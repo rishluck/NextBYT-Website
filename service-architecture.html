@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Architecture &amp; 3D Design — NextByt</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Josefin+Sans:wght@100;200;300;400&display=swap" rel="stylesheet">
+<style>
+  :root{--black:#0d0a09;--dark:#120e0b;--card:#181210;--border:#2a2018;--gold:#d4a070;--gold-light:#eacca8;--cream:#f5f0ea;--white:#ffffff;--text-muted:#887870;--text-dim:#504038;}
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+  body{background:var(--black);color:var(--cream);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden;cursor:none;}
+  .cursor{position:fixed;width:10px;height:10px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:width .3s,height .3s;}
+  .cursor-ring{position:fixed;width:36px;height:36px;border:1px solid var(--gold);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:width .3s,height .3s;opacity:.6;}
+  .cursor.hover{width:16px;height:16px;}.cursor-ring.hover{width:56px;height:56px;border-color:var(--gold-light);opacity:1;}
+  nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:28px 60px;display:flex;align-items:center;justify-content:space-between;background:rgba(8,8,8,0.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+  .nav-logo{font-family:'Josefin Sans',sans-serif;font-size:20px;font-weight:200;letter-spacing:6px;color:var(--white);text-decoration:none;display:flex;align-items:center;gap:10px;}
+  .nav-logo .logo-text span{color:var(--gold);font-weight:400;}
+  .nav-back{color:var(--text-muted);text-decoration:none;font-size:12px;letter-spacing:2px;text-transform:uppercase;transition:color .3s;}
+  .nav-back:hover{color:var(--gold);}
+  .nav-cta{background:transparent;border:1px solid var(--gold);color:var(--gold);padding:10px 28px;font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;cursor:none;transition:all .3s;text-decoration:none;}
+  .nav-cta:hover{background:var(--gold);color:var(--black);}
+  .service-hero{min-height:85vh;display:flex;align-items:flex-end;padding:0 60px 80px;position:relative;overflow:hidden;margin-top:80px;}
+  .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 65% 40%,rgba(212,160,112,0.08) 0%,transparent 70%);}
+  .hero-grid{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(212,160,112,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(212,160,112,0.03) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 100%);}
+  .hero-content{position:relative;z-index:1;width:100%;display:flex;justify-content:space-between;align-items:flex-end;}
+  .hero-left{max-width:700px;}
+  .hero-tag{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:24px;opacity:0;animation:fadeUp 1s .2s forwards;}
+  .hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(52px,8vw,110px);font-weight:300;line-height:.95;letter-spacing:-2px;color:var(--white);margin-bottom:32px;opacity:0;animation:fadeUp 1s .4s forwards;}
+  .hero-title em{font-style:italic;color:var(--gold);}
+  .hero-desc{font-size:15px;line-height:1.9;color:var(--text-muted);max-width:480px;opacity:0;animation:fadeUp 1s .6s forwards;}
+  .hero-stats{display:flex;flex-direction:column;gap:32px;opacity:0;animation:fadeUp 1s .8s forwards;}
+  .stat-item{text-align:right;}.stat-num{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:300;color:var(--gold);line-height:1;}
+  .stat-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-dim);margin-top:4px;}
+  section{padding:100px 60px;}
+  .section-tag{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
+  .section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4.5vw,64px);font-weight:300;line-height:1.05;color:var(--white);margin-bottom:20px;}
+  .section-title em{font-style:italic;color:var(--gold);}
+  .section-desc{font-size:15px;line-height:1.9;color:var(--text-muted);max-width:560px;}
+  .section-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:70px;}
+  .deliver-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+  .deliver-card{background:var(--card);border:1px solid var(--border);padding:44px 36px;transition:border-color .4s;position:relative;overflow:hidden;}
+  .deliver-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(212,160,112,0.04) 0%,transparent 60%);opacity:0;transition:opacity .4s;}
+  .deliver-card:hover::before{opacity:1;}.deliver-card:hover{border-color:var(--gold);}
+  .deliver-icon{font-size:32px;margin-bottom:20px;}
+  .deliver-title{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--white);margin-bottom:12px;}
+  .deliver-text{font-size:13px;line-height:1.8;color:var(--text-muted);}
+  .deliver-list{list-style:none;margin-top:16px;}
+  .deliver-list li{font-size:12px;color:var(--text-muted);padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.04);display:flex;align-items:center;gap:10px;}
+  .deliver-list li::before{content:'→';color:var(--gold);font-size:11px;flex-shrink:0;}
+  .process-section{background:var(--dark);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+  .process-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid var(--border);margin-top:60px;}
+  .p-step{padding:44px 30px;border-right:1px solid var(--border);transition:background .3s;}
+  .p-step:last-child{border-right:none;}.p-step:hover{background:var(--card);}
+  .p-num{font-family:'Cormorant Garamond',serif;font-size:56px;color:var(--border);line-height:1;margin-bottom:16px;transition:color .3s;}
+  .p-step:hover .p-num{color:var(--gold);opacity:.4;}
+  .p-title{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--white);margin-bottom:10px;}
+  .p-text{font-size:12px;color:var(--text-muted);line-height:1.7;}
+  .software-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:60px;}
+  .software-card{background:var(--card);border:1px solid var(--border);padding:36px 30px;text-align:center;transition:border-color .3s;}
+  .software-card:hover{border-color:var(--gold);}
+  .software-icon{font-size:36px;margin-bottom:14px;}
+  .software-name{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--white);margin-bottom:8px;}
+  .software-desc{font-size:12px;color:var(--text-muted);line-height:1.6;}
+  .project-types{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:60px;}
+  .project-type{background:var(--card);border:1px solid var(--border);padding:44px 36px;position:relative;overflow:hidden;transition:border-color .3s;}
+  .project-type:hover{border-color:var(--gold);}
+  .project-type-num{font-family:'Cormorant Garamond',serif;font-size:64px;color:var(--border);line-height:1;margin-bottom:16px;}
+  .project-type-name{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--white);margin-bottom:14px;}
+  .project-type-text{font-size:13px;color:var(--text-muted);line-height:1.8;}
+  .faq-list{margin-top:60px;}
+  .faq-item{border-bottom:1px solid var(--border);}
+  .faq-q{padding:28px 0;font-size:16px;color:var(--white);cursor:none;display:flex;justify-content:space-between;align-items:center;transition:color .3s;}
+  .faq-q:hover{color:var(--gold);}
+  .faq-icon{color:var(--gold);font-size:20px;transition:transform .3s;flex-shrink:0;}
+  .faq-a{font-size:14px;color:var(--text-muted);line-height:1.8;padding-bottom:24px;display:none;max-width:700px;}
+  .faq-item.open .faq-a{display:block;}.faq-item.open .faq-icon{transform:rotate(45deg);}
+  .cta-section{background:var(--dark);border-top:1px solid var(--border);text-align:center;padding:100px 60px;}
+  .cta-title{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,72px);font-weight:300;color:var(--white);margin-bottom:20px;}
+  .cta-title em{font-style:italic;color:var(--gold);}
+  .cta-desc{font-size:15px;color:var(--text-muted);line-height:1.8;max-width:500px;margin:0 auto 48px;}
+  .cta-btns{display:flex;gap:20px;justify-content:center;}
+  .btn-gold{background:var(--gold);color:var(--black);border:none;padding:16px 44px;font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;font-weight:500;cursor:none;transition:background .3s;text-decoration:none;}
+  .btn-gold:hover{background:var(--gold-light);}
+  .btn-outline{background:transparent;color:var(--gold);border:1px solid var(--gold);padding:16px 44px;font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;cursor:none;transition:all .3s;text-decoration:none;}
+  .btn-outline:hover{background:var(--gold);color:var(--black);}
+  footer{background:var(--black);border-top:1px solid var(--border);padding:60px;display:flex;justify-content:space-between;align-items:center;}
+  .footer-logo{font-family:'Josefin Sans',sans-serif;font-size:18px;font-weight:200;letter-spacing:6px;color:var(--white);text-decoration:none;}
+  .footer-logo span{color:var(--gold);font-weight:400;}
+  .footer-copy{font-size:12px;color:var(--text-dim);}
+  .footer-links{display:flex;gap:30px;}
+  .footer-links a{font-size:12px;color:var(--text-dim);text-decoration:none;transition:color .3s;}
+  .footer-links a:hover{color:var(--gold);}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+  .reveal{opacity:0;transform:translateY(40px);transition:opacity .8s ease,transform .8s ease;}
+  .reveal.visible{opacity:1;transform:translateY(0);}
+  @media(max-width:1024px){nav{padding:20px 30px;}.service-hero{padding:0 30px 60px;}.hero-content{flex-direction:column;gap:40px;}.hero-stats{flex-direction:row;}.stat-item{text-align:left;}section{padding:70px 30px;}.deliver-grid{grid-template-columns:1fr 1fr;}.process-steps{grid-template-columns:1fr 1fr;}.software-grid{grid-template-columns:1fr 1fr;}.project-types{grid-template-columns:1fr 1fr;}.section-header{flex-direction:column;gap:20px;}footer{flex-direction:column;gap:24px;text-align:center;}.footer-links{flex-wrap:wrap;justify-content:center;}}
+  @media(max-width:640px){.deliver-grid{grid-template-columns:1fr;}.process-steps{grid-template-columns:1fr;}.p-step{border-right:none;border-bottom:1px solid var(--border);}.software-grid{grid-template-columns:1fr 1fr;}.project-types{grid-template-columns:1fr;}.cta-btns{flex-direction:column;align-items:center;}}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<nav>
+  <a href="index.html" class="nav-logo">
+    <svg viewBox="0 0 100 100" width="32" height="32" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#eacca8"/><stop offset="50%" stop-color="#d4a070"/><stop offset="100%" stop-color="#a86030"/></linearGradient></defs><path d="M4 22 L4 4 L22 4" fill="none" stroke="url(#g)" stroke-width="2.2"/><path d="M78 4 L96 4 L96 22" fill="none" stroke="url(#g)" stroke-width="2.2"/><path d="M4 78 L4 96 L22 96" fill="none" stroke="url(#g)" stroke-width="2.2"/><path d="M78 96 L96 96 L96 78" fill="none" stroke="url(#g)" stroke-width="2.2"/><line x1="27" y1="21" x2="27" y2="79" stroke="url(#g)" stroke-width="10" stroke-linecap="butt"/><line x1="73" y1="21" x2="73" y2="79" stroke="url(#g)" stroke-width="10" stroke-linecap="butt"/><line x1="27" y1="21" x2="73" y2="79" stroke="url(#g)" stroke-width="10" stroke-linecap="butt"/><rect x="42" y="42" width="12" height="12" fill="#0d0a09"/></svg>
+    <span class="logo-text">NEXT<span>BYT</span></span>
+  </a>
+  <a href="index.html" class="nav-back">&#x2190; Back to Home</a>
+  <a href="index.html#contact" class="nav-cta">Start a Project</a>
+</nav>
+
+<section class="service-hero">
+  <div class="hero-bg"></div><div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-left">
+      <p class="hero-tag">&#x2666; Service 04 &nbsp;&#x2014;&nbsp; Architecture &amp; 3D Design</p>
+      <h1 class="hero-title">Visualise Before<br>You <em>Build</em></h1>
+      <p class="hero-desc">Photorealistic architectural renders, detailed floor plans, and immersive 3D walkthroughs — helping developers, architects, and property owners communicate their vision with absolute clarity.</p>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item"><div class="stat-num">40+</div><div class="stat-label">Projects Completed</div></div>
+      <div class="stat-item"><div class="stat-num">4K</div><div class="stat-label">Render Resolution</div></div>
+      <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Client Satisfaction</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-header reveal">
+    <div><p class="section-tag">&#x2666; Our Services</p><h2 class="section-title">Every Stage of<br><em>Architectural Visualisation</em></h2></div>
+    <p class="section-desc">From initial concept sketches to photorealistic final renders — we cover the full spectrum of architectural and 3D design services.</p>
+  </div>
+  <div class="deliver-grid">
+    <div class="deliver-card reveal">
+      <div class="deliver-icon">&#x1F4D0;</div>
+      <div class="deliver-title">Floor Plans &amp; Layouts</div>
+      <p class="deliver-text">Precise, professional floor plans for residential and commercial properties — technical drawings ready for planning applications.</p>
+      <ul class="deliver-list">
+        <li>AutoCAD technical drawings</li>
+        <li>2D floor plans to scale</li>
+        <li>Site layout plans</li>
+        <li>Planning permission drawings</li>
+        <li>As-built documentation</li>
+      </ul>
+    </div>
+    <div class="deliver-card reveal">
+      <div class="deliver-icon">&#x1F3D7;&#xFE0F;</div>
+      <div class="deliver-title">3D Exterior Renders</div>
+      <p class="deliver-text">Photorealistic exterior renders that bring buildings to life before a single brick is laid — perfect for marketing, investment, and planning approvals.</p>
+      <ul class="deliver-list">
+        <li>Day &amp; twilight render options</li>
+        <li>Landscaping &amp; context included</li>
+        <li>Multiple camera angles</li>
+        <li>4K resolution output</li>
+        <li>Print &amp; digital formats</li>
+      </ul>
+    </div>
+    <div class="deliver-card reveal">
+      <div class="deliver-icon">&#x1F3A5;</div>
+      <div class="deliver-title">3D Walkthroughs &amp; Animations</div>
+      <p class="deliver-text">Cinematic animated walkthroughs that let clients and investors experience a space before it exists — the most powerful sales tool in property development.</p>
+      <ul class="deliver-list">
+        <li>60-second to 3-minute videos</li>
+        <li>Full HD / 4K output</li>
+        <li>Narration &amp; music options</li>
+        <li>VR-ready 360° tours</li>
+        <li>Drone perspective shots</li>
+      </ul>
+    </div>
+    <div class="deliver-card reveal">
+      <div class="deliver-icon">&#x1F4CD;</div>
+      <div class="deliver-title">Site &amp; Master Plans</div>
+      <p class="deliver-text">Overhead site plans showing building placement, landscaping, parking, and infrastructure for planning and investor presentations.</p>
+      <ul class="deliver-list">
+        <li>2D illustrated site plans</li>
+        <li>3D aerial perspectives</li>
+        <li>Phasing diagrams</li>
+        <li>Infrastructure mapping</li>
+        <li>GIS data integration</li>
+      </ul>
+    </div>
+    <div class="deliver-card reveal">
+      <div class="deliver-icon">&#x1F4CC;</div>
+      <div class="deliver-title">Concept Design &amp; Feasibility</div>
+      <p class="deliver-text">Early-stage concept development — helping you test ideas, explore massing options, and present proposals to stakeholders before committing to full design.</p>
+      <ul class="deliver-list">
+        <li>Massing models</li>
+        <li>Alternative design options</li>
+        <li>Feasibility visualisations</li>
+        <li>Planning strategy support</li>
+        <li>Stakeholder presentation packs</li>
+      </ul>
+    </div>
+    <div class="deliver-card reveal">
+      <div class="deliver-icon">&#x1F4F0;</div>
+      <div class="deliver-title">Marketing &amp; Sales Visuals</div>
+      <p class="deliver-text">Development brochures, hoardings, websites, and CGI packs — everything a property developer needs to sell off-plan with confidence.</p>
+      <ul class="deliver-list">
+        <li>CGI brochure packs</li>
+        <li>Hoarding &amp; billboard designs</li>
+        <li>Development website imagery</li>
+        <li>Social media render packs</li>
+        <li>Virtual show home tours</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--dark);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="section-header reveal">
+    <div><p class="section-tag">&#x2666; Project Types</p><h2 class="section-title">We Work Across<br>All <em>Building Types</em></h2></div>
+    <p class="section-desc">Residential, commercial, or mixed-use — our architectural visualisation team has experience across all property types.</p>
+  </div>
+  <div class="project-types">
+    <div class="project-type reveal"><div class="project-type-num">01</div><div class="project-type-name">Residential</div><p class="project-type-text">Luxury houses, apartments, housing developments, and private villas. From single homes to large-scale residential schemes.</p></div>
+    <div class="project-type reveal"><div class="project-type-num">02</div><div class="project-type-name">Commercial</div><p class="project-type-text">Office buildings, retail units, hospitality venues, and mixed-use commercial developments — any scale, any complexity.</p></div>
+    <div class="project-type reveal"><div class="project-type-num">03</div><div class="project-type-name">Mixed-Use</div><p class="project-type-text">Complex multi-use developments combining residential, retail, leisure, and commercial spaces within a single scheme.</p></div>
+  </div>
+</section>
+
+<section class="process-section">
+  <div class="section-header reveal">
+    <div><p class="section-tag">&#x2666; Our Process</p><h2 class="section-title">From Brief to<br><em>Photorealistic</em> Render</h2></div>
+    <p class="section-desc">A meticulous process that ensures every render is accurate, stunning, and delivered on time.</p>
+  </div>
+  <div class="process-steps">
+    <div class="p-step reveal"><div class="p-num">01</div><div class="p-title">Brief &amp; Files</div><p class="p-text">You share drawings, reference images, and materials. We ask the right questions to understand exactly what you need.</p></div>
+    <div class="p-step reveal"><div class="p-num">02</div><div class="p-title">3D Modelling</div><p class="p-text">We build a precise 3D model of the building or space — every dimension, material, and detail accounted for.</p></div>
+    <div class="p-step reveal"><div class="p-num">03</div><div class="p-title">Lighting &amp; Materials</div><p class="p-text">Photorealistic materials, lighting, and environment applied. This is where the render begins to look real.</p></div>
+    <div class="p-step reveal"><div class="p-num">04</div><div class="p-title">Preview &amp; Feedback</div><p class="p-text">We share draft renders for your review. You provide feedback on camera angles, materials, and landscaping.</p></div>
+    <div class="p-step reveal"><div class="p-num">05</div><div class="p-title">Final Delivery</div><p class="p-text">High-resolution final renders delivered in all required formats — print-ready, web-optimised, and future-proof.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="section-header reveal">
+    <div><p class="section-tag">&#x2666; Software</p><h2 class="section-title">Industry-Leading<br><em>Tools</em></h2></div>
+    <p class="section-desc">We use the same tools as the world's top architectural studios — delivering render quality that rivals any firm.</p>
+  </div>
+  <div class="software-grid">
+    <div class="software-card reveal"><div class="software-icon">&#x1F4D0;</div><div class="software-name">AutoCAD</div><p class="software-desc">Precision technical drawings, floor plans, and construction documentation.</p></div>
+    <div class="software-card reveal"><div class="software-icon">&#x1F3DB;&#xFE0F;</div><div class="software-name">Revit</div><p class="software-desc">BIM modelling for complex architectural and engineering projects.</p></div>
+    <div class="software-card reveal"><div class="software-icon">&#x1F3A8;</div><div class="software-name">3ds Max &amp; V-Ray</div><p class="software-desc">The industry standard for photorealistic architectural rendering.</p></div>
+    <div class="software-card reveal"><div class="software-icon">&#x26F0;&#xFE0F;</div><div class="software-name">SketchUp</div><p class="software-desc">Rapid concept modelling and early-stage design visualisation.</p></div>
+    <div class="software-card reveal"><div class="software-icon">&#x1F308;</div><div class="software-name">Lumion</div><p class="software-desc">Real-time rendering for fast walkthroughs and flythrough animations.</p></div>
+    <div class="software-card reveal"><div class="software-icon">&#x1F4F7;</div><div class="software-name">Photoshop</div><p class="software-desc">Post-production enhancement for the final presentation-ready renders.</p></div>
+    <div class="software-card reveal"><div class="software-icon">&#x1F3AC;</div><div class="software-name">After Effects</div><p class="software-desc">Animation compositing and cinematic walkthrough video production.</p></div>
+    <div class="software-card reveal"><div class="software-icon">&#x1F30D;</div><div class="software-name">Enscape</div><p class="software-desc">Real-time VR walkthroughs directly within the design model.</p></div>
+  </div>
+</section>
+
+<section style="background:var(--dark);border-top:1px solid var(--border);">
+  <div class="section-header reveal"><div><p class="section-tag">&#x2666; FAQs</p><h2 class="section-title">Common <em>Questions</em></h2></div><p class="section-desc">Everything you need to know before commissioning architectural visualisation.</p></div>
+  <div class="faq-list reveal">
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What files do you need to start a render project? <span class="faq-icon">+</span></div><div class="faq-a">We typically need architectural drawings (CAD, PDF, or even hand sketches), your material and finish specifications, and any reference images. The more detail you provide, the more accurate the render. We can work from early-stage concepts too.</div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How photorealistic are the renders? <span class="faq-icon">+</span></div><div class="faq-a">Our renders are frequently mistaken for photographs by end clients and investors. We use physically accurate lighting, high-resolution materials, and detailed environmental context to achieve maximum realism.</div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Can you work with buildings that haven't been designed yet? <span class="faq-icon">+</span></div><div class="faq-a">Yes — we work at all project stages from initial concept to detailed design. Early-stage renders are a great way to test massing and design options quickly before committing to full detailed design.</div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How long does it take to produce architectural renders? <span class="faq-icon">+</span></div><div class="faq-a">A standard set of 3–5 exterior renders typically takes 5–10 working days. Animated walkthroughs take 2–4 weeks depending on length and complexity. We always confirm timelines at brief stage.</div></div>
+  </div>
+</section>
+
+<section class="cta-section reveal">
+  <p class="section-tag">&#x2666; Start Visualising</p>
+  <h2 class="cta-title">Bring Your Architecture<br>to <em>Life</em></h2>
+  <p class="cta-desc">Share your project brief and we'll come back with a proposal and sample renders within 48 hours.</p>
+  <div class="cta-btns"><a href="index.html#contact" class="btn-gold">Submit Your Brief</a><a href="index.html" class="btn-outline">View All Services</a></div>
+</section>
+
+<footer>
+  <a href="index.html" class="footer-logo">NEXT<span>BYT</span></a>
+  <p class="footer-copy">&copy; 2025 NextByt. All rights reserved.</p>
+  <div class="footer-links"><a href="index.html#services">Services</a><a href="index.html#about">About</a><a href="index.html#work">Work</a><a href="index.html#contact">Contact</a></div>
+</footer>
+<script>
+  const cursor=document.getElementById('cursor'),cursorRing=document.getElementById('cursorRing');
+  document.addEventListener('mousemove',(e)=>{cursor.style.left=e.clientX+'px';cursor.style.top=e.clientY+'px';setTimeout(()=>{cursorRing.style.left=e.clientX+'px';cursorRing.style.top=e.clientY+'px';},60);});
+  document.querySelectorAll('a,button,.deliver-card,.faq-q').forEach(el=>{el.addEventListener('mouseenter',()=>{cursor.classList.add('hover');cursorRing.classList.add('hover');});el.addEventListener('mouseleave',()=>{cursor.classList.remove('hover');cursorRing.classList.remove('hover');});});
+  const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),80);observer.unobserve(e.target);}});},{threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+  function toggleFaq(el){const item=el.parentElement;const wasOpen=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!wasOpen)item.classList.add('open');}
+</script>
+</body>
+</html>
