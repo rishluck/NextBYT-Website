@@ -405,7 +405,7 @@
   /* PORTFOLIO */
   .portfolio-section { background: var(--dark); border-top: 1px solid var(--border); }
   .portfolio-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 60px; }
-  .portfolio-item { position: relative; overflow: hidden; cursor: none; }
+  .portfolio-item { position: relative; overflow: hidden; cursor: none; display: block; text-decoration: none; color: inherit; }
   .portfolio-item:first-child { grid-column: span 2; }
   .portfolio-visual {
     height: 400px; overflow: hidden; position: relative;
@@ -918,7 +918,7 @@
     <p class="section-desc">A curated selection from across our disciplines &mdash; each project a story of transformation.</p>
   </div>
   <div class="portfolio-grid">
-    <div class="portfolio-item reveal">
+    <a href="project-meridian.html" class="portfolio-item reveal">
       <div class="portfolio-visual">
         <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1400&q=80" alt="Architecture project" loading="lazy">
       </div>
@@ -927,8 +927,8 @@
         <div class="portfolio-cat">Architecture &amp; 3D Design</div>
         <div class="portfolio-title">The Meridian &mdash; Mixed-Use Development, Dubai</div>
       </div>
-    </div>
-    <div class="portfolio-item reveal">
+    </a>
+    <a href="project-casa-verde.html" class="portfolio-item reveal">
       <div class="portfolio-visual">
         <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=900&q=80" alt="Interior design" loading="lazy">
       </div>
@@ -937,8 +937,8 @@
         <div class="portfolio-cat">Interior Design</div>
         <div class="portfolio-title">Casa Verde &mdash; Luxury Residence</div>
       </div>
-    </div>
-    <div class="portfolio-item reveal">
+    </a>
+    <a href="project-bloom-collective.html" class="portfolio-item reveal">
       <div class="portfolio-visual">
         <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=900&q=80" alt="Brand identity" loading="lazy">
       </div>
@@ -947,7 +947,7 @@
         <div class="portfolio-cat">Brand Identity</div>
         <div class="portfolio-title">Bloom Collective &mdash; Full Rebrand</div>
       </div>
-    </div>
+    </a>
   </div>
 </section>
 

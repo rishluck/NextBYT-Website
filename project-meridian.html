@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Meridian — NextByt</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Josefin+Sans:wght@100;200;300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0d0a09; --dark: #120e0b; --card: #181210; --border: #2a2018;
+    --gold: #d4a070; --gold-light: #eacca8; --cream: #f5f0ea; --white: #ffffff;
+    --text-muted: #887870; --text-dim: #504038;
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--black); color: var(--cream); font-family: 'DM Sans', sans-serif; font-weight: 300; overflow-x: hidden; cursor: none; }
+
+  .cursor { position: fixed; width: 10px; height: 10px; background: var(--gold); border-radius: 50%; pointer-events: none; z-index: 99999; transform: translate(-50%,-50%); transition: width .3s, height .3s; }
+  .cursor-ring { position: fixed; width: 36px; height: 36px; border: 1px solid var(--gold); border-radius: 50%; pointer-events: none; z-index: 99998; transform: translate(-50%,-50%); transition: all .3s; opacity: .6; }
+  .cursor.hover { width: 16px; height: 16px; }
+  .cursor-ring.hover { width: 56px; height: 56px; border-color: var(--gold-light); opacity: 1; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 28px 60px; display: flex; align-items: center; justify-content: space-between; background: rgba(13,10,9,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+  .nav-logo { font-family: 'Josefin Sans', sans-serif; font-size: 20px; font-weight: 200; letter-spacing: 6px; color: var(--white); text-decoration: none; display: flex; align-items: center; gap: 10px; }
+  .nav-logo .logo-text span { color: var(--gold); font-weight: 400; }
+  .nav-back { color: var(--text-muted); text-decoration: none; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; transition: color .3s; display: flex; align-items: center; gap: 8px; }
+  .nav-back:hover { color: var(--gold); }
+  .nav-cta { background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 10px 28px; font-family: 'DM Sans', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; cursor: none; transition: all .3s; text-decoration: none; }
+  .nav-cta:hover { background: var(--gold); color: var(--black); }
+
+  /* HERO */
+  .project-hero { height: 92vh; position: relative; overflow: hidden; display: flex; align-items: flex-end; }
+  .hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: grayscale(20%); transform-origin: center; animation: slowZoom 12s ease-out forwards; }
+  @keyframes slowZoom { from { transform: scale(1.08); } to { transform: scale(1); } }
+  .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(13,10,9,0.96) 0%, rgba(13,10,9,0.5) 50%, rgba(13,10,9,0.2) 100%); }
+  .hero-content { position: relative; z-index: 1; padding: 0 60px 80px; width: 100%; }
+  .hero-cat { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; opacity: 0; animation: fadeUp .8s .3s forwards; }
+  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(56px, 9vw, 130px); font-weight: 300; line-height: .92; letter-spacing: -3px; color: var(--white); margin-bottom: 32px; opacity: 0; animation: fadeUp .8s .5s forwards; }
+  .hero-title em { font-style: italic; color: var(--gold); }
+  .hero-meta-strip { display: flex; gap: 60px; opacity: 0; animation: fadeUp .8s .7s forwards; }
+  .hero-meta-item { }
+  .hero-meta-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 6px; }
+  .hero-meta-value { font-size: 14px; color: var(--cream); }
+
+  /* SECTIONS */
+  section { padding: 100px 60px; }
+  .section-tag { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 4.5vw, 64px); font-weight: 300; line-height: 1.05; color: var(--white); margin-bottom: 24px; }
+  .section-title em { font-style: italic; color: var(--gold); }
+
+  /* OVERVIEW */
+  .overview-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .overview-body p { font-size: 15px; line-height: 1.9; color: var(--text-muted); margin-bottom: 20px; }
+  .overview-body p:last-child { margin-bottom: 0; }
+  .scope-list { list-style: none; margin-top: 8px; }
+  .scope-list li { font-size: 13px; color: var(--text-muted); padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 12px; }
+  .scope-list li::before { content: ''; width: 4px; height: 4px; background: var(--gold); border-radius: 50%; flex-shrink: 0; }
+  .scope-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 20px; }
+
+  /* GALLERY */
+  .gallery-section { background: var(--dark); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 80px 60px; }
+  .gallery-grid { display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: auto auto; gap: 4px; margin-top: 50px; }
+  .gallery-item { overflow: hidden; position: relative; }
+  .gallery-item:first-child { grid-row: span 2; }
+  .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(15%); transition: transform .8s ease, filter .8s ease; }
+  .gallery-item:first-child img { height: 600px; }
+  .gallery-item:not(:first-child) img { height: 298px; }
+  .gallery-item:hover img { transform: scale(1.04); filter: grayscale(0%); }
+
+  /* APPROACH */
+  .approach-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 60px; }
+  .approach-card { background: var(--card); border: 1px solid var(--border); padding: 44px 36px; transition: border-color .4s; position: relative; overflow: hidden; }
+  .approach-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(212,160,112,0.04) 0%, transparent 60%); opacity: 0; transition: opacity .4s; }
+  .approach-card:hover::before { opacity: 1; }
+  .approach-card:hover { border-color: var(--gold); }
+  .approach-num { font-family: 'Cormorant Garamond', serif; font-size: 72px; color: var(--border); line-height: 1; margin-bottom: 20px; transition: color .4s; }
+  .approach-card:hover .approach-num { color: var(--gold); opacity: .3; }
+  .approach-title { font-family: 'Cormorant Garamond', serif; font-size: 24px; color: var(--white); margin-bottom: 14px; }
+  .approach-text { font-size: 13px; line-height: 1.8; color: var(--text-muted); }
+
+  /* RESULTS */
+  .results-section { background: var(--dark); border-top: 1px solid var(--border); }
+  .results-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 60px; }
+  .result-card { background: var(--card); border: 1px solid var(--border); padding: 50px 44px; text-align: center; }
+  .result-num { font-family: 'Cormorant Garamond', serif; font-size: 72px; font-weight: 300; color: var(--gold); line-height: 1; margin-bottom: 12px; }
+  .result-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px; }
+  .result-desc { font-size: 13px; color: var(--text-dim); line-height: 1.6; }
+
+  /* NEXT PROJECT */
+  .next-project { display: block; position: relative; overflow: hidden; text-decoration: none; border-top: 1px solid var(--border); }
+  .next-project-img { width: 100%; height: 480px; object-fit: cover; filter: grayscale(40%); transition: transform .8s ease, filter .8s ease; display: block; }
+  .next-project:hover .next-project-img { transform: scale(1.04); filter: grayscale(0%); }
+  .next-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(13,10,9,0.92) 0%, rgba(13,10,9,0.3) 60%, transparent 100%); }
+  .next-content { position: absolute; bottom: 60px; left: 60px; right: 60px; display: flex; justify-content: space-between; align-items: flex-end; }
+  .next-label { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+  .next-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 5vw, 64px); font-weight: 300; color: var(--white); line-height: 1; }
+  .next-arrow { font-size: 48px; color: var(--gold); transition: transform .4s; }
+  .next-project:hover .next-arrow { transform: translateX(12px); }
+
+  /* CTA */
+  .cta-section { background: var(--dark); border-top: 1px solid var(--border); text-align: center; padding: 100px 60px; }
+  .cta-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 5vw, 72px); font-weight: 300; color: var(--white); margin-bottom: 20px; }
+  .cta-title em { font-style: italic; color: var(--gold); }
+  .cta-desc { font-size: 15px; color: var(--text-muted); max-width: 480px; margin: 0 auto 48px; line-height: 1.9; }
+  .cta-btns { display: flex; gap: 20px; justify-content: center; }
+  .btn-gold { background: var(--gold); color: var(--black); border: none; padding: 16px 44px; font-family: 'DM Sans', sans-serif; font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; font-weight: 500; cursor: none; transition: background .3s; text-decoration: none; display: inline-block; }
+  .btn-gold:hover { background: var(--gold-light); }
+  .btn-outline { background: transparent; color: var(--gold); border: 1px solid var(--gold); padding: 16px 44px; font-family: 'DM Sans', sans-serif; font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; cursor: none; transition: all .3s; text-decoration: none; display: inline-block; }
+  .btn-outline:hover { background: var(--gold); color: var(--black); }
+
+  /* FOOTER */
+  footer { background: var(--black); border-top: 1px solid var(--border); padding: 60px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-logo { font-family: 'Josefin Sans', sans-serif; font-size: 18px; font-weight: 200; letter-spacing: 6px; color: var(--white); text-decoration: none; }
+  .footer-logo span { color: var(--gold); font-weight: 400; }
+  .footer-copy { font-size: 12px; color: var(--text-dim); }
+  .footer-links { display: flex; gap: 30px; }
+  .footer-links a { font-size: 12px; color: var(--text-dim); text-decoration: none; transition: color .3s; }
+  .footer-links a:hover { color: var(--gold); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity .8s ease, transform .8s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-left { opacity: 0; transform: translateX(-40px); transition: opacity .9s ease, transform .9s ease; }
+  .reveal-left.visible { opacity: 1; transform: translateX(0); }
+  .reveal-right { opacity: 0; transform: translateX(40px); transition: opacity .9s ease, transform .9s ease; }
+  .reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+  @media (max-width: 1024px) {
+    nav { padding: 20px 30px; }
+    section { padding: 70px 30px; }
+    .hero-content { padding: 0 30px 60px; }
+    .overview-grid { grid-template-columns: 1fr; gap: 40px; }
+    .gallery-section { padding: 60px 30px; }
+    .gallery-grid { grid-template-columns: 1fr; }
+    .gallery-item:first-child { grid-row: auto; }
+    .gallery-item:first-child img, .gallery-item:not(:first-child) img { height: 280px; }
+    .approach-grid { grid-template-columns: 1fr; }
+    .results-grid { grid-template-columns: 1fr; }
+    .next-content { flex-direction: column; align-items: flex-start; gap: 20px; bottom: 40px; left: 30px; right: 30px; }
+    .hero-meta-strip { flex-wrap: wrap; gap: 30px; }
+    footer { flex-direction: column; gap: 24px; text-align: center; }
+    .footer-links { flex-wrap: wrap; justify-content: center; }
+    .cta-btns { flex-direction: column; align-items: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <svg viewBox="0 0 100 100" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+      <defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#eacca8"/><stop offset="50%" stop-color="#d4a070"/><stop offset="100%" stop-color="#a86030"/></linearGradient></defs>
+      <path d="M4 22 L4 4 L22 4" fill="none" stroke="url(#g)" stroke-width="2.2"/>
+      <path d="M78 4 L96 4 L96 22" fill="none" stroke="url(#g)" stroke-width="2.2"/>
+      <path d="M4 78 L4 96 L22 96" fill="none" stroke="url(#g)" stroke-width="2.2"/>
+      <path d="M78 96 L96 96 L96 78" fill="none" stroke="url(#g)" stroke-width="2.2"/>
+      <line x1="27" y1="21" x2="27" y2="79" stroke="url(#g)" stroke-width="10" stroke-linecap="butt"/>
+      <line x1="73" y1="21" x2="73" y2="79" stroke="url(#g)" stroke-width="10" stroke-linecap="butt"/>
+      <line x1="27" y1="21" x2="73" y2="79" stroke="url(#g)" stroke-width="10" stroke-linecap="butt"/>
+      <rect x="42" y="42" width="12" height="12" fill="#0d0a09"/>
+    </svg>
+    <span class="logo-text">NEXT<span>BYT</span></span>
+  </a>
+  <a href="index.html#work" class="nav-back">&#x2190; Back to Work</a>
+  <a href="index.html#contact" class="nav-cta">Start a Project</a>
+</nav>
+
+<!-- HERO -->
+<div class="project-hero">
+  <img class="hero-img" src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1800&q=85" alt="The Meridian">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-cat">&#x2666; Architecture &amp; 3D Design &nbsp;&#x2014;&nbsp; Project 01</p>
+    <h1 class="hero-title">The <em>Meridian</em></h1>
+    <div class="hero-meta-strip">
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Client</div>
+        <div class="hero-meta-value">Meridian Properties LLC</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Location</div>
+        <div class="hero-meta-value">Dubai, UAE</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Year</div>
+        <div class="hero-meta-value">2024</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Scope</div>
+        <div class="hero-meta-value">Architecture &amp; 3D Visualisation</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- OVERVIEW -->
+<section>
+  <div class="overview-grid">
+    <div class="overview-body reveal-left">
+      <p class="section-tag">&#x2666; The Brief</p>
+      <h2 class="section-title">Mixed-Use<br><em>Development</em></h2>
+      <p>Meridian Properties approached us with a bold vision — a landmark mixed-use tower for Dubai's rapidly evolving business district. The client needed photorealistic 3D visualisations and detailed architectural concepts to present to investors and planning authorities before any physical work began.</p>
+      <p>The brief called for a design that balanced commercial viability with architectural ambition — a building that would stand out on the skyline while meeting strict local planning codes and sustainability requirements.</p>
+      <p>We developed the concept from initial sketches through to fully rendered walkthroughs, giving stakeholders a clear, compelling picture of the finished development.</p>
+    </div>
+    <div class="reveal-right">
+      <p class="scope-label">&#x2666; Project Scope</p>
+      <ul class="scope-list">
+        <li>Concept development &amp; spatial planning</li>
+        <li>AutoCAD floor plans (all levels)</li>
+        <li>Exterior 3D modelling &amp; rendering</li>
+        <li>Interior common-area visualisations</li>
+        <li>Photorealistic daylight &amp; night renders</li>
+        <li>Animated 360° walkthrough video</li>
+        <li>Investor presentation deck</li>
+        <li>Planning submission documentation</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<div class="gallery-section">
+  <p class="section-tag reveal">&#x2666; Project Imagery</p>
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1200&q=80" alt="Meridian exterior render" loading="lazy">
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80" alt="Meridian interior" loading="lazy">
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1503174971373-b1f69850bded?w=800&q=80" alt="Meridian detail" loading="lazy">
+    </div>
+  </div>
+</div>
+
+<!-- APPROACH -->
+<section>
+  <div class="reveal">
+    <p class="section-tag">&#x2666; Our Approach</p>
+    <h2 class="section-title">How We<br><em>Delivered</em> It</h2>
+  </div>
+  <div class="approach-grid">
+    <div class="approach-card reveal">
+      <div class="approach-num">01</div>
+      <div class="approach-title">Site &amp; Context Analysis</div>
+      <p class="approach-text">We studied the site location, surrounding buildings, solar orientation, and Dubai's planning codes to establish a design framework rooted in context rather than trend.</p>
+    </div>
+    <div class="approach-card reveal">
+      <div class="approach-num">02</div>
+      <div class="approach-title">Concept &amp; Massing</div>
+      <p class="approach-text">Multiple massing options were explored in early 3D modelling to test height, floor plate efficiency, and visual impact before committing to the final form.</p>
+    </div>
+    <div class="approach-card reveal">
+      <div class="approach-num">03</div>
+      <div class="approach-title">Photorealistic Rendering</div>
+      <p class="approach-text">Final renders were produced with cinematic lighting, accurate material textures, and surrounding context to give investors a genuine sense of the finished development.</p>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section class="results-section">
+  <div class="reveal">
+    <p class="section-tag">&#x2666; The Outcome</p>
+    <h2 class="section-title">Project <em>Results</em></h2>
+  </div>
+  <div class="results-grid">
+    <div class="result-card reveal">
+      <div class="result-num">100%</div>
+      <div class="result-label">Planning Approval</div>
+      <div class="result-desc">Full planning permission granted on the first submission — supported by our detailed visualisation package.</div>
+    </div>
+    <div class="result-card reveal">
+      <div class="result-num">£4.2M</div>
+      <div class="result-label">Investment Secured</div>
+      <div class="result-desc">The investor presentation, built around our renders, helped the client close a £4.2M development funding round.</div>
+    </div>
+    <div class="result-card reveal">
+      <div class="result-num">6 Wks</div>
+      <div class="result-label">Concept to Final Render</div>
+      <div class="result-desc">Full project delivered in six weeks — from initial brief through to final renders and walkthrough animation.</div>
+    </div>
+  </div>
+</section>
+
+<!-- NEXT PROJECT -->
+<a href="project-casa-verde.html" class="next-project">
+  <img class="next-project-img" src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1800&q=80" alt="Casa Verde">
+  <div class="next-overlay"></div>
+  <div class="next-content">
+    <div>
+      <p class="next-label">&#x2666; Next Project</p>
+      <h2 class="next-title">Casa Verde</h2>
+    </div>
+    <div class="next-arrow">&#x2192;</div>
+  </div>
+</a>
+
+<!-- CTA -->
+<section class="cta-section reveal">
+  <p class="section-tag">&#x2666; Ready to Begin?</p>
+  <h2 class="cta-title">Start Your<br><em>Project</em></h2>
+  <p class="cta-desc">Got a vision? We'll help you visualise it, communicate it, and bring it to life. Get in touch for a free consultation.</p>
+  <div class="cta-btns">
+    <a href="index.html#contact" class="btn-gold">Start a Project</a>
+    <a href="index.html#work" class="btn-outline">View All Work</a>
+  </div>
+</section>
+
+<footer>
+  <a href="index.html" class="footer-logo">NEXT<span>BYT</span></a>
+  <p class="footer-copy">&copy; 2025 NextByt. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="index.html#services">Services</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#work">Work</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+</footer>
+
+<script>
+  const cursor = document.getElementById('cursor');
+  const cursorRing = document.getElementById('cursorRing');
+  document.addEventListener('mousemove', (e) => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+    setTimeout(() => {
+      cursorRing.style.left = e.clientX + 'px';
+      cursorRing.style.top = e.clientY + 'px';
+    }, 60);
+  });
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => { cursor.classList.add('hover'); cursorRing.classList.add('hover'); });
+    el.addEventListener('mouseleave', () => { cursor.classList.remove('hover'); cursorRing.classList.remove('hover'); });
+  });
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
