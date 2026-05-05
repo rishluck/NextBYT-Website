@@ -17,6 +17,9 @@
     --white: #ffffff;
     --text-muted: #887870;
     --text-dim: #504038;
+    --coral: #e8705a;
+    --teal: #4ecdc4;
+    --purple: #9b7fe8;
   }
 
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -30,43 +33,31 @@
     cursor: none;
   }
 
-  /* GRAIN TEXTURE */
+  /* GRAIN */
   body::after {
     content: '';
     position: fixed; inset: 0;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 9997;
-    opacity: 0.5;
+    pointer-events: none; z-index: 9997; opacity: 0.5;
   }
 
   /* PRELOADER */
   #preloader {
-    position: fixed; inset: 0;
-    background: var(--black);
-    z-index: 99999;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    gap: 32px;
+    position: fixed; inset: 0; background: var(--black);
+    z-index: 99999; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 32px;
     transition: opacity 1s ease, visibility 1s ease;
   }
   #preloader.hide { opacity: 0; visibility: hidden; }
   .preloader-logo {
     font-family: 'Josefin Sans', sans-serif;
-    font-size: 28px; font-weight: 200;
-    letter-spacing: 12px;
-    color: var(--white);
+    font-size: 28px; font-weight: 200; letter-spacing: 12px; color: var(--white);
     animation: preloaderFade 1.5s ease-in-out infinite;
   }
   .preloader-logo span { color: var(--gold); }
-  .preloader-track {
-    width: 180px; height: 1px;
-    background: var(--border);
-    position: relative; overflow: hidden;
-  }
+  .preloader-track { width: 180px; height: 1px; background: var(--border); position: relative; overflow: hidden; }
   .preloader-fill {
-    position: absolute; left: -100%; top: 0;
-    width: 100%; height: 100%;
+    position: absolute; left: -100%; top: 0; width: 100%; height: 100%;
     background: linear-gradient(to right, transparent, var(--gold), transparent);
     animation: preloaderSlide 1.6s ease forwards;
   }
@@ -75,28 +66,22 @@
 
   /* SCROLL PROGRESS */
   #progress-bar {
-    position: fixed; top: 0; left: 0;
-    height: 2px;
+    position: fixed; top: 0; left: 0; height: 2px;
     background: linear-gradient(to right, var(--gold), var(--gold-light));
-    z-index: 10000; width: 0%;
-    transition: width 0.08s linear;
+    z-index: 10000; width: 0%; transition: width 0.08s linear;
   }
 
-  /* CUSTOM CURSOR */
+  /* CURSOR */
   .cursor {
-    position: fixed; width: 10px; height: 10px;
-    background: var(--gold); border-radius: 50%;
-    pointer-events: none; z-index: 99999;
-    transform: translate(-50%, -50%);
-    transition: transform 0.1s, width 0.3s, height 0.3s, opacity 0.3s;
+    position: fixed; width: 10px; height: 10px; background: var(--gold);
+    border-radius: 50%; pointer-events: none; z-index: 99999;
+    transform: translate(-50%,-50%); transition: transform 0.1s, width 0.3s, height 0.3s, opacity 0.3s;
     mix-blend-mode: screen;
   }
   .cursor-ring {
-    position: fixed; width: 36px; height: 36px;
-    border: 1px solid var(--gold); border-radius: 50%;
-    pointer-events: none; z-index: 99998;
-    transform: translate(-50%, -50%);
-    transition: transform 0.18s ease, width 0.3s, height 0.3s, border-color 0.3s;
+    position: fixed; width: 36px; height: 36px; border: 1px solid var(--gold);
+    border-radius: 50%; pointer-events: none; z-index: 99998;
+    transform: translate(-50%,-50%); transition: transform 0.18s ease, width 0.3s, height 0.3s, border-color 0.3s;
     opacity: 0.6;
   }
   .cursor.hover { width: 16px; height: 16px; }
@@ -104,20 +89,15 @@
 
   /* NAV */
   nav {
-    position: fixed; top: 0; left: 0; right: 0;
-    z-index: 1000;
-    padding: 28px 60px;
-    display: flex; align-items: center; justify-content: space-between;
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    padding: 28px 60px; display: flex; align-items: center; justify-content: space-between;
     background: linear-gradient(to bottom, rgba(8,8,8,0.95), transparent);
-    backdrop-filter: blur(2px);
-    transition: background 0.4s, backdrop-filter 0.4s;
+    backdrop-filter: blur(2px); transition: background 0.4s, backdrop-filter 0.4s;
   }
   .nav-logo {
     font-family: 'Josefin Sans', sans-serif;
-    font-size: 20px; font-weight: 200;
-    letter-spacing: 6px; color: var(--white);
-    text-decoration: none;
-    display: flex; align-items: center; gap: 10px;
+    font-size: 20px; font-weight: 200; letter-spacing: 6px; color: var(--white);
+    text-decoration: none; display: flex; align-items: center; gap: 10px;
   }
   .nav-logo .logo-text span { color: var(--gold); font-weight: 400; }
   .nav-links { display: flex; gap: 42px; list-style: none; }
@@ -127,17 +107,14 @@
     transition: color 0.3s; position: relative;
   }
   .nav-links a::after {
-    content: ''; position: absolute;
-    bottom: -4px; left: 0;
-    width: 0; height: 1px;
-    background: var(--gold); transition: width 0.3s;
+    content: ''; position: absolute; bottom: -4px; left: 0;
+    width: 0; height: 1px; background: var(--gold); transition: width 0.3s;
   }
   .nav-links a:hover { color: var(--gold); }
   .nav-links a:hover::after { width: 100%; }
   .nav-cta {
-    background: transparent; border: 1px solid var(--gold);
-    color: var(--gold); padding: 10px 28px;
-    font-family: 'DM Sans', sans-serif;
+    background: transparent; border: 1px solid var(--gold); color: var(--gold);
+    padding: 10px 28px; font-family: 'DM Sans', sans-serif;
     font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
     cursor: none; transition: all 0.3s;
   }
@@ -145,19 +122,16 @@
 
   /* HERO */
   .hero {
-    min-height: 100vh;
-    display: flex; flex-direction: column;
-    justify-content: flex-end;
-    padding: 0 60px 80px;
+    min-height: 100vh; display: flex; flex-direction: column;
+    justify-content: flex-end; padding: 0 60px 80px;
     position: relative; overflow: hidden;
   }
   .hero-bg-img {
     position: absolute; inset: 0;
-    background-image: url('https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?w=1920&q=80');
+    background-image: url('images/services/web-design.jpg');
     background-size: cover; background-position: center;
-    opacity: 0.07; filter: grayscale(100%);
-    transform: scale(1.08);
-    will-change: transform;
+    opacity: 0.09; filter: grayscale(100%);
+    transform: scale(1.08); will-change: transform;
   }
   .hero-bg {
     position: absolute; inset: 0;
@@ -174,50 +148,32 @@
     background-size: 80px 80px;
     mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
   }
-
-  /* HERO BLOBS */
-  .hero-blob {
-    position: absolute; border-radius: 50%;
-    filter: blur(100px); pointer-events: none;
-  }
+  .hero-blob { position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; }
   .hero-blob-1 {
     width: 700px; height: 700px;
     background: radial-gradient(circle, rgba(212,160,112,0.07) 0%, transparent 70%);
-    top: -150px; right: -150px;
-    animation: blobDrift 12s ease-in-out infinite;
+    top: -150px; right: -150px; animation: blobDrift 12s ease-in-out infinite;
   }
   .hero-blob-2 {
     width: 500px; height: 500px;
     background: radial-gradient(circle, rgba(212,160,112,0.05) 0%, transparent 70%);
-    bottom: 0; left: -50px;
-    animation: blobDrift 15s ease-in-out infinite reverse;
-    animation-delay: -6s;
+    bottom: 0; left: -50px; animation: blobDrift 15s ease-in-out infinite reverse; animation-delay: -6s;
   }
   @keyframes blobDrift {
-    0%,100% { transform: translate(0,0) scale(1); }
-    33% { transform: translate(40px,-40px) scale(1.06); }
-    66% { transform: translate(-30px,30px) scale(0.94); }
+    0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(40px,-40px) scale(1.06)} 66%{transform:translate(-30px,30px) scale(0.94)}
   }
-
-  /* PARTICLES */
   .hero-particles { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
   .particle {
-    position: absolute;
-    width: 2px; height: 2px;
-    background: var(--gold); border-radius: 50%;
-    animation: particleFloat var(--dur, 6s) var(--ease, ease-in-out) infinite;
-    animation-delay: var(--del, 0s);
-    left: var(--x, 50%); top: var(--y, 80%);
-    opacity: 0;
+    position: absolute; width: 2px; height: 2px; background: var(--gold); border-radius: 50%;
+    animation: particleFloat var(--dur,6s) var(--ease,ease-in-out) infinite;
+    animation-delay: var(--del,0s); left: var(--x,50%); top: var(--y,80%); opacity: 0;
   }
   @keyframes particleFloat {
-    0% { opacity: 0; transform: translateY(0) translateX(0) scale(1); }
-    15% { opacity: 0.8; }
-    85% { opacity: 0.2; }
-    100% { opacity: 0; transform: translateY(-200px) translateX(var(--drift, 20px)) scale(0.2); }
+    0%{opacity:0;transform:translateY(0) translateX(0) scale(1)}
+    15%{opacity:0.8} 85%{opacity:0.2}
+    100%{opacity:0;transform:translateY(-200px) translateX(var(--drift,20px)) scale(0.2)}
   }
 
-  /* HERO CONTENT */
   .hero-tag {
     font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
     color: var(--gold); margin-bottom: 28px;
@@ -225,10 +181,8 @@
   }
   .hero-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(68px, 10vw, 140px);
-    font-weight: 300; line-height: 0.9;
-    letter-spacing: -2px; color: var(--white);
-    margin-bottom: 40px;
+    font-size: clamp(68px, 10vw, 140px); font-weight: 300; line-height: 0.9;
+    letter-spacing: -2px; color: var(--white); margin-bottom: 40px;
     opacity: 0; animation: fadeUp 1s 0.7s forwards;
   }
   .hero-title em { font-style: italic; color: var(--gold); }
@@ -236,22 +190,12 @@
     display: flex; align-items: flex-end; justify-content: space-between;
     opacity: 0; animation: fadeUp 1s 0.9s forwards;
   }
-  .hero-desc {
-    max-width: 420px; font-size: 15px;
-    line-height: 1.8; color: var(--text-muted);
-  }
+  .hero-desc { max-width: 420px; font-size: 15px; line-height: 1.8; color: var(--text-muted); }
   .hero-stats { display: flex; gap: 60px; }
-  .stat-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 48px; font-weight: 300; color: var(--gold); line-height: 1;
-  }
-  .stat-label {
-    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
-    color: var(--text-dim); margin-top: 4px;
-  }
+  .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 300; color: var(--gold); line-height: 1; }
+  .stat-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-dim); margin-top: 4px; }
   .scroll-indicator {
-    position: absolute; bottom: 30px; left: 50%;
-    transform: translateX(-50%);
+    position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
     display: flex; flex-direction: column; align-items: center; gap: 8px;
     opacity: 0; animation: fadeIn 1s 1.4s forwards;
   }
@@ -267,15 +211,10 @@
     border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
     padding: 18px 0; overflow: hidden; background: var(--dark);
   }
-  .marquee-track {
-    display: flex; gap: 80px;
-    animation: marquee 25s linear infinite; white-space: nowrap;
-  }
+  .marquee-track { display: flex; gap: 80px; animation: marquee 25s linear infinite; white-space: nowrap; }
   .marquee-item {
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 13px; font-weight: 200;
-    letter-spacing: 5px; text-transform: uppercase;
-    color: var(--text-dim);
+    font-family: 'Josefin Sans', sans-serif; font-size: 13px; font-weight: 200;
+    letter-spacing: 5px; text-transform: uppercase; color: var(--text-dim);
     display: flex; align-items: center; gap: 80px;
   }
   .marquee-item .dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; display: inline-block; }
@@ -286,91 +225,84 @@
   .section-tag { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
   .section-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(42px, 5vw, 72px); font-weight: 300;
-    line-height: 1.05; color: var(--white);
+    font-size: clamp(42px, 5vw, 72px); font-weight: 300; line-height: 1.05; color: var(--white);
   }
   .section-title em { font-style: italic; color: var(--gold); }
   .section-desc { max-width: 360px; font-size: 14px; line-height: 1.9; color: var(--text-muted); padding-top: 20px; }
 
-  /* SERVICE CARDS */
+  /* SERVICE CARDS — with images */
   .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
   .service-card {
-    background: var(--card); padding: 48px 40px;
-    border: 1px solid var(--border);
+    background: var(--card); border: 1px solid var(--border);
     position: relative; overflow: hidden;
-    transition: border-color 0.4s, transform 0.1s ease, box-shadow 0.4s;
-    cursor: none; text-decoration: none; display: block; color: inherit;
-    transform-style: preserve-3d;
-    will-change: transform;
+    transition: border-color 0.4s, box-shadow 0.4s;
+    cursor: none; text-decoration: none; display: flex; flex-direction: column; color: inherit;
   }
-  .service-card::before {
-    content: ''; position: absolute; inset: 0;
-    background: linear-gradient(135deg, rgba(212,160,112,0.07) 0%, transparent 60%);
-    opacity: 0; transition: opacity 0.4s;
-  }
-  .service-card:hover::before { opacity: 1; }
   .service-card:hover { border-color: var(--gold); box-shadow: 0 20px 60px rgba(212,160,112,0.08); }
-  .service-card:hover .service-icon { color: var(--gold); transform: scale(1.1) rotate(-5deg); }
-  .service-card:hover .service-arrow { opacity: 1; transform: translateX(0); }
-  .service-num { font-size: 13px; letter-spacing: 3px; color: var(--text-dim); margin-bottom: 36px; }
-  .service-icon { font-size: 38px; margin-bottom: 24px; transition: color 0.4s, transform 0.4s; color: var(--text-muted); display: inline-block; }
-  .service-name { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; color: var(--white); margin-bottom: 14px; line-height: 1.2; }
-  .service-desc { font-size: 13px; line-height: 1.9; color: var(--text-muted); margin-bottom: 32px; }
-  .service-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
-  .service-tag { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(212,160,112,0.3); padding: 4px 12px; }
-  .service-arrow { font-size: 20px; color: var(--gold); opacity: 0; transform: translateX(-10px); transition: all 0.3s; }
 
-  .service-card.wide {
-    grid-column: span 2;
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 40px; align-items: center;
+  /* Card image strip */
+  .scard-img {
+    width: 100%; height: 200px; overflow: hidden; position: relative; flex-shrink: 0;
   }
-  .service-card.wide .service-visual {
-    height: 280px; position: relative; overflow: hidden;
-  }
-  .service-card.wide .service-visual img {
+  .scard-img img {
     width: 100%; height: 100%; object-fit: cover;
-    filter: grayscale(40%); transition: filter 0.6s, transform 0.6s;
+    filter: grayscale(60%) brightness(0.7);
+    transition: filter 0.6s, transform 0.6s;
   }
-  .service-card.wide:hover .service-visual img { filter: grayscale(0%); transform: scale(1.05); }
-  .service-card.wide .service-visual::after {
+  .service-card:hover .scard-img img { filter: grayscale(10%) brightness(0.85); transform: scale(1.06); }
+  .scard-img::after {
     content: ''; position: absolute; inset: 0;
-    background: linear-gradient(135deg, rgba(212,160,112,0.1) 0%, transparent 50%);
-    z-index: 1;
+    background: linear-gradient(to top, var(--card) 0%, transparent 60%);
   }
+  .scard-num {
+    position: absolute; top: 14px; left: 14px; z-index: 2;
+    font-size: 11px; letter-spacing: 2px; color: var(--gold-light);
+    font-family: 'Josefin Sans', sans-serif;
+    background: rgba(13,10,9,0.6); padding: 4px 10px;
+    backdrop-filter: blur(6px);
+  }
+  .scard-accent {
+    position: absolute; top: 14px; right: 14px; z-index: 2;
+    font-size: 22px;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+  }
+
+  /* Card body */
+  .scard-body { padding: 28px 32px 36px; flex: 1; display: flex; flex-direction: column; }
+  .service-name { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 400; color: var(--white); margin-bottom: 12px; line-height: 1.2; }
+  .service-desc { font-size: 13px; line-height: 1.9; color: var(--text-muted); margin-bottom: 24px; flex: 1; }
+  .service-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+  .service-tag { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(212,160,112,0.3); padding: 4px 12px; }
+  .service-arrow { font-size: 18px; color: var(--gold); opacity: 0; transform: translateX(-10px); transition: all 0.3s; }
+  .service-card:hover .service-arrow { opacity: 1; transform: translateX(0); }
+
+  /* Wide card — Web Design as hero service */
+  .service-card.wide {
+    grid-column: span 2; flex-direction: row; align-items: stretch;
+  }
+  .service-card.wide .scard-img { width: 48%; height: auto; min-height: 260px; }
+  .service-card.wide .scard-img img { height: 100%; }
+  .service-card.wide .scard-body { padding: 40px 40px; }
+  .service-card.wide .service-name { font-size: 34px; }
 
   /* ABOUT */
   .about-section { background: var(--dark); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
   .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; }
   .about-visual { position: relative; height: 560px; }
-  .about-img-main {
-    position: absolute; top: 0; left: 0; right: 60px; bottom: 60px;
-    overflow: hidden;
-  }
-  .about-img-main img {
-    width: 100%; height: 100%; object-fit: cover;
-    filter: grayscale(30%); transition: filter 0.7s, transform 0.7s;
-  }
-  .about-img-main::before {
-    content: ''; position: absolute; inset: 0; z-index: 1;
-    background: linear-gradient(135deg, rgba(212,160,112,0.08) 0%, transparent 60%);
-  }
+  .about-img-main { position: absolute; top: 0; left: 0; right: 60px; bottom: 60px; overflow: hidden; }
+  .about-img-main img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(30%); transition: filter 0.7s, transform 0.7s; }
+  .about-img-main::before { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(135deg, rgba(212,160,112,0.08) 0%, transparent 60%); }
   .about-visual:hover .about-img-main img { filter: grayscale(0%); transform: scale(1.03); }
   .about-img-accent {
-    position: absolute; bottom: 0; right: 0;
-    width: 200px; height: 200px;
-    background: var(--gold);
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 64px; font-weight: 300;
-    color: var(--black); line-height: 1; text-align: center;
-    z-index: 2;
+    position: absolute; bottom: 0; right: 0; width: 200px; height: 200px;
+    background: var(--gold); display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif; font-size: 64px; font-weight: 300;
+    color: var(--black); line-height: 1; text-align: center; z-index: 2;
     transition: transform 0.4s;
   }
   .about-visual:hover .about-img-accent { transform: scale(1.04); }
-  .about-content .section-tag { margin-bottom: 12px; }
   .about-content p { font-size: 15px; line-height: 1.9; color: var(--text-muted); margin-top: 24px; }
-  .about-features { margin-top: 48px; display: flex; flex-direction: column; gap: 0; }
+  .about-features { margin-top: 48px; display: flex; flex-direction: column; }
   .about-feature { display: flex; align-items: flex-start; gap: 20px; padding: 22px 0; border-bottom: 1px solid var(--border); }
   .feature-icon { font-size: 22px; color: var(--gold); flex-shrink: 0; margin-top: 2px; transition: transform 0.3s; }
   .about-feature:hover .feature-icon { transform: scale(1.2) rotate(10deg); }
@@ -378,23 +310,16 @@
   .feature-text { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
 
   /* PROCESS */
-  .process-grid {
-    display: grid; grid-template-columns: repeat(4, 1fr);
-    gap: 0; margin-top: 80px; border: 1px solid var(--border);
-  }
+  .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 80px; border: 1px solid var(--border); }
   .process-step {
     padding: 48px 36px; border-right: 1px solid var(--border);
-    position: relative; transition: background 0.4s;
-    overflow: hidden;
+    position: relative; transition: background 0.4s; overflow: hidden;
   }
   .process-step:last-child { border-right: none; }
   .process-step:hover { background: var(--card); }
   .process-step::before {
-    content: ''; position: absolute;
-    bottom: 0; left: 0; right: 0; height: 2px;
-    background: var(--gold);
-    transform: scaleX(0); transform-origin: left;
-    transition: transform 0.5s ease;
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+    background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform 0.5s ease;
   }
   .process-step:hover::before { transform: scaleX(1); }
   .process-num { font-size: 80px; color: var(--border); line-height: 1; margin-bottom: 20px; transition: color 0.4s; font-family: 'Cormorant Garamond', serif; }
@@ -404,47 +329,58 @@
 
   /* PORTFOLIO */
   .portfolio-section { background: var(--dark); border-top: 1px solid var(--border); }
-  .portfolio-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 60px; }
-  .portfolio-item { position: relative; overflow: hidden; cursor: none; display: block; text-decoration: none; color: inherit; }
-  .portfolio-item:first-child { grid-column: span 2; }
-  .portfolio-visual {
-    height: 400px; overflow: hidden; position: relative;
-    background: var(--card);
+  .portfolio-slider-wrap { margin-top: 60px; }
+  .portfolio-slider { position: relative; overflow: hidden; }
+  .portfolio-slides { display: flex; transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+  .portfolio-slide {
+    min-width: 100%; position: relative; height: 580px;
+    overflow: hidden; flex-shrink: 0; display: block; text-decoration: none; color: inherit;
   }
-  .portfolio-item:first-child .portfolio-visual { height: 520px; }
-  .portfolio-visual img {
-    width: 100%; height: 100%; object-fit: cover;
-    filter: grayscale(20%);
-    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.6s;
+  .portfolio-slide img {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; object-position: top;
+    filter: grayscale(20%); transition: filter 0.6s, transform 8s ease;
   }
-  .portfolio-item:hover .portfolio-visual img { transform: scale(1.06); filter: grayscale(0%); }
-  .portfolio-visual::before {
+  .portfolio-slide.active img { filter: grayscale(0%); transform: scale(1.04); }
+  .portfolio-slide::before {
     content: ''; position: absolute; inset: 0; z-index: 1;
-    background: linear-gradient(to top, rgba(8,8,8,0.9) 0%, rgba(8,8,8,0.2) 50%, transparent 100%);
+    background: linear-gradient(to right, rgba(13,10,9,0.88) 0%, rgba(13,10,9,0.35) 55%, transparent 100%);
   }
-  .portfolio-visual::after {
-    content: ''; position: absolute; inset: 0; z-index: 1;
-    background: rgba(212,160,112,0); transition: background 0.4s;
+  .slide-info {
+    position: absolute; top: 50%; left: 80px; transform: translateY(-50%);
+    z-index: 2; max-width: 480px;
   }
-  .portfolio-item:hover .portfolio-visual::after { background: rgba(212,160,112,0.04); }
-  .portfolio-view-btn {
-    position: absolute; top: 50%; left: 50%;
-    transform: translate(-50%, -50%) scale(0.85);
-    background: rgba(13,10,9,0.7); border: 1px solid var(--gold);
-    color: var(--gold); padding: 14px 32px;
-    font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase;
-    z-index: 3; opacity: 0; transition: all 0.4s;
-    backdrop-filter: blur(6px); white-space: nowrap;
+  .slide-num { font-size: 11px; letter-spacing: 4px; color: var(--text-dim); margin-bottom: 14px; }
+  .slide-cat { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+  .slide-title {
+    font-family: 'Cormorant Garamond', serif; font-size: clamp(38px, 4.5vw, 60px);
+    font-weight: 300; color: var(--white); line-height: 1.05; margin-bottom: 28px;
   }
-  .portfolio-item:hover .portfolio-view-btn { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-  .portfolio-info {
-    position: absolute; bottom: 0; left: 0; right: 0;
-    padding: 36px 40px; z-index: 2;
-    transform: translateY(10px); transition: transform 0.4s;
+  .slide-link {
+    display: inline-block; border: 1px solid var(--gold); color: var(--gold);
+    padding: 12px 32px; font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase;
+    transition: background 0.3s, color 0.3s;
   }
-  .portfolio-item:hover .portfolio-info { transform: translateY(0); }
-  .portfolio-cat { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
-  .portfolio-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; color: var(--white); }
+  .portfolio-slide:hover .slide-link { background: var(--gold); color: var(--black); }
+  .slider-controls {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 24px 80px; background: var(--card); border-top: 1px solid var(--border);
+  }
+  .slider-arrows { display: flex; gap: 2px; }
+  .slider-arrow {
+    width: 52px; height: 52px; border: 1px solid var(--border);
+    background: transparent; color: var(--cream); font-size: 18px;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: background 0.3s, border-color 0.3s, color 0.3s; font-family: inherit;
+  }
+  .slider-arrow:hover { background: var(--gold); border-color: var(--gold); color: var(--black); }
+  .pf-dots { display: flex; gap: 10px; align-items: center; }
+  .pf-dot {
+    width: 6px; height: 6px; background: var(--text-dim);
+    border: none; padding: 0; cursor: pointer; transition: all 0.3s;
+  }
+  .pf-dot.active { width: 24px; background: var(--gold); }
+  .slider-counter { font-size: 12px; color: var(--text-dim); letter-spacing: 2px; }
 
   /* TESTIMONIAL */
   .testimonial-section {
@@ -453,19 +389,14 @@
     position: relative; overflow: hidden;
   }
   .testimonial-section::before {
-    content: '"'; position: absolute;
-    top: -20px; left: 50%; transform: translateX(-50%);
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 300px; color: rgba(212,160,112,0.03);
-    line-height: 1; pointer-events: none;
-    font-weight: 300;
+    content: '"'; position: absolute; top: -20px; left: 50%; transform: translateX(-50%);
+    font-family: 'Cormorant Garamond', serif; font-size: 300px; color: rgba(212,160,112,0.03);
+    line-height: 1; pointer-events: none; font-weight: 300;
   }
   .testimonial-quote {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(28px, 3.5vw, 50px); font-weight: 300;
-    font-style: italic; line-height: 1.5;
-    color: var(--cream); margin-bottom: 40px;
-    transition: opacity 0.4s;
+    font-size: clamp(28px, 3.5vw, 50px); font-weight: 300; font-style: italic;
+    line-height: 1.5; color: var(--cream); margin-bottom: 40px; transition: opacity 0.4s;
   }
   .testimonial-quote em { color: var(--gold); font-style: normal; }
   .testimonial-author { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-muted); }
@@ -476,9 +407,8 @@
   /* PRICING */
   .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 70px; }
   .pricing-card {
-    background: var(--card); border: 1px solid var(--border);
-    padding: 52px 44px; position: relative;
-    transition: border-color 0.4s, transform 0.4s, box-shadow 0.4s;
+    background: var(--card); border: 1px solid var(--border); padding: 52px 44px;
+    position: relative; transition: border-color 0.4s, transform 0.4s, box-shadow 0.4s;
   }
   .pricing-card:hover { transform: translateY(-6px); box-shadow: 0 30px 70px rgba(0,0,0,0.3); }
   .pricing-card.featured {
@@ -491,8 +421,7 @@
   .pricing-badge {
     display: none; position: absolute; top: 28px; right: 28px;
     background: var(--gold); color: var(--black);
-    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
-    padding: 5px 14px; font-weight: 500;
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase; padding: 5px 14px; font-weight: 500;
   }
   .pricing-plan { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 20px; }
   .pricing-price { font-family: 'Cormorant Garamond', serif; font-size: 64px; font-weight: 300; color: var(--white); line-height: 1; margin-bottom: 8px; }
@@ -500,22 +429,23 @@
   .pricing-freq { font-size: 12px; color: var(--text-dim); margin-bottom: 36px; }
   .pricing-divider { height: 1px; background: var(--border); margin-bottom: 32px; }
   .pricing-features { list-style: none; margin-bottom: 40px; }
-  .pricing-features li { font-size: 13px; color: var(--text-muted); padding: 9px 0; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .pricing-features li {
+    font-size: 13px; color: var(--text-muted); padding: 9px 0;
+    display: flex; align-items: center; gap: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
   .pricing-features li::before { content: '✓'; color: var(--gold); font-size: 12px; flex-shrink: 0; }
   .btn-primary {
     display: block; width: 100%; background: var(--gold); color: var(--black);
-    border: none; padding: 16px;
-    font-family: 'DM Sans', sans-serif; font-size: 11px;
-    letter-spacing: 2.5px; text-transform: uppercase; font-weight: 500;
-    cursor: none; transition: background 0.3s, transform 0.2s;
-    text-decoration: none; text-align: center;
+    border: none; padding: 16px; font-family: 'DM Sans', sans-serif;
+    font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; font-weight: 500;
+    cursor: none; transition: background 0.3s, transform 0.2s; text-decoration: none; text-align: center;
   }
   .btn-primary:hover { background: var(--gold-light); transform: scale(1.02); }
   .btn-outline {
-    display: block; width: 100%; background: transparent;
-    color: var(--gold); border: 1px solid var(--gold); padding: 16px;
-    font-family: 'DM Sans', sans-serif; font-size: 11px;
-    letter-spacing: 2.5px; text-transform: uppercase; font-weight: 400;
+    display: block; width: 100%; background: transparent; color: var(--gold);
+    border: 1px solid var(--gold); padding: 16px; font-family: 'DM Sans', sans-serif;
+    font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; font-weight: 400;
     cursor: none; transition: all 0.3s; text-decoration: none; text-align: center;
   }
   .btn-outline:hover { background: var(--gold); color: var(--black); }
@@ -531,14 +461,12 @@
   .form-label { display: block; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 10px; }
   .form-input, .form-select, .form-textarea {
     width: 100%; background: var(--card); border: 1px solid var(--border);
-    color: var(--cream); padding: 14px 18px;
-    font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 300;
-    transition: border-color 0.3s, box-shadow 0.3s; outline: none;
+    color: var(--cream); padding: 14px 18px; font-family: 'DM Sans', sans-serif;
+    font-size: 14px; font-weight: 300; transition: border-color 0.3s, box-shadow 0.3s; outline: none;
   }
   .form-textarea { height: 130px; resize: vertical; }
   .form-input:focus, .form-select:focus, .form-textarea:focus {
-    border-color: var(--gold);
-    box-shadow: 0 0 0 3px rgba(212,160,112,0.08);
+    border-color: var(--gold); box-shadow: 0 0 0 3px rgba(212,160,112,0.08);
   }
   .form-select option { background: var(--dark); }
   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
@@ -546,11 +474,19 @@
   /* FOOTER */
   footer { background: var(--black); border-top: 1px solid var(--border); padding: 70px 60px 40px; }
   .footer-main { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
-  .footer-brand-name { font-family: 'Josefin Sans', sans-serif; font-size: 22px; font-weight: 200; letter-spacing: 8px; color: var(--white); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+  .footer-brand-name {
+    font-family: 'Josefin Sans', sans-serif; font-size: 22px; font-weight: 200;
+    letter-spacing: 8px; color: var(--white); margin-bottom: 20px;
+    display: flex; align-items: center; gap: 10px;
+  }
   .footer-brand-name .logo-text span { color: var(--gold); font-weight: 400; }
   .footer-tagline { font-size: 13px; line-height: 1.8; color: var(--text-muted); margin-bottom: 28px; max-width: 280px; }
   .footer-social { display: flex; gap: 16px; }
-  .social-link { width: 38px; height: 38px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--text-muted); text-decoration: none; font-size: 14px; transition: all 0.3s; }
+  .social-link {
+    width: 38px; height: 38px; border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-muted); text-decoration: none; font-size: 14px; transition: all 0.3s;
+  }
   .social-link:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-3px); }
   .footer-col-title { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; }
   .footer-links { list-style: none; }
@@ -564,64 +500,54 @@
   .footer-legal a:hover { color: var(--gold); }
 
   /* ANIMATIONS */
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+  @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
   @keyframes scrollPulse { 0%,100%{opacity:1;transform:scaleY(1)} 50%{opacity:0.4;transform:scaleY(0.6)} }
 
-  .reveal {
-    opacity: 0; transform: translateY(40px);
-    transition: opacity 0.9s ease, transform 0.9s ease;
-  }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal { opacity:0; transform:translateY(40px); transition:opacity 0.9s ease,transform 0.9s ease; }
+  .reveal.visible { opacity:1; transform:translateY(0); }
+  .reveal-left { opacity:0; transform:translateX(-40px); transition:opacity 0.9s ease,transform 0.9s ease; }
+  .reveal-left.visible { opacity:1; transform:translateX(0); }
+  .reveal-right { opacity:0; transform:translateX(40px); transition:opacity 0.9s ease,transform 0.9s ease; }
+  .reveal-right.visible { opacity:1; transform:translateX(0); }
 
-  .reveal-left {
-    opacity: 0; transform: translateX(-40px);
-    transition: opacity 0.9s ease, transform 0.9s ease;
-  }
-  .reveal-left.visible { opacity: 1; transform: translateX(0); }
+  .services-grid .service-card:nth-child(1).reveal{transition-delay:0s}
+  .services-grid .service-card:nth-child(2).reveal{transition-delay:0.12s}
+  .services-grid .service-card:nth-child(3).reveal{transition-delay:0s}
+  .services-grid .service-card:nth-child(4).reveal{transition-delay:0.12s}
+  .services-grid .service-card:nth-child(5).reveal{transition-delay:0.24s}
+  .services-grid .service-card:nth-child(6).reveal{transition-delay:0s}
+  .services-grid .service-card:nth-child(7).reveal{transition-delay:0.12s}
+  .services-grid .service-card:nth-child(8).reveal{transition-delay:0.24s}
 
-  .reveal-right {
-    opacity: 0; transform: translateX(40px);
-    transition: opacity 0.9s ease, transform 0.9s ease;
+  @media(max-width:1024px){
+    nav{padding:24px 30px} .nav-links{display:none}
+    section{padding:80px 30px} .hero{padding:0 30px 60px}
+    .hero-title{font-size:clamp(52px,12vw,100px)} .hero-stats{gap:30px}
+    .services-grid{grid-template-columns:1fr 1fr}
+    .service-card.wide{grid-column:span 2;flex-direction:column}
+    .service-card.wide .scard-img{width:100%;height:220px}
+    .about-grid,.contact-grid{grid-template-columns:1fr;gap:50px}
+    .pricing-grid{grid-template-columns:1fr;gap:20px}
+    .process-grid{grid-template-columns:1fr 1fr}
+    .testimonial-section{padding:80px 30px}
+    .footer-main{grid-template-columns:1fr 1fr;gap:40px}
   }
-  .reveal-right.visible { opacity: 1; transform: translateX(0); }
-
-  /* Staggered service card delays */
-  .services-grid .service-card:nth-child(1).reveal { transition-delay: 0s; }
-  .services-grid .service-card:nth-child(2).reveal { transition-delay: 0.12s; }
-  .services-grid .service-card:nth-child(3).reveal { transition-delay: 0.24s; }
-  .services-grid .service-card:nth-child(4).reveal { transition-delay: 0.36s; }
-  .services-grid .service-card:nth-child(5).reveal { transition-delay: 0.48s; }
-  .services-grid .service-card:nth-child(6).reveal { transition-delay: 0.60s; }
-
-  @media (max-width: 1024px) {
-    nav { padding: 24px 30px; }
-    .nav-links { display: none; }
-    section { padding: 80px 30px; }
-    .hero { padding: 0 30px 60px; }
-    .hero-title { font-size: clamp(52px, 12vw, 100px); }
-    .hero-stats { gap: 30px; }
-    .services-grid { grid-template-columns: 1fr 1fr; }
-    .service-card.wide { grid-column: span 2; }
-    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 50px; }
-    .pricing-grid { grid-template-columns: 1fr; gap: 20px; }
-    .process-grid { grid-template-columns: 1fr 1fr; }
-    .testimonial-section { padding: 80px 30px; }
-    .footer-main { grid-template-columns: 1fr 1fr; gap: 40px; }
-  }
-  @media (max-width: 640px) {
-    .services-grid { grid-template-columns: 1fr; }
-    .service-card.wide { grid-column: span 1; display: block; }
-    .portfolio-grid { grid-template-columns: 1fr; }
-    .portfolio-item:first-child { grid-column: span 1; }
-    .process-grid { grid-template-columns: 1fr; }
-    .hero-bottom { flex-direction: column; gap: 40px; }
-    footer { padding: 50px 30px 30px; }
-    .footer-main { grid-template-columns: 1fr; gap: 30px; }
-    .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
-    .form-row { grid-template-columns: 1fr; }
-    .pricing-card.featured { transform: none; }
+  @media(max-width:640px){
+    .services-grid{grid-template-columns:1fr}
+    .service-card.wide{grid-column:span 1;flex-direction:column}
+    .portfolio-slide { height: 420px; }
+    .slide-info { left: 28px; max-width: 90%; }
+    .slider-controls { padding: 20px 28px; }
+    .slider-counter { display: none; }
+    .process-grid{grid-template-columns:1fr}
+    .hero-bottom{flex-direction:column;gap:40px}
+    footer{padding:50px 30px 30px}
+    .footer-main{grid-template-columns:1fr;gap:30px}
+    .footer-bottom{flex-direction:column;gap:20px;text-align:center}
+    .form-row{grid-template-columns:1fr}
+    .pricing-card.featured{transform:none}
   }
 </style>
 </head>
@@ -629,16 +555,14 @@
 
 <!-- PRELOADER -->
 <div id="preloader">
-  <div>
-    <div class="preloader-logo">NEXT<span>BYT</span></div>
-    <div class="preloader-track"><div class="preloader-fill"></div></div>
-  </div>
+  <div class="preloader-logo">NEXT<span>BYT</span></div>
+  <div class="preloader-track"><div class="preloader-fill"></div></div>
 </div>
 
 <!-- SCROLL PROGRESS -->
 <div id="progress-bar"></div>
 
-<!-- Custom Cursor -->
+<!-- CURSOR -->
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
@@ -684,12 +608,12 @@
   <div class="hero-blob hero-blob-2"></div>
   <div class="hero-particles" id="heroParticles"></div>
 
-  <p class="hero-tag">&#x2666; NextByt Digital Studio &#x2666; Creative Agency</p>
+  <p class="hero-tag">&#x2666; NextByt Digital Studio &#x2666; Technology &amp; Creative Agency</p>
   <h1 class="hero-title">
-    We Build<br><em>Beautiful</em><br>Brands &amp; Spaces
+    We Build<br><em>Digital</em><br>Products &amp; Brands
   </h1>
   <div class="hero-bottom">
-    <p class="hero-desc">From pixels to blueprints &mdash; we craft compelling digital experiences, iconic brand identities, and stunning architectural visions for businesses that dare to be different.</p>
+    <p class="hero-desc">From custom websites and Shopify stores to AI-powered marketing and iconic brand identities — we build the complete digital presence your business deserves.</p>
     <div class="hero-stats">
       <div>
         <div class="stat-num" data-target="200">0</div>
@@ -700,7 +624,7 @@
         <div class="stat-label">Happy Clients</div>
       </div>
       <div>
-        <div class="stat-num" data-target="6">0</div>
+        <div class="stat-num" data-target="8">0</div>
         <div class="stat-label">Core Services</div>
       </div>
     </div>
@@ -714,20 +638,20 @@
 <!-- MARQUEE -->
 <div class="marquee-section">
   <div class="marquee-track" id="marqueeTrack">
-    <span class="marquee-item">Web Design <span class="dot"></span></span>
+    <span class="marquee-item">Web Design &amp; Dev <span class="dot"></span></span>
+    <span class="marquee-item">Shopify Design <span class="dot"></span></span>
+    <span class="marquee-item">AI Marketing <span class="dot"></span></span>
     <span class="marquee-item">Brand Identity <span class="dot"></span></span>
-    <span class="marquee-item">Architecture <span class="dot"></span></span>
     <span class="marquee-item">Social Media <span class="dot"></span></span>
-    <span class="marquee-item">Interior Design <span class="dot"></span></span>
-    <span class="marquee-item">3D Visualization <span class="dot"></span></span>
+    <span class="marquee-item">UI / UX Design <span class="dot"></span></span>
     <span class="marquee-item">Logo Design <span class="dot"></span></span>
     <span class="marquee-item">Graphic Design <span class="dot"></span></span>
-    <span class="marquee-item">Web Design <span class="dot"></span></span>
+    <span class="marquee-item">Web Design &amp; Dev <span class="dot"></span></span>
+    <span class="marquee-item">Shopify Design <span class="dot"></span></span>
+    <span class="marquee-item">AI Marketing <span class="dot"></span></span>
     <span class="marquee-item">Brand Identity <span class="dot"></span></span>
-    <span class="marquee-item">Architecture <span class="dot"></span></span>
     <span class="marquee-item">Social Media <span class="dot"></span></span>
-    <span class="marquee-item">Interior Design <span class="dot"></span></span>
-    <span class="marquee-item">3D Visualization <span class="dot"></span></span>
+    <span class="marquee-item">UI / UX Design <span class="dot"></span></span>
     <span class="marquee-item">Logo Design <span class="dot"></span></span>
     <span class="marquee-item">Graphic Design <span class="dot"></span></span>
   </div>
@@ -740,95 +664,168 @@
       <p class="section-tag">&#x2666; What We Do</p>
       <h2 class="section-title">Our Core<br><em>Services</em></h2>
     </div>
-    <p class="section-desc">We offer an integrated suite of creative and technical services &mdash; designed to take your vision from concept to reality, all under one roof.</p>
+    <p class="section-desc">An integrated suite of digital and creative services — from Shopify stores and AI-driven campaigns to brand identity and web development, all under one roof.</p>
   </div>
 
   <div class="services-grid">
-    <a href="service-web-design.html" class="service-card reveal">
-      <div class="service-num">01</div>
-      <div class="service-icon">&#x1F4BB;</div>
-      <h3 class="service-name">Website Design &amp; Development</h3>
-      <p class="service-desc">Stunning, conversion-focused websites built for small businesses and startups. Fast, responsive, and built to grow with you.</p>
-      <div class="service-tags">
-        <span class="service-tag">UI/UX</span>
-        <span class="service-tag">WordPress</span>
-        <span class="service-tag">Custom Dev</span>
-        <span class="service-tag">E-Commerce</span>
-      </div>
-      <div class="service-arrow">&#x2192;</div>
-    </a>
 
-    <a href="service-social-media.html" class="service-card reveal">
-      <div class="service-num">02</div>
-      <div class="service-icon">&#x1F4E3;</div>
-      <h3 class="service-name">Social Media Marketing</h3>
-      <p class="service-desc">Strategic content creation, community management, and paid campaigns across Instagram, LinkedIn, TikTok, and more.</p>
-      <div class="service-tags">
-        <span class="service-tag">Content Strategy</span>
-        <span class="service-tag">Paid Ads</span>
-        <span class="service-tag">Analytics</span>
+    <!-- 01 — Wide: Web Design & Dev (hero service) -->
+    <a href="service-web-design.html" class="service-card wide reveal">
+      <div class="scard-img">
+        <img src="images/services/web-design.jpg" alt="Web Design & Development" loading="lazy">
+        <div class="scard-num">01</div>
+        <div class="scard-accent">💻</div>
       </div>
-      <div class="service-arrow">&#x2192;</div>
-    </a>
-
-    <a href="service-brand-design.html" class="service-card reveal">
-      <div class="service-num">03</div>
-      <div class="service-icon">&#x270F;&#xFE0F;</div>
-      <h3 class="service-name">Logo &amp; Brand Design</h3>
-      <p class="service-desc">Memorable logos and complete brand identities &mdash; colour palettes, typography, brand guidelines and full visual systems.</p>
-      <div class="service-tags">
-        <span class="service-tag">Logo Design</span>
-        <span class="service-tag">Brand System</span>
-        <span class="service-tag">Guidelines</span>
-      </div>
-      <div class="service-arrow">&#x2192;</div>
-    </a>
-
-    <a href="service-architecture.html" class="service-card wide reveal">
-      <div>
-        <div class="service-num">04</div>
-        <div class="service-icon">&#x1F3D7;&#xFE0F;</div>
-        <h3 class="service-name">Architecture &amp; 3D Design</h3>
-        <p class="service-desc">Architectural planning, concept development, and photorealistic 3D renders. We visualise buildings and spaces before a single brick is laid &mdash; giving clients clarity, confidence, and a competitive edge.</p>
+      <div class="scard-body">
+        <h3 class="service-name">Website Design &amp; Development</h3>
+        <p class="service-desc">Stunning, conversion-focused websites built for small businesses and startups. Fast, responsive, SEO-ready, and engineered to grow with you — from a simple landing page to a full-featured web app.</p>
         <div class="service-tags">
-          <span class="service-tag">Floor Plans</span>
+          <span class="service-tag">UI/UX</span>
+          <span class="service-tag">WordPress</span>
+          <span class="service-tag">Custom Dev</span>
+          <span class="service-tag">E-Commerce</span>
+          <span class="service-tag">React / Next.js</span>
+        </div>
+        <div class="service-arrow">→</div>
+      </div>
+    </a>
+
+    <!-- 02 — Shopify Design -->
+    <a href="service-web-design.html" class="service-card reveal">
+      <div class="scard-img">
+        <img src="images/services/shopify.jpg" alt="Shopify Design" loading="lazy">
+        <div class="scard-num">02</div>
+        <div class="scard-accent">🛍️</div>
+      </div>
+      <div class="scard-body">
+        <h3 class="service-name">Shopify Design &amp; Development</h3>
+        <p class="service-desc">Custom Shopify stores built to convert — beautiful themes, seamless checkout flows, product pages that sell, and apps that automate your operations.</p>
+        <div class="service-tags">
+          <span class="service-tag">Shopify</span>
+          <span class="service-tag">Custom Theme</span>
+          <span class="service-tag">E-Commerce</span>
+          <span class="service-tag">Shopify Plus</span>
+        </div>
+        <div class="service-arrow">→</div>
+      </div>
+    </a>
+
+    <!-- 03 — Social Media -->
+    <a href="service-social-media.html" class="service-card reveal">
+      <div class="scard-img">
+        <img src="images/services/social-media.jpg" alt="Social Media Marketing" loading="lazy">
+        <div class="scard-num">03</div>
+        <div class="scard-accent">📣</div>
+      </div>
+      <div class="scard-body">
+        <h3 class="service-name">Social Media Marketing</h3>
+        <p class="service-desc">Strategic content creation, community management, and paid campaigns across Instagram, LinkedIn, TikTok, and more.</p>
+        <div class="service-tags">
+          <span class="service-tag">Content Strategy</span>
+          <span class="service-tag">Paid Ads</span>
+          <span class="service-tag">Analytics</span>
+        </div>
+        <div class="service-arrow">→</div>
+      </div>
+    </a>
+
+    <!-- 04 — Brand Design -->
+    <a href="service-brand-design.html" class="service-card reveal">
+      <div class="scard-img">
+        <img src="images/services/brand-design.jpg" alt="Logo & Brand Design" loading="lazy">
+        <div class="scard-num">04</div>
+        <div class="scard-accent">✏️</div>
+      </div>
+      <div class="scard-body">
+        <h3 class="service-name">Logo &amp; Brand Design</h3>
+        <p class="service-desc">Memorable logos and complete brand identities — colour palettes, typography, brand guidelines and full visual systems.</p>
+        <div class="service-tags">
+          <span class="service-tag">Logo Design</span>
+          <span class="service-tag">Brand System</span>
+          <span class="service-tag">Guidelines</span>
+        </div>
+        <div class="service-arrow">→</div>
+      </div>
+    </a>
+
+    <!-- 05 — AI Marketing (NEW — featured) -->
+    <a href="#contact" class="service-card reveal" style="border-color:rgba(212,160,112,0.35)">
+      <div class="scard-img">
+        <img src="images/services/ai-marketing.jpg" alt="AI Marketing" loading="lazy">
+        <div class="scard-num" style="background:rgba(212,160,112,0.25);color:var(--gold-light)">NEW</div>
+        <div class="scard-accent">🤖</div>
+      </div>
+      <div class="scard-body">
+        <h3 class="service-name">AI Marketing</h3>
+        <p class="service-desc">Supercharge your growth with AI-powered campaigns — automated ad copy, personalised email sequences, predictive audience targeting, and data-driven content strategies at scale.</p>
+        <div class="service-tags">
+          <span class="service-tag">AI Copywriting</span>
+          <span class="service-tag">Ad Automation</span>
+          <span class="service-tag">Email Flows</span>
+          <span class="service-tag">Audience AI</span>
+        </div>
+        <div class="service-arrow">→</div>
+      </div>
+    </a>
+
+    <!-- 06 — Graphic Design -->
+    <a href="service-graphic-design.html" class="service-card reveal">
+      <div class="scard-img">
+        <img src="images/services/graphic-design.jpg" alt="Graphic Design" loading="lazy">
+        <div class="scard-num">06</div>
+        <div class="scard-accent">🎨</div>
+      </div>
+      <div class="scard-body">
+        <h3 class="service-name">Graphic Design</h3>
+        <p class="service-desc">Print and digital design for every touchpoint — brochures, packaging, presentations, advertising, event materials and more.</p>
+        <div class="service-tags">
+          <span class="service-tag">Print</span>
+          <span class="service-tag">Digital</span>
+          <span class="service-tag">Packaging</span>
+          <span class="service-tag">Presentations</span>
+        </div>
+        <div class="service-arrow">→</div>
+      </div>
+    </a>
+
+    <!-- 07 — Architecture (secondary) -->
+    <a href="service-architecture.html" class="service-card reveal">
+      <div class="scard-img">
+        <img src="images/services/architecture.jpg" alt="Architecture & 3D Design" loading="lazy">
+        <div class="scard-num">07</div>
+        <div class="scard-accent">🏗️</div>
+      </div>
+      <div class="scard-body">
+        <h3 class="service-name">Architecture &amp; 3D Design</h3>
+        <p class="service-desc">Photorealistic 3D renders, floor plans and walkthroughs for property developers and architects who need to sell a vision.</p>
+        <div class="service-tags">
           <span class="service-tag">3D Renders</span>
-          <span class="service-tag">Walkthroughs</span>
+          <span class="service-tag">Floor Plans</span>
           <span class="service-tag">AutoCAD</span>
         </div>
-        <div class="service-arrow">&#x2192;</div>
-      </div>
-      <div class="service-visual">
-        <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80" alt="Architecture render" loading="lazy">
+        <div class="service-arrow">→</div>
       </div>
     </a>
 
+    <!-- 08 — Interior Design (secondary) -->
     <a href="service-interior-design.html" class="service-card reveal">
-      <div class="service-num">05</div>
-      <div class="service-icon">&#x1F6CB;&#xFE0F;</div>
-      <h3 class="service-name">Interior Design</h3>
-      <p class="service-desc">Spatial planning, mood boards, material selections and full 3D interior visualisations for residential and commercial spaces.</p>
-      <div class="service-tags">
-        <span class="service-tag">Residential</span>
-        <span class="service-tag">Commercial</span>
-        <span class="service-tag">3D Renders</span>
+      <div class="scard-img">
+        <img src="images/services/interior.jpg" alt="Interior Design" loading="lazy">
+        <div class="scard-num">08</div>
+        <div class="scard-accent">🛋️</div>
       </div>
-      <div class="service-arrow">&#x2192;</div>
+      <div class="scard-body">
+        <h3 class="service-name">Interior Design</h3>
+        <p class="service-desc">Spatial planning, mood boards, material selections and full 3D interior visualisations for residential and commercial spaces.</p>
+        <div class="service-tags">
+          <span class="service-tag">Residential</span>
+          <span class="service-tag">Commercial</span>
+          <span class="service-tag">3D Renders</span>
+        </div>
+        <div class="service-arrow">→</div>
+      </div>
     </a>
 
-    <a href="service-graphic-design.html" class="service-card reveal">
-      <div class="service-num">06</div>
-      <div class="service-icon">&#x1F3A8;</div>
-      <h3 class="service-name">Graphic Design</h3>
-      <p class="service-desc">Print and digital design for every touchpoint &mdash; brochures, packaging, presentations, advertising, event materials and more.</p>
-      <div class="service-tags">
-        <span class="service-tag">Print</span>
-        <span class="service-tag">Digital</span>
-        <span class="service-tag">Packaging</span>
-        <span class="service-tag">Presentations</span>
-      </div>
-      <div class="service-arrow">&#x2192;</div>
-    </a>
   </div>
 </section>
 
@@ -837,7 +834,7 @@
   <div class="about-grid">
     <div class="about-visual reveal-left">
       <div class="about-img-main">
-        <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=900&q=80" alt="Creative studio team" loading="lazy">
+        <img src="images/about/team.jpg" alt="Creative studio team" loading="lazy">
       </div>
       <div class="about-img-accent">
         Since<br>2018
@@ -845,9 +842,9 @@
     </div>
     <div class="about-content reveal-right">
       <p class="section-tag">&#x2666; About NextByt</p>
-      <h2 class="section-title">Where Creativity<br>Meets <em>Precision</em></h2>
-      <p>We are a multi-disciplinary creative studio helping small businesses and startups establish powerful, memorable presences &mdash; both online and in the built world.</p>
-      <p>From a single logo to a complete brand ecosystem, from a landing page to a full architectural visualisation &mdash; NextByt does it all with the same obsessive attention to detail.</p>
+      <h2 class="section-title">Where Technology<br>Meets <em>Creativity</em></h2>
+      <p>We are a digital-first creative studio helping small businesses and startups build a powerful online presence — from beautiful websites and data-driven marketing to iconic brand identities.</p>
+      <p>From a single logo to a complete digital ecosystem, NextByt does it all with the same obsessive attention to detail and strategic thinking.</p>
       <div class="about-features">
         <div class="about-feature">
           <div class="feature-icon">&#x26A1;</div>
@@ -860,7 +857,7 @@
           <div class="feature-icon">&#x1F3AF;</div>
           <div>
             <div class="feature-title">Strategy-First Approach</div>
-            <div class="feature-text">Every design decision is rooted in your business goals, your audience, and your competitive landscape.</div>
+            <div class="feature-text">Every design and development decision is rooted in your business goals, your audience, and your competitive landscape.</div>
           </div>
         </div>
         <div class="about-feature">
@@ -893,17 +890,17 @@
     <div class="process-step reveal">
       <div class="process-num">02</div>
       <h3 class="process-title">Strategy</h3>
-      <p class="process-text">We map out the approach &mdash; defining direction, deliverables, timelines and the creative strategy before a single pixel is placed.</p>
+      <p class="process-text">We map out the approach — defining direction, deliverables, timelines and the creative strategy before a single pixel is placed.</p>
     </div>
     <div class="process-step reveal">
       <div class="process-num">03</div>
       <h3 class="process-title">Creation</h3>
-      <p class="process-text">Our team gets to work &mdash; designing, building, and refining with you in the loop at every stage through shared feedback tools.</p>
+      <p class="process-text">Our team gets to work — designing, building, and refining with you in the loop at every stage through shared feedback tools.</p>
     </div>
     <div class="process-step reveal">
       <div class="process-num">04</div>
       <h3 class="process-title">Delivery</h3>
-      <p class="process-text">Final files, live handover, and ongoing support. We don't disappear after delivery &mdash; we stay close for the long term.</p>
+      <p class="process-text">Final files, live handover, and ongoing support. We don't disappear after delivery — we stay close for the long term.</p>
     </div>
   </div>
 </section>
@@ -915,39 +912,67 @@
       <p class="section-tag">&#x2666; Selected Work</p>
       <h2 class="section-title">Recent <em>Projects</em></h2>
     </div>
-    <p class="section-desc">A curated selection from across our disciplines &mdash; each project a story of transformation.</p>
+    <p class="section-desc">A curated selection from across our disciplines — each project a story of transformation.</p>
   </div>
-  <div class="portfolio-grid">
-    <a href="project-meridian.html" class="portfolio-item reveal">
-      <div class="portfolio-visual">
-        <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1400&q=80" alt="Architecture project" loading="lazy">
+  <div class="portfolio-slider-wrap">
+    <div class="portfolio-slider">
+      <div class="portfolio-slides" id="portfolioSlides">
+
+        <a href="project-sephora.html" class="portfolio-slide active">
+          <img src="images/portfolio/sephora/Sephora_Home.png" alt="Sephora Website Redesign" loading="lazy">
+          <div class="slide-info">
+            <div class="slide-num">01 / 04</div>
+            <div class="slide-cat">Website Redesign &amp; UI/UX</div>
+            <h3 class="slide-title">Sephora<br>Redesign</h3>
+            <span class="slide-link">View Project</span>
+          </div>
+        </a>
+
+        <a href="project-readwave.html" class="portfolio-slide">
+          <img src="images/portfolio/read wave CASE STUDY/other/Cover Page.jpg" alt="ReadWave UI/UX Case Study" loading="lazy">
+          <div class="slide-info">
+            <div class="slide-num">02 / 04</div>
+            <div class="slide-cat">UI / UX Design &mdash; Case Study</div>
+            <h3 class="slide-title">ReadWave<br>Blog Platform</h3>
+            <span class="slide-link">View Case Study</span>
+          </div>
+        </a>
+
+        <a href="project-vitly.html" class="portfolio-slide">
+          <img src="images/portfolio/Vitly/Full Page.png" alt="Vitly Nutrition Shopify Store" loading="lazy">
+          <div class="slide-info">
+            <div class="slide-num">03 / 04</div>
+            <div class="slide-cat">Shopify Design &amp; Development</div>
+            <h3 class="slide-title">Vitly<br>Nutrition</h3>
+            <span class="slide-link">View Project</span>
+          </div>
+        </a>
+
+        <a href="project-malabar.html" class="portfolio-slide">
+          <img src="images/portfolio/Malabar Concept Design/1.png" alt="Malabar Hill Luxury Resort Website" loading="lazy">
+          <div class="slide-info">
+            <div class="slide-num">04 / 04</div>
+            <div class="slide-cat">Luxury Hospitality &amp; Web Design</div>
+            <h3 class="slide-title">Malabar Hill<br>Resort</h3>
+            <span class="slide-link">View Project</span>
+          </div>
+        </a>
+
       </div>
-      <div class="portfolio-view-btn">View Project</div>
-      <div class="portfolio-info">
-        <div class="portfolio-cat">Architecture &amp; 3D Design</div>
-        <div class="portfolio-title">The Meridian &mdash; Mixed-Use Development, Dubai</div>
+    </div>
+    <div class="slider-controls">
+      <div class="slider-arrows">
+        <button class="slider-arrow" id="pfPrev" aria-label="Previous project">←</button>
+        <button class="slider-arrow" id="pfNext" aria-label="Next project">→</button>
       </div>
-    </a>
-    <a href="project-casa-verde.html" class="portfolio-item reveal">
-      <div class="portfolio-visual">
-        <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=900&q=80" alt="Interior design" loading="lazy">
+      <div class="pf-dots">
+        <button class="pf-dot active" data-idx="0"></button>
+        <button class="pf-dot" data-idx="1"></button>
+        <button class="pf-dot" data-idx="2"></button>
+        <button class="pf-dot" data-idx="3"></button>
       </div>
-      <div class="portfolio-view-btn">View Project</div>
-      <div class="portfolio-info">
-        <div class="portfolio-cat">Interior Design</div>
-        <div class="portfolio-title">Casa Verde &mdash; Luxury Residence</div>
-      </div>
-    </a>
-    <a href="project-bloom-collective.html" class="portfolio-item reveal">
-      <div class="portfolio-visual">
-        <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=900&q=80" alt="Brand identity" loading="lazy">
-      </div>
-      <div class="portfolio-view-btn">View Project</div>
-      <div class="portfolio-info">
-        <div class="portfolio-cat">Brand Identity</div>
-        <div class="portfolio-title">Bloom Collective &mdash; Full Rebrand</div>
-      </div>
-    </a>
+      <div class="slider-counter" id="pfCounter">01 / 04</div>
+    </div>
   </div>
 </section>
 
@@ -1008,18 +1033,18 @@
     </div>
     <div class="pricing-card reveal">
       <div class="pricing-plan">Enterprise</div>
-      <div class="pricing-price" style="font-size: 42px;">Custom</div>
+      <div class="pricing-price" style="font-size:42px">Custom</div>
       <div class="pricing-freq">Tailored to your scope</div>
       <div class="pricing-divider"></div>
       <ul class="pricing-features">
-        <li>Architecture &amp; 3D renders</li>
-        <li>Interior design &amp; visualisation</li>
+        <li>Full-stack web application</li>
         <li>Full digital &amp; brand ecosystem</li>
         <li>Dedicated account manager</li>
         <li>Ongoing retainer options</li>
         <li>Multi-platform campaigns</li>
         <li>White-label services</li>
         <li>NDA &amp; partnership agreements</li>
+        <li>Priority 24/7 support</li>
       </ul>
       <a href="#contact" class="btn-outline">Let's Talk</a>
     </div>
@@ -1032,8 +1057,8 @@
     <div class="contact-left reveal-left">
       <p class="section-tag">&#x2666; Get In Touch</p>
       <h2 class="section-title">Let's Build<br>Something <em>Great</em></h2>
-      <p style="color: var(--text-muted); font-size: 14px; line-height: 1.9; margin-top: 24px;">
-        Whether you're a startup with a big idea or an established business ready for a refresh &mdash; we'd love to hear from you. Fill in the form and we'll get back to you within 24 hours.
+      <p style="color:var(--text-muted);font-size:14px;line-height:1.9;margin-top:24px">
+        Whether you're a startup with a big idea or an established business ready for a digital refresh &mdash; we'd love to hear from you. Fill in the form and we'll get back to you within 24 hours.
       </p>
       <div class="contact-item">
         <div class="contact-item-label">Email Us</div>
@@ -1068,11 +1093,13 @@
         <select class="form-select">
           <option value="">Select a service...</option>
           <option>Website Design &amp; Development</option>
+          <option>Shopify Design &amp; Development</option>
+          <option>AI Marketing</option>
           <option>Social Media Marketing</option>
           <option>Logo &amp; Brand Design</option>
+          <option>Graphic Design</option>
           <option>Architecture &amp; 3D Design</option>
           <option>Interior Design</option>
-          <option>Graphic Design</option>
           <option>Multiple Services</option>
         </select>
       </div>
@@ -1121,7 +1148,7 @@
         </svg>
         <span class="logo-text">NEXT<span>BYT</span></span>
       </div>
-      <p class="footer-tagline">NextByt &mdash; a multi-disciplinary creative studio crafting brands, digital experiences, and architectural visions that endure.</p>
+      <p class="footer-tagline">NextByt &mdash; a digital-first creative studio crafting websites, brands, and digital experiences that endure.</p>
       <div class="footer-social">
         <a href="#" class="social-link" title="TikTok">tt</a>
         <a href="#" class="social-link" title="Instagram">ig</a>
@@ -1133,10 +1160,10 @@
       <div class="footer-col-title">Services</div>
       <ul class="footer-links">
         <li><a href="service-web-design.html">Web Design &amp; Dev</a></li>
+        <li><a href="service-web-design.html">Shopify Design</a></li>
+        <li><a href="#contact">AI Marketing</a></li>
         <li><a href="service-social-media.html">Social Media</a></li>
         <li><a href="service-brand-design.html">Brand &amp; Logo</a></li>
-        <li><a href="service-architecture.html">Architecture</a></li>
-        <li><a href="service-interior-design.html">Interior Design</a></li>
         <li><a href="service-graphic-design.html">Graphic Design</a></li>
       </ul>
     </div>
@@ -1180,27 +1207,24 @@
     }, 1800);
   });
 
-  /* ── SCROLL PROGRESS BAR ── */
+  /* ── SCROLL PROGRESS ── */
   const progressBar = document.getElementById('progress-bar');
   window.addEventListener('scroll', () => {
     const scrolled = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
     progressBar.style.width = scrolled + '%';
-  });
+  }, { passive: true });
 
-  /* ── CUSTOM CURSOR ── */
+  /* ── CURSOR ── */
   const cursor = document.getElementById('cursor');
   const cursorRing = document.getElementById('cursorRing');
   let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
   document.addEventListener('mousemove', (e) => {
     mouseX = e.clientX; mouseY = e.clientY;
-    cursor.style.left = mouseX + 'px';
-    cursor.style.top = mouseY + 'px';
+    cursor.style.left = mouseX + 'px'; cursor.style.top = mouseY + 'px';
   });
   function animateRing() {
-    ringX += (mouseX - ringX) * 0.12;
-    ringY += (mouseY - ringY) * 0.12;
-    cursorRing.style.left = ringX + 'px';
-    cursorRing.style.top = ringY + 'px';
+    ringX += (mouseX - ringX) * 0.12; ringY += (mouseY - ringY) * 0.12;
+    cursorRing.style.left = ringX + 'px'; cursorRing.style.top = ringY + 'px';
     requestAnimationFrame(animateRing);
   }
   animateRing();
@@ -1212,19 +1236,16 @@
   /* ── HERO PARALLAX ── */
   const heroBg = document.getElementById('heroBgImg');
   window.addEventListener('scroll', () => {
-    const y = window.scrollY;
-    if (heroBg) heroBg.style.transform = `scale(1.08) translateY(${y * 0.25}px)`;
+    if (heroBg) heroBg.style.transform = `scale(1.08) translateY(${window.scrollY * 0.25}px)`;
   }, { passive: true });
 
-  /* ── FLOATING PARTICLES ── */
+  /* ── PARTICLES ── */
   const particleContainer = document.getElementById('heroParticles');
   for (let i = 0; i < 28; i++) {
     const p = document.createElement('div');
     p.className = 'particle';
-    const x = Math.random() * 100;
-    const y = 30 + Math.random() * 60;
-    const dur = 5 + Math.random() * 8;
-    const del = -(Math.random() * dur);
+    const x = Math.random() * 100, y = 30 + Math.random() * 60;
+    const dur = 5 + Math.random() * 8, del = -(Math.random() * dur);
     const drift = (Math.random() - 0.5) * 80;
     const size = Math.random() > 0.7 ? 3 : 2;
     p.style.cssText = `--x:${x}%;--y:${y}%;--dur:${dur}s;--del:${del}s;--drift:${drift}px;width:${size}px;height:${size}px;`;
@@ -1235,11 +1256,9 @@
   document.querySelectorAll('.service-card').forEach(card => {
     card.addEventListener('mousemove', (e) => {
       const rect = card.getBoundingClientRect();
-      const cx = rect.left + rect.width / 2;
-      const cy = rect.top + rect.height / 2;
-      const dx = (e.clientX - cx) / (rect.width / 2);
-      const dy = (e.clientY - cy) / (rect.height / 2);
-      card.style.transform = `perspective(800px) rotateY(${dx * 5}deg) rotateX(${-dy * 5}deg) translateZ(4px)`;
+      const cx = rect.left + rect.width / 2, cy = rect.top + rect.height / 2;
+      const dx = (e.clientX - cx) / (rect.width / 2), dy = (e.clientY - cy) / (rect.height / 2);
+      card.style.transform = `perspective(800px) rotateY(${dx * 4}deg) rotateX(${-dy * 4}deg) translateZ(4px)`;
     });
     card.addEventListener('mouseleave', () => {
       card.style.transform = 'perspective(800px) rotateY(0deg) rotateX(0deg) translateZ(0)';
@@ -1255,14 +1274,12 @@
   if (navCta) {
     navCta.addEventListener('mousemove', (e) => {
       const rect = navCta.getBoundingClientRect();
-      const cx = rect.left + rect.width / 2;
-      const cy = rect.top + rect.height / 2;
-      const dx = (e.clientX - cx) * 0.3;
-      const dy = (e.clientY - cy) * 0.3;
+      const dx = (e.clientX - (rect.left + rect.width / 2)) * 0.3;
+      const dy = (e.clientY - (rect.top + rect.height / 2)) * 0.3;
       navCta.style.transform = `translate(${dx}px, ${dy}px)`;
     });
     navCta.addEventListener('mouseleave', () => {
-      navCta.style.transform = 'translate(0, 0)';
+      navCta.style.transform = 'translate(0,0)';
       navCta.style.transition = 'transform 0.5s ease, background 0.3s, color 0.3s';
     });
     navCta.addEventListener('mouseenter', () => {
@@ -1270,23 +1287,18 @@
     });
   }
 
-  /* ── SCROLL REVEAL (includes left/right) ── */
+  /* ── SCROLL REVEAL ── */
   const allReveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
+      if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
     });
   }, { threshold: 0.1 });
   allReveals.forEach(el => observer.observe(el));
 
-  /* ── COUNT-UP STATS ── */
+  /* ── COUNT-UP ── */
   function animateCount(el, target, suffix) {
-    let start = 0;
-    const dur = 2000;
-    const step = 16;
+    let start = 0; const dur = 2000, step = 16;
     const increment = target / (dur / step);
     const timer = setInterval(() => {
       start += increment;
@@ -1297,8 +1309,7 @@
   function startCounters() {
     document.querySelectorAll('.stat-num[data-target]').forEach(el => {
       const t = parseInt(el.dataset.target);
-      const suffix = t === 6 ? '+' : t === 98 ? '%' : '+';
-      animateCount(el, t, suffix);
+      animateCount(el, t, t === 8 ? '+' : t === 98 ? '%' : '+');
     });
   }
 
@@ -1319,21 +1330,16 @@
   /* ── FORM SUBMIT ── */
   function handleSubmit(btn) {
     btn.textContent = '✓ Enquiry Sent!';
-    btn.style.background = '#2a6b2a';
-    btn.style.color = '#fff';
-    setTimeout(() => {
-      btn.textContent = 'Send Enquiry →';
-      btn.style.background = '';
-      btn.style.color = '';
-    }, 3000);
+    btn.style.background = '#2a6b2a'; btn.style.color = '#fff';
+    setTimeout(() => { btn.textContent = 'Send Enquiry →'; btn.style.background = ''; btn.style.color = ''; }, 3000);
   }
 
   /* ── TESTIMONIAL ROTATOR ── */
   const dots = document.querySelectorAll('.t-dot');
   const testimonials = [
     { quote: '"NextByt transformed our entire brand. The website, identity, and social presence they created made us look like a <em>Fortune 500 company</em> from day one."', author: '— Sarah Chen, Founder & CEO, Luminary Health' },
-    { quote: '"The 3D architectural renders NextByt produced were so realistic our investors thought they were photographs. <em>Absolutely world-class</em> work."', author: '— James Okafor, Property Developer' },
-    { quote: '"Our social media following grew 400% in three months. The NextByt team\'s content strategy was <em>completely transformational</em> for our startup."', author: '— Priya Sharma, Co-Founder, GreenRoot' },
+    { quote: '"The website NextByt built for us tripled our conversion rate in the first month. <em>Absolutely world-class</em> digital work."', author: '— James Okafor, Founder, BuildRight' },
+    { quote: '"Our social media following grew 400% in three months. The NextByt team\'s content strategy was <em>completely transformational</em> for our startup."', author: '— Priya Sharma, Co-Founder, GreenRoot' }
   ];
   let currentTest = 0;
   const quoteEl = document.querySelector('.testimonial-quote');
@@ -1342,22 +1348,54 @@
   dots.forEach((dot, i) => {
     dot.addEventListener('click', () => {
       if (i === currentTest) return;
-      dots[currentTest].classList.remove('active');
-      currentTest = i;
-      dots[currentTest].classList.add('active');
-      quoteEl.style.opacity = 0;
-      quoteEl.style.transform = 'translateY(10px)';
+      dots[currentTest].classList.remove('active'); currentTest = i; dots[i].classList.add('active');
+      quoteEl.style.opacity = 0; quoteEl.style.transform = 'translateY(10px)';
       setTimeout(() => {
         quoteEl.innerHTML = testimonials[i].quote;
         authorEl.textContent = testimonials[i].author;
-        quoteEl.style.opacity = 1;
-        quoteEl.style.transform = 'translateY(0)';
+        quoteEl.style.opacity = 1; quoteEl.style.transform = 'translateY(0)';
       }, 400);
     });
   });
-  setInterval(() => {
-    dots[(currentTest + 1) % 3].click();
-  }, 5000);
+  setInterval(() => { dots[(currentTest + 1) % 3].click(); }, 5000);
+
+  // Portfolio slider
+  const pfSlides = document.querySelectorAll('.portfolio-slide');
+  const pfSlidesContainer = document.getElementById('portfolioSlides');
+  const pfDots = document.querySelectorAll('.pf-dot');
+  const pfCounter = document.getElementById('pfCounter');
+  let pfCurrent = 0;
+  let pfLock = false;
+
+  function pfGoTo(index) {
+    if (pfLock) return;
+    pfLock = true;
+    pfSlides[pfCurrent].classList.remove('active');
+    pfDots[pfCurrent].classList.remove('active');
+    pfCurrent = (index + pfSlides.length) % pfSlides.length;
+    pfSlides[pfCurrent].classList.add('active');
+    pfDots[pfCurrent].classList.add('active');
+    pfSlidesContainer.style.transform = `translateX(-${pfCurrent * 100}%)`;
+    pfCounter.textContent = String(pfCurrent + 1).padStart(2, '0') + ' / ' + String(pfSlides.length).padStart(2, '0');
+    setTimeout(() => { pfLock = false; }, 750);
+  }
+
+  document.getElementById('pfPrev').addEventListener('click', (e) => { e.preventDefault(); pfGoTo(pfCurrent - 1); });
+  document.getElementById('pfNext').addEventListener('click', (e) => { e.preventDefault(); pfGoTo(pfCurrent + 1); });
+  pfDots.forEach(dot => dot.addEventListener('click', () => pfGoTo(parseInt(dot.dataset.idx))));
+
+  // Swipe support
+  let pfTouchX = 0;
+  pfSlidesContainer.addEventListener('touchstart', e => { pfTouchX = e.touches[0].clientX; }, { passive: true });
+  pfSlidesContainer.addEventListener('touchend', e => {
+    const diff = pfTouchX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) pfGoTo(diff > 0 ? pfCurrent + 1 : pfCurrent - 1);
+  });
+
+  // Auto-advance every 5s
+  let pfAuto = setInterval(() => pfGoTo(pfCurrent + 1), 5000);
+  document.querySelector('.portfolio-slider-wrap').addEventListener('mouseenter', () => clearInterval(pfAuto));
+  document.querySelector('.portfolio-slider-wrap').addEventListener('mouseleave', () => { pfAuto = setInterval(() => pfGoTo(pfCurrent + 1), 5000); });
 </script>
 </body>
 </html>

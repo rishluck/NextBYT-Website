@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Malabar Hill — NextByt</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Josefin+Sans:wght@100;200;300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0d0a09; --dark: #120e0b; --card: #181210;
+    --border: #2a2018; --gold: #d4a070; --gold-light: #eacca8;
+    --cream: #f5f0ea; --white: #ffffff;
+    --text-muted: #887870; --text-dim: #504038;
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--black); color: var(--cream); font-family: 'DM Sans', sans-serif; font-weight: 300; overflow-x: hidden; }
+
+  body::after {
+    content: ''; position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 9997; opacity: 0.5;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    padding: 24px 60px; display: flex; align-items: center; justify-content: space-between;
+    background: rgba(13,10,9,0.95); backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Josefin Sans', sans-serif; font-size: 18px; font-weight: 200;
+    letter-spacing: 6px; color: var(--white); text-decoration: none;
+  }
+  .nav-logo span { color: var(--gold); font-weight: 400; }
+  .nav-back {
+    color: var(--text-muted); text-decoration: none; font-size: 12px;
+    letter-spacing: 2px; text-transform: uppercase; transition: color 0.3s;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .nav-back:hover { color: var(--gold); }
+
+  /* HERO */
+  .project-hero {
+    height: 90vh; min-height: 600px; position: relative; overflow: hidden;
+    display: flex; align-items: flex-end;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background-image: url('images/portfolio/Malabar Concept Design/1.png');
+    background-size: cover; background-position: center top;
+    filter: brightness(0.45);
+    transform: scale(1.05);
+    transition: transform 8s ease;
+  }
+  .project-hero:hover .hero-bg { transform: scale(1); }
+  .hero-gradient {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(13,10,9,0.95) 0%, rgba(13,10,9,0.2) 60%, transparent 100%);
+  }
+  .hero-content {
+    position: relative; z-index: 2;
+    padding: 0 60px 80px;
+  }
+  .project-tag {
+    font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 20px;
+    opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
+  }
+  .project-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 8vw, 110px); font-weight: 300; line-height: 0.92;
+    letter-spacing: -2px; color: var(--white); margin-bottom: 36px;
+    opacity: 0; animation: fadeUp 0.8s 0.4s forwards;
+  }
+  .project-title em { font-style: italic; color: var(--gold); }
+  .project-meta {
+    display: flex; gap: 48px; flex-wrap: wrap;
+    opacity: 0; animation: fadeUp 0.8s 0.6s forwards;
+  }
+  .meta-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 6px; }
+  .meta-value { font-size: 14px; color: var(--cream); }
+
+  /* MAIN IMAGE */
+  .project-main-img {
+    padding: 60px; background: var(--dark);
+    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  }
+  .project-main-img img {
+    width: 100%; max-width: 1000px; display: block; margin: 0 auto;
+    border: 1px solid var(--border);
+    box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+  }
+
+  /* CONTENT */
+  .project-content { padding: 100px 60px; max-width: 1200px; margin: 0 auto; }
+  .project-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; margin-bottom: 80px; }
+  .project-sidebar-title {
+    font-family: 'Cormorant Garamond', serif; font-size: 14px;
+    letter-spacing: 3px; text-transform: uppercase; color: var(--gold);
+    margin-bottom: 20px;
+  }
+  .project-sidebar p { font-size: 13px; color: var(--text-muted); line-height: 1.9; margin-bottom: 12px; }
+  .project-body h2 {
+    font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 300;
+    color: var(--white); margin-bottom: 24px; line-height: 1.1;
+  }
+  .project-body h2 em { font-style: italic; color: var(--gold); }
+  .project-body p { font-size: 15px; line-height: 1.9; color: var(--text-muted); margin-bottom: 20px; }
+
+  /* TAGS */
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+  .skill-tag {
+    font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--gold); border: 1px solid rgba(212,160,112,0.3);
+    padding: 6px 16px;
+  }
+
+  /* SECTION DIVIDER */
+  .section-label {
+    font-size: 10px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300;
+    color: var(--white); margin-bottom: 48px; line-height: 1.1;
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+
+  /* SCREEN GALLERY */
+  .gallery-section {
+    padding: 80px 60px; background: var(--dark);
+    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  }
+  .gallery-section .inner { max-width: 1200px; margin: 0 auto; }
+  .gallery-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 3px;
+  }
+  .gallery-item { position: relative; overflow: hidden; background: var(--card); }
+  .gallery-item.wide { grid-column: span 2; }
+  .gallery-item img {
+    width: 100%; display: block;
+    transition: transform 0.6s ease, filter 0.4s ease;
+    filter: brightness(0.92);
+  }
+  .gallery-item:hover img { transform: scale(1.03); filter: brightness(1); }
+  .gallery-caption {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 16px 20px;
+    background: linear-gradient(to top, rgba(13,10,9,0.9) 0%, transparent 100%);
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gold); opacity: 0; transition: opacity 0.3s;
+  }
+  .gallery-item:hover .gallery-caption { opacity: 1; }
+
+  /* HIGHLIGHTS */
+  .highlights { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin: 60px 0 0; }
+  .highlight {
+    background: var(--card); border: 1px solid var(--border);
+    padding: 36px 32px; transition: border-color 0.3s;
+  }
+  .highlight:hover { border-color: var(--gold); }
+  .highlight-icon { font-size: 28px; margin-bottom: 16px; }
+  .highlight-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--white); margin-bottom: 10px; }
+  .highlight-text { font-size: 13px; color: var(--text-muted); line-height: 1.8; }
+
+  /* COLOUR PALETTE */
+  .palette-section { padding: 80px 60px; max-width: 1200px; margin: 0 auto; }
+  .palette-row { display: flex; gap: 16px; flex-wrap: wrap; }
+  .swatch {
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+  }
+  .swatch-colour {
+    width: 80px; height: 80px; border: 1px solid var(--border);
+  }
+  .swatch-name { font-size: 11px; letter-spacing: 1px; color: var(--text-muted); text-align: center; }
+  .swatch-hex { font-size: 10px; color: var(--text-dim); }
+
+  /* CTA */
+  .project-cta {
+    background: var(--dark); border-top: 1px solid var(--border);
+    padding: 80px 60px; text-align: center;
+  }
+  .project-cta h2 {
+    font-family: 'Cormorant Garamond', serif; font-size: 56px; font-weight: 300;
+    color: var(--white); margin-bottom: 20px;
+  }
+  .project-cta h2 em { font-style: italic; color: var(--gold); }
+  .project-cta p { font-size: 15px; color: var(--text-muted); margin-bottom: 40px; }
+  .cta-btn {
+    display: inline-block; background: var(--gold); color: var(--black);
+    padding: 16px 48px; font-family: 'DM Sans', sans-serif;
+    font-size: 12px; letter-spacing: 2px; text-transform: uppercase; font-weight: 500;
+    text-decoration: none; transition: background 0.3s, transform 0.2s;
+  }
+  .cta-btn:hover { background: var(--gold-light); transform: scale(1.02); }
+  .back-link {
+    display: inline-block; margin-top: 24px; color: var(--text-dim);
+    text-decoration: none; font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .back-link:hover { color: var(--gold); }
+
+  /* PROJECT NAV */
+  .project-nav {
+    display: grid; grid-template-columns: 1fr 1px 1fr;
+    background: var(--dark);
+    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  }
+  .pnav-divider { background: var(--border); }
+  .pnav-item {
+    padding: 48px 60px; text-decoration: none; color: inherit;
+    transition: background 0.3s; display: flex; flex-direction: column; gap: 6px;
+  }
+  .pnav-item:hover { background: rgba(212,160,112,0.04); }
+  .pnav-next { align-items: flex-end; text-align: right; }
+  .pnav-dir { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 4px; }
+  .pnav-cat { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); }
+  .pnav-title {
+    font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 300;
+    color: var(--white); line-height: 1.1; transition: color 0.3s;
+  }
+  .pnav-item:hover .pnav-title { color: var(--gold-light); }
+  .pnav-thumb {
+    width: 90px; height: 60px; object-fit: cover; object-position: top;
+    border: 1px solid var(--border); margin-top: 14px;
+    filter: grayscale(40%); transition: filter 0.3s;
+  }
+  .pnav-item:hover .pnav-thumb { filter: grayscale(0%); }
+
+  /* FOOTER */
+  footer {
+    background: var(--black); border-top: 1px solid var(--border);
+    padding: 30px 60px; display: flex; justify-content: space-between; align-items: center;
+  }
+  footer span { font-size: 12px; color: var(--text-dim); }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+
+  @media(max-width: 768px) {
+    nav { padding: 20px 24px; }
+    .hero-content { padding: 0 24px 60px; }
+    .project-main-img, .gallery-section, .palette-section { padding-left: 24px; padding-right: 24px; }
+    .project-content { padding: 60px 24px; }
+    .project-grid { grid-template-columns: 1fr; gap: 40px; }
+    .gallery-grid { grid-template-columns: 1fr; }
+    .gallery-item.wide { grid-column: span 1; }
+    .highlights { grid-template-columns: 1fr; }
+    .project-cta { padding: 60px 24px; }
+    footer { flex-direction: column; gap: 12px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">NEXT<span>BYT</span></a>
+  <a href="index.html#work" class="nav-back">← Back to Work</a>
+</nav>
+
+<!-- HERO -->
+<div class="project-hero">
+  <div class="hero-bg"></div>
+  <div class="hero-gradient"></div>
+  <div class="hero-content">
+    <p class="project-tag">&#x2666; Luxury Resort Website — Concept Design</p>
+    <h1 class="project-title">Malabar<br><em>Hill</em></h1>
+    <div class="project-meta">
+      <div class="meta-item">
+        <div class="meta-label">Project Type</div>
+        <div class="meta-value">Website Design Concept</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Industry</div>
+        <div class="meta-value">Luxury Hospitality &amp; Tourism</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Services</div>
+        <div class="meta-value">UI Design, UX, Web Design</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Status</div>
+        <div class="meta-value">Concept / Portfolio Piece</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN IMAGE -->
+<div class="project-main-img">
+  <img src="images/portfolio/Malabar Concept Design/Full Website.png" alt="Malabar Hill Resort Website Design by NextByt">
+</div>
+
+<!-- CONTENT -->
+<div class="project-content">
+  <div class="project-grid">
+    <div class="project-sidebar">
+      <div class="project-sidebar-title">About</div>
+      <p>A concept website design for Malabar Hill — a private jungle retreat in Sri Lanka offering 14 exclusive villas with ocean views, plunge pools, and immersive nature experiences.</p>
+      <p>The brief was to capture the feeling of complete seclusion and luxury while making villa booking and discovery effortless for high-net-worth travellers.</p>
+      <p style="margin-top:24px">Skills used:</p>
+      <div class="skill-tags">
+        <span class="skill-tag">UI Design</span>
+        <span class="skill-tag">UX</span>
+        <span class="skill-tag">Web Design</span>
+        <span class="skill-tag">Figma</span>
+        <span class="skill-tag">Hospitality</span>
+      </div>
+    </div>
+    <div class="project-body">
+      <h2>Designing for the<br><em>Art of Escape</em></h2>
+      <p>Malabar Hill is a concept for an ultra-luxury boutique resort perched above the ocean and cradled by the jungle of Sri Lanka. The design challenge was to translate a feeling — silence, seclusion, timeless design — into a digital experience that compels its audience to book.</p>
+      <p>The website leads with a full-bleed hero that puts the architecture centre stage, showcasing the resort's signature arched pool villas draped in tropical greenery. Every scroll reveals something new: the reservation widget for frictionless booking, a cinematic story section, villa type comparisons, immersive dining features, and a weddings &amp; events showcase.</p>
+      <p>A warm terracotta and ivory palette — drawn directly from the resort's earthy architecture — creates visual continuity between the physical space and its digital presence. Refined serif typography communicates exclusivity, while generous white space gives the imagery room to breathe.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN GALLERY -->
+<div class="gallery-section">
+  <div class="inner">
+    <p class="section-label">&#x2666; Page Sections</p>
+    <h2 class="section-title">A Walk Through the<br><em>Experience</em></h2>
+    <div class="gallery-grid">
+      <div class="gallery-item wide">
+        <img src="images/portfolio/Malabar Concept Design/1.png" alt="Malabar Hill — Hero & Navigation">
+        <div class="gallery-caption">Hero — Sri Lanka's Private Jungle Retreat</div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/portfolio/Malabar Concept Design/2.png" alt="Malabar Hill — Reservation & Story">
+        <div class="gallery-caption">Reservation Booking & Brand Story</div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/portfolio/Malabar Concept Design/3.png" alt="Malabar Hill — Our Villas">
+        <div class="gallery-caption">Villa Showcase — Ocean View &amp; Wetland Sanctuary</div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/portfolio/Malabar Concept Design/4.png" alt="Malabar Hill — Experiences">
+        <div class="gallery-caption">Experiences — Reconnect with Nature</div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/portfolio/Malabar Concept Design/5.png" alt="Malabar Hill — Dining">
+        <div class="gallery-caption">Dining — The Hill House &amp; The Bar</div>
+      </div>
+      <div class="gallery-item wide">
+        <img src="images/portfolio/Malabar Concept Design/6.png" alt="Malabar Hill — Weddings & Events">
+        <div class="gallery-caption">Weddings &amp; Events</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COLOUR PALETTE -->
+<div class="palette-section">
+  <p class="section-label">&#x2666; Design Language</p>
+  <h2 class="section-title">Colours Drawn from<br><em>Earth &amp; Jungle</em></h2>
+  <div class="palette-row">
+    <div class="swatch">
+      <div class="swatch-colour" style="background:#A85C3A;"></div>
+      <div class="swatch-name">Terracotta</div>
+      <div class="swatch-hex">#A85C3A</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-colour" style="background:#C4865A;"></div>
+      <div class="swatch-name">Warm Rust</div>
+      <div class="swatch-hex">#C4865A</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-colour" style="background:#F5F0E8;border:1px solid #2a2018;"></div>
+      <div class="swatch-name">Ivory</div>
+      <div class="swatch-hex">#F5F0E8</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-colour" style="background:#3B2A1F;"></div>
+      <div class="swatch-name">Deep Earth</div>
+      <div class="swatch-hex">#3B2A1F</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-colour" style="background:#8B9E7A;"></div>
+      <div class="swatch-name">Jungle Sage</div>
+      <div class="swatch-hex">#8B9E7A</div>
+    </div>
+  </div>
+</div>
+
+<!-- HIGHLIGHTS -->
+<div class="project-content" style="padding-top:0">
+  <div class="highlights">
+    <div class="highlight">
+      <div class="highlight-icon">🏔️</div>
+      <div class="highlight-title">Immersive Storytelling</div>
+      <div class="highlight-text">Each section tells the resort story — from the architectural hero down to dining and events. The layout guides the visitor through an experience before they even arrive.</div>
+    </div>
+    <div class="highlight">
+      <div class="highlight-icon">🏡</div>
+      <div class="highlight-title">Villa Discovery UX</div>
+      <div class="highlight-text">Tabbed villa categories let guests compare Ocean View and Wetland Sanctuary options side by side — reducing friction in the decision-making process.</div>
+    </div>
+    <div class="highlight">
+      <div class="highlight-icon">📅</div>
+      <div class="highlight-title">Frictionless Booking</div>
+      <div class="highlight-text">The reservation widget is embedded directly into the flow — check-in, check-out, villa type, and availability check in one clean panel without ever leaving the page.</div>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECT NAV -->
+<div class="project-nav">
+  <a href="project-vitly.html" class="pnav-item pnav-prev">
+    <div class="pnav-dir">← Previous Project</div>
+    <div class="pnav-cat">Shopify Design</div>
+    <div class="pnav-title">Vitly Nutrition</div>
+    <img src="images/portfolio/Vitly/Full Page.png" alt="Vitly" class="pnav-thumb">
+  </a>
+  <div class="pnav-divider"></div>
+  <a href="project-sephora.html" class="pnav-item pnav-next">
+    <div class="pnav-dir">Next Project →</div>
+    <div class="pnav-cat">Website Redesign</div>
+    <div class="pnav-title">Sephora Redesign</div>
+    <img src="images/portfolio/sephora/Sephora_Home.png" alt="Sephora" class="pnav-thumb">
+  </a>
+</div>
+
+<!-- CTA -->
+<div class="project-cta">
+  <h2>Your brand deserves a<br><em>website like this.</em></h2>
+  <p>Whether you run a boutique hotel, a resort, or a luxury service — I can design a website that makes your guests feel the experience before they even book.</p>
+  <a href="index.html#contact" class="cta-btn">Start a Project</a><br>
+  <a href="index.html#work" class="back-link">← Back to all work</a>
+</div>
+
+<footer>
+  <span>© 2025 NextByt. All rights reserved.</span>
+  <span>Malabar Hill is a concept design created for portfolio purposes.</span>
+</footer>
+
+</body>
+</html>

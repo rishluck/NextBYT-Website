@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReadWave UI/UX Case Study — NextByt</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Josefin+Sans:wght@100;200;300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0d0a09; --dark: #120e0b; --card: #181210;
+    --border: #2a2018; --gold: #d4a070; --gold-light: #eacca8;
+    --cream: #f5f0ea; --white: #ffffff;
+    --text-muted: #887870; --text-dim: #504038;
+    --rw-teal: #009AA8; --rw-lime: #E9FF42; --rw-navy: #07151F;
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--black); color: var(--cream); font-family: 'DM Sans', sans-serif; font-weight: 300; overflow-x: hidden; }
+
+  body::after {
+    content: ''; position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 9997; opacity: 0.5;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    padding: 24px 60px; display: flex; align-items: center; justify-content: space-between;
+    background: rgba(13,10,9,0.95); backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: 'Josefin Sans', sans-serif; font-size: 18px; font-weight: 200; letter-spacing: 6px; color: var(--white); text-decoration: none; }
+  .nav-logo span { color: var(--gold); font-weight: 400; }
+  .nav-back { color: var(--text-muted); text-decoration: none; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; transition: color 0.3s; }
+  .nav-back:hover { color: var(--gold); }
+
+  /* HERO */
+  .project-hero {
+    min-height: 100vh; position: relative; overflow: hidden;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 0 60px 80px;
+  }
+  .hero-cover {
+    position: absolute; inset: 0;
+    background-image: url('images/portfolio/read wave CASE STUDY/other/Cover Page.jpg');
+    background-size: cover; background-position: center top;
+    opacity: 0.35; filter: grayscale(20%);
+    transform: scale(1.05);
+  }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(13,10,9,1) 0%, rgba(13,10,9,0.6) 50%, rgba(13,10,9,0.3) 100%);
+  }
+  .hero-content { position: relative; z-index: 1; }
+  .project-tag { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; opacity: 0; animation: fadeUp 0.8s 0.3s forwards; }
+  .project-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 8vw, 110px); font-weight: 300; line-height: 0.9;
+    letter-spacing: -2px; color: var(--white); margin-bottom: 36px;
+    opacity: 0; animation: fadeUp 0.8s 0.5s forwards;
+  }
+  .project-title em { font-style: italic; color: var(--gold); }
+  .project-meta { display: flex; gap: 48px; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.8s 0.7s forwards; }
+  .meta-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 6px; }
+  .meta-value { font-size: 14px; color: var(--cream); }
+
+  /* SECTIONS */
+  .section { padding: 100px 60px; border-top: 1px solid var(--border); }
+  .section.dark { background: var(--dark); }
+  .section-label { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 5vw, 60px); font-weight: 300;
+    color: var(--white); margin-bottom: 40px; line-height: 1.05;
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+  .body-text { font-size: 15px; line-height: 1.9; color: var(--text-muted); max-width: 720px; margin-bottom: 20px; }
+
+  /* OVERVIEW GRID */
+  .overview-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; align-items: start; }
+  .overview-sidebar { }
+  .sidebar-block { margin-bottom: 36px; padding-bottom: 36px; border-bottom: 1px solid var(--border); }
+  .sidebar-block:last-child { border-bottom: none; }
+  .sidebar-title { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 10px; }
+  .sidebar-value { font-size: 14px; color: var(--cream); line-height: 1.7; }
+  .tools { display: flex; gap: 12px; margin-top: 8px; flex-wrap: wrap; }
+  .tool-tag { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(212,160,112,0.3); padding: 5px 14px; }
+
+  /* FULL IMAGE */
+  .full-img { width: 100%; display: block; border: 1px solid var(--border); }
+  .img-wrap { margin-bottom: 4px; overflow: hidden; }
+  .img-wrap img { width: 100%; display: block; transition: transform 0.6s; }
+  .img-wrap:hover img { transform: scale(1.02); }
+  .img-caption { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 32px; }
+
+  /* SCREEN GRID */
+  .screen-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 48px; }
+  .screen-grid.two-col { grid-template-columns: 1fr 1fr; }
+  .screen-item { overflow: hidden; position: relative; background: var(--card); }
+  .screen-item img { width: 100%; display: block; filter: brightness(0.9); transition: filter 0.4s, transform 0.5s; }
+  .screen-item:hover img { filter: brightness(1); transform: scale(1.03); }
+  .screen-label {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: linear-gradient(to top, rgba(13,10,9,0.9), transparent);
+    padding: 20px 16px 12px;
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .screen-item:hover .screen-label { opacity: 1; }
+
+  /* WIREFRAME GRID */
+  .wire-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 48px; }
+  .wire-item { overflow: hidden; background: var(--card); border: 1px solid var(--border); }
+  .wire-item img { width: 100%; display: block; filter: grayscale(20%) brightness(0.85); transition: filter 0.4s; }
+  .wire-item:hover img { filter: grayscale(0%) brightness(1); }
+
+  /* PROCESS STEPS */
+  .process-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; margin-top: 48px; border: 1px solid var(--border); }
+  .process-step {
+    padding: 36px 28px; border-right: 1px solid var(--border);
+    position: relative; transition: background 0.3s;
+  }
+  .process-step:last-child { border-right: none; }
+  .process-step:hover { background: var(--card); }
+  .process-step::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+    background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform 0.4s;
+  }
+  .process-step:hover::after { transform: scaleX(1); }
+  .step-num { font-family: 'Cormorant Garamond', serif; font-size: 48px; color: var(--border); margin-bottom: 12px; transition: color 0.3s; }
+  .process-step:hover .step-num { color: var(--gold); opacity: 0.5; }
+  .step-title { font-size: 14px; font-weight: 500; color: var(--white); margin-bottom: 10px; }
+  .step-text { font-size: 12px; color: var(--text-muted); line-height: 1.7; }
+
+  /* COLOUR PALETTE */
+  .palette { display: flex; gap: 0; margin-top: 40px; border: 1px solid var(--border); overflow: hidden; }
+  .colour-swatch { flex: 1; height: 120px; display: flex; align-items: flex-end; padding: 14px 16px; }
+  .colour-hex { font-size: 12px; letter-spacing: 1px; font-weight: 500; }
+
+  /* HIGHLIGHTS */
+  .highlights { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 60px; }
+  .highlight { background: var(--card); border: 1px solid var(--border); padding: 36px 32px; transition: border-color 0.3s; }
+  .highlight:hover { border-color: var(--gold); }
+  .highlight-icon { font-size: 28px; margin-bottom: 16px; }
+  .highlight-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--white); margin-bottom: 10px; }
+  .highlight-text { font-size: 13px; color: var(--text-muted); line-height: 1.8; }
+
+  /* CTA */
+  .project-cta { background: var(--dark); border-top: 1px solid var(--border); padding: 80px 60px; text-align: center; }
+  .project-cta h2 { font-family: 'Cormorant Garamond', serif; font-size: 56px; font-weight: 300; color: var(--white); margin-bottom: 20px; }
+  .project-cta h2 em { font-style: italic; color: var(--gold); }
+  .project-cta p { font-size: 15px; color: var(--text-muted); margin-bottom: 40px; }
+  .cta-btn {
+    display: inline-block; background: var(--gold); color: var(--black);
+    padding: 16px 48px; font-family: 'DM Sans', sans-serif;
+    font-size: 12px; letter-spacing: 2px; text-transform: uppercase; font-weight: 500;
+    text-decoration: none; transition: background 0.3s, transform 0.2s;
+  }
+  .cta-btn:hover { background: var(--gold-light); transform: scale(1.02); }
+  .back-link { display: inline-block; margin-top: 24px; color: var(--text-dim); text-decoration: none; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; transition: color 0.3s; }
+  .back-link:hover { color: var(--gold); }
+
+  /* PROJECT NAV */
+  .project-nav {
+    display: grid; grid-template-columns: 1fr 1px 1fr;
+    background: var(--dark);
+    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  }
+  .pnav-divider { background: var(--border); }
+  .pnav-item {
+    padding: 48px 60px; text-decoration: none; color: inherit;
+    transition: background 0.3s; display: flex; flex-direction: column; gap: 6px;
+  }
+  .pnav-item:hover { background: rgba(212,160,112,0.04); }
+  .pnav-next { align-items: flex-end; text-align: right; }
+  .pnav-dir { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 4px; }
+  .pnav-cat { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); }
+  .pnav-title {
+    font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 300;
+    color: var(--white); line-height: 1.1; transition: color 0.3s;
+  }
+  .pnav-item:hover .pnav-title { color: var(--gold-light); }
+  .pnav-thumb {
+    width: 90px; height: 60px; object-fit: cover; object-position: top;
+    border: 1px solid var(--border); margin-top: 14px;
+    filter: grayscale(40%); transition: filter 0.3s;
+  }
+  .pnav-item:hover .pnav-thumb { filter: grayscale(0%); }
+
+  footer { background: var(--black); border-top: 1px solid var(--border); padding: 28px 60px; display: flex; justify-content: space-between; }
+  footer span { font-size: 12px; color: var(--text-dim); }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+
+  @media(max-width:768px) {
+    nav { padding: 18px 24px; }
+    .project-hero, .section { padding-left: 24px; padding-right: 24px; }
+    .overview-grid { grid-template-columns: 1fr; gap: 40px; }
+    .screen-grid, .screen-grid.two-col, .wire-grid { grid-template-columns: 1fr; }
+    .process-grid { grid-template-columns: 1fr 1fr; }
+    .highlights { grid-template-columns: 1fr; }
+    .palette { flex-wrap: wrap; }
+    .colour-swatch { flex: none; width: 50%; }
+    footer { flex-direction: column; gap: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">NEXT<span>BYT</span></a>
+  <a href="index.html#work" class="nav-back">← Back to Work</a>
+</nav>
+
+<!-- HERO -->
+<div class="project-hero">
+  <div class="hero-cover"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="project-tag">&#x2666; UI / UX Design &mdash; Case Study</p>
+    <h1 class="project-title">Read<em>Wave</em><br>Blog Platform</h1>
+    <div class="project-meta">
+      <div>
+        <div class="meta-label">Project Type</div>
+        <div class="meta-value">UI/UX Case Study</div>
+      </div>
+      <div>
+        <div class="meta-label">Industry</div>
+        <div class="meta-value">Digital Media / Blogging</div>
+      </div>
+      <div>
+        <div class="meta-label">Role</div>
+        <div class="meta-value">UI/UX Designer (Solo)</div>
+      </div>
+      <div>
+        <div class="meta-label">Tools</div>
+        <div class="meta-value">Figma, Illustrator, Photoshop</div>
+      </div>
+      <div>
+        <div class="meta-label">Year</div>
+        <div class="meta-value">2025</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- OVERVIEW -->
+<div class="section dark">
+  <div class="overview-grid">
+    <div class="overview-sidebar">
+      <div class="sidebar-block">
+        <div class="sidebar-title">Project</div>
+        <div class="sidebar-value">ReadWave</div>
+      </div>
+      <div class="sidebar-block">
+        <div class="sidebar-title">Industry</div>
+        <div class="sidebar-value">Digital Media</div>
+      </div>
+      <div class="sidebar-block">
+        <div class="sidebar-title">Year</div>
+        <div class="sidebar-value">2025</div>
+      </div>
+      <div class="sidebar-block">
+        <div class="sidebar-title">My Role</div>
+        <div class="sidebar-value">UI/UX Designer — responsible for the full design process: research, wireframing, visual design, and prototyping.</div>
+      </div>
+      <div class="sidebar-block">
+        <div class="sidebar-title">Tools Used</div>
+        <div class="tools">
+          <span class="tool-tag">Figma</span>
+          <span class="tool-tag">Illustrator</span>
+          <span class="tool-tag">Photoshop</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <p class="section-label">&#x2666; Project Overview</p>
+      <h2 class="section-title">A Platform for<br><em>Readers & Writers</em></h2>
+      <p class="body-text">ReadWave is a blog-based web platform where users can create, read, and interact with content simply and engagingly. The platform connects readers with writers across topics ranging from technology and culture to creative writing and lifestyle.</p>
+      <p class="body-text">The challenge was to design an interface that feels immersive and editorial — drawing readers in with bold visual storytelling — while keeping navigation effortless and discovery intuitive. The result is a dark, high-contrast UI built around content-first design principles.</p>
+      <p class="body-text">Platform purpose: Read Wave is a place to read and share blog posts. It's easy to use, helps readers find interesting content, and lets bloggers connect with others. The design focus was to build a clean and modern interface that supports easy navigation, encourages content discovery, and promotes user interaction.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FINAL UI — HOME -->
+<div class="section">
+  <p class="section-label">&#x2666; Final UI Screens</p>
+  <h2 class="section-title">The <em>Finished</em> Design</h2>
+  <p class="body-text">Eight fully designed screens covering the complete user journey — from landing on the homepage to reading an article, exploring categories, logging in, and managing a writer account.</p>
+
+  <div class="screen-grid" style="margin-top:48px">
+    <div class="screen-item" style="grid-column: span 2">
+      <img src="images/portfolio/read wave CASE STUDY/UI/Home.png" alt="ReadWave Home Screen">
+      <div class="screen-label">Home</div>
+    </div>
+    <div class="screen-item">
+      <img src="images/portfolio/read wave CASE STUDY/UI/Explore.png" alt="ReadWave Explore Screen">
+      <div class="screen-label">Explore</div>
+    </div>
+    <div class="screen-item">
+      <img src="images/portfolio/read wave CASE STUDY/UI/Blog_View.png" alt="ReadWave Blog View">
+      <div class="screen-label">Blog View</div>
+    </div>
+    <div class="screen-item">
+      <img src="images/portfolio/read wave CASE STUDY/UI/Blog_View 2.png" alt="ReadWave Blog View 2">
+      <div class="screen-label">Blog View 2</div>
+    </div>
+    <div class="screen-item">
+      <img src="images/portfolio/read wave CASE STUDY/UI/Blog_upload.png" alt="ReadWave Blog Upload">
+      <div class="screen-label">Blog Upload</div>
+    </div>
+    <div class="screen-item">
+      <img src="images/portfolio/read wave CASE STUDY/UI/About Us.png" alt="ReadWave About">
+      <div class="screen-label">About Us</div>
+    </div>
+    <div class="screen-item">
+      <img src="images/portfolio/read wave CASE STUDY/UI/Login.png" alt="ReadWave Login">
+      <div class="screen-label">Login</div>
+    </div>
+    <div class="screen-item">
+      <img src="images/portfolio/read wave CASE STUDY/UI/Writer_Account.png" alt="ReadWave Writer Account">
+      <div class="screen-label">Writer Account</div>
+    </div>
+    <div class="screen-item">
+      <img src="images/portfolio/read wave CASE STUDY/UI/Explore 2.png" alt="ReadWave Explore 2">
+      <div class="screen-label">Explore 2</div>
+    </div>
+  </div>
+</div>
+
+<!-- DESIGN PROCESS -->
+<div class="section dark">
+  <p class="section-label">&#x2666; How It Was Built</p>
+  <h2 class="section-title">The Design <em>Process</em></h2>
+  <p class="body-text">A structured five-stage design methodology was followed — rooted in empathy and validated through testing — to ensure every design decision was purposeful and user-backed.</p>
+
+  <div class="process-grid">
+    <div class="process-step">
+      <div class="step-num">01</div>
+      <div class="step-title">Empathise</div>
+      <div class="step-text">User interviews and surveys were conducted to identify pain points faced by readers and bloggers on existing platforms.</div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">02</div>
+      <div class="step-title">Define</div>
+      <div class="step-text">Insights were synthesised to outline core problems and translate them into actionable design objectives focused on clarity, engagement, and discoverability.</div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">03</div>
+      <div class="step-title">Ideate</div>
+      <div class="step-text">Wireframes and layout concepts were generated to explore solutions for simplified browsing, personalised discovery, and built-in social interaction.</div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">04</div>
+      <div class="step-title">Prototype</div>
+      <div class="step-text">Interactive prototypes were created in Figma to simulate the user journey, enabling early usability validation and refinement.</div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">05</div>
+      <div class="step-title">Test &amp; Iterate</div>
+      <div class="step-text">Based on findings, the interface and features were refined to improve clarity, interaction, and overall experience.</div>
+    </div>
+  </div>
+
+  <div class="img-wrap" style="margin-top:48px">
+    <img src="images/portfolio/read wave CASE STUDY/other/Design Process.jpg" alt="Design Process Diagram" class="full-img">
+  </div>
+</div>
+
+<!-- WIREFRAMES -->
+<div class="section">
+  <p class="section-label">&#x2666; Wireframes</p>
+  <h2 class="section-title">From <em>Structure</em><br>to Screen</h2>
+  <p class="body-text">Before moving into high-fidelity visuals, low-fidelity wireframes were produced to map out layout, content hierarchy, and user flow — ensuring the information architecture was solid before any visual decisions were made.</p>
+
+  <div class="wire-grid">
+    <div class="wire-item">
+      <img src="images/portfolio/read wave CASE STUDY/Wireframe/MacBook Pro 16_ - 1.png" alt="Wireframe 1">
+    </div>
+    <div class="wire-item">
+      <img src="images/portfolio/read wave CASE STUDY/Wireframe/MacBook Pro 16_ - 2.png" alt="Wireframe 2">
+    </div>
+    <div class="wire-item">
+      <img src="images/portfolio/read wave CASE STUDY/Wireframe/MacBook Pro 16_ - 3.png" alt="Wireframe 3">
+    </div>
+    <div class="wire-item">
+      <img src="images/portfolio/read wave CASE STUDY/Wireframe/MacBook Pro 16_ - 4.png" alt="Wireframe 4">
+    </div>
+    <div class="wire-item">
+      <img src="images/portfolio/read wave CASE STUDY/Wireframe/MacBook Pro 16_ - 5.png" alt="Wireframe 5">
+    </div>
+    <div class="wire-item">
+      <img src="images/portfolio/read wave CASE STUDY/other/User Flow.jpg" alt="User Flow">
+    </div>
+  </div>
+</div>
+
+<!-- USER PERSONAS -->
+<div class="section dark">
+  <p class="section-label">&#x2666; User Research</p>
+  <h2 class="section-title">Understanding the <em>Users</em></h2>
+  <p class="body-text">User personas were developed from research insights to keep design decisions grounded in real user needs — representing both readers looking for quality content and writers wanting to grow their audience.</p>
+
+  <div class="screen-grid two-col" style="margin-top:48px">
+    <div class="screen-item">
+      <img src="images/portfolio/read wave CASE STUDY/other/User Persona 1.jpg" alt="User Persona 1">
+    </div>
+    <div class="screen-item">
+      <img src="images/portfolio/read wave CASE STUDY/other/User Personas 2.jpg" alt="User Persona 2">
+    </div>
+  </div>
+</div>
+
+<!-- COLOUR & TYPOGRAPHY -->
+<div class="section">
+  <p class="section-label">&#x2666; Visual Identity</p>
+  <h2 class="section-title">Colour &amp; <em>Typography</em></h2>
+  <p class="body-text">The visual language of ReadWave is bold and editorial — a dark navy base with electric teal and neon lime accents that give the platform energy and personality. Blinker was chosen as the primary typeface for its modern geometric character and strong screen legibility.</p>
+
+  <div class="palette">
+    <div class="colour-swatch" style="background:#07151F">
+      <span class="colour-hex" style="color:#ffffff">#07151F</span>
+    </div>
+    <div class="colour-swatch" style="background:#009AA8">
+      <span class="colour-hex" style="color:#ffffff">#009AA8</span>
+    </div>
+    <div class="colour-swatch" style="background:#E9FF42">
+      <span class="colour-hex" style="color:#07151F">#E9FF42</span>
+    </div>
+    <div class="colour-swatch" style="background:#A3ACB1">
+      <span class="colour-hex" style="color:#07151F">#A3ACB1</span>
+    </div>
+  </div>
+
+  <div class="img-wrap" style="margin-top:4px">
+    <img src="images/portfolio/read wave CASE STUDY/other/Colour.jpg" alt="Brand Colour Palette" class="full-img">
+  </div>
+  <div class="img-wrap" style="margin-top:4px">
+    <img src="images/portfolio/read wave CASE STUDY/other/Typo.jpg" alt="Typography — Blinker" class="full-img">
+  </div>
+</div>
+
+<!-- KEY OUTCOMES -->
+<div class="section dark">
+  <p class="section-label">&#x2666; Key Outcomes</p>
+  <h2 class="section-title">What This Project <em>Demonstrates</em></h2>
+
+  <div class="highlights">
+    <div class="highlight">
+      <div class="highlight-icon">🎯</div>
+      <div class="highlight-title">End-to-End UX Process</div>
+      <div class="highlight-text">From user research and personas through wireframing, prototyping, and final UI — this project demonstrates the full UX design process applied consistently across a complete product.</div>
+    </div>
+    <div class="highlight">
+      <div class="highlight-icon">🖤</div>
+      <div class="highlight-title">Editorial Dark UI</div>
+      <div class="highlight-text">The dark, high-contrast interface paired with neon accents creates a premium editorial feel — proving that content platforms don't have to default to plain white layouts.</div>
+    </div>
+    <div class="highlight">
+      <div class="highlight-icon">📖</div>
+      <div class="highlight-title">Content-First Design</div>
+      <div class="highlight-text">Every layout decision — from the hero article placement to the category browsing grid — puts content at the centre, reducing friction and keeping users engaged longer.</div>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECT OVERVIEW IMAGE -->
+<div class="section" style="padding-top:60px;padding-bottom:60px">
+  <img src="images/portfolio/read wave CASE STUDY/other/Project Overview.jpg" alt="Project Overview" class="full-img">
+</div>
+
+<!-- PROJECT NAV -->
+<div class="project-nav">
+  <a href="project-sephora.html" class="pnav-item pnav-prev">
+    <div class="pnav-dir">← Previous Project</div>
+    <div class="pnav-cat">Website Redesign</div>
+    <div class="pnav-title">Sephora Redesign</div>
+    <img src="images/portfolio/sephora/Sephora_Home.png" alt="Sephora" class="pnav-thumb">
+  </a>
+  <div class="pnav-divider"></div>
+  <a href="project-vitly.html" class="pnav-item pnav-next">
+    <div class="pnav-dir">Next Project →</div>
+    <div class="pnav-cat">Shopify Design</div>
+    <div class="pnav-title">Vitly Nutrition</div>
+    <img src="images/portfolio/Vitly/Full Page.png" alt="Vitly" class="pnav-thumb">
+  </a>
+</div>
+
+<!-- CTA -->
+<div class="project-cta">
+  <h2>Want a design like <em>this?</em></h2>
+  <p>Whether it's a full UI/UX case study, a Shopify store, or a brand new website — I'd love to work on your project.</p>
+  <a href="index.html#contact" class="cta-btn">Start a Project</a><br>
+  <a href="index.html#work" class="back-link">← Back to all work</a>
+</div>
+
+<footer>
+  <span>© 2025 NextByt. All rights reserved.</span>
+  <span>ReadWave — original UI/UX concept by Rishitha Lakranda</span>
+</footer>
+
+</body>
+</html>

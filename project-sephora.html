@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sephora Redesign — NextByt</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Josefin+Sans:wght@100;200;300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0d0a09; --dark: #120e0b; --card: #181210;
+    --border: #2a2018; --gold: #d4a070; --gold-light: #eacca8;
+    --cream: #f5f0ea; --white: #ffffff;
+    --text-muted: #887870; --text-dim: #504038;
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--black); color: var(--cream); font-family: 'DM Sans', sans-serif; font-weight: 300; overflow-x: hidden; }
+
+  body::after {
+    content: ''; position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 9997; opacity: 0.5;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    padding: 24px 60px; display: flex; align-items: center; justify-content: space-between;
+    background: rgba(13,10,9,0.95); backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Josefin Sans', sans-serif; font-size: 18px; font-weight: 200;
+    letter-spacing: 6px; color: var(--white); text-decoration: none;
+  }
+  .nav-logo span { color: var(--gold); font-weight: 400; }
+  .nav-back {
+    color: var(--text-muted); text-decoration: none; font-size: 12px;
+    letter-spacing: 2px; text-transform: uppercase; transition: color 0.3s;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .nav-back:hover { color: var(--gold); }
+
+  /* HERO */
+  .project-hero {
+    padding: 140px 60px 80px; position: relative; overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+  .project-hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 80% 50%, rgba(212,160,112,0.06) 0%, transparent 70%);
+  }
+  .project-tag { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+  .project-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(48px, 7vw, 100px); font-weight: 300; line-height: 0.95;
+    letter-spacing: -2px; color: var(--white); margin-bottom: 32px;
+  }
+  .project-title em { font-style: italic; color: var(--gold); }
+  .project-meta {
+    display: flex; gap: 48px; flex-wrap: wrap;
+  }
+  .meta-item { }
+  .meta-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 6px; }
+  .meta-value { font-size: 14px; color: var(--cream); }
+
+  /* MAIN IMAGE */
+  .project-main-img {
+    margin: 0; padding: 60px;
+    background: var(--dark); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  }
+  .project-main-img img {
+    width: 100%; max-width: 1000px; display: block; margin: 0 auto;
+    border: 1px solid var(--border);
+    box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+  }
+
+  /* CONTENT */
+  .project-content { padding: 100px 60px; max-width: 1200px; margin: 0 auto; }
+  .project-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; margin-bottom: 80px; }
+  .project-sidebar-title {
+    font-family: 'Cormorant Garamond', serif; font-size: 14px;
+    letter-spacing: 3px; text-transform: uppercase; color: var(--gold);
+    margin-bottom: 20px;
+  }
+  .project-sidebar p { font-size: 13px; color: var(--text-muted); line-height: 1.9; margin-bottom: 12px; }
+  .project-body h2 {
+    font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 300;
+    color: var(--white); margin-bottom: 24px; line-height: 1.1;
+  }
+  .project-body h2 em { font-style: italic; color: var(--gold); }
+  .project-body p { font-size: 15px; line-height: 1.9; color: var(--text-muted); margin-bottom: 20px; }
+
+  /* HIGHLIGHTS */
+  .highlights { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin: 60px 0; }
+  .highlight {
+    background: var(--card); border: 1px solid var(--border);
+    padding: 36px 32px; transition: border-color 0.3s;
+  }
+  .highlight:hover { border-color: var(--gold); }
+  .highlight-icon { font-size: 28px; margin-bottom: 16px; }
+  .highlight-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--white); margin-bottom: 10px; }
+  .highlight-text { font-size: 13px; color: var(--text-muted); line-height: 1.8; }
+
+  /* TAGS */
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+  .skill-tag {
+    font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--gold); border: 1px solid rgba(212,160,112,0.3);
+    padding: 6px 16px;
+  }
+
+  /* CTA */
+  .project-cta {
+    background: var(--dark); border-top: 1px solid var(--border);
+    padding: 80px 60px; text-align: center;
+  }
+  .project-cta h2 {
+    font-family: 'Cormorant Garamond', serif; font-size: 56px; font-weight: 300;
+    color: var(--white); margin-bottom: 20px;
+  }
+  .project-cta h2 em { font-style: italic; color: var(--gold); }
+  .project-cta p { font-size: 15px; color: var(--text-muted); margin-bottom: 40px; }
+  .cta-btn {
+    display: inline-block; background: var(--gold); color: var(--black);
+    padding: 16px 48px; font-family: 'DM Sans', sans-serif;
+    font-size: 12px; letter-spacing: 2px; text-transform: uppercase; font-weight: 500;
+    text-decoration: none; transition: background 0.3s, transform 0.2s;
+  }
+  .cta-btn:hover { background: var(--gold-light); transform: scale(1.02); }
+  .back-link {
+    display: inline-block; margin-top: 24px; color: var(--text-dim);
+    text-decoration: none; font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .back-link:hover { color: var(--gold); }
+
+  /* PROJECT NAV */
+  .project-nav {
+    display: grid; grid-template-columns: 1fr 1px 1fr;
+    background: var(--dark);
+    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  }
+  .pnav-divider { background: var(--border); }
+  .pnav-item {
+    padding: 48px 60px; text-decoration: none; color: inherit;
+    transition: background 0.3s; display: flex; flex-direction: column; gap: 6px;
+  }
+  .pnav-item:hover { background: rgba(212,160,112,0.04); }
+  .pnav-next { align-items: flex-end; text-align: right; }
+  .pnav-dir { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 4px; }
+  .pnav-cat { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); }
+  .pnav-title {
+    font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 300;
+    color: var(--white); line-height: 1.1; transition: color 0.3s;
+  }
+  .pnav-item:hover .pnav-title { color: var(--gold-light); }
+  .pnav-thumb {
+    width: 90px; height: 60px; object-fit: cover; object-position: top;
+    border: 1px solid var(--border); margin-top: 14px;
+    filter: grayscale(40%); transition: filter 0.3s;
+  }
+  .pnav-item:hover .pnav-thumb { filter: grayscale(0%); }
+
+  /* FOOTER */
+  footer {
+    background: var(--black); border-top: 1px solid var(--border);
+    padding: 30px 60px; display: flex; justify-content: space-between; align-items: center;
+  }
+  footer span { font-size: 12px; color: var(--text-dim); }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+  .project-tag { opacity:0; animation: fadeUp 0.8s 0.2s forwards; }
+  .project-title { opacity:0; animation: fadeUp 0.8s 0.4s forwards; }
+  .project-meta { opacity:0; animation: fadeUp 0.8s 0.6s forwards; }
+
+  @media(max-width:768px) {
+    nav { padding: 20px 24px; }
+    .project-hero, .project-main-img, .project-content, .project-cta { padding-left: 24px; padding-right: 24px; }
+    .project-grid { grid-template-columns: 1fr; gap: 40px; }
+    .highlights { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 12px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">NEXT<span>BYT</span></a>
+  <a href="index.html#work" class="nav-back">← Back to Work</a>
+</nav>
+
+<!-- HERO -->
+<div class="project-hero">
+  <div class="project-hero-bg"></div>
+  <p class="project-tag">&#x2666; Website Redesign &amp; UI/UX Design</p>
+  <h1 class="project-title">Sephora<br><em>Redesign</em><br>Concept</h1>
+  <div class="project-meta">
+    <div class="meta-item">
+      <div class="meta-label">Project Type</div>
+      <div class="meta-value">Website Redesign Concept</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Industry</div>
+      <div class="meta-value">Beauty &amp; E-Commerce</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Services</div>
+      <div class="meta-value">UI Design, UX, E-Commerce</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Status</div>
+      <div class="meta-value">Concept / Portfolio Piece</div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN IMAGE -->
+<div class="project-main-img">
+  <img src="images/portfolio/sephora/Sephora_Home.png" alt="Sephora Website Redesign by NextByt">
+</div>
+
+<!-- CONTENT -->
+<div class="project-content">
+
+  <div class="project-grid">
+    <div class="project-sidebar">
+      <div class="project-sidebar-title">About</div>
+      <p>A self-initiated redesign concept of Sephora's e-commerce homepage — reimagining the layout, visual hierarchy, and user experience to drive higher engagement and conversions.</p>
+      <p style="margin-top:24px">Skills used:</p>
+      <div class="skill-tags">
+        <span class="skill-tag">UI Design</span>
+        <span class="skill-tag">UX</span>
+        <span class="skill-tag">E-Commerce</span>
+        <span class="skill-tag">Figma</span>
+        <span class="skill-tag">Web Design</span>
+      </div>
+    </div>
+    <div class="project-body">
+      <h2>Redesigning a Global<br><em>Beauty Giant</em></h2>
+      <p>This is a concept redesign of Sephora's homepage — one of the world's most recognised beauty e-commerce brands. The goal was to modernise the layout, improve visual hierarchy, and create a more immersive shopping experience that converts browsers into buyers.</p>
+      <p>The redesign focuses on bold hero sections that highlight promotions like "Celebrate Pay Day" with clear CTAs, improved product grid layouts for featured collections such as "Father's Day Fragrances" and "Beauty Picks Just For You", and a cleaner overall structure that guides the customer naturally from discovery to purchase.</p>
+      <p>This project demonstrates the ability to work at scale — understanding how a global brand communicates, then improving it with stronger design decisions while staying true to the brand's identity.</p>
+    </div>
+  </div>
+
+  <div class="highlights">
+    <div class="highlight">
+      <div class="highlight-icon">🎯</div>
+      <div class="highlight-title">Clear Visual Hierarchy</div>
+      <div class="highlight-text">Redesigned the homepage layout to guide the user eye from hero promotion down to featured products and category discovery — reducing cognitive load and increasing scroll depth.</div>
+    </div>
+    <div class="highlight">
+      <div class="highlight-icon">🛍️</div>
+      <div class="highlight-title">Conversion-First Design</div>
+      <div class="highlight-text">Every section — from the hero banner to the product grid — was designed with conversion in mind. Strong CTAs, trust signals, and a clean checkout flow prompt action at every step.</div>
+    </div>
+    <div class="highlight">
+      <div class="highlight-icon">📱</div>
+      <div class="highlight-title">Mobile-First Thinking</div>
+      <div class="highlight-text">The layout was conceived mobile-first, ensuring the experience is equally strong on smartphones — where the majority of beauty shoppers browse and buy.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- PROJECT NAV -->
+<div class="project-nav">
+  <a href="project-malabar.html" class="pnav-item pnav-prev">
+    <div class="pnav-dir">← Previous Project</div>
+    <div class="pnav-cat">Luxury Hospitality</div>
+    <div class="pnav-title">Malabar Hill</div>
+    <img src="images/portfolio/Malabar Concept Design/1.png" alt="Malabar Hill" class="pnav-thumb">
+  </a>
+  <div class="pnav-divider"></div>
+  <a href="project-readwave.html" class="pnav-item pnav-next">
+    <div class="pnav-dir">Next Project →</div>
+    <div class="pnav-cat">UI / UX Design</div>
+    <div class="pnav-title">ReadWave</div>
+    <img src="images/portfolio/read wave CASE STUDY/other/Cover Page.jpg" alt="ReadWave" class="pnav-thumb">
+  </a>
+</div>
+
+<!-- CTA -->
+<div class="project-cta">
+  <h2>Want something<br><em>like this?</em></h2>
+  <p>I can redesign your existing website or build you a brand new one from scratch — tailored to your brand, your customers, and your goals.</p>
+  <a href="index.html#contact" class="cta-btn">Start a Project</a><br>
+  <a href="index.html#work" class="back-link">← Back to all work</a>
+</div>
+
+<footer>
+  <span>© 2025 NextByt. All rights reserved.</span>
+  <span>Sephora is a trademark of LVMH. This is an unsolicited concept redesign for portfolio purposes only.</span>
+</footer>
+
+</body>
+</html>

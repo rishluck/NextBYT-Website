@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vitly Nutrition — Shopify Store — NextByt</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Josefin+Sans:wght@100;200;300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0d0a09; --dark: #120e0b; --card: #181210;
+    --border: #2a2018; --gold: #d4a070; --gold-light: #eacca8;
+    --cream: #f5f0ea; --white: #ffffff;
+    --text-muted: #887870; --text-dim: #504038;
+    --vitly-teal: #009B8B; --vitly-cream: #F5EDD6; --vitly-purple: #7B5EA7;
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--black); color: var(--cream); font-family: 'DM Sans', sans-serif; font-weight: 300; overflow-x: hidden; }
+  body::after {
+    content: ''; position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 9997; opacity: 0.5;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    padding: 24px 60px; display: flex; align-items: center; justify-content: space-between;
+    background: rgba(13,10,9,0.95); backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: 'Josefin Sans', sans-serif; font-size: 18px; font-weight: 200; letter-spacing: 6px; color: var(--white); text-decoration: none; }
+  .nav-logo span { color: var(--gold); font-weight: 400; }
+  .nav-back { color: var(--text-muted); text-decoration: none; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; transition: color 0.3s; }
+  .nav-back:hover { color: var(--gold); }
+
+  /* HERO */
+  .project-hero {
+    min-height: 100vh; position: relative; overflow: hidden;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 0 60px 80px;
+  }
+  .hero-cover {
+    position: absolute; inset: 0;
+    background-image: url('images/portfolio/Vitly/Full Page.png');
+    background-size: cover; background-position: center top;
+    opacity: 0.3; transform: scale(1.05);
+  }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(13,10,9,1) 0%, rgba(13,10,9,0.7) 50%, rgba(13,10,9,0.4) 100%);
+  }
+  .hero-content { position: relative; z-index: 1; }
+  .project-tag { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; opacity: 0; animation: fadeUp 0.8s 0.3s forwards; }
+  .project-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 8vw, 110px); font-weight: 300; line-height: 0.9;
+    letter-spacing: -2px; color: var(--white); margin-bottom: 36px;
+    opacity: 0; animation: fadeUp 0.8s 0.5s forwards;
+  }
+  .project-title em { font-style: italic; color: var(--gold); }
+  .project-meta { display: flex; gap: 48px; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.8s 0.7s forwards; }
+  .meta-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 6px; }
+  .meta-value { font-size: 14px; color: var(--cream); }
+
+  /* SECTIONS */
+  .section { padding: 100px 60px; border-top: 1px solid var(--border); }
+  .section.dark { background: var(--dark); }
+  .section-label { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 5vw, 60px); font-weight: 300; color: var(--white); margin-bottom: 40px; line-height: 1.05; }
+  .section-title em { font-style: italic; color: var(--gold); }
+  .body-text { font-size: 15px; line-height: 1.9; color: var(--text-muted); max-width: 720px; margin-bottom: 20px; }
+
+  /* OVERVIEW */
+  .overview-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; align-items: start; }
+  .sidebar-block { margin-bottom: 32px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
+  .sidebar-block:last-child { border-bottom: none; }
+  .sidebar-title { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 8px; }
+  .sidebar-value { font-size: 14px; color: var(--cream); line-height: 1.7; }
+  .tool-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+  .tool-tag { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(212,160,112,0.3); padding: 5px 14px; }
+
+  /* FULL PAGE SHOWCASE */
+  .fullpage-wrap {
+    position: relative; overflow: hidden;
+    border: 1px solid var(--border);
+    max-height: 700px;
+    cursor: pointer;
+    transition: max-height 0.8s ease;
+  }
+  .fullpage-wrap.expanded { max-height: 9999px; }
+  .fullpage-wrap img { width: 100%; display: block; }
+  .fullpage-fade {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 200px;
+    background: linear-gradient(to top, var(--black), transparent);
+    display: flex; align-items: flex-end; justify-content: center; padding-bottom: 30px;
+    transition: opacity 0.4s;
+  }
+  .fullpage-wrap.expanded .fullpage-fade { opacity: 0; pointer-events: none; }
+  .expand-btn {
+    background: var(--gold); color: var(--black);
+    border: none; padding: 12px 32px; font-family: 'DM Sans', sans-serif;
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 500;
+    cursor: pointer; transition: background 0.3s;
+  }
+  .expand-btn:hover { background: var(--gold-light); }
+
+  /* SCREEN GRID */
+  .screen-grid { display: grid; gap: 2px; margin-top: 48px; }
+  .screen-grid.col3 { grid-template-columns: repeat(3, 1fr); }
+  .screen-grid.col2 { grid-template-columns: 1fr 1fr; }
+  .screen-item { overflow: hidden; position: relative; background: var(--card); }
+  .screen-item img { width: 100%; display: block; filter: brightness(0.9); transition: filter 0.4s, transform 0.5s; }
+  .screen-item:hover img { filter: brightness(1); transform: scale(1.03); }
+  .screen-label {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: linear-gradient(to top, rgba(13,10,9,0.9), transparent);
+    padding: 20px 16px 12px;
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .screen-item:hover .screen-label { opacity: 1; }
+
+  /* COLOUR PALETTE */
+  .palette { display: flex; gap: 0; margin-top: 40px; border: 1px solid var(--border); overflow: hidden; }
+  .colour-swatch { flex: 1; height: 100px; display: flex; align-items: flex-end; padding: 12px 16px; }
+  .colour-hex { font-size: 12px; letter-spacing: 1px; font-weight: 500; }
+
+  /* FEATURES */
+  .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin-top: 48px; }
+  .feature-card { background: var(--card); border: 1px solid var(--border); padding: 36px 28px; transition: border-color 0.3s; }
+  .feature-card:hover { border-color: var(--gold); }
+  .feature-icon { font-size: 28px; margin-bottom: 16px; }
+  .feature-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; color: var(--white); margin-bottom: 10px; }
+  .feature-text { font-size: 13px; color: var(--text-muted); line-height: 1.75; }
+
+  /* HIGHLIGHTS */
+  .highlights { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 60px; }
+  .highlight { background: var(--card); border: 1px solid var(--border); padding: 36px 32px; transition: border-color 0.3s; }
+  .highlight:hover { border-color: var(--gold); }
+  .highlight-icon { font-size: 28px; margin-bottom: 16px; }
+  .highlight-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--white); margin-bottom: 10px; }
+  .highlight-text { font-size: 13px; color: var(--text-muted); line-height: 1.8; }
+
+  /* CTA */
+  .project-cta { background: var(--dark); border-top: 1px solid var(--border); padding: 80px 60px; text-align: center; }
+  .project-cta h2 { font-family: 'Cormorant Garamond', serif; font-size: 56px; font-weight: 300; color: var(--white); margin-bottom: 20px; }
+  .project-cta h2 em { font-style: italic; color: var(--gold); }
+  .project-cta p { font-size: 15px; color: var(--text-muted); margin-bottom: 40px; }
+  .cta-btn { display: inline-block; background: var(--gold); color: var(--black); padding: 16px 48px; font-family: 'DM Sans', sans-serif; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; text-decoration: none; transition: background 0.3s, transform 0.2s; }
+  .cta-btn:hover { background: var(--gold-light); transform: scale(1.02); }
+  .back-link { display: inline-block; margin-top: 24px; color: var(--text-dim); text-decoration: none; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; transition: color 0.3s; }
+  .back-link:hover { color: var(--gold); }
+
+  /* PROJECT NAV */
+  .project-nav {
+    display: grid; grid-template-columns: 1fr 1px 1fr;
+    background: var(--dark);
+    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  }
+  .pnav-divider { background: var(--border); }
+  .pnav-item {
+    padding: 48px 60px; text-decoration: none; color: inherit;
+    transition: background 0.3s; display: flex; flex-direction: column; gap: 6px;
+  }
+  .pnav-item:hover { background: rgba(212,160,112,0.04); }
+  .pnav-next { align-items: flex-end; text-align: right; }
+  .pnav-dir { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 4px; }
+  .pnav-cat { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); }
+  .pnav-title {
+    font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 300;
+    color: var(--white); line-height: 1.1; transition: color 0.3s;
+  }
+  .pnav-item:hover .pnav-title { color: var(--gold-light); }
+  .pnav-thumb {
+    width: 90px; height: 60px; object-fit: cover; object-position: top;
+    border: 1px solid var(--border); margin-top: 14px;
+    filter: grayscale(40%); transition: filter 0.3s;
+  }
+  .pnav-item:hover .pnav-thumb { filter: grayscale(0%); }
+
+  footer { background: var(--black); border-top: 1px solid var(--border); padding: 28px 60px; display: flex; justify-content: space-between; }
+  footer span { font-size: 12px; color: var(--text-dim); }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+
+  @media(max-width:768px) {
+    nav { padding: 18px 24px; }
+    .project-hero, .section, .project-cta { padding-left: 24px; padding-right: 24px; }
+    .overview-grid { grid-template-columns: 1fr; gap: 40px; }
+    .screen-grid.col3, .screen-grid.col2 { grid-template-columns: 1fr; }
+    .features-grid { grid-template-columns: 1fr 1fr; }
+    .highlights { grid-template-columns: 1fr; }
+    .palette { flex-wrap: wrap; }
+    .colour-swatch { flex: none; width: 50%; }
+    footer { flex-direction: column; gap: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">NEXT<span>BYT</span></a>
+  <a href="index.html#work" class="nav-back">← Back to Work</a>
+</nav>
+
+<!-- HERO -->
+<div class="project-hero">
+  <div class="hero-cover"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="project-tag">&#x2666; Shopify Design &amp; Development &mdash; Client Project</p>
+    <h1 class="project-title">Vitly<br><em>Nutrition</em></h1>
+    <div class="project-meta">
+      <div>
+        <div class="meta-label">Client</div>
+        <div class="meta-value">Vitly Nutrition</div>
+      </div>
+      <div>
+        <div class="meta-label">Platform</div>
+        <div class="meta-value">Shopify</div>
+      </div>
+      <div>
+        <div class="meta-label">Industry</div>
+        <div class="meta-value">Health &amp; Wellness / E-Commerce</div>
+      </div>
+      <div>
+        <div class="meta-label">Market</div>
+        <div class="meta-value">United Kingdom</div>
+      </div>
+      <div>
+        <div class="meta-label">Type</div>
+        <div class="meta-value">Live Client Store</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- OVERVIEW -->
+<div class="section dark">
+  <div class="overview-grid">
+    <div>
+      <div class="sidebar-block">
+        <div class="sidebar-title">Client</div>
+        <div class="sidebar-value">Vitly Nutrition</div>
+      </div>
+      <div class="sidebar-block">
+        <div class="sidebar-title">Platform</div>
+        <div class="sidebar-value">Shopify</div>
+      </div>
+      <div class="sidebar-block">
+        <div class="sidebar-title">Market</div>
+        <div class="sidebar-value">United Kingdom</div>
+      </div>
+      <div class="sidebar-block">
+        <div class="sidebar-title">Certification</div>
+        <div class="sidebar-value">B Corp Certified Brand</div>
+      </div>
+      <div class="sidebar-block">
+        <div class="sidebar-title">Services Delivered</div>
+        <div class="tool-tags">
+          <span class="tool-tag">Shopify Dev</span>
+          <span class="tool-tag">UI Design</span>
+          <span class="tool-tag">E-Commerce</span>
+          <span class="tool-tag">Product Pages</span>
+          <span class="tool-tag">Conversion CRO</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <p class="section-label">&#x2666; Project Overview</p>
+      <h2 class="section-title">A Shopify Store Built<br>to <em>Convert</em></h2>
+      <p class="body-text">Vitly Nutrition is a UK-based health and wellness brand selling premium vitamin gummy supplements — from Apple Cider Vinegar and Omega 3-6-9 to Hair, Skin & Nails and Pre+Pro Biotic blends. They are one of the UK and Europe's first B Corp Certified gummy nutrition brands.</p>
+      <p class="body-text">The brief was to design and build a full Shopify storefront that matched the brand's vibrant, health-forward identity — using bold lifestyle photography, a warm teal and cream colour palette, and a clean layout that guides shoppers from discovery through to checkout with minimal friction.</p>
+      <p class="body-text">Every section was designed with conversion in mind: a high-impact hero, a scrolling ingredient marquee, editorial split-layout philosophy sections, a bestsellers product grid with sale badges, a features trust bar, and a campaign lifestyle section — all built on Shopify for easy client management.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FULL PAGE SCREENSHOT -->
+<div class="section">
+  <p class="section-label">&#x2666; Full Store View</p>
+  <h2 class="section-title">The Complete <em>Storefront</em></h2>
+  <p class="body-text">A full scroll of the Vitly homepage — from hero banner to footer — showing the complete shopping experience designed and built on Shopify.</p>
+  <div class="fullpage-wrap" id="fullpage" style="margin-top:40px">
+    <img src="images/portfolio/Vitly/Full Page.png" alt="Vitly Full Page">
+    <div class="fullpage-fade">
+      <button class="expand-btn" onclick="document.getElementById('fullpage').classList.toggle('expanded'); this.textContent = document.getElementById('fullpage').classList.contains('expanded') ? 'Collapse ↑' : 'View Full Page ↓'">View Full Page ↓</button>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION BREAKDOWN -->
+<div class="section dark">
+  <p class="section-label">&#x2666; Section Breakdown</p>
+  <h2 class="section-title">Every Section, <em>Designed</em></h2>
+  <p class="body-text">A closer look at the key sections of the store — each designed to serve a specific purpose in the customer journey.</p>
+
+  <div class="screen-grid col2">
+    <div class="screen-item">
+      <img src="images/portfolio/Vitly/1.png" alt="Vitly Hero & Top Sections">
+      <div class="screen-label">Hero &amp; Philosophy</div>
+    </div>
+    <div class="screen-item">
+      <img src="images/portfolio/Vitly/2.png" alt="Vitly Philosophy & Bestsellers">
+      <div class="screen-label">Bestsellers Grid</div>
+    </div>
+    <div class="screen-item">
+      <img src="images/portfolio/Vitly/3.png" alt="Vitly Features & Campaign">
+      <div class="screen-label">Trust Bar &amp; Campaign</div>
+    </div>
+    <div class="screen-item">
+      <img src="images/portfolio/Vitly/4.png" alt="Vitly Campaign & Footer">
+      <div class="screen-label">Campaign &amp; Footer</div>
+    </div>
+  </div>
+</div>
+
+<!-- STORE FEATURES -->
+<div class="section">
+  <p class="section-label">&#x2666; What Was Built</p>
+  <h2 class="section-title">Key Store <em>Features</em></h2>
+  <p class="body-text">Every element of the store was built to reflect Vitly's brand positioning — playful, health-conscious, science-backed, and trustworthy.</p>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🦸</div>
+      <div class="feature-title">Hero Banner</div>
+      <div class="feature-text">Full-width editorial hero with lifestyle model photography, brand tagline, and a prominent "Shop Now" CTA designed to hook visitors immediately.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🏷️</div>
+      <div class="feature-title">Scrolling Marquee</div>
+      <div class="feature-text">Animated ingredient ticker — Vinegar Powder, Blackcurrant, Vitamin B, Iron, Inositol, Glucose Syrup — reinforcing product quality and naturalness.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🛒</div>
+      <div class="feature-title">Bestsellers Grid</div>
+      <div class="feature-text">Product collection grid with sale badges, star ratings, and price comparisons — built to surface the best-selling SKUs and drive add-to-cart.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">✅</div>
+      <div class="feature-title">Trust Bar</div>
+      <div class="feature-text">Four-point trust section: Delicious Vitamin Gummies, Science-Backed Nutrition, Expertly Formulated, and B Corp Certified — addressing key buyer objections.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📸</div>
+      <div class="feature-title">Campaign Section</div>
+      <div class="feature-text">Bold three-panel lifestyle campaign imagery with a centred "Shop Now" CTA — creating an emotional connection with the brand's fun, vibrant identity.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📧</div>
+      <div class="feature-title">Newsletter Signup</div>
+      <div class="feature-text">"Join the club" footer email capture for product announcements and exclusive discounts — growing the brand's owned marketing channel.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🌍</div>
+      <div class="feature-title">Multi-Region Ready</div>
+      <div class="feature-text">Built with UK market as primary, with language and region selectors in the footer for future international expansion.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📱</div>
+      <div class="feature-title">Mobile Optimised</div>
+      <div class="feature-text">Every section designed and tested to be fully responsive — ensuring the shopping experience is seamless on smartphones, where most orders come from.</div>
+    </div>
+  </div>
+</div>
+
+<!-- COLOUR PALETTE -->
+<div class="section dark">
+  <p class="section-label">&#x2666; Brand Colours</p>
+  <h2 class="section-title">The Vitly <em>Palette</em></h2>
+  <p class="body-text">The store's colour palette reflects the brand's health-forward personality — warm teal as the primary brand colour, a soft cream for warmth, a bold purple for premium sections, and citrus orange for energy and vibrancy.</p>
+
+  <div class="palette">
+    <div class="colour-swatch" style="background:#009B8B">
+      <span class="colour-hex" style="color:#fff">Vitly Teal</span>
+    </div>
+    <div class="colour-swatch" style="background:#F5EDD6">
+      <span class="colour-hex" style="color:#333">Warm Cream</span>
+    </div>
+    <div class="colour-swatch" style="background:#7B5EA7">
+      <span class="colour-hex" style="color:#fff">Purple</span>
+    </div>
+    <div class="colour-swatch" style="background:#2D1B0E">
+      <span class="colour-hex" style="color:#fff">Dark Brown</span>
+    </div>
+    <div class="colour-swatch" style="background:#F5A623">
+      <span class="colour-hex" style="color:#fff">Citrus</span>
+    </div>
+  </div>
+</div>
+
+<!-- KEY OUTCOMES -->
+<div class="section">
+  <p class="section-label">&#x2666; Results</p>
+  <h2 class="section-title">What This Project <em>Delivers</em></h2>
+
+  <div class="highlights">
+    <div class="highlight">
+      <div class="highlight-icon">🛍️</div>
+      <div class="highlight-title">Shopify E-Commerce</div>
+      <div class="highlight-text">A fully functional, live Shopify store — custom theme design built around Vitly's brand, with product pages, collection grids, cart, and checkout all configured and ready to sell.</div>
+    </div>
+    <div class="highlight">
+      <div class="highlight-icon">🎨</div>
+      <div class="highlight-title">Brand-Aligned Design</div>
+      <div class="highlight-text">Every colour, font, image crop, and layout decision was made to match and elevate Vitly's existing brand identity — creating a store that feels premium, playful, and trustworthy.</div>
+    </div>
+    <div class="highlight">
+      <div class="highlight-icon">📈</div>
+      <div class="highlight-title">Conversion-Focused</div>
+      <div class="highlight-text">From the hero CTA to the trust bar and bestsellers grid, every section was designed with a clear goal — moving the visitor closer to purchase with each scroll.</div>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECT NAV -->
+<div class="project-nav">
+  <a href="project-readwave.html" class="pnav-item pnav-prev">
+    <div class="pnav-dir">← Previous Project</div>
+    <div class="pnav-cat">UI / UX Design</div>
+    <div class="pnav-title">ReadWave</div>
+    <img src="images/portfolio/read wave CASE STUDY/other/Cover Page.jpg" alt="ReadWave" class="pnav-thumb">
+  </a>
+  <div class="pnav-divider"></div>
+  <a href="project-malabar.html" class="pnav-item pnav-next">
+    <div class="pnav-dir">Next Project →</div>
+    <div class="pnav-cat">Luxury Hospitality</div>
+    <div class="pnav-title">Malabar Hill</div>
+    <img src="images/portfolio/Malabar Concept Design/1.png" alt="Malabar Hill" class="pnav-thumb">
+  </a>
+</div>
+
+<!-- CTA -->
+<div class="project-cta">
+  <h2>Need a Shopify store<br>like <em>this?</em></h2>
+  <p>I build custom Shopify stores that look great and convert — designed around your brand, your products, and your customers.</p>
+  <a href="index.html#contact" class="cta-btn">Start Your Shopify Project</a><br>
+  <a href="index.html#work" class="back-link">← Back to all work</a>
+</div>
+
+<footer>
+  <span>© 2025 NextByt. All rights reserved.</span>
+  <span>Vitly Nutrition — Shopify store designed &amp; built by NextByt</span>
+</footer>
+
+</body>
+</html>
