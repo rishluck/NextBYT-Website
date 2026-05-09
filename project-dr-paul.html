@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sephora Redesign — NextByt</title>
-<meta name="description" content="Sephora website redesign concept by NextByt — a UI/UX portfolio piece reimagining the Sephora shopping experience with a refined, conversion-focused design system.">
+<title>Dr. Paul — Pet Wellness E-Commerce | NextByt</title>
+<meta name="description" content="Dr. Paul Pet Wellness e-commerce website designed by NextByt — a trust-led Shopify store for vet-formulated dog supplements, built to convert through credibility and clean UX.">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Josefin+Sans:wght@100;200;300;400&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -12,6 +12,7 @@
     --border: #2a2018; --gold: #d4a070; --gold-light: #eacca8;
     --cream: #f5f0ea; --white: #ffffff;
     --text-muted: #887870; --text-dim: #504038;
+    --paw: #c4855a;
   }
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -49,7 +50,9 @@
   }
   .project-hero-bg {
     position: absolute; inset: 0;
-    background: radial-gradient(ellipse 60% 60% at 80% 50%, rgba(212,160,112,0.06) 0%, transparent 70%);
+    background:
+      radial-gradient(ellipse 50% 70% at 85% 40%, rgba(196,133,90,0.08) 0%, transparent 65%),
+      radial-gradient(ellipse 30% 40% at 10% 80%, rgba(212,160,112,0.04) 0%, transparent 60%);
   }
   .project-tag { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
   .project-title {
@@ -58,12 +61,21 @@
     letter-spacing: -2px; color: var(--white); margin-bottom: 32px;
   }
   .project-title em { font-style: italic; color: var(--gold); }
-  .project-meta {
-    display: flex; gap: 48px; flex-wrap: wrap;
-  }
-  .meta-item { }
+  .project-meta { display: flex; gap: 48px; flex-wrap: wrap; }
   .meta-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 6px; }
   .meta-value { font-size: 14px; color: var(--cream); }
+
+  /* BADGE STRIP */
+  .badge-strip {
+    background: var(--dark); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    padding: 20px 60px; display: flex; align-items: center; gap: 48px; overflow-x: auto;
+  }
+  .badge-strip-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-dim); white-space: nowrap; }
+  .badge {
+    display: flex; align-items: center; gap: 10px; white-space: nowrap;
+    font-size: 12px; letter-spacing: 1px; color: var(--cream);
+  }
+  .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
 
   /* MAIN IMAGE */
   .project-main-img {
@@ -75,6 +87,17 @@
     border: 1px solid var(--border);
     box-shadow: 0 40px 100px rgba(0,0,0,0.5);
   }
+  /* Placeholder shown when no image is available */
+  .img-placeholder {
+    width: 100%; max-width: 1000px; margin: 0 auto;
+    height: 540px; background: linear-gradient(135deg, #1a1210 0%, #221610 50%, #1a1008 100%);
+    border: 1px solid var(--border);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+  }
+  .img-placeholder-paw { font-size: 64px; opacity: 0.3; }
+  .img-placeholder-text { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--text-dim); letter-spacing: 4px; text-transform: uppercase; }
+  .img-placeholder-sub { font-size: 11px; letter-spacing: 2px; color: var(--text-dim); opacity: 0.6; }
 
   /* CONTENT */
   .project-content { padding: 100px 60px; max-width: 1200px; margin: 0 auto; }
@@ -92,6 +115,21 @@
   .project-body h2 em { font-style: italic; color: var(--gold); }
   .project-body p { font-size: 15px; line-height: 1.9; color: var(--text-muted); margin-bottom: 20px; }
 
+  /* PRODUCT GRID */
+  .product-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
+    margin: 60px 0; border: 1px solid var(--border);
+  }
+  .product-item {
+    background: var(--card); padding: 28px 20px; text-align: center;
+    border-right: 1px solid var(--border); transition: background 0.3s;
+  }
+  .product-item:last-child { border-right: none; }
+  .product-item:hover { background: rgba(212,160,112,0.04); }
+  .product-icon { font-size: 32px; margin-bottom: 12px; }
+  .product-name { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--cream); margin-bottom: 6px; }
+  .product-desc { font-size: 11px; color: var(--text-dim); line-height: 1.6; }
+
   /* HIGHLIGHTS */
   .highlights { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin: 60px 0; }
   .highlight {
@@ -103,6 +141,20 @@
   .highlight-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--white); margin-bottom: 10px; }
   .highlight-text { font-size: 13px; color: var(--text-muted); line-height: 1.8; }
 
+  /* TRUST SECTION */
+  .trust-section {
+    background: var(--dark); border: 1px solid var(--border);
+    padding: 52px; margin: 60px 0;
+    display: grid; grid-template-columns: 1fr 1px 1fr 1px 1fr; gap: 0;
+  }
+  .trust-divider { background: var(--border); }
+  .trust-item { padding: 0 40px; text-align: center; }
+  .trust-number {
+    font-family: 'Cormorant Garamond', serif; font-size: 56px; font-weight: 300;
+    color: var(--gold); line-height: 1;
+  }
+  .trust-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-dim); margin-top: 8px; }
+
   /* TAGS */
   .skill-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
   .skill-tag {
@@ -110,6 +162,17 @@
     color: var(--gold); border: 1px solid rgba(212,160,112,0.3);
     padding: 6px 16px;
   }
+
+  /* QUOTE */
+  .project-quote {
+    margin: 60px 0; padding: 52px 60px; border-left: 2px solid var(--gold);
+    background: var(--dark);
+  }
+  .project-quote blockquote {
+    font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300;
+    font-style: italic; color: var(--white); line-height: 1.4; margin-bottom: 20px;
+  }
+  .project-quote cite { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); }
 
   /* CTA */
   .project-cta {
@@ -175,11 +238,22 @@
   .project-title { opacity:0; animation: fadeUp 0.8s 0.4s forwards; }
   .project-meta { opacity:0; animation: fadeUp 0.8s 0.6s forwards; }
 
+  @media(max-width:1024px) {
+    .product-grid { grid-template-columns: repeat(2, 1fr); }
+    .trust-section { grid-template-columns: 1fr; }
+    .trust-divider { display: none; }
+    .trust-item { padding: 24px 0; border-bottom: 1px solid var(--border); }
+    .trust-item:last-child { border-bottom: none; }
+  }
   @media(max-width:768px) {
     nav { padding: 20px 24px; }
     .project-hero, .project-main-img, .project-content, .project-cta { padding-left: 24px; padding-right: 24px; }
     .project-grid { grid-template-columns: 1fr; gap: 40px; }
     .highlights { grid-template-columns: 1fr; }
+    .product-grid { grid-template-columns: repeat(2, 1fr); }
+    .badge-strip { padding: 16px 24px; }
+    .project-quote { padding: 36px 24px; }
+    .pnav-item { padding: 32px 24px; }
     footer { flex-direction: column; gap: 12px; text-align: center; }
   }
 </style>
@@ -194,31 +268,41 @@
 <!-- HERO -->
 <div class="project-hero">
   <div class="project-hero-bg"></div>
-  <p class="project-tag">&#x2666; Website Redesign &amp; UI/UX Design</p>
-  <h1 class="project-title">Sephora<br><em>Redesign</em><br>Concept</h1>
+  <p class="project-tag">&#x2666; E-Commerce &amp; Web Design</p>
+  <h1 class="project-title">Dr. Paul<br><em>Pet Wellness</em></h1>
   <div class="project-meta">
     <div class="meta-item">
       <div class="meta-label">Project Type</div>
-      <div class="meta-value">Website Redesign Concept</div>
+      <div class="meta-value">E-Commerce Website</div>
     </div>
     <div class="meta-item">
       <div class="meta-label">Industry</div>
-      <div class="meta-value">Beauty &amp; E-Commerce</div>
+      <div class="meta-value">Pet Health &amp; Wellness</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Market</div>
+      <div class="meta-value">United Kingdom</div>
     </div>
     <div class="meta-item">
       <div class="meta-label">Services</div>
-      <div class="meta-value">UI Design, UX, E-Commerce</div>
-    </div>
-    <div class="meta-item">
-      <div class="meta-label">Status</div>
-      <div class="meta-value">Concept / Portfolio Piece</div>
+      <div class="meta-value">Web Design, UI/UX, E-Commerce</div>
     </div>
   </div>
 </div>
 
+<!-- TRUST BADGE STRIP -->
+<div class="badge-strip">
+  <span class="badge-strip-label">Credentials</span>
+  <div class="badge"><span class="badge-dot"></span> GMP Certified</div>
+  <div class="badge"><span class="badge-dot"></span> ISO Certified</div>
+  <div class="badge"><span class="badge-dot"></span> Vet Formulated</div>
+  <div class="badge"><span class="badge-dot"></span> 100% Natural Ingredients</div>
+  <div class="badge"><span class="badge-dot"></span> Money-Back Guarantee</div>
+</div>
+
 <!-- MAIN IMAGE -->
 <div class="project-main-img">
-  <img src="images/portfolio/sephora/Sephora_Home.png" alt="Sephora Website Redesign by NextByt">
+  <img src="images/portfolio/Dr.Paul/1.png" alt="Dr. Paul Pet Wellness Website by NextByt">
 </div>
 
 <!-- CONTENT -->
@@ -227,40 +311,87 @@
   <div class="project-grid">
     <div class="project-sidebar">
       <div class="project-sidebar-title">About</div>
-      <p>A self-initiated redesign concept of Sephora's e-commerce homepage — reimagining the layout, visual hierarchy, and user experience to drive higher engagement and conversions.</p>
+      <p>Dr. Paul is a UK-based pet wellness brand offering a full range of natural, vet-formulated supplements for dogs — from calming chews and joint support to probiotic blends and salmon oil.</p>
+      <p>The brief: build an e-commerce experience that communicates trust, warmth, and clinical credibility — while driving conversions from a health-conscious pet owner audience.</p>
       <p style="margin-top:24px">Skills used:</p>
       <div class="skill-tags">
-        <span class="skill-tag">UI Design</span>
-        <span class="skill-tag">UX</span>
-        <span class="skill-tag">E-Commerce</span>
-        <span class="skill-tag">Figma</span>
         <span class="skill-tag">Web Design</span>
+        <span class="skill-tag">UI / UX</span>
+        <span class="skill-tag">E-Commerce</span>
+        <span class="skill-tag">Copywriting</span>
+        <span class="skill-tag">Brand Design</span>
+        <span class="skill-tag">Figma</span>
       </div>
     </div>
     <div class="project-body">
-      <h2>Redesigning a Global<br><em>Beauty Giant</em></h2>
-      <p>This is a concept redesign of Sephora's homepage — one of the world's most recognised beauty e-commerce brands. The goal was to modernise the layout, improve visual hierarchy, and create a more immersive shopping experience that converts browsers into buyers.</p>
-      <p>The redesign focuses on bold hero sections that highlight promotions like "Celebrate Pay Day" with clear CTAs, improved product grid layouts for featured collections such as "Father's Day Fragrances" and "Beauty Picks Just For You", and a cleaner overall structure that guides the customer naturally from discovery to purchase.</p>
-      <p>This project demonstrates the ability to work at scale — understanding how a global brand communicates, then improving it with stronger design decisions while staying true to the brand's identity.</p>
+      <h2>Building Trust for<br><em>Every Dog Owner</em></h2>
+      <p>Pet wellness is a market built on one thing: trust. Dog owners making decisions about their pet's health need to feel completely confident in the brand before they buy. The Dr. Paul website was designed from the ground up to answer that need — leading with clinical credibility (GMP certified, ISO certified, vet-formulated) before ever showing a product price.</p>
+      <p>The site needed to work across two very different audiences: first-time buyers discovering natural supplements for their dog, and repeat customers looking for a fast, frictionless purchase. The information architecture was designed to serve both — with a clear product range, benefit-led copywriting, and a smooth checkout experience that removes hesitation at every step.</p>
+      <p>The warm, natural palette echoes the brand's "100% natural" promise — earthy tones paired with clean white space to keep the focus on product photography and trust signals. Every page is structured to guide the visitor from curiosity to confidence to conversion.</p>
     </div>
   </div>
 
+  <!-- PRODUCT RANGE -->
+  <div class="product-grid">
+    <div class="product-item">
+      <div class="product-icon">😌</div>
+      <div class="product-desc">Anxiety & stress relief for dogs</div>
+    </div>
+    <div class="product-item">
+      <div class="product-icon">🛡️</div>
+      <div class="product-desc">Natural protection chews</div>
+    </div>
+    <div class="product-item">
+      <div class="product-icon">🦴</div>
+      <div class="product-desc">Mobility & flexibility support</div>
+    </div>
+    <div class="product-item">
+      <div class="product-icon">🐟</div>
+      <div class="product-desc">Wild Alaskan omega-3 blend</div>
+    </div>
+  </div>
+
+  <!-- TRUST NUMBERS -->
+  <div class="trust-section">
+    <div class="trust-item">
+      <div class="trust-number">7+</div>
+      <div class="trust-label">Product Lines</div>
+    </div>
+    <div class="trust-divider"></div>
+    <div class="trust-item">
+      <div class="trust-number">100%</div>
+      <div class="trust-label">Natural Ingredients</div>
+    </div>
+    <div class="trust-divider"></div>
+    <div class="trust-item">
+      <div class="trust-number">GMP</div>
+      <div class="trust-label">Certified Manufacturing</div>
+    </div>
+  </div>
+
+  <!-- HIGHLIGHTS -->
   <div class="highlights">
     <div class="highlight">
-      <div class="highlight-icon">🎯</div>
-      <div class="highlight-title">Clear Visual Hierarchy</div>
-      <div class="highlight-text">Redesigned the homepage layout to guide the user eye from hero promotion down to featured products and category discovery — reducing cognitive load and increasing scroll depth.</div>
+      <div class="highlight-icon">🏆</div>
+      <div class="highlight-title">Trust-First Design</div>
+      <div class="highlight-text">Certifications, vet endorsements, and a money-back guarantee are front and centre — because in health-focused e-commerce, credibility converts before the product page even loads.</div>
     </div>
     <div class="highlight">
-      <div class="highlight-icon">🛍️</div>
-      <div class="highlight-title">Conversion-First Design</div>
-      <div class="highlight-text">Every section — from the hero banner to the product grid — was designed with conversion in mind. Strong CTAs, trust signals, and a clean checkout flow prompt action at every step.</div>
+      <div class="highlight-icon">🐾</div>
+      <div class="highlight-title">Benefit-Led Storytelling</div>
+      <div class="highlight-text">Every product page leads with the outcome for the dog, not the ingredient list. Clear, warm copywriting helps pet owners instantly understand which product is right for their specific concern.</div>
     </div>
     <div class="highlight">
-      <div class="highlight-icon">📱</div>
-      <div class="highlight-title">Mobile-First Thinking</div>
-      <div class="highlight-text">The layout was conceived mobile-first, ensuring the experience is equally strong on smartphones — where the majority of beauty shoppers browse and buy.</div>
+      <div class="highlight-icon">📦</div>
+      <div class="highlight-title">Frictionless Commerce</div>
+      <div class="highlight-text">Clean product grids, prominent CTAs, and a streamlined checkout flow eliminate decision fatigue — turning browsers into buyers with as few clicks as possible.</div>
     </div>
+  </div>
+
+  <!-- QUOTE -->
+  <div class="project-quote">
+    <blockquote>"Wellness That Wags Tails — supporting lifelong health and happiness for every dog through trusted, natural products."</blockquote>
+    <cite>Dr. Paul — Brand Mission</cite>
   </div>
 
 </div>
@@ -274,25 +405,25 @@
     <img src="images/portfolio/Malabar Concept Design/1.png" alt="Malabar Hill" class="pnav-thumb">
   </a>
   <div class="pnav-divider"></div>
-  <a href="project-readwave.html" class="pnav-item pnav-next">
+  <a href="project-sephora.html" class="pnav-item pnav-next">
     <div class="pnav-dir">Next Project →</div>
-    <div class="pnav-cat">UI / UX Design</div>
-    <div class="pnav-title">ReadWave</div>
-    <img src="images/portfolio/read wave CASE STUDY/other/Cover Page.jpg" alt="ReadWave" class="pnav-thumb">
+    <div class="pnav-cat">Website Redesign &amp; UI/UX</div>
+    <div class="pnav-title">Sephora Redesign</div>
+    <img src="images/portfolio/sephora/Sephora_Home.png" alt="Sephora" class="pnav-thumb">
   </a>
 </div>
 
 <!-- CTA -->
 <div class="project-cta">
-  <h2>Want something<br><em>like this?</em></h2>
-  <p>I can redesign your existing website or build you a brand new one from scratch — tailored to your brand, your customers, and your goals.</p>
+  <h2>Ready to build something<br><em>remarkable?</em></h2>
+  <p>Whether you're launching a brand or scaling an existing one — I'll design an e-commerce experience that earns trust and drives sales.</p>
   <a href="index.html#contact" class="cta-btn">Start a Project</a><br>
   <a href="index.html#work" class="back-link">← Back to all work</a>
 </div>
 
 <footer>
   <span>© 2025 NextByt. All rights reserved.</span>
-  <span>Sephora is a trademark of LVMH. This is an unsolicited concept redesign for portfolio purposes only.</span>
+  <span>Dr. Paul is a registered trademark. Project shown for portfolio purposes.</span>
 </footer>
 
 </body>

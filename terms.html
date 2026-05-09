@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Service — NextByt</title>
+<meta name="description" content="NextByt's Terms of Service — the terms and conditions that govern your use of our website and services.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Josefin+Sans:wght@100;200;300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0d0a09; --dark: #120e0b; --card: #181210; --border: #2a2018;
+    --gold: #d4a070; --gold-light: #eacca8; --cream: #f5f0ea; --white: #ffffff;
+    --text-muted: #887870; --text-dim: #504038;
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--black); color: var(--cream); font-family: 'DM Sans', sans-serif; font-weight: 300; overflow-x: hidden; cursor: none; }
+  .cursor { position: fixed; width: 10px; height: 10px; background: var(--gold); border-radius: 50%; pointer-events: none; z-index: 99999; transform: translate(-50%,-50%); transition: width .3s, height .3s; }
+  .cursor-ring { position: fixed; width: 36px; height: 36px; border: 1px solid var(--gold); border-radius: 50%; pointer-events: none; z-index: 99998; transform: translate(-50%,-50%); transition: width .3s, height .3s; opacity: .6; }
+  .cursor.hover { width: 16px; height: 16px; }
+  .cursor-ring.hover { width: 56px; height: 56px; border-color: var(--gold-light); opacity: 1; }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 28px 60px; display: flex; align-items: center; justify-content: space-between; background: rgba(8,8,8,0.97); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+  .nav-logo { font-family: 'Josefin Sans', sans-serif; font-size: 20px; font-weight: 200; letter-spacing: 6px; color: var(--white); text-decoration: none; display: flex; align-items: center; gap: 10px; }
+  .nav-logo span { color: var(--gold); font-weight: 400; }
+  .nav-back { color: var(--text-muted); text-decoration: none; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; transition: color .3s; display: flex; align-items: center; gap: 8px; }
+  .nav-back:hover { color: var(--gold); }
+  .nav-cta { background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 10px 28px; font-family: 'DM Sans', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; cursor: none; transition: all .3s; text-decoration: none; }
+  .nav-cta:hover { background: var(--gold); color: var(--black); }
+
+  .page-hero { padding: 160px 60px 80px; border-bottom: 1px solid var(--border); }
+  .page-tag { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+  .page-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(48px, 7vw, 96px); font-weight: 300; line-height: 1; color: var(--white); margin-bottom: 24px; }
+  .page-title em { font-style: italic; color: var(--gold); }
+  .page-updated { font-size: 12px; color: var(--text-dim); letter-spacing: 1px; }
+
+  .content-wrap { max-width: 780px; margin: 0 auto; padding: 80px 60px 120px; }
+  .section { margin-bottom: 60px; }
+  .section h2 { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; color: var(--white); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+  .section p { font-size: 15px; line-height: 1.9; color: var(--text-muted); margin-bottom: 16px; }
+  .section ul { list-style: none; padding: 0; margin-bottom: 16px; }
+  .section ul li { font-size: 15px; line-height: 1.9; color: var(--text-muted); padding: 6px 0 6px 20px; position: relative; }
+  .section ul li::before { content: '—'; position: absolute; left: 0; color: var(--gold); }
+  .section a { color: var(--gold); text-decoration: none; }
+  .section a:hover { color: var(--gold-light); }
+
+  footer { background: var(--black); border-top: 1px solid var(--border); padding: 60px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-logo { font-family: 'Josefin Sans', sans-serif; font-size: 18px; font-weight: 200; letter-spacing: 6px; color: var(--white); text-decoration: none; }
+  .footer-logo span { color: var(--gold); font-weight: 400; }
+  .footer-copy { font-size: 12px; color: var(--text-dim); }
+  .footer-links { display: flex; gap: 30px; }
+  .footer-links a { font-size: 12px; color: var(--text-dim); text-decoration: none; transition: color .3s; }
+  .footer-links a:hover { color: var(--gold); }
+
+  @media (max-width: 768px) {
+    nav { padding: 20px 24px; }
+    .page-hero { padding: 120px 24px 60px; }
+    .content-wrap { padding: 60px 24px 80px; }
+    footer { flex-direction: column; gap: 24px; text-align: center; padding: 40px 24px; }
+    .footer-links { flex-wrap: wrap; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">NEXT<span>BYT</span></a>
+  <a href="index.html" class="nav-back">← Back to Home</a>
+  <a href="index.html#contact" class="nav-cta">Start a Project</a>
+</nav>
+
+<div class="page-hero">
+  <div class="page-tag">Legal</div>
+  <h1 class="page-title">Terms of<br><em>Service</em></h1>
+  <p class="page-updated">Last updated: May 2025</p>
+</div>
+
+<div class="content-wrap">
+
+  <div class="section">
+    <h2>1. Agreement to Terms</h2>
+    <p>By accessing or using the NextByt website or engaging our services, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our website or services.</p>
+  </div>
+
+  <div class="section">
+    <h2>2. Our Services</h2>
+    <p>NextByt provides digital creative services including, but not limited to:</p>
+    <ul>
+      <li>Website design and development</li>
+      <li>Logo and brand identity design</li>
+      <li>Social media marketing and content creation</li>
+      <li>UI/UX design</li>
+      <li>Graphic design</li>
+      <li>Architecture and 3D visualisation</li>
+      <li>Interior design concepts</li>
+    </ul>
+    <p>The specific scope, deliverables, timeline, and fees for each project are agreed upon separately in a project proposal or contract.</p>
+  </div>
+
+  <div class="section">
+    <h2>3. Payments & Fees</h2>
+    <p>Payment terms are outlined in each individual project agreement. Generally:</p>
+    <ul>
+      <li>A deposit is required before work commences</li>
+      <li>Final payment is due upon project completion or as agreed in the contract</li>
+      <li>Late payments may incur additional charges</li>
+      <li>All fees are non-refundable unless otherwise stated</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>4. Intellectual Property</h2>
+    <p>Upon receipt of full payment, all final deliverables created specifically for you become your property. NextByt retains the right to display completed work in our portfolio unless otherwise agreed in writing.</p>
+    <p>All preliminary concepts, drafts, and unused designs remain the intellectual property of NextByt.</p>
+  </div>
+
+  <div class="section">
+    <h2>5. Client Responsibilities</h2>
+    <p>To ensure the smooth delivery of your project, you agree to:</p>
+    <ul>
+      <li>Provide accurate briefs, assets, and feedback in a timely manner</li>
+      <li>Ensure you have the rights to any content, images, or materials you supply to us</li>
+      <li>Review and approve deliverables within agreed timeframes</li>
+      <li>Not hold NextByt liable for delays caused by late client feedback</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>6. Revisions</h2>
+    <p>The number of revisions included in a project is outlined in the project proposal. Additional revisions beyond the agreed scope may be charged at our standard hourly rate.</p>
+  </div>
+
+  <div class="section">
+    <h2>7. Limitation of Liability</h2>
+    <p>NextByt will not be liable for any indirect, incidental, or consequential damages arising from the use of our services or website. Our total liability to you shall not exceed the total fees paid for the project in question.</p>
+  </div>
+
+  <div class="section">
+    <h2>8. Termination</h2>
+    <p>Either party may terminate a project agreement with written notice. In the event of termination, you will be invoiced for all work completed up to the termination date. Deposits are non-refundable.</p>
+  </div>
+
+  <div class="section">
+    <h2>9. Governing Law</h2>
+    <p>These Terms of Service are governed by the laws of England and Wales. Any disputes shall be subject to the exclusive jurisdiction of the courts of England and Wales.</p>
+  </div>
+
+  <div class="section">
+    <h2>10. Changes to These Terms</h2>
+    <p>We reserve the right to update these Terms of Service at any time. Changes will be posted on this page with an updated date. Continued use of our website or services after changes constitutes acceptance of the new terms.</p>
+  </div>
+
+  <div class="section">
+    <h2>11. Contact Us</h2>
+    <p>If you have any questions about these Terms of Service, please contact us at <a href="mailto:hello@nextbyt.com">hello@nextbyt.com</a>.</p>
+  </div>
+
+</div>
+
+<footer>
+  <a href="index.html" class="footer-logo">NEXT<span>BYT</span></a>
+  <p class="footer-copy">&copy; 2025 NextByt. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="index.html#services">Services</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#work">Work</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+</footer>
+
+<script>
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx + 'px'; cursor.style.top = my + 'px'; });
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => { cursor.classList.add('hover'); ring.classList.add('hover'); });
+    el.addEventListener('mouseleave', () => { cursor.classList.remove('hover'); ring.classList.remove('hover'); });
+  });
+  (function animRing() { rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(animRing); })();
+</script>
+</body>
+</html>
