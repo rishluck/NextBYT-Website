@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AURIS — Luxury Fashion E-Commerce | NextByt</title>
+<meta name="description" content="AURIS luxury fashion e-commerce website designed by NextByt — an editorial Shopify experience built for a high-end clothing brand with seasonal collections and refined UX.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Josefin+Sans:wght@100;200;300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0d0a09; --dark: #120e0b; --card: #181210;
+    --border: #2a2018; --gold: #d4a070; --gold-light: #eacca8;
+    --cream: #f5f0ea; --white: #ffffff;
+    --text-muted: #887870; --text-dim: #504038;
+    --auris-sand: #C8B89A; --auris-off: #F2EDE6; --auris-dark: #1A1510;
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--black); color: var(--cream); font-family: 'DM Sans', sans-serif; font-weight: 300; overflow-x: hidden; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 24px 60px; display: flex; align-items: center; justify-content: space-between; background: rgba(13,10,9,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+  .nav-logo { font-family: 'Josefin Sans', sans-serif; font-size: 18px; font-weight: 200; letter-spacing: 6px; color: var(--white); text-decoration: none; }
+  .nav-logo span { color: var(--gold); font-weight: 400; }
+  .nav-back { color: var(--text-muted); text-decoration: none; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; transition: color 0.3s; }
+  .nav-back:hover { color: var(--gold); }
+
+  .project-hero { min-height: 100vh; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 60px 80px; }
+  .hero-cover { position: absolute; inset: 0; background-image: url('images/portfolio/AURIS/AURIS.jpg'); background-size: cover; background-position: center top; opacity: 0.35; transform: scale(1.05); }
+  .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(13,10,9,1) 0%, rgba(13,10,9,0.65) 50%, rgba(13,10,9,0.3) 100%); }
+  .hero-content { position: relative; z-index: 1; }
+  .project-tag { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; opacity: 0; animation: fadeUp 0.8s 0.3s forwards; }
+  .project-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(52px, 8vw, 110px); font-weight: 300; line-height: 0.9; letter-spacing: -2px; color: var(--white); margin-bottom: 36px; opacity: 0; animation: fadeUp 0.8s 0.5s forwards; }
+  .project-title em { font-style: italic; color: var(--gold); }
+  .project-meta { display: flex; gap: 48px; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.8s 0.7s forwards; }
+  .meta-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 6px; }
+  .meta-value { font-size: 14px; color: var(--cream); }
+
+  .section { padding: 100px 60px; border-top: 1px solid var(--border); }
+  .section.dark { background: var(--dark); }
+  .section-label { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 5vw, 60px); font-weight: 300; color: var(--white); margin-bottom: 40px; line-height: 1.05; }
+  .section-title em { font-style: italic; color: var(--gold); }
+  .body-text { font-size: 15px; line-height: 1.9; color: var(--text-muted); max-width: 720px; margin-bottom: 20px; }
+
+  .overview-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; align-items: start; }
+  .sidebar-block { margin-bottom: 32px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
+  .sidebar-block:last-child { border-bottom: none; }
+  .sidebar-title { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 8px; }
+  .sidebar-value { font-size: 14px; color: var(--cream); line-height: 1.7; }
+  .tool-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+  .tool-tag { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(212,160,112,0.3); padding: 5px 14px; }
+
+  .fullpage-wrap { position: relative; overflow: hidden; border: 1px solid var(--border); max-height: 700px; cursor: pointer; transition: max-height 0.8s ease; margin-top: 40px; }
+  .fullpage-wrap.expanded { max-height: 9999px; }
+  .fullpage-wrap img { width: 100%; display: block; }
+  .fullpage-fade { position: absolute; bottom: 0; left: 0; right: 0; height: 200px; background: linear-gradient(to top, var(--black), transparent); display: flex; align-items: flex-end; justify-content: center; padding-bottom: 30px; transition: opacity 0.4s; }
+  .fullpage-wrap.expanded .fullpage-fade { opacity: 0; pointer-events: none; }
+  .expand-btn { background: var(--gold); color: var(--black); border: none; padding: 12px 32px; font-family: 'DM Sans', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; cursor: pointer; transition: background 0.3s; }
+  .expand-btn:hover { background: var(--gold-light); }
+
+  .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin-top: 48px; }
+  .feature-card { background: var(--card); border: 1px solid var(--border); padding: 36px 28px; transition: border-color 0.3s; }
+  .feature-card:hover { border-color: var(--gold); }
+  .feature-icon { font-size: 28px; margin-bottom: 16px; }
+  .feature-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; color: var(--white); margin-bottom: 10px; }
+  .feature-text { font-size: 13px; color: var(--text-muted); line-height: 1.75; }
+
+  .palette { display: flex; gap: 0; margin-top: 40px; border: 1px solid var(--border); overflow: hidden; }
+  .colour-swatch { flex: 1; height: 100px; display: flex; align-items: flex-end; padding: 12px 16px; }
+  .colour-hex { font-size: 12px; letter-spacing: 1px; font-weight: 500; }
+
+  .highlights { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 60px; }
+  .highlight { background: var(--card); border: 1px solid var(--border); padding: 36px 32px; transition: border-color 0.3s; }
+  .highlight:hover { border-color: var(--gold); }
+  .highlight-icon { font-size: 28px; margin-bottom: 16px; }
+  .highlight-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--white); margin-bottom: 10px; }
+  .highlight-text { font-size: 13px; color: var(--text-muted); line-height: 1.8; }
+
+  .project-cta { background: var(--dark); border-top: 1px solid var(--border); padding: 80px 60px; text-align: center; }
+  .project-cta h2 { font-family: 'Cormorant Garamond', serif; font-size: 56px; font-weight: 300; color: var(--white); margin-bottom: 20px; }
+  .project-cta h2 em { font-style: italic; color: var(--gold); }
+  .project-cta p { font-size: 15px; color: var(--text-muted); margin-bottom: 40px; }
+  .cta-btn { display: inline-block; background: var(--gold); color: var(--black); padding: 16px 48px; font-family: 'DM Sans', sans-serif; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; text-decoration: none; transition: background 0.3s, transform 0.2s; }
+  .cta-btn:hover { background: var(--gold-light); transform: scale(1.02); }
+  .back-link { display: inline-block; margin-top: 24px; color: var(--text-dim); text-decoration: none; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; transition: color 0.3s; }
+  .back-link:hover { color: var(--gold); }
+
+  .project-nav { display: grid; grid-template-columns: 1fr 1px 1fr; background: var(--dark); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .pnav-divider { background: var(--border); }
+  .pnav-item { padding: 48px 60px; text-decoration: none; color: inherit; transition: background 0.3s; display: flex; flex-direction: column; gap: 6px; }
+  .pnav-item:hover { background: rgba(212,160,112,0.04); }
+  .pnav-next { align-items: flex-end; text-align: right; }
+  .pnav-dir { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 4px; }
+  .pnav-cat { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); }
+  .pnav-title { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 300; color: var(--white); line-height: 1.1; transition: color 0.3s; }
+  .pnav-item:hover .pnav-title { color: var(--gold-light); }
+  .pnav-thumb { width: 90px; height: 60px; object-fit: cover; object-position: top; border: 1px solid var(--border); margin-top: 14px; filter: grayscale(40%); transition: filter 0.3s; }
+  .pnav-item:hover .pnav-thumb { filter: grayscale(0%); }
+
+  footer { background: var(--black); border-top: 1px solid var(--border); padding: 28px 60px; display: flex; justify-content: space-between; }
+  footer span { font-size: 12px; color: var(--text-dim); }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+
+  @media(max-width:768px) {
+    nav { padding: 18px 24px; }
+    .project-hero, .section, .project-cta { padding-left: 24px; padding-right: 24px; }
+    .overview-grid { grid-template-columns: 1fr; gap: 40px; }
+    .features-grid { grid-template-columns: 1fr 1fr; }
+    .highlights { grid-template-columns: 1fr; }
+    .palette { flex-wrap: wrap; }
+    .colour-swatch { flex: none; width: 50%; }
+    footer { flex-direction: column; gap: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">NEXT<span>BYT</span></a>
+  <a href="index.html#work" class="nav-back">← Back to Work</a>
+</nav>
+
+<div class="project-hero">
+  <div class="hero-cover"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="project-tag">&#x2666; Fashion E-Commerce &mdash; Client Project</p>
+    <h1 class="project-title">AURIS<br><em>Fashion</em></h1>
+    <div class="project-meta">
+      <div><div class="meta-label">Client</div><div class="meta-value">AURIS</div></div>
+      <div><div class="meta-label">Platform</div><div class="meta-value">Shopify</div></div>
+      <div><div class="meta-label">Industry</div><div class="meta-value">Luxury Fashion / E-Commerce</div></div>
+      <div><div class="meta-label">Type</div><div class="meta-value">Client Project</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="section dark">
+  <div class="overview-grid">
+    <div>
+      <div class="sidebar-block"><div class="sidebar-title">Client</div><div class="sidebar-value">AURIS</div></div>
+      <div class="sidebar-block"><div class="sidebar-title">Platform</div><div class="sidebar-value">Shopify</div></div>
+      <div class="sidebar-block"><div class="sidebar-title">Industry</div><div class="sidebar-value">Luxury Fashion</div></div>
+      <div class="sidebar-block"><div class="sidebar-title">Founded</div><div class="sidebar-value">Since 2014</div></div>
+      <div class="sidebar-block">
+        <div class="sidebar-title">Services Delivered</div>
+        <div class="tool-tags">
+          <span class="tool-tag">Web Design</span>
+          <span class="tool-tag">Shopify Dev</span>
+          <span class="tool-tag">Editorial UX</span>
+          <span class="tool-tag">E-Commerce</span>
+          <span class="tool-tag">Art Direction</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <p class="section-label">&#x2666; Project Overview</p>
+      <h2 class="section-title">A Fashion Store Built<br>for <em>Discernment</em></h2>
+      <p class="body-text">AURIS is a luxury fashion brand with a philosophy rooted in craft, permanence, and quiet confidence. The brand's ethos — "We do not make clothes for the moment. We make clothes that become a part of who you are." — demanded a digital presence that matched that same level of intention.</p>
+      <p class="body-text">The brief was to build an editorial Shopify storefront that could carry seasonal collections — starting with The Art of Silence Collection and The Autumn Edit — while feeling timeless rather than trend-led. Every section was designed to slow the visitor down, invite consideration, and position AURIS as a brand worth knowing.</p>
+      <p class="body-text">The result is a refined, image-led e-commerce experience with strong editorial layout, luxurious whitespace, and a warm neutral palette that echoes the brand's tactile, cloth-and-craft identity.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <p class="section-label">&#x2666; Full Site View</p>
+  <h2 class="section-title">The Complete <em>Experience</em></h2>
+  <p class="body-text">A full scroll of the AURIS website — from the hero collection hero through seasonal editorial, product pages, brand story, and newsletter — showing the complete luxury shopping journey.</p>
+  <div class="fullpage-wrap" id="fullpage">
+    <img src="images/portfolio/AURIS/AURIS.jpg" alt="AURIS Full Page">
+    <div class="fullpage-fade">
+      <button class="expand-btn" onclick="document.getElementById('fullpage').classList.toggle('expanded'); this.textContent = document.getElementById('fullpage').classList.contains('expanded') ? 'Collapse ↑' : 'View Full Page ↓'">View Full Page ↓</button>
+    </div>
+  </div>
+</div>
+
+<div class="section dark">
+  <p class="section-label">&#x2666; What Was Built</p>
+  <h2 class="section-title">Key Site <em>Features</em></h2>
+  <p class="body-text">Each section of the AURIS site was designed to serve a distinct purpose in the luxury customer journey — from discovery to desire to purchase.</p>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🖼️</div>
+      <div class="feature-title">Editorial Hero</div>
+      <div class="feature-text">A full-bleed collection hero with fashion photography, a bold serif headline, and a restrained CTA — setting the tone immediately as a luxury destination.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🍂</div>
+      <div class="feature-title">Seasonal Collections</div>
+      <div class="feature-text">The Autumn Edit — a curated product grid with editorial-style imagery, product naming, and pricing laid out to feel like a magazine spread, not a catalogue.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🧥</div>
+      <div class="feature-title">Feature Product Page</div>
+      <div class="feature-text">Le Manteau Doré — a dedicated product feature with full-width photography, hand-written-style typography, and clear collection/size/colour selectors.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📸</div>
+      <div class="feature-title">Season Stories</div>
+      <div class="feature-text">A mosaic-style campaign gallery featuring editorial lifestyle photography — creating an emotional visual narrative around the season's aesthetic.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🪡</div>
+      <div class="feature-title">Brand Story</div>
+      <div class="feature-text">Craft That Endures — a brand history section anchored to 2014, reinforcing longevity and the brand's commitment to quality over trends.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">⭐</div>
+      <div class="feature-title">Social Proof</div>
+      <div class="feature-text">A customer quote section with editorial typography — "Wearing AURIS is not about being seen." — designed to resonate emotionally rather than sell rationally.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">✉️</div>
+      <div class="feature-title">Letters from the Atelier</div>
+      <div class="feature-text">A newsletter section framed as correspondence rather than marketing — building an intimate subscriber relationship that feels aligned with the brand voice.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📱</div>
+      <div class="feature-title">Mobile Optimised</div>
+      <div class="feature-text">Every section designed to be fully responsive — the editorial feel carries seamlessly from desktop to mobile without losing the luxury aesthetic.</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <p class="section-label">&#x2666; Brand Colours</p>
+  <h2 class="section-title">The AURIS <em>Palette</em></h2>
+  <p class="body-text">The AURIS palette is rooted in natural materials and timeless neutrals — warm sand, soft off-white, rich charcoal, and deep stone — reflecting a brand built on enduring craft rather than seasonal colour.</p>
+  <div class="palette">
+    <div class="colour-swatch" style="background:#C8B89A"><span class="colour-hex" style="color:#fff">Sand</span></div>
+    <div class="colour-swatch" style="background:#F2EDE6"><span class="colour-hex" style="color:#666">Off White</span></div>
+    <div class="colour-swatch" style="background:#2C2520"><span class="colour-hex" style="color:#fff">Charcoal</span></div>
+    <div class="colour-swatch" style="background:#6B5C50"><span class="colour-hex" style="color:#fff">Stone</span></div>
+    <div class="colour-swatch" style="background:#0A0807"><span class="colour-hex" style="color:#fff">Black</span></div>
+  </div>
+</div>
+
+<div class="section dark">
+  <p class="section-label">&#x2666; Results</p>
+  <h2 class="section-title">What This Project <em>Delivers</em></h2>
+  <div class="highlights">
+    <div class="highlight">
+      <div class="highlight-icon">🏛️</div>
+      <div class="highlight-title">Editorial Authority</div>
+      <div class="highlight-text">The site positions AURIS as a brand to be discovered, not just shopped — using editorial layout, considered whitespace, and restrained typography to build desirability before a single product is clicked.</div>
+    </div>
+    <div class="highlight">
+      <div class="highlight-icon">🛍️</div>
+      <div class="highlight-title">Conversion Architecture</div>
+      <div class="highlight-text">Despite its editorial feel, every page is structured around a clear customer journey — from collection discovery through product detail to purchase — with friction removed at each step.</div>
+    </div>
+    <div class="highlight">
+      <div class="highlight-icon">📖</div>
+      <div class="highlight-title">Brand Storytelling</div>
+      <div class="highlight-text">The site doesn't just sell clothes — it tells the AURIS story. Brand history, craft philosophy, and customer voice are woven throughout, building the emotional connection that turns visitors into loyal customers.</div>
+    </div>
+  </div>
+</div>
+
+<div class="project-nav">
+  <a href="project-vitly.html" class="pnav-item pnav-prev">
+    <div class="pnav-dir">← Previous Project</div>
+    <div class="pnav-cat">Shopify E-Commerce</div>
+    <div class="pnav-title">Vitly Nutrition</div>
+    <img src="images/portfolio/Vitly/1.png" alt="Vitly" class="pnav-thumb">
+  </a>
+  <div class="pnav-divider"></div>
+  <a href="project-ashly-fishbar.html" class="pnav-item pnav-next">
+    <div class="pnav-dir">Next Project →</div>
+    <div class="pnav-cat">Restaurant Branding</div>
+    <div class="pnav-title">Ashly Fishbar</div>
+    <img src="images/portfolio/Ashly Fishbar/Ashly Fishbar.jpg" alt="Ashly Fishbar" class="pnav-thumb">
+  </a>
+</div>
+
+<div class="project-cta">
+  <h2>Need a luxury store<br>like <em>this?</em></h2>
+  <p>We build fashion e-commerce experiences that feel as premium as the products they sell.</p>
+  <a href="index.html#contact" class="cta-btn">Start Your Fashion Project</a><br>
+  <a href="index.html#work" class="back-link">← Back to all work</a>
+</div>
+
+<footer>
+  <span>© 2025 NextByt. All rights reserved.</span>
+  <span>AURIS — Fashion e-commerce designed &amp; built by NextByt</span>
+</footer>
+
+</body>
+</html>

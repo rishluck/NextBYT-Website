@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ashly Fishbar — Restaurant Branding & Website | NextByt</title>
+<meta name="description" content="Ashly Fishbar restaurant website designed by NextByt — a bold, high-energy brand and web experience for a crispy fish and burger restaurant with character.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Josefin+Sans:wght@100;200;300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0d0a09; --dark: #120e0b; --card: #181210;
+    --border: #2a2018; --gold: #d4a070; --gold-light: #eacca8;
+    --cream: #f5f0ea; --white: #ffffff;
+    --text-muted: #887870; --text-dim: #504038;
+    --ashly-red: #C8001A; --ashly-yellow: #F5C518; --ashly-dark: #1A0A08;
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--black); color: var(--cream); font-family: 'DM Sans', sans-serif; font-weight: 300; overflow-x: hidden; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 24px 60px; display: flex; align-items: center; justify-content: space-between; background: rgba(13,10,9,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+  .nav-logo { font-family: 'Josefin Sans', sans-serif; font-size: 18px; font-weight: 200; letter-spacing: 6px; color: var(--white); text-decoration: none; }
+  .nav-logo span { color: var(--gold); font-weight: 400; }
+  .nav-back { color: var(--text-muted); text-decoration: none; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; transition: color 0.3s; }
+  .nav-back:hover { color: var(--gold); }
+
+  .project-hero { min-height: 100vh; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 60px 80px; }
+  .hero-cover { position: absolute; inset: 0; background-image: url('images/portfolio/Ashly Fishbar/Ashly Fishbar.jpg'); background-size: cover; background-position: center top; opacity: 0.35; transform: scale(1.05); }
+  .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(13,10,9,1) 0%, rgba(13,10,9,0.65) 50%, rgba(13,10,9,0.3) 100%); }
+  .hero-content { position: relative; z-index: 1; }
+  .project-tag { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; opacity: 0; animation: fadeUp 0.8s 0.3s forwards; }
+  .project-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(52px, 8vw, 110px); font-weight: 300; line-height: 0.9; letter-spacing: -2px; color: var(--white); margin-bottom: 36px; opacity: 0; animation: fadeUp 0.8s 0.5s forwards; }
+  .project-title em { font-style: italic; color: var(--gold); }
+  .project-meta { display: flex; gap: 48px; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.8s 0.7s forwards; }
+  .meta-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 6px; }
+  .meta-value { font-size: 14px; color: var(--cream); }
+
+  .section { padding: 100px 60px; border-top: 1px solid var(--border); }
+  .section.dark { background: var(--dark); }
+  .section-label { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 5vw, 60px); font-weight: 300; color: var(--white); margin-bottom: 40px; line-height: 1.05; }
+  .section-title em { font-style: italic; color: var(--gold); }
+  .body-text { font-size: 15px; line-height: 1.9; color: var(--text-muted); max-width: 720px; margin-bottom: 20px; }
+
+  .overview-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; align-items: start; }
+  .sidebar-block { margin-bottom: 32px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
+  .sidebar-block:last-child { border-bottom: none; }
+  .sidebar-title { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 8px; }
+  .sidebar-value { font-size: 14px; color: var(--cream); line-height: 1.7; }
+  .tool-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+  .tool-tag { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(212,160,112,0.3); padding: 5px 14px; }
+
+  .fullpage-wrap { position: relative; overflow: hidden; border: 1px solid var(--border); max-height: 700px; cursor: pointer; transition: max-height 0.8s ease; margin-top: 40px; }
+  .fullpage-wrap.expanded { max-height: 9999px; }
+  .fullpage-wrap img { width: 100%; display: block; }
+  .fullpage-fade { position: absolute; bottom: 0; left: 0; right: 0; height: 200px; background: linear-gradient(to top, var(--black), transparent); display: flex; align-items: flex-end; justify-content: center; padding-bottom: 30px; transition: opacity 0.4s; }
+  .fullpage-wrap.expanded .fullpage-fade { opacity: 0; pointer-events: none; }
+  .expand-btn { background: var(--gold); color: var(--black); border: none; padding: 12px 32px; font-family: 'DM Sans', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; cursor: pointer; transition: background 0.3s; }
+  .expand-btn:hover { background: var(--gold-light); }
+
+  .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin-top: 48px; }
+  .feature-card { background: var(--card); border: 1px solid var(--border); padding: 36px 28px; transition: border-color 0.3s; }
+  .feature-card:hover { border-color: var(--gold); }
+  .feature-icon { font-size: 28px; margin-bottom: 16px; }
+  .feature-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; color: var(--white); margin-bottom: 10px; }
+  .feature-text { font-size: 13px; color: var(--text-muted); line-height: 1.75; }
+
+  .palette { display: flex; gap: 0; margin-top: 40px; border: 1px solid var(--border); overflow: hidden; }
+  .colour-swatch { flex: 1; height: 100px; display: flex; align-items: flex-end; padding: 12px 16px; }
+  .colour-hex { font-size: 12px; letter-spacing: 1px; font-weight: 500; }
+
+  .highlights { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 60px; }
+  .highlight { background: var(--card); border: 1px solid var(--border); padding: 36px 32px; transition: border-color 0.3s; }
+  .highlight:hover { border-color: var(--gold); }
+  .highlight-icon { font-size: 28px; margin-bottom: 16px; }
+  .highlight-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--white); margin-bottom: 10px; }
+  .highlight-text { font-size: 13px; color: var(--text-muted); line-height: 1.8; }
+
+  .project-cta { background: var(--dark); border-top: 1px solid var(--border); padding: 80px 60px; text-align: center; }
+  .project-cta h2 { font-family: 'Cormorant Garamond', serif; font-size: 56px; font-weight: 300; color: var(--white); margin-bottom: 20px; }
+  .project-cta h2 em { font-style: italic; color: var(--gold); }
+  .project-cta p { font-size: 15px; color: var(--text-muted); margin-bottom: 40px; }
+  .cta-btn { display: inline-block; background: var(--gold); color: var(--black); padding: 16px 48px; font-family: 'DM Sans', sans-serif; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; text-decoration: none; transition: background 0.3s, transform 0.2s; }
+  .cta-btn:hover { background: var(--gold-light); transform: scale(1.02); }
+  .back-link { display: inline-block; margin-top: 24px; color: var(--text-dim); text-decoration: none; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; transition: color 0.3s; }
+  .back-link:hover { color: var(--gold); }
+
+  .project-nav { display: grid; grid-template-columns: 1fr 1px 1fr; background: var(--dark); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .pnav-divider { background: var(--border); }
+  .pnav-item { padding: 48px 60px; text-decoration: none; color: inherit; transition: background 0.3s; display: flex; flex-direction: column; gap: 6px; }
+  .pnav-item:hover { background: rgba(212,160,112,0.04); }
+  .pnav-next { align-items: flex-end; text-align: right; }
+  .pnav-dir { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 4px; }
+  .pnav-cat { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); }
+  .pnav-title { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 300; color: var(--white); line-height: 1.1; transition: color 0.3s; }
+  .pnav-item:hover .pnav-title { color: var(--gold-light); }
+  .pnav-thumb { width: 90px; height: 60px; object-fit: cover; object-position: top; border: 1px solid var(--border); margin-top: 14px; filter: grayscale(40%); transition: filter 0.3s; }
+  .pnav-item:hover .pnav-thumb { filter: grayscale(0%); }
+
+  footer { background: var(--black); border-top: 1px solid var(--border); padding: 28px 60px; display: flex; justify-content: space-between; }
+  footer span { font-size: 12px; color: var(--text-dim); }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+
+  @media(max-width:768px) {
+    nav { padding: 18px 24px; }
+    .project-hero, .section, .project-cta { padding-left: 24px; padding-right: 24px; }
+    .overview-grid { grid-template-columns: 1fr; gap: 40px; }
+    .features-grid { grid-template-columns: 1fr 1fr; }
+    .highlights { grid-template-columns: 1fr; }
+    .palette { flex-wrap: wrap; }
+    .colour-swatch { flex: none; width: 50%; }
+    footer { flex-direction: column; gap: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">NEXT<span>BYT</span></a>
+  <a href="index.html#work" class="nav-back">← Back to Work</a>
+</nav>
+
+<div class="project-hero">
+  <div class="hero-cover"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="project-tag">&#x2666; Restaurant Branding &amp; Web Design &mdash; Client Project</p>
+    <h1 class="project-title">Ashly<br><em>Fishbar</em></h1>
+    <div class="project-meta">
+      <div><div class="meta-label">Client</div><div class="meta-value">Ashly Fishbar</div></div>
+      <div><div class="meta-label">Industry</div><div class="meta-value">Food &amp; Restaurant</div></div>
+      <div><div class="meta-label">Locations</div><div class="meta-value">5 Counters</div></div>
+      <div><div class="meta-label">Type</div><div class="meta-value">Client Project</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="section dark">
+  <div class="overview-grid">
+    <div>
+      <div class="sidebar-block"><div class="sidebar-title">Client</div><div class="sidebar-value">Ashly Fishbar</div></div>
+      <div class="sidebar-block"><div class="sidebar-title">Industry</div><div class="sidebar-value">Food &amp; Hospitality</div></div>
+      <div class="sidebar-block"><div class="sidebar-title">Locations</div><div class="sidebar-value">5 Counters, One Kitchen</div></div>
+      <div class="sidebar-block"><div class="sidebar-title">Brand Promise</div><div class="sidebar-value">Honest. Crispy. Always Hot.</div></div>
+      <div class="sidebar-block">
+        <div class="sidebar-title">Services Delivered</div>
+        <div class="tool-tags">
+          <span class="tool-tag">Brand Identity</span>
+          <span class="tool-tag">Web Design</span>
+          <span class="tool-tag">Copywriting</span>
+          <span class="tool-tag">Menu Design</span>
+          <span class="tool-tag">UI/UX</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <p class="section-label">&#x2666; Project Overview</p>
+      <h2 class="section-title">A Restaurant Brand Built<br>with <em>Attitude</em></h2>
+      <p class="body-text">Ashly Fishbar is a bold, no-nonsense food brand with a simple promise — Honest. Crispy. Always Hot. With five counter locations and one central kitchen, the brand needed a digital presence that matched its character: direct, confident, and full of personality.</p>
+      <p class="body-text">The brief was to design a website and brand system that could communicate value (two prices, one promise), build local trust ("What the locals say"), and convert hungry visitors into customers with a clear, friction-free experience — from menu to "Ring Us."</p>
+      <p class="body-text">The result is a high-energy, bold design system rooted in red, black, and yellow — a classic fast-food colour palette used with intention — combined with sharp, direct copywriting that gives Ashly Fishbar a voice as distinctive as the food.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <p class="section-label">&#x2666; Full Site View</p>
+  <h2 class="section-title">The Complete <em>Experience</em></h2>
+  <p class="body-text">A full scroll of the Ashly Fishbar website — from the bold hero through menu pricing, brand story, social proof, and the final call to action.</p>
+  <div class="fullpage-wrap" id="fullpage">
+    <img src="images/portfolio/Ashly Fishbar/Ashly Fishbar.jpg" alt="Ashly Fishbar Full Page">
+    <div class="fullpage-fade">
+      <button class="expand-btn" onclick="document.getElementById('fullpage').classList.toggle('expanded'); this.textContent = document.getElementById('fullpage').classList.contains('expanded') ? 'Collapse ↑' : 'View Full Page ↓'">View Full Page ↓</button>
+    </div>
+  </div>
+</div>
+
+<div class="section dark">
+  <p class="section-label">&#x2666; What Was Built</p>
+  <h2 class="section-title">Key Site <em>Features</em></h2>
+  <p class="body-text">Every section of the Ashly Fishbar site was designed with one goal — turn a hungry visitor into a paying customer as fast as possible.</p>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🔥</div>
+      <div class="feature-title">Bold Hero</div>
+      <div class="feature-text">"Honest. Crispy. Always Hot." — a punchy, full-bleed hero with food photography and the brand's three-word promise front and centre.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">💷</div>
+      <div class="feature-title">Transparent Pricing</div>
+      <div class="feature-text">Two prices, one promise. A clean pricing section that communicates value upfront — building trust with no-nonsense clarity before the customer even sees the menu.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🗺️</div>
+      <div class="feature-title">Five Locations</div>
+      <div class="feature-text">A clear five-counter location section — helping local customers instantly identify their nearest Ashly Fishbar and reducing the barrier to visit.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🍔</div>
+      <div class="feature-title">Food Showcase</div>
+      <div class="feature-text">High-appetite food photography section showing the full range — from crispy fish to loaded burgers — with bold headlines designed to trigger cravings.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">⭐</div>
+      <div class="feature-title">Social Proof</div>
+      <div class="feature-text">"What the locals say" — a review section using real customer voices to build community trust and local credibility, presented in an energetic, readable layout.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🌿</div>
+      <div class="feature-title">Brand Values</div>
+      <div class="feature-text">"100% Natural. We don't foul it." — a dedicated section communicating ingredient quality and sourcing transparency in the brand's own voice.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📞</div>
+      <div class="feature-title">Direct CTA</div>
+      <div class="feature-text">"Hungry? Ring Us." — a bold, personality-led closing CTA that drives action through voice rather than a generic "Contact Us" button.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📱</div>
+      <div class="feature-title">Mobile First</div>
+      <div class="feature-text">Fully responsive design built for mobile — where most food decisions are made — with fast-loading images and a frictionless tap-to-call experience.</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <p class="section-label">&#x2666; Brand Colours</p>
+  <h2 class="section-title">The Ashly <em>Palette</em></h2>
+  <p class="body-text">The Ashly Fishbar palette uses the classic high-energy food colour combination — bold red for appetite and urgency, deep black for authority, warm yellow for energy and warmth, and clean white for contrast and legibility.</p>
+  <div class="palette">
+    <div class="colour-swatch" style="background:#C8001A"><span class="colour-hex" style="color:#fff">Ashly Red</span></div>
+    <div class="colour-swatch" style="background:#1A0A08"><span class="colour-hex" style="color:#fff">Deep Black</span></div>
+    <div class="colour-swatch" style="background:#F5C518"><span class="colour-hex" style="color:#333">Warm Yellow</span></div>
+    <div class="colour-swatch" style="background:#F5F0EA"><span class="colour-hex" style="color:#333">Off White</span></div>
+    <div class="colour-swatch" style="background:#3D1A0A"><span class="colour-hex" style="color:#fff">Brown</span></div>
+  </div>
+</div>
+
+<div class="section dark">
+  <p class="section-label">&#x2666; Results</p>
+  <h2 class="section-title">What This Project <em>Delivers</em></h2>
+  <div class="highlights">
+    <div class="highlight">
+      <div class="highlight-icon">💬</div>
+      <div class="highlight-title">Distinct Brand Voice</div>
+      <div class="highlight-text">Ashly Fishbar has a voice now — bold, direct, and local. Every line of copy was written to sound like the brand, not like a generic restaurant website, giving it an identity that sticks.</div>
+    </div>
+    <div class="highlight">
+      <div class="highlight-icon">📍</div>
+      <div class="highlight-title">Local Presence</div>
+      <div class="highlight-text">The site is built to serve local customers — fast loading, location-forward, and structured around the questions real customers ask: Where are you? What do you serve? How much?</div>
+    </div>
+    <div class="highlight">
+      <div class="highlight-icon">🚀</div>
+      <div class="highlight-title">Conversion Ready</div>
+      <div class="highlight-text">From the first scroll to the final CTA, every section moves the visitor toward action — whether that's calling, visiting, or sharing with a friend. No dead ends, no wasted sections.</div>
+    </div>
+  </div>
+</div>
+
+<div class="project-nav">
+  <a href="project-auris.html" class="pnav-item pnav-prev">
+    <div class="pnav-dir">← Previous Project</div>
+    <div class="pnav-cat">Luxury Fashion</div>
+    <div class="pnav-title">AURIS Fashion</div>
+    <img src="images/portfolio/AURIS/AURIS.jpg" alt="AURIS" class="pnav-thumb">
+  </a>
+  <div class="pnav-divider"></div>
+  <a href="project-malabar.html" class="pnav-item pnav-next">
+    <div class="pnav-dir">Next Project →</div>
+    <div class="pnav-cat">Luxury Hospitality</div>
+    <div class="pnav-title">Malabar Hill</div>
+    <img src="images/portfolio/Malabar Concept Design/1.png" alt="Malabar Hill" class="pnav-thumb">
+  </a>
+</div>
+
+<div class="project-cta">
+  <h2>Need a restaurant site<br>with <em>this?</em></h2>
+  <p>We build food and hospitality websites that capture the personality of the place — and turn hungry visitors into customers.</p>
+  <a href="index.html#contact" class="cta-btn">Start Your Restaurant Project</a><br>
+  <a href="index.html#work" class="back-link">← Back to all work</a>
+</div>
+
+<footer>
+  <span>© 2025 NextByt. All rights reserved.</span>
+  <span>Ashly Fishbar — Brand &amp; website designed by NextByt</span>
+</footer>
+
+</body>
+</html>
