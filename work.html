@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All Projects — NextByt</title>
+<meta name="description" content="Browse all NextByt projects — web design, brand identity, UI/UX, architecture, interior design, and more.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Josefin+Sans:wght@100;200;300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black:#0d0a09;--dark:#120e0b;--card:#181210;--border:#2a2018;
+    --gold:#d4a070;--gold-light:#eacca8;--cream:#f5f0ea;--white:#ffffff;
+    --text-muted:#887870;--text-dim:#504038;
+  }
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--black);color:var(--cream);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden;cursor:none;}
+  .cursor{position:fixed;width:10px;height:10px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:width .3s,height .3s;}
+  .cursor-ring{position:fixed;width:36px;height:36px;border:1px solid var(--gold);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:width .3s,height .3s;opacity:.6;}
+  .cursor.hover{width:16px;height:16px;}
+  .cursor-ring.hover{width:56px;height:56px;border-color:var(--gold-light);opacity:1;}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:28px 60px;display:flex;align-items:center;justify-content:space-between;background:rgba(8,8,8,0.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+  .nav-logo{font-family:'Josefin Sans',sans-serif;font-size:20px;font-weight:200;letter-spacing:6px;color:var(--white);text-decoration:none;display:flex;align-items:center;gap:10px;}
+  .nav-logo span{color:var(--gold);font-weight:400;}
+  .nav-back{color:var(--text-muted);text-decoration:none;font-size:12px;letter-spacing:2px;text-transform:uppercase;transition:color .3s;display:flex;align-items:center;gap:8px;}
+  .nav-back:hover{color:var(--gold);}
+  .nav-cta{background:transparent;border:1px solid var(--gold);color:var(--gold);padding:10px 28px;font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;cursor:none;transition:all .3s;text-decoration:none;}
+  .nav-cta:hover{background:var(--gold);color:var(--black);}
+
+  /* HERO */
+  .page-hero{padding:160px 60px 80px;border-bottom:1px solid var(--border);}
+  .page-tag{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:20px;}
+  .page-title{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,7vw,96px);font-weight:300;line-height:1;color:var(--white);margin-bottom:24px;}
+  .page-title em{font-style:italic;color:var(--gold);}
+  .page-desc{font-size:16px;color:var(--text-muted);line-height:1.8;max-width:520px;}
+
+  /* FILTERS */
+  .filters-bar{padding:50px 60px 0;}
+  .filters-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--text-dim);margin-bottom:20px;}
+  .filter-buttons{display:flex;flex-wrap:wrap;gap:10px;}
+  .filter-btn{background:transparent;border:1px solid var(--border);color:var(--text-muted);font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:10px 22px;cursor:none;transition:all .3s;}
+  .filter-btn:hover{border-color:var(--gold);color:var(--gold);}
+  .filter-btn.active{background:var(--gold);border-color:var(--gold);color:var(--black);}
+
+  /* GRID */
+  .work-grid-wrap{padding:50px 60px 120px;}
+  .work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+  .work-card{position:relative;overflow:hidden;aspect-ratio:4/3;display:block;text-decoration:none;}
+  .work-card img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(0.25,0.46,0.45,0.94),filter .5s;}
+  .work-card:hover img{transform:scale(1.06);filter:brightness(0.4);}
+  .work-card-overlay{position:absolute;inset:0;padding:30px;display:flex;flex-direction:column;justify-content:flex-end;background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.2) 60%,transparent 100%);opacity:1;}
+  .work-card:hover .work-card-overlay{background:transparent;}
+  .work-card-cat{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;transform:translateY(10px);transition:transform .4s, opacity .4s;opacity:0;}
+  .work-card:hover .work-card-cat{opacity:1;transform:translateY(0);}
+  .work-card-title{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,2.5vw,32px);font-weight:300;color:var(--white);line-height:1.15;}
+  .work-card-sub{font-size:12px;color:var(--text-muted);margin-top:6px;transform:translateY(10px);transition:transform .4s .05s, opacity .4s .05s;opacity:0;}
+  .work-card:hover .work-card-sub{opacity:1;transform:translateY(0);}
+  .work-card-link{display:inline-block;margin-top:14px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);border-bottom:1px solid var(--gold);padding-bottom:2px;transform:translateY(10px);transition:transform .4s .1s, opacity .4s .1s;opacity:0;}
+  .work-card:hover .work-card-link{opacity:1;transform:translateY(0);}
+
+  /* hidden state */
+  .work-card.hidden{display:none;}
+
+  /* no results */
+  .no-results{display:none;text-align:center;padding:80px 20px;color:var(--text-dim);font-size:14px;letter-spacing:1px;grid-column:1/-1;}
+  .no-results.show{display:block;}
+
+  /* FOOTER */
+  footer{background:var(--black);border-top:1px solid var(--border);padding:60px;display:flex;justify-content:space-between;align-items:center;}
+  .footer-logo{font-family:'Josefin Sans',sans-serif;font-size:18px;font-weight:200;letter-spacing:6px;color:var(--white);text-decoration:none;}
+  .footer-logo span{color:var(--gold);font-weight:400;}
+  .footer-copy{font-size:12px;color:var(--text-dim);}
+  .footer-links{display:flex;gap:30px;}
+  .footer-links a{font-size:12px;color:var(--text-dim);text-decoration:none;transition:color .3s;}
+  .footer-links a:hover{color:var(--gold);}
+
+  @media(max-width:1024px){
+    .work-grid{grid-template-columns:repeat(2,1fr);}
+  }
+  @media(max-width:768px){
+    nav{padding:20px 24px;}
+    .page-hero{padding:120px 24px 60px;}
+    .filters-bar{padding:40px 24px 0;}
+    .work-grid-wrap{padding:40px 24px 80px;}
+    .work-grid{grid-template-columns:1fr;}
+    footer{flex-direction:column;gap:24px;text-align:center;padding:40px 24px;}
+    .footer-links{flex-wrap:wrap;justify-content:center;}
+  }
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">NEXT<span>BYT</span></a>
+  <a href="index.html" class="nav-back">← Back to Home</a>
+  <a href="index.html#contact" class="nav-cta">Start a Project</a>
+</nav>
+
+<div class="page-hero">
+  <div class="page-tag">&#x2666; Our Work</div>
+  <h1 class="page-title">All<br><em>Projects</em></h1>
+  <p class="page-desc">A curated selection from across our disciplines — web design, brand identity, UI/UX, architecture, and more.</p>
+</div>
+
+<div class="filters-bar">
+  <p class="filters-label">Filter by discipline</p>
+  <div class="filter-buttons">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="web">Web Design</button>
+    <button class="filter-btn" data-filter="uiux">UI / UX</button>
+    <button class="filter-btn" data-filter="brand">Brand &amp; Logo</button>
+    <button class="filter-btn" data-filter="ecommerce">E-Commerce</button>
+    <button class="filter-btn" data-filter="architecture">Architecture</button>
+    <button class="filter-btn" data-filter="interior">Interior Design</button>
+  </div>
+</div>
+
+<div class="work-grid-wrap">
+  <div class="work-grid" id="workGrid">
+
+    <a href="project-sephora.html" class="work-card" data-cats="web uiux">
+      <img src="images/portfolio/sephora/Sephora_Home.png" alt="Sephora Redesign" loading="lazy">
+      <div class="work-card-overlay">
+        <div class="work-card-cat">Website Redesign &amp; UI/UX</div>
+        <div class="work-card-title">Sephora<br>Redesign</div>
+        <div class="work-card-sub">UI/UX &mdash; Web Design</div>
+        <div class="work-card-link">View Project →</div>
+      </div>
+    </a>
+
+    <a href="project-readwave.html" class="work-card" data-cats="uiux web">
+      <img src="images/portfolio/read wave CASE STUDY/other/Cover Page.jpg" alt="ReadWave Blog Platform" loading="lazy">
+      <div class="work-card-overlay">
+        <div class="work-card-cat">UI / UX Case Study</div>
+        <div class="work-card-title">ReadWave<br>Blog Platform</div>
+        <div class="work-card-sub">UI/UX &mdash; Product Design</div>
+        <div class="work-card-link">View Case Study →</div>
+      </div>
+    </a>
+
+    <a href="project-vitly.html" class="work-card" data-cats="web ecommerce brand">
+      <img src="images/portfolio/Vitly/Full Page.png" alt="Vitly Nutrition" loading="lazy">
+      <div class="work-card-overlay">
+        <div class="work-card-cat">Shopify &amp; E-Commerce</div>
+        <div class="work-card-title">Vitly<br>Nutrition</div>
+        <div class="work-card-sub">E-Commerce &mdash; Web Design</div>
+        <div class="work-card-link">View Project →</div>
+      </div>
+    </a>
+
+    <a href="project-malabar.html" class="work-card" data-cats="web brand">
+      <img src="images/portfolio/Malabar Concept Design/1.png" alt="Malabar Hill Resort" loading="lazy">
+      <div class="work-card-overlay">
+        <div class="work-card-cat">Luxury Hospitality</div>
+        <div class="work-card-title">Malabar Hill<br>Resort</div>
+        <div class="work-card-sub">Web Design &mdash; Branding</div>
+        <div class="work-card-link">View Project →</div>
+      </div>
+    </a>
+
+    <a href="project-dr-paul.html" class="work-card" data-cats="web ecommerce brand">
+      <img src="images/portfolio/Dr.Paul/1.png" alt="Dr. Paul Pet Wellness" loading="lazy">
+      <div class="work-card-overlay">
+        <div class="work-card-cat">E-Commerce &amp; Web Design</div>
+        <div class="work-card-title">Dr. Paul<br>Pet Wellness</div>
+        <div class="work-card-sub">E-Commerce &mdash; Brand</div>
+        <div class="work-card-link">View Project →</div>
+      </div>
+    </a>
+
+    <a href="project-auris.html" class="work-card" data-cats="web ecommerce brand">
+      <img src="images/portfolio/AURIS/AURIS.jpg" alt="AURIS Fashion" loading="lazy">
+      <div class="work-card-overlay">
+        <div class="work-card-cat">Luxury Fashion E-Commerce</div>
+        <div class="work-card-title">AURIS<br>Fashion</div>
+        <div class="work-card-sub">E-Commerce &mdash; Brand</div>
+        <div class="work-card-link">View Project →</div>
+      </div>
+    </a>
+
+    <a href="project-aspley-fishbar.html" class="work-card" data-cats="web brand">
+      <img src="images/portfolio/Aspley Fish Bar/Aspley Fish Bar.jpg" alt="Aspley Fish Bar" loading="lazy">
+      <div class="work-card-overlay">
+        <div class="work-card-cat">Restaurant Branding &amp; Web</div>
+        <div class="work-card-title">Aspley<br>Fish Bar</div>
+        <div class="work-card-sub">Web Design &mdash; Branding</div>
+        <div class="work-card-link">View Project →</div>
+      </div>
+    </a>
+
+    <div class="no-results" id="noResults">No projects in this category yet.</div>
+
+  </div>
+</div>
+
+<footer>
+  <a href="index.html" class="footer-logo">NEXT<span>BYT</span></a>
+  <p class="footer-copy">&copy; 2025 NextByt. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="index.html#services">Services</a>
+    <a href="index.html#about">About</a>
+    <a href="work.html">Work</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+</footer>
+
+<script>
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx+'px'; cursor.style.top = my+'px'; });
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => { cursor.classList.add('hover'); ring.classList.add('hover'); });
+    el.addEventListener('mouseleave', () => { cursor.classList.remove('hover'); ring.classList.remove('hover'); });
+  });
+  (function animRing(){ rx += (mx-rx)*0.12; ry += (my-ry)*0.12; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(animRing); })();
+
+  // Filter logic
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.work-card');
+  const noResults = document.getElementById('noResults');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      let visible = 0;
+      cards.forEach(card => {
+        const cats = card.dataset.cats.split(' ');
+        if (filter === 'all' || cats.includes(filter)) {
+          card.classList.remove('hidden');
+          visible++;
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+      noResults.classList.toggle('show', visible === 0);
+    });
+  });
+</script>
+</body>
+</html>
