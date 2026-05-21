@@ -60,6 +60,25 @@
   .work-card-link{display:inline-block;margin-top:14px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);border-bottom:1px solid var(--gold);padding-bottom:2px;transform:translateY(10px);transition:transform .4s .1s, opacity .4s .1s;opacity:0;}
   .work-card:hover .work-card-link{opacity:1;transform:translateY(0);}
 
+  /* COMING SOON */
+  .work-card.coming-soon { pointer-events: none; }
+  .work-card.coming-soon img { filter: brightness(0.25) grayscale(60%); }
+  .coming-soon-badge {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    text-align: center; z-index: 2;
+  }
+  .coming-soon-badge span {
+    display: block; font-size: 10px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--gold); border: 1px solid rgba(212,160,112,0.5);
+    padding: 8px 20px; background: rgba(13,10,9,0.6); backdrop-filter: blur(6px);
+    margin-bottom: 12px;
+  }
+  .coming-soon-badge .cs-title {
+    font-family: 'Cormorant Garamond', serif; font-size: clamp(22px, 2.5vw, 32px);
+    font-weight: 300; color: var(--white); line-height: 1.15; display: block;
+    border: none; padding: 0; background: none; backdrop-filter: none; letter-spacing: 0;
+  }
+
   /* hidden state */
   .work-card.hidden{display:none;}
 
@@ -191,6 +210,72 @@
         <div class="work-card-link">View Project →</div>
       </div>
     </a>
+
+    <a href="project-horen-foods.html" class="work-card" data-cats="web brand">
+      <img src="images/portfolio/Horen Foods/Horen Foods.jpg" alt="Horen Foods" loading="lazy">
+      <div class="work-card-overlay">
+        <div class="work-card-cat">Food &amp; Beverage</div>
+        <div class="work-card-title">Horen<br>Foods</div>
+        <div class="work-card-sub">Web Design &mdash; Brand</div>
+        <div class="work-card-link">View Project →</div>
+      </div>
+    </a>
+
+    <a href="project-nexcon.html" class="work-card" data-cats="web">
+      <img src="images/portfolio/Nexcon/Desktop - 1.jpg" alt="Nexcon" loading="lazy">
+      <div class="work-card-overlay">
+        <div class="work-card-cat">Construction &amp; Engineering</div>
+        <div class="work-card-title">Nexcon</div>
+        <div class="work-card-sub">Web Design &mdash; B2B</div>
+        <div class="work-card-link">View Project →</div>
+      </div>
+    </a>
+
+    <a href="project-prodrive.html" class="work-card" data-cats="web brand">
+      <img src="images/portfolio/ProDrive/Podrive.jpg" alt="ProDrive" loading="lazy">
+      <div class="work-card-overlay">
+        <div class="work-card-cat">Automotive &amp; Motorsport</div>
+        <div class="work-card-title">Pro<em style="font-style:italic;color:var(--gold)">Drive</em></div>
+        <div class="work-card-sub">Web Design &mdash; Brand</div>
+        <div class="work-card-link">View Project →</div>
+      </div>
+    </a>
+
+    <a href="project-pillar-box.html" class="work-card" data-cats="web brand">
+      <img src="images/portfolio/Pillar Box/Pillar Box.jpg" alt="Pillar Box" loading="lazy">
+      <div class="work-card-overlay">
+        <div class="work-card-cat">Restaurant &amp; Hospitality</div>
+        <div class="work-card-title">Pillar<br>Box</div>
+        <div class="work-card-sub">Brand &mdash; Web Design</div>
+        <div class="work-card-link">View Project →</div>
+      </div>
+    </a>
+
+    <a href="project-logo-design.html" class="work-card" data-cats="brand">
+      <img src="images/Logo/V3.4.1.3.png" alt="Logo Design Work" loading="lazy" style="object-fit:contain;background:var(--card);padding:20px;">
+      <div class="work-card-overlay">
+        <div class="work-card-cat">Brand Identity &amp; Logo Design</div>
+        <div class="work-card-title">Logo<br>Design</div>
+        <div class="work-card-sub">Logo &mdash; Brand System</div>
+        <div class="work-card-link">View Work →</div>
+      </div>
+    </a>
+
+    <div class="work-card coming-soon" data-cats="architecture">
+      <img src="images/services/architecture.jpg" alt="Architecture & 3D Design — Coming Soon" loading="lazy">
+      <div class="coming-soon-badge">
+        <span>Coming Soon</span>
+        <span class="cs-title">Architecture<br>&amp; 3D Design</span>
+      </div>
+    </div>
+
+    <div class="work-card coming-soon" data-cats="interior">
+      <img src="images/services/interior.jpg" alt="Interior Design — Coming Soon" loading="lazy">
+      <div class="coming-soon-badge">
+        <span>Coming Soon</span>
+        <span class="cs-title">Interior<br>Design</span>
+      </div>
+    </div>
 
     <div class="no-results" id="noResults">No projects in this category yet.</div>
 

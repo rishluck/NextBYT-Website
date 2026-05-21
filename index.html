@@ -570,7 +570,7 @@
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">
+  <a href="./" class="nav-logo">
     <svg viewBox="0 0 100 100" width="36" height="36" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="navRg" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -875,7 +875,7 @@
 </section>
 
 <!-- PROCESS -->
-<section>
+<section id="process">
   <div class="section-header reveal">
     <div>
       <p class="section-tag">&#x2666; How We Work</p>
@@ -1111,24 +1111,26 @@
         <div class="contact-item-value">London, United Kingdom</div>
       </div>
     </div>
-    <div class="contact-right reveal-right">
+    <form class="contact-right reveal-right" name="contact" method="POST" netlify netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="contact">
+      <p style="display:none"><label>Don't fill this out: <input name="bot-field"></label></p>
       <div class="form-row">
         <div class="form-group">
           <label class="form-label">First Name</label>
-          <input type="text" class="form-input" placeholder="John">
+          <input type="text" name="first-name" class="form-input" placeholder="John" required>
         </div>
         <div class="form-group">
           <label class="form-label">Last Name</label>
-          <input type="text" class="form-input" placeholder="Smith">
+          <input type="text" name="last-name" class="form-input" placeholder="Smith">
         </div>
       </div>
       <div class="form-group">
         <label class="form-label">Email Address</label>
-        <input type="email" class="form-input" placeholder="john@company.com">
+        <input type="email" name="email" class="form-input" placeholder="john@company.com" required>
       </div>
       <div class="form-group">
         <label class="form-label">Service Interested In</label>
-        <select class="form-select">
+        <select name="service" class="form-select">
           <option value="">Select a service...</option>
           <option>Website Design &amp; Development</option>
           <option>Shopify Design &amp; Development</option>
@@ -1143,7 +1145,7 @@
       </div>
       <div class="form-group">
         <label class="form-label">Budget Range</label>
-        <select class="form-select">
+        <select name="budget" class="form-select">
           <option value="">Select budget...</option>
           <option>Under &pound;500</option>
           <option>&pound;500 &ndash; &pound;1,000</option>
@@ -1154,10 +1156,10 @@
       </div>
       <div class="form-group">
         <label class="form-label">Tell Us About Your Project</label>
-        <textarea class="form-textarea" placeholder="Briefly describe your project, goals, and timeline..."></textarea>
+        <textarea name="message" class="form-textarea" placeholder="Briefly describe your project, goals, and timeline..."></textarea>
       </div>
-      <button class="btn-primary" onclick="handleSubmit(this)">Send Enquiry &rarr;</button>
-    </div>
+      <button type="submit" class="btn-primary">Send Enquiry &rarr;</button>
+    </form>
   </div>
 </section>
 
@@ -1210,18 +1212,16 @@
       <ul class="footer-links">
         <li><a href="#about">About Us</a></li>
         <li><a href="#work">Our Work</a></li>
-        <li><a href="#">Process</a></li>
+        <li><a href="#process">Process</a></li>
         <li><a href="#pricing">Pricing</a></li>
-        <li><a href="#">Blog</a></li>
-        <li><a href="#">Careers</a></li>
       </ul>
     </div>
     <div>
       <div class="footer-col-title">Contact</div>
       <ul class="footer-links">
-        <li><a href="#">hello@nextbyt.com</a></li>
-        <li><a href="#">+44 20 7946 0123</a></li>
-        <li><a href="#">London, UK</a></li>
+        <li><a href="mailto:hello@nextbyt.com">hello@nextbyt.com</a></li>
+        <li><a href="tel:+442079460123">+44 20 7946 0123</a></li>
+        <li><a href="https://maps.google.com/?q=London,UK" target="_blank" rel="noopener">London, UK</a></li>
         <li><a href="#contact">Free Consultation</a></li>
       </ul>
     </div>
