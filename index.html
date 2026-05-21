@@ -523,8 +523,67 @@
   .services-grid .service-card:nth-child(7).reveal{transition-delay:0.12s}
   .services-grid .service-card:nth-child(8).reveal{transition-delay:0.24s}
 
+  /* HAMBURGER */
+  .nav-hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    background: none; border: none; cursor: pointer; padding: 6px; z-index: 1001;
+  }
+  .nav-hamburger span {
+    display: block; width: 24px; height: 1.5px; background: var(--cream); transition: all 0.35s ease;
+  }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+  /* MOBILE MENU OVERLAY */
+  .mobile-menu {
+    position: fixed; inset: 0; background: rgba(8,8,8,0.98);
+    backdrop-filter: blur(20px); z-index: 9000;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    opacity: 0; visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+  }
+  .mobile-menu.open { opacity: 1; visibility: visible; }
+  .mobile-nav {
+    display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center;
+  }
+  .mobile-nav a {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 10vw, 60px); font-weight: 300; line-height: 1.25;
+    color: var(--white); text-decoration: none; letter-spacing: -1px;
+    transition: color 0.3s; display: block;
+    opacity: 0; transform: translateY(20px);
+    transition: color 0.3s, opacity 0.4s ease, transform 0.4s ease;
+  }
+  .mobile-menu.open .mobile-nav a { opacity: 1; transform: translateY(0); }
+  .mobile-menu.open .mobile-nav a:nth-child(1) { transition-delay: 0.05s; }
+  .mobile-menu.open .mobile-nav a:nth-child(2) { transition-delay: 0.1s; }
+  .mobile-menu.open .mobile-nav a:nth-child(3) { transition-delay: 0.15s; }
+  .mobile-menu.open .mobile-nav a:nth-child(4) { transition-delay: 0.2s; }
+  .mobile-menu.open .mobile-nav a:nth-child(5) { transition-delay: 0.25s; }
+  .mobile-nav a:hover { color: var(--gold); }
+  .mobile-nav-cta {
+    margin-top: 36px; display: inline-block;
+    border: 1px solid var(--gold); color: var(--gold);
+    padding: 14px 40px; font-family: 'DM Sans', sans-serif;
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    text-decoration: none; transition: all 0.3s;
+    opacity: 0; transform: translateY(20px);
+    transition: all 0.3s, opacity 0.4s 0.3s ease, transform 0.4s 0.3s ease;
+  }
+  .mobile-menu.open .mobile-nav-cta { opacity: 1; transform: translateY(0); }
+  .mobile-nav-cta:hover { background: var(--gold); color: var(--black); }
+
+  /* Hide cursor on touch devices */
+  @media(hover: none) {
+    body { cursor: auto; }
+    .cursor, .cursor-ring { display: none; }
+  }
+
   @media(max-width:1024px){
-    nav{padding:24px 30px} .nav-links{display:none}
+    nav{padding:24px 30px} .nav-links{display:none} .nav-cta{display:none}
+    .nav-hamburger{display:flex}
     section{padding:80px 30px} .hero{padding:0 30px 60px}
     .hero-title{font-size:clamp(52px,12vw,100px)} .hero-stats{gap:30px}
     .services-grid{grid-template-columns:1fr 1fr}
@@ -545,15 +604,32 @@
     .slider-counter { display: none; }
     .process-grid{grid-template-columns:1fr}
     .hero-bottom{flex-direction:column;gap:40px}
+    .hero-stats{gap:24px}
+    .stat-num{font-size:38px}
     footer{padding:50px 30px 30px}
     .footer-main{grid-template-columns:1fr;gap:30px}
     .footer-bottom{flex-direction:column;gap:20px;text-align:center}
     .form-row{grid-template-columns:1fr}
     .pricing-card.featured{transform:none}
+    .about-visual{height:380px}
+    .testimonial-section{padding:60px 24px}
+    section{padding:60px 24px}
   }
 </style>
 </head>
 <body>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <nav class="mobile-nav">
+    <a href="#services" class="mobile-link">Services</a>
+    <a href="#about" class="mobile-link">About</a>
+    <a href="work.html" class="mobile-link">Work</a>
+    <a href="#pricing" class="mobile-link">Pricing</a>
+    <a href="#contact" class="mobile-link">Contact</a>
+    <a href="#contact" class="mobile-nav-cta">Start a Project</a>
+  </nav>
+</div>
 
 <!-- PRELOADER -->
 <div id="preloader">
@@ -599,6 +675,9 @@
     <li><a href="#contact">Contact</a></li>
   </ul>
   <button class="nav-cta" id="navCta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Start a Project</button>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <!-- HERO -->
@@ -1237,6 +1316,19 @@
 </footer>
 
 <script>
+  /* ── MOBILE MENU ── */
+  const hamburger = document.getElementById('navHamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  function toggleMenu(open) {
+    hamburger.classList.toggle('open', open);
+    mobileMenu.classList.toggle('open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+  hamburger.addEventListener('click', () => toggleMenu(!mobileMenu.classList.contains('open')));
+  document.querySelectorAll('.mobile-link, .mobile-nav-cta').forEach(link => {
+    link.addEventListener('click', () => toggleMenu(false));
+  });
+
   /* ── PRELOADER ── */
   window.addEventListener('load', () => {
     setTimeout(() => {
