@@ -278,8 +278,12 @@
   .service-arrow { font-size: 18px; color: var(--gold); opacity: 0; transform: translateX(-10px); transition: all 0.3s; }
   .service-card:hover .service-arrow { opacity: 1; transform: translateX(0); }
   .service-card.scard-soon { cursor: default; pointer-events: none; }
-  .service-card.scard-soon .scard-img img { filter: grayscale(40%) brightness(0.55); }
-  .scard-soon-badge { position: absolute; top: 14px; right: 14px; background: var(--gold); color: var(--black); font-family: 'Josefin Sans', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; padding: 5px 10px; border-radius: 2px; z-index: 4; }
+  .service-card.scard-soon .scard-img { height: 100%; min-height: 380px; flex: 1; }
+  .service-card.scard-soon .scard-img img { filter: brightness(0.25) grayscale(60%); }
+  .service-card.scard-soon .scard-img::after { display: none; }
+  .scard-soon-badge { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); text-align: center; z-index: 4; width: 80%; }
+  .scard-soon-badge > span { display: block; font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(212,160,112,0.5); padding: 8px 20px; background: rgba(13,10,9,0.6); backdrop-filter: blur(6px); margin-bottom: 14px; font-family: 'Josefin Sans', sans-serif; }
+  .scard-soon-badge .cs-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(24px, 2.8vw, 36px); font-weight: 300; color: #fff; line-height: 1.15; display: block; letter-spacing: 0; }
 
   /* Wide card — Web Design as hero service */
   .service-card.wide {
@@ -877,16 +881,9 @@
       <div class="scard-img">
         <img src="images/services/architecture.jpg" alt="Architecture & 3D Design" loading="lazy">
         <div class="scard-num">07</div>
-        <div class="scard-accent">🏗️</div>
-        <div class="scard-soon-badge">Coming Soon</div>
-      </div>
-      <div class="scard-body">
-        <h3 class="service-name">Architecture &amp; 3D Design</h3>
-        <p class="service-desc">Photorealistic 3D renders, floor plans and walkthroughs for property developers and architects who need to sell a vision.</p>
-        <div class="service-tags">
-          <span class="service-tag">3D Renders</span>
-          <span class="service-tag">Floor Plans</span>
-          <span class="service-tag">AutoCAD</span>
+        <div class="scard-soon-badge">
+          <span>Coming Soon</span>
+          <span class="cs-title">Architecture<br>&amp; 3D Design</span>
         </div>
       </div>
     </div>
@@ -896,16 +893,9 @@
       <div class="scard-img">
         <img src="images/services/interior.jpg" alt="Interior Design" loading="lazy">
         <div class="scard-num">08</div>
-        <div class="scard-accent">🛋️</div>
-        <div class="scard-soon-badge">Coming Soon</div>
-      </div>
-      <div class="scard-body">
-        <h3 class="service-name">Interior Design</h3>
-        <p class="service-desc">Spatial planning, mood boards, material selections and full 3D interior visualisations for residential and commercial spaces.</p>
-        <div class="service-tags">
-          <span class="service-tag">Residential</span>
-          <span class="service-tag">Commercial</span>
-          <span class="service-tag">3D Renders</span>
+        <div class="scard-soon-badge">
+          <span>Coming Soon</span>
+          <span class="cs-title">Interior<br>Design</span>
         </div>
       </div>
     </div>
