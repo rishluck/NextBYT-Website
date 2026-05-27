@@ -91,11 +91,23 @@
   .footer-links{display:flex;gap:30px;}
   .footer-links a{font-size:12px;color:var(--text-dim);text-decoration:none;transition:color .3s;}
   .footer-links a:hover{color:var(--gold);}
+  .work-block{margin-bottom:60px;padding-bottom:60px;border-bottom:1px solid var(--border);}
+  .work-block:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+  .work-client-label{display:flex;align-items:center;gap:16px;margin-bottom:28px;flex-wrap:wrap;}
+  .client-tag{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);background:rgba(212,160,112,0.1);border:1px solid rgba(212,160,112,0.2);padding:4px 12px;flex-shrink:0;}
+  .client-name{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--white);}
+  .client-divider{width:1px;height:18px;background:var(--border);flex-shrink:0;}
+  .client-type{font-size:12px;color:var(--text-muted);letter-spacing:.5px;}
+  .sm-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;}
+  .sm-grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;}
+  .sm-post{aspect-ratio:1/1;overflow:hidden;}
+  .sm-post img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease;}
+  .sm-post:hover img{transform:scale(1.05);}
   @keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
   .reveal{opacity:0;transform:translateY(40px);transition:opacity .8s ease,transform .8s ease;}
   .reveal.visible{opacity:1;transform:translateY(0);}
-  @media(max-width:1024px){nav{padding:20px 30px;}.service-hero{padding:0 30px 60px;}.hero-content{flex-direction:column;gap:40px;}.hero-stats{flex-direction:row;}.stat-item{text-align:left;}section{padding:70px 30px;}.deliver-grid{grid-template-columns:1fr 1fr;}.process-steps{grid-template-columns:1fr 1fr;}.platforms-grid{grid-template-columns:1fr 1fr;}.results-grid{grid-template-columns:1fr 1fr;}.section-header{flex-direction:column;gap:20px;}footer{flex-direction:column;gap:24px;text-align:center;}.footer-links{flex-wrap:wrap;justify-content:center;}}
-  @media(max-width:640px){.deliver-grid{grid-template-columns:1fr;}.process-steps{grid-template-columns:1fr;}.p-step{border-right:none;border-bottom:1px solid var(--border);}.platforms-grid{grid-template-columns:1fr 1fr;}.results-grid{grid-template-columns:1fr 1fr;}.cta-btns{flex-direction:column;align-items:center;}}
+  @media(max-width:1024px){nav{padding:20px 30px;}.service-hero{padding:0 30px 60px;}.hero-content{flex-direction:column;gap:40px;}.hero-stats{flex-direction:row;}.stat-item{text-align:left;}section{padding:70px 30px;}.deliver-grid{grid-template-columns:1fr 1fr;}.process-steps{grid-template-columns:1fr 1fr;}.platforms-grid{grid-template-columns:1fr 1fr;}.results-grid{grid-template-columns:1fr 1fr;}.section-header{flex-direction:column;gap:20px;}.sm-grid-4{grid-template-columns:repeat(2,1fr);}.work-client-label{flex-direction:column;align-items:flex-start;gap:8px;}.client-divider{display:none;}footer{flex-direction:column;gap:24px;text-align:center;}.footer-links{flex-wrap:wrap;justify-content:center;}}
+  @media(max-width:640px){.deliver-grid{grid-template-columns:1fr;}.process-steps{grid-template-columns:1fr;}.p-step{border-right:none;border-bottom:1px solid var(--border);}.platforms-grid{grid-template-columns:1fr 1fr;}.results-grid{grid-template-columns:1fr 1fr;}.sm-grid{grid-template-columns:repeat(2,1fr);}.sm-grid-4{grid-template-columns:repeat(2,1fr);}.cta-btns{flex-direction:column;align-items:center;}}
 </style>
 </head>
 <body>
@@ -220,6 +232,49 @@
     <div class="platform-card reveal"><div class="platform-icon"><img src="https://cdn.simpleicons.org/linkedin/d4a070" width="36" height="36" alt="LinkedIn"></div><div class="platform-name">LinkedIn</div><p class="platform-text">B2B thought leadership, company pages, and lead-generation campaigns.</p></div>
     <div class="platform-card reveal"><div class="platform-icon"><img src="https://cdn.simpleicons.org/facebook/d4a070" width="36" height="36" alt="Facebook"></div><div class="platform-name">Facebook</div><p class="platform-text">Community building, targeted advertising, and local business promotion.</p></div>
     <div class="platform-card reveal"><div class="platform-icon"><img src="https://cdn.simpleicons.org/x/d4a070" width="36" height="36" alt="X / Twitter"></div><div class="platform-name">X / Twitter</div><p class="platform-text">Brand voice, real-time engagement, and community conversation.</p></div>
+  </div>
+</section>
+
+<!-- FEATURED WORK -->
+<section>
+  <div class="section-header reveal">
+    <div><p class="section-tag">&#x2666; Featured Work</p><h2 class="section-title">Real Content.<br><em>Real Campaigns.</em></h2></div>
+    <p class="section-desc">A selection of social media content we've created for our clients — strategised, designed, and delivered entirely in-house.</p>
+  </div>
+
+  <div class="work-block reveal">
+    <div class="work-client-label">
+      <span class="client-tag">Client Work</span>
+      <span class="client-name">Dr. Paul Pet Wellness</span>
+      <span class="client-divider"></span>
+      <span class="client-type">Instagram Campaign — 30-Day Launch Series</span>
+    </div>
+    <div class="sm-grid">
+      <div class="sm-post"><img src="images/portfolio/Social%20Media/Instagram%20Day%202.jpg" alt="Dr. Paul calming chews ad"></div>
+      <div class="sm-post"><img src="images/portfolio/Social%20Media/Instagram%20Day%204.jpg" alt="Dr. Paul hip &amp; joint chews ad"></div>
+      <div class="sm-post"><img src="images/portfolio/Social%20Media/8.jpg" alt="Dr. Paul product range showcase"></div>
+      <div class="sm-post"><img src="images/portfolio/Social%20Media/2.jpg" alt="Dr. Paul dental care post"></div>
+      <div class="sm-post"><img src="images/portfolio/Social%20Media/Giveaway.jpg" alt="Dr. Paul giveaway campaign"></div>
+      <div class="sm-post"><img src="images/portfolio/Social%20Media/1.jpg" alt="Dr. Paul engagement post"></div>
+      <div class="sm-post"><img src="images/portfolio/Social%20Media/2W%20D3%20Story-1.jpg" alt="Dr. Paul salmon oil product post"></div>
+      <div class="sm-post"><img src="images/portfolio/Social%20Media/4.jpg" alt="Dr. Paul community engagement post"></div>
+      <div class="sm-post"><img src="images/portfolio/Social%20Media/Instagram%20post%201%20-%20Day%207.jpg" alt="Dr. Paul flea &amp; tick chews post"></div>
+    </div>
+  </div>
+
+  <div class="work-block reveal">
+    <div class="work-client-label">
+      <span class="client-tag">Personal Brand</span>
+      <span class="client-name">@rishitha.design</span>
+      <span class="client-divider"></span>
+      <span class="client-type">UI/UX Designer Brand — Instagram Portfolio Content</span>
+    </div>
+    <div class="sm-grid-4">
+      <div class="sm-post"><img src="images/portfolio/Social%20Media/Instagram%20post%20-%201.jpg" alt="Luno UI showcase post"></div>
+      <div class="sm-post"><img src="images/portfolio/Social%20Media/37.jpg" alt="Savoy Cinema UI showcase post"></div>
+      <div class="sm-post"><img src="images/portfolio/Social%20Media/1%202.jpg" alt="Sephora rebrand showcase post"></div>
+      <div class="sm-post"><img src="images/portfolio/Social%20Media/5%202.jpg" alt="UX psychology thought leadership post"></div>
+    </div>
   </div>
 </section>
 
