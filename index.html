@@ -138,68 +138,173 @@
   .hero-bg {
     position: absolute; inset: 0;
     background:
-      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(212,160,112,0.08) 0%, transparent 70%),
-      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(212,160,112,0.05) 0%, transparent 60%),
-      linear-gradient(to top, rgba(13,10,9,0.9) 0%, rgba(13,10,9,0.3) 50%, rgba(13,10,9,0.6) 100%);
+      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(212,160,112,0.1) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(212,160,112,0.06) 0%, transparent 60%),
+      linear-gradient(to top, rgba(13,10,9,0.95) 0%, rgba(13,10,9,0.2) 50%, rgba(13,10,9,0.7) 100%);
   }
   .hero-grid {
     position: absolute; inset: 0; pointer-events: none;
     background-image:
-      linear-gradient(rgba(212,160,112,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(212,160,112,0.04) 1px, transparent 1px);
+      linear-gradient(rgba(212,160,112,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(212,160,112,0.05) 1px, transparent 1px);
     background-size: 80px 80px;
     mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+    animation: gridShimmer 8s ease-in-out infinite;
+  }
+  @keyframes gridShimmer {
+    0%,100%{opacity:1} 50%{opacity:0.5}
   }
   .hero-blob { position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; }
   .hero-blob-1 {
-    width: 700px; height: 700px;
-    background: radial-gradient(circle, rgba(212,160,112,0.07) 0%, transparent 70%);
-    top: -150px; right: -150px; animation: blobDrift 12s ease-in-out infinite;
+    width: 800px; height: 800px;
+    background: radial-gradient(circle, rgba(212,160,112,0.1) 0%, transparent 70%);
+    top: -200px; right: -200px; animation: blobDrift 12s ease-in-out infinite;
   }
   .hero-blob-2 {
-    width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(212,160,112,0.05) 0%, transparent 70%);
-    bottom: 0; left: -50px; animation: blobDrift 15s ease-in-out infinite reverse; animation-delay: -6s;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(212,160,112,0.07) 0%, transparent 70%);
+    bottom: -100px; left: -100px; animation: blobDrift 15s ease-in-out infinite reverse; animation-delay: -6s;
+  }
+  .hero-blob-3 {
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(212,160,112,0.06) 0%, transparent 70%);
+    top: 30%; left: 40%; animation: blobDrift 20s ease-in-out infinite; animation-delay: -10s;
   }
   @keyframes blobDrift {
     0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(40px,-40px) scale(1.06)} 66%{transform:translate(-30px,30px) scale(0.94)}
   }
+
+  /* Ambient mouse-follow glow */
+  .hero-ambient {
+    position: absolute; width: 700px; height: 700px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(212,160,112,0.13) 0%, transparent 70%);
+    filter: blur(80px); pointer-events: none;
+    transform: translate(-50%,-50%); will-change: left,top;
+    transition: left 1.2s cubic-bezier(0.16,1,0.3,1), top 1.2s cubic-bezier(0.16,1,0.3,1);
+    left: 50%; top: 50%;
+  }
+
+  /* Particles */
   .hero-particles { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
   .particle {
-    position: absolute; width: 2px; height: 2px; background: var(--gold); border-radius: 50%;
-    animation: particleFloat var(--dur,6s) var(--ease,ease-in-out) infinite;
+    position: absolute; background: var(--gold); border-radius: 50%;
+    animation: particleFloat var(--dur,6s) ease-in-out infinite;
     animation-delay: var(--del,0s); left: var(--x,50%); top: var(--y,80%); opacity: 0;
   }
   @keyframes particleFloat {
     0%{opacity:0;transform:translateY(0) translateX(0) scale(1)}
-    15%{opacity:0.8} 85%{opacity:0.2}
-    100%{opacity:0;transform:translateY(-200px) translateX(var(--drift,20px)) scale(0.2)}
+    15%{opacity:var(--op,0.7)} 85%{opacity:0.1}
+    100%{opacity:0;transform:translateY(-240px) translateX(var(--drift,20px)) scale(0.1)}
   }
 
+  /* Corner brackets */
+  .hero-corner {
+    position: absolute; width: 44px; height: 44px;
+    border-color: rgba(212,160,112,0.4); border-style: solid; pointer-events: none;
+    opacity: 0;
+  }
+  .hero-corner-tl { top: 94px; left: 60px; border-width: 1px 0 0 1px; animation: fadeIn 0.8s 1.6s forwards; }
+  .hero-corner-tr { top: 94px; right: 60px; border-width: 1px 1px 0 0; animation: fadeIn 0.8s 1.75s forwards; }
+  .hero-corner-bl { bottom: 110px; left: 60px; border-width: 0 0 1px 1px; animation: fadeIn 0.8s 1.9s forwards; }
+  .hero-corner-br { bottom: 110px; right: 60px; border-width: 0 1px 1px 0; animation: fadeIn 0.8s 2.05s forwards; }
+
+  /* Availability badge */
+  .hero-badge-wrap {
+    position: absolute; top: 108px; right: 60px;
+    opacity: 0; animation: fadeUp 0.8s 1.3s forwards;
+  }
+  .hero-badge {
+    display: flex; align-items: center; gap: 10px;
+    border: 1px solid rgba(212,160,112,0.22); padding: 10px 18px;
+    background: rgba(13,10,9,0.7); backdrop-filter: blur(12px);
+    animation: badgeFloat 5s 2.2s ease-in-out infinite;
+  }
+  .hero-badge-dot {
+    width: 7px; height: 7px; background: #4ade80; border-radius: 50%; flex-shrink: 0;
+    box-shadow: 0 0 10px rgba(74,222,128,0.8);
+    animation: pulseDot 2s ease-in-out infinite;
+  }
+  .hero-badge-text {
+    font-family: 'Josefin Sans', sans-serif; font-size: 10px;
+    letter-spacing: 3px; text-transform: uppercase; color: var(--text-muted);
+  }
+  @keyframes pulseDot {
+    0%,100%{box-shadow:0 0 6px rgba(74,222,128,0.6)} 50%{box-shadow:0 0 18px rgba(74,222,128,1), 0 0 30px rgba(74,222,128,0.3)}
+  }
+  @keyframes badgeFloat {
+    0%,100%{transform:translateY(0)} 50%{transform:translateY(-7px)}
+  }
+
+  /* Decorative gold accent line */
+  .hero-accent-line {
+    position: absolute; left: 60px; top: 50%; height: 1px;
+    background: linear-gradient(to right, rgba(212,160,112,0.5), transparent);
+    width: 0; animation: lineGrow 1.2s cubic-bezier(0.16,1,0.3,1) 1.4s forwards;
+    pointer-events: none;
+  }
+  @keyframes lineGrow { to { width: 200px; } }
+
+  /* Title line-by-line reveal */
   .hero-tag {
     font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
     color: var(--gold); margin-bottom: 28px;
-    opacity: 0; animation: fadeUp 1s 0.5s forwards;
+    opacity: 0; animation: fadeUp 0.8s 0.4s forwards;
   }
   .hero-title {
     font-family: 'Cormorant Garamond', serif;
     font-size: clamp(68px, 10vw, 140px); font-weight: 300; line-height: 0.9;
     letter-spacing: -2px; color: var(--white); margin-bottom: 40px;
-    opacity: 0; animation: fadeUp 1s 0.7s forwards;
   }
   .hero-title em { font-style: italic; color: var(--gold); }
+  .hero-title-line { display: block; overflow: hidden; }
+  .hero-title-inner {
+    display: block;
+    transform: translateY(110%); opacity: 0;
+    animation: lineReveal 1s cubic-bezier(0.16,1,0.3,1) forwards;
+  }
+  .hero-title-inner.d1 { animation-delay: 0.55s; }
+  .hero-title-inner.d2 { animation-delay: 0.72s; }
+  .hero-title-inner.d3 { animation-delay: 0.89s; }
+  @keyframes lineReveal {
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  /* Hero bottom & CTAs */
   .hero-bottom {
     display: flex; align-items: flex-end; justify-content: space-between;
-    opacity: 0; animation: fadeUp 1s 0.9s forwards;
+    opacity: 0; animation: fadeUp 0.9s 1.05s forwards;
   }
   .hero-desc { max-width: 420px; font-size: 15px; line-height: 1.8; color: var(--text-muted); }
+  .hero-ctas {
+    display: flex; gap: 14px; margin-top: 32px;
+  }
+  .hero-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: 'DM Sans', sans-serif; font-size: 11px;
+    letter-spacing: 3px; text-transform: uppercase; text-decoration: none;
+    padding: 14px 30px; transition: all 0.3s ease; cursor: none;
+  }
+  .hero-btn-primary {
+    background: var(--gold); color: var(--black); border: 1px solid var(--gold);
+  }
+  .hero-btn-primary:hover { background: var(--gold-light); border-color: var(--gold-light); }
+  .hero-btn-ghost {
+    background: transparent; color: var(--cream); border: 1px solid rgba(212,160,112,0.35);
+  }
+  .hero-btn-ghost:hover { background: var(--gold); color: var(--black); border-color: var(--gold); }
+  .hero-btn-arrow { transition: transform 0.3s ease; }
+  .hero-btn:hover .hero-btn-arrow { transform: translateX(4px); }
+
+  /* Stats */
   .hero-stats { display: flex; gap: 60px; }
   .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 300; color: var(--gold); line-height: 1; }
   .stat-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-dim); margin-top: 4px; }
+
+  /* Scroll indicator */
   .scroll-indicator {
     position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
     display: flex; flex-direction: column; align-items: center; gap: 8px;
-    opacity: 0; animation: fadeIn 1s 1.4s forwards;
+    opacity: 0; animation: fadeIn 1s 2s forwards;
   }
   .scroll-indicator span { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-dim); }
   .scroll-line {
@@ -297,19 +402,48 @@
   /* ABOUT */
   .about-section { background: var(--dark); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
   .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; }
-  .about-visual { position: relative; height: 560px; }
-  .about-img-main { position: absolute; top: 0; left: 0; right: 60px; bottom: 60px; overflow: hidden; }
-  .about-img-main img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(30%); transition: filter 0.7s, transform 0.7s; }
-  .about-img-main::before { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(135deg, rgba(212,160,112,0.08) 0%, transparent 60%); }
-  .about-visual:hover .about-img-main img { filter: grayscale(0%); transform: scale(1.03); }
+  .about-visual { position: relative; height: 600px; }
+
+  /* Main large image */
+  .about-img-main {
+    position: absolute; top: 0; left: 0; right: 70px; bottom: 70px; overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+  }
+  .about-img-main img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+  .about-img-main::before {
+    content: ''; position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(160deg, rgba(212,160,112,0.12) 0%, transparent 50%, rgba(13,10,9,0.3) 100%);
+  }
+  .about-visual:hover .about-img-main img { transform: scale(1.04); }
+
+  /* Secondary floating image card */
+  .about-img-second {
+    position: absolute; bottom: 70px; right: 0; width: 170px; height: 210px;
+    overflow: hidden; z-index: 2; border: 3px solid var(--dark);
+    box-shadow: -10px 10px 50px rgba(0,0,0,0.6);
+    transition: transform 0.4s ease;
+  }
+  .about-img-second img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+  .about-visual:hover .about-img-second { transform: scale(1.03); }
+  .about-visual:hover .about-img-second img { transform: scale(1.05); }
+
+  /* Gold "Since 2018" accent badge */
   .about-img-accent {
-    position: absolute; bottom: 0; right: 0; width: 200px; height: 200px;
-    background: var(--gold); display: flex; align-items: center; justify-content: center;
-    font-family: 'Cormorant Garamond', serif; font-size: 64px; font-weight: 300;
-    color: var(--black); line-height: 1; text-align: center; z-index: 2;
+    position: absolute; bottom: 0; right: 0; width: 170px; height: 66px;
+    background: var(--gold); display: flex; flex-direction: column;
+    align-items: center; justify-content: center; z-index: 3;
+    font-family: 'Josefin Sans', sans-serif; letter-spacing: 2px;
     transition: transform 0.4s;
   }
-  .about-visual:hover .about-img-accent { transform: scale(1.04); }
+  .about-accent-year {
+    font-size: 26px; font-weight: 200; color: var(--black); line-height: 1;
+    font-family: 'Cormorant Garamond', serif;
+  }
+  .about-accent-label {
+    font-size: 8px; font-weight: 300; color: rgba(13,10,9,0.7);
+    letter-spacing: 3px; text-transform: uppercase; margin-top: 3px;
+  }
+  .about-visual:hover .about-img-accent { transform: translateY(-4px); }
   .about-content p { font-size: 15px; line-height: 1.9; color: var(--text-muted); margin-top: 24px; }
   .about-features { margin-top: 48px; display: flex; flex-direction: column; }
   .about-feature { display: flex; align-items: flex-start; gap: 20px; padding: 22px 0; border-bottom: 1px solid var(--border); }
@@ -593,6 +727,9 @@
     .nav-hamburger{display:flex}
     section{padding:80px 30px} .hero{padding:0 30px 60px}
     .hero-title{font-size:clamp(52px,12vw,100px)} .hero-stats{gap:30px}
+    .hero-corner-tl{left:30px} .hero-corner-bl{left:30px}
+    .hero-corner-tr{right:30px} .hero-corner-br{right:30px}
+    .hero-badge-wrap{right:30px}
     .services-grid{grid-template-columns:1fr 1fr}
     .service-card.wide{grid-column:span 2;flex-direction:column}
     .service-card.wide .scard-img{width:100%;height:220px}
@@ -612,6 +749,11 @@
     .process-grid{grid-template-columns:1fr}
     .hero-bottom{flex-direction:column;gap:40px}
     .hero-stats{gap:24px}
+    .hero-badge-wrap{display:none}
+    .hero-corner{display:none}
+    .hero-accent-line{display:none}
+    .hero-ctas{flex-direction:column;gap:10px}
+    .hero-btn{justify-content:center;text-align:center}
     .stat-num{font-size:38px}
     footer{padding:50px 30px 30px}
     .footer-main{grid-template-columns:1fr;gap:30px}
@@ -694,14 +836,41 @@
   <div class="hero-grid"></div>
   <div class="hero-blob hero-blob-1"></div>
   <div class="hero-blob hero-blob-2"></div>
+  <div class="hero-blob hero-blob-3"></div>
+  <div class="hero-ambient" id="heroAmbient"></div>
   <div class="hero-particles" id="heroParticles"></div>
+
+  <!-- Corner brackets -->
+  <div class="hero-corner hero-corner-tl"></div>
+  <div class="hero-corner hero-corner-tr"></div>
+  <div class="hero-corner hero-corner-bl"></div>
+  <div class="hero-corner hero-corner-br"></div>
+
+  <!-- Accent line -->
+  <div class="hero-accent-line"></div>
+
+  <!-- Availability badge -->
+  <div class="hero-badge-wrap">
+    <div class="hero-badge">
+      <div class="hero-badge-dot"></div>
+      <span class="hero-badge-text">Available for new projects</span>
+    </div>
+  </div>
 
   <p class="hero-tag">&#x2666; NextByt Digital Studio &#x2666; Technology &amp; Creative Agency</p>
   <h1 class="hero-title">
-    We Build<br><em>Digital</em><br>Products &amp; Brands
+    <span class="hero-title-line"><span class="hero-title-inner d1">We Build</span></span>
+    <span class="hero-title-line"><span class="hero-title-inner d2"><em>Digital</em></span></span>
+    <span class="hero-title-line"><span class="hero-title-inner d3">Products &amp; Brands</span></span>
   </h1>
   <div class="hero-bottom">
-    <p class="hero-desc">From custom websites and Shopify stores to AI-powered marketing and iconic brand identities — we build the complete digital presence your business deserves.</p>
+    <div>
+      <p class="hero-desc">From custom websites and Shopify stores to AI-powered marketing and iconic brand identities — we build the complete digital presence your business deserves.</p>
+      <div class="hero-ctas">
+        <a href="work.html" class="hero-btn hero-btn-primary">View Our Work <span class="hero-btn-arrow">→</span></a>
+        <a href="#contact" class="hero-btn hero-btn-ghost" onclick="event.preventDefault();document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Start a Project</a>
+      </div>
+    </div>
     <div class="hero-stats">
       <div>
         <div class="stat-num" data-target="10">0</div>
@@ -908,10 +1077,14 @@
   <div class="about-grid">
     <div class="about-visual reveal-left">
       <div class="about-img-main">
-        <img src="images/about/team.jpg" alt="Creative studio team" loading="lazy">
+        <img src="images/services/graphic-design.jpg" alt="Creative design workspace" loading="lazy">
+      </div>
+      <div class="about-img-second">
+        <img src="images/services/brand-design.jpg" alt="Design studio setup" loading="lazy">
       </div>
       <div class="about-img-accent">
-        Since<br>2018
+        <span class="about-accent-year">Since 2018</span>
+        <span class="about-accent-label">Nottingham Studio</span>
       </div>
     </div>
     <div class="about-content reveal-right">
@@ -1216,7 +1389,7 @@
       </p>
       <div class="contact-item">
         <div class="contact-item-label">Email Us</div>
-        <div class="contact-item-value">hello@nextbyt.com</div>
+        <div class="contact-item-value">hello@nextbyt.uk</div>
       </div>
       <div class="contact-item">
         <div class="contact-item-label">Call Us</div>
@@ -1224,7 +1397,7 @@
       </div>
       <div class="contact-item">
         <div class="contact-item-label">Based In</div>
-        <div class="contact-item-value">London, United Kingdom</div>
+        <div class="contact-item-value">Nottingham, United Kingdom</div>
       </div>
     </div>
     <form class="contact-right reveal-right" name="contact" method="POST" netlify netlify-honeypot="bot-field">
@@ -1335,9 +1508,9 @@
     <div>
       <div class="footer-col-title">Contact</div>
       <ul class="footer-links">
-        <li><a href="mailto:hello@nextbyt.com">hello@nextbyt.com</a></li>
+        <li><a href="mailto:hello@nextbyt.uk">hello@nextbyt.uk</a></li>
         <li><a href="tel:+442079460123">+44 20 7946 0123</a></li>
-        <li><a href="https://maps.google.com/?q=London,UK" target="_blank" rel="noopener">London, UK</a></li>
+        <li><a href="https://maps.google.com/?q=Nottingham,UK" target="_blank" rel="noopener">Nottingham, UK</a></li>
         <li><a href="#contact">Free Consultation</a></li>
       </ul>
     </div>
@@ -1408,16 +1581,27 @@
 
   /* ── PARTICLES ── */
   const particleContainer = document.getElementById('heroParticles');
-  for (let i = 0; i < 28; i++) {
+  for (let i = 0; i < 45; i++) {
     const p = document.createElement('div');
     p.className = 'particle';
-    const x = Math.random() * 100, y = 30 + Math.random() * 60;
-    const dur = 5 + Math.random() * 8, del = -(Math.random() * dur);
-    const drift = (Math.random() - 0.5) * 80;
-    const size = Math.random() > 0.7 ? 3 : 2;
-    p.style.cssText = `--x:${x}%;--y:${y}%;--dur:${dur}s;--del:${del}s;--drift:${drift}px;width:${size}px;height:${size}px;`;
+    const x = Math.random() * 100, y = 20 + Math.random() * 70;
+    const dur = 6 + Math.random() * 10, del = -(Math.random() * dur);
+    const drift = (Math.random() - 0.5) * 100;
+    const r = Math.random();
+    const size = r > 0.85 ? 4 : r > 0.6 ? 3 : r > 0.3 ? 2 : 1;
+    const op = 0.4 + Math.random() * 0.6;
+    p.style.cssText = `--x:${x}%;--y:${y}%;--dur:${dur}s;--del:${del}s;--drift:${drift}px;--op:${op};width:${size}px;height:${size}px;`;
     particleContainer.appendChild(p);
   }
+
+  /* ── HERO AMBIENT GLOW ── */
+  const heroAmbient = document.getElementById('heroAmbient');
+  const heroSection = document.getElementById('hero');
+  heroSection.addEventListener('mousemove', (e) => {
+    const rect = heroSection.getBoundingClientRect();
+    heroAmbient.style.left = (e.clientX - rect.left) + 'px';
+    heroAmbient.style.top = (e.clientY - rect.top) + 'px';
+  });
 
   /* ── CARD 3D TILT ── */
   document.querySelectorAll('.service-card').forEach(card => {
