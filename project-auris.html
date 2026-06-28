@@ -1,3 +1,5 @@
+---
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,7 +27,7 @@
   .nav-back:hover { color: var(--gold); }
 
   .project-hero { min-height: 100vh; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 60px 80px; }
-  .hero-cover { position: absolute; inset: 0; background-image: url('images/portfolio/AURIS/AURIS.jpg'); background-size: cover; background-position: center top; opacity: 0.35; transform: scale(1.05); }
+  .hero-cover { position: absolute; inset: 0; background-image: url('/images/portfolio/AURIS/AURIS.jpg'); background-size: cover; background-position: center top; opacity: 0.35; transform: scale(1.05); }
   .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(13,10,9,1) 0%, rgba(13,10,9,0.65) 50%, rgba(13,10,9,0.3) 100%); }
   .hero-content { position: relative; z-index: 1; }
   .project-tag { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; opacity: 0; animation: fadeUp 0.8s 0.3s forwards; }
@@ -117,8 +119,8 @@
 <body>
 
 <nav>
-  <a href="index.html" class="nav-logo">NEXT<span>BYT</span></a>
-  <a href="index.html#work" class="nav-back">← Back to Work</a>
+  <a href="/" class="nav-logo">NEXT<span>BYT</span></a>
+  <a href="/#work" class="nav-back">← Back to Work</a>
 </nav>
 
 <div class="project-hero">
@@ -169,7 +171,7 @@
   <h2 class="section-title">The Complete <em>Experience</em></h2>
   <p class="body-text">A full scroll of the AURIS website — from the hero collection hero through seasonal editorial, product pages, brand story, and newsletter — showing the complete luxury shopping journey.</p>
   <div class="fullpage-wrap" id="fullpage">
-    <img src="images/portfolio/AURIS/AURIS.jpg" alt="AURIS Full Page">
+    <img src="/images/portfolio/AURIS/AURIS.jpg" alt="AURIS Full Page">
     <div class="fullpage-fade">
       <button class="expand-btn" onclick="document.getElementById('fullpage').classList.toggle('expanded'); this.textContent = document.getElementById('fullpage').classList.contains('expanded') ? 'Collapse ↑' : 'View Full Page ↓'">View Full Page ↓</button>
     </div>
@@ -260,26 +262,26 @@
 </div>
 
 <div class="project-nav">
-  <a href="project-vitly.html" class="pnav-item pnav-prev">
+  <a href="/project-vitly/" class="pnav-item pnav-prev">
     <div class="pnav-dir">← Previous Project</div>
     <div class="pnav-cat">Shopify E-Commerce</div>
     <div class="pnav-title">Vitly Nutrition</div>
-    <img src="images/portfolio/Vitly/1.png" alt="Vitly" class="pnav-thumb">
+    <img src="/images/portfolio/Vitly/1.png" alt="Vitly" class="pnav-thumb">
   </a>
   <div class="pnav-divider"></div>
-  <a href="project-aspley-fishbar.html" class="pnav-item pnav-next">
+  <a href="/project-aspley-fishbar/" class="pnav-item pnav-next">
     <div class="pnav-dir">Next Project →</div>
     <div class="pnav-cat">Restaurant Branding</div>
     <div class="pnav-title">Aspley Fish Bar</div>
-    <img src="images/portfolio/Aspley Fish Bar/Aspley Fish Bar.jpg" alt="Aspley Fish Bar" class="pnav-thumb">
+    <img src="/images/portfolio/Aspley Fish Bar/Aspley Fish Bar.jpg" alt="Aspley Fish Bar" class="pnav-thumb">
   </a>
 </div>
 
 <div class="project-cta">
   <h2>Need a luxury store<br>like <em>this?</em></h2>
   <p>We build fashion e-commerce experiences that feel as premium as the products they sell.</p>
-  <a href="index.html#contact" class="cta-btn">Start Your Fashion Project</a><br>
-  <a href="index.html#work" class="back-link">← Back to all work</a>
+  <a href="/#contact" class="cta-btn">Start Your Fashion Project</a><br>
+  <a href="/#work" class="back-link">← Back to all work</a>
 </div>
 
 <footer>
