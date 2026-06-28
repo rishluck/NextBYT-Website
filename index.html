@@ -1415,7 +1415,11 @@
       </div>
       <div class="form-group">
         <label class="form-label">Email Address</label>
-        <input type="email" name="email" class="form-input" placeholder="john@company.com" required>
+        <div style="position:relative;">
+          <input type="email" name="email" id="emailInput" class="form-input" placeholder="john@company.com" required autocomplete="email">
+          <span id="emailStatus" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:16px;display:none;"></span>
+        </div>
+        <div id="emailError" style="display:none;margin-top:6px;font-size:11px;letter-spacing:1px;color:#e07070;"></div>
       </div>
       <div class="form-group">
         <label class="form-label">Service Interested In</label>
@@ -1579,12 +1583,61 @@
     if (heroBg) heroBg.style.transform = `scale(1.08) translateY(${window.scrollY * 0.25}px)`;
   }, { passive: true });
 
+  /* ── EMAIL VALIDATION ── */
+  const emailInput = document.getElementById('emailInput');
+  const emailStatus = document.getElementById('emailStatus');
+  const emailError = document.getElementById('emailError');
+  const FAKE_DOMAINS = ['mailinator.com','guerrillamail.com','temp-mail.org','throwam.com','yopmail.com','sharklasers.com','maildrop.cc','trashmail.com','fakeinbox.com','tempmail.com','dispostable.com','spamgourmet.com'];
+
+  function validateEmail(val) {
+    const regex = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
+    if (!regex.test(val)) return { ok: false, msg: 'Please enter a valid email address.' };
+    const domain = val.split('@')[1].toLowerCase();
+    if (FAKE_DOMAINS.includes(domain)) return { ok: false, msg: 'Please use a real email address.' };
+    if (!domain.includes('.')) return { ok: false, msg: 'Email domain looks invalid.' };
+    return { ok: true };
+  }
+
+  emailInput.addEventListener('input', () => {
+    const val = emailInput.value.trim();
+    if (!val) { emailStatus.style.display = 'none'; emailError.style.display = 'none'; return; }
+    const result = validateEmail(val);
+    emailStatus.style.display = 'block';
+    if (result.ok) {
+      emailStatus.textContent = '✓';
+      emailStatus.style.color = '#4ade80';
+      emailInput.style.borderColor = 'rgba(74,222,128,0.4)';
+      emailError.style.display = 'none';
+    } else {
+      emailStatus.textContent = '✗';
+      emailStatus.style.color = '#e07070';
+      emailInput.style.borderColor = 'rgba(224,112,112,0.4)';
+      emailError.style.display = 'block';
+      emailError.textContent = result.msg;
+    }
+  });
+  emailInput.addEventListener('blur', () => {
+    if (!emailInput.value.trim()) { emailStatus.style.display = 'none'; emailError.style.display = 'none'; emailInput.style.borderColor = ''; }
+  });
+
   /* ── CONTACT FORM ── */
   const contactForm = document.getElementById('contactForm');
   const contactSubmit = document.getElementById('contactSubmit');
   const formMsg = document.getElementById('formMsg');
   contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+    const emailVal = emailInput.value.trim();
+    const emailCheck = validateEmail(emailVal);
+    if (!emailCheck.ok) {
+      emailError.style.display = 'block';
+      emailError.textContent = emailCheck.msg;
+      emailStatus.style.display = 'block';
+      emailStatus.textContent = '✗';
+      emailStatus.style.color = '#e07070';
+      emailInput.style.borderColor = 'rgba(224,112,112,0.4)';
+      emailInput.focus();
+      return;
+    }
     contactSubmit.textContent = 'Sending...';
     contactSubmit.disabled = true;
     try {
