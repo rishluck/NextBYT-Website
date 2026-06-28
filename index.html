@@ -1397,7 +1397,10 @@
         <div class="contact-item-value">Nottingham, United Kingdom</div>
       </div>
     </div>
-    <form class="contact-right reveal-right" name="contact" method="POST" netlify netlify-honeypot="bot-field">
+    <form class="contact-right reveal-right" id="contactForm" action="https://formsubmit.co/ajax/hello@nextbyt.uk" method="POST">
+      <input type="hidden" name="_subject" value="New Enquiry from NextBYT Website">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="text" name="_honey" style="display:none">
       <input type="hidden" name="form-name" value="contact">
       <p style="display:none"><label>Don't fill this out: <input name="bot-field"></label></p>
       <div class="form-row">
@@ -1444,7 +1447,8 @@
         <label class="form-label">Tell Us About Your Project</label>
         <textarea name="message" class="form-textarea" placeholder="Briefly describe your project, goals, and timeline..."></textarea>
       </div>
-      <button type="submit" class="btn-primary">Send Enquiry &rarr;</button>
+      <button type="submit" class="btn-primary" id="contactSubmit">Send Enquiry &rarr;</button>
+      <div id="formMsg" style="display:none;margin-top:20px;font-size:13px;letter-spacing:1px;"></div>
     </form>
   </div>
 </section>
@@ -1574,6 +1578,38 @@
   window.addEventListener('scroll', () => {
     if (heroBg) heroBg.style.transform = `scale(1.08) translateY(${window.scrollY * 0.25}px)`;
   }, { passive: true });
+
+  /* ── CONTACT FORM ── */
+  const contactForm = document.getElementById('contactForm');
+  const contactSubmit = document.getElementById('contactSubmit');
+  const formMsg = document.getElementById('formMsg');
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    contactSubmit.textContent = 'Sending...';
+    contactSubmit.disabled = true;
+    try {
+      const res = await fetch(contactForm.action, {
+        method: 'POST',
+        body: new FormData(contactForm),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        contactForm.reset();
+        contactSubmit.textContent = 'Message Sent ✓';
+        formMsg.style.display = 'block';
+        formMsg.style.color = 'var(--gold)';
+        formMsg.textContent = "Thank you — we'll be in touch within 24 hours.";
+      } else {
+        throw new Error();
+      }
+    } catch {
+      contactSubmit.textContent = 'Send Enquiry →';
+      contactSubmit.disabled = false;
+      formMsg.style.display = 'block';
+      formMsg.style.color = '#e07070';
+      formMsg.textContent = 'Something went wrong. Please email us directly at hello@nextbyt.uk';
+    }
+  });
 
   /* ── PARTICLES ── */
   const particleContainer = document.getElementById('heroParticles');
