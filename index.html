@@ -1328,7 +1328,7 @@
   <div class="pricing-grid">
     <div class="pricing-card reveal">
       <div class="pricing-plan">Starter</div>
-      <div class="pricing-price"><span>&pound;</span>799</div>
+      <div class="pricing-price"><span>&pound;</span>499</div>
       <div class="pricing-freq">One-time project fee</div>
       <div class="pricing-divider"></div>
       <ul class="pricing-features">
@@ -1345,7 +1345,7 @@
     <div class="pricing-card featured reveal">
       <div class="pricing-badge">Most Popular</div>
       <div class="pricing-plan">Growth</div>
-      <div class="pricing-price"><span>&pound;</span>1,999</div>
+      <div class="pricing-price"><span>&pound;</span>999</div>
       <div class="pricing-freq">Project + 3 months support</div>
       <div class="pricing-divider"></div>
       <ul class="pricing-features">
@@ -1401,7 +1401,7 @@
     </div>
     <form class="contact-right reveal-right" id="contactForm" action="https://formsubmit.co/ajax/hello@nextbyt.uk" method="POST">
       <input type="hidden" name="_subject" value="New Enquiry from NextBYT Website">
-      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_blacklist" value="telegram, t.me/, wa.me/, whatsapp, backlink, guest post, seo services, increase your ranking, cryptocurrency, bitcoin, casino, loan approval">
       <input type="text" name="_honey" style="display:none">
       <input type="hidden" name="form-name" value="contact">
       <p style="display:none"><label>Don't fill this out: <input name="bot-field"></label></p>
@@ -1486,8 +1486,9 @@
       </div>
       <p class="footer-tagline">NextByt &mdash; a digital-first creative studio crafting websites, brands, and digital experiences that endure.</p>
       <div class="footer-social">
-        <a href="#" class="social-link" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
-        <a href="#" class="social-link" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://www.instagram.com/nextbyt_web/" class="social-link" title="Instagram" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://www.facebook.com/profile.php?id=61591606343398" class="social-link" title="Facebook" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="https://www.tiktok.com/@nextbyt?is_from_webapp=1&sender_device=pc" class="social-link" title="TikTok" target="_blank" rel="noopener"><i class="fa-brands fa-tiktok"></i></a>
         <a href="#" class="social-link" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
         <a href="#" class="social-link" title="Behance"><i class="fa-brands fa-behance"></i></a>
       </div>
@@ -1626,8 +1627,20 @@
   const contactForm = document.getElementById('contactForm');
   const contactSubmit = document.getElementById('contactSubmit');
   const formMsg = document.getElementById('formMsg');
+  const formLoadTime = Date.now();
   contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+    const honeypotFilled = contactForm.querySelector('[name="_honey"]').value.trim() !== '' ||
+      contactForm.querySelector('[name="bot-field"]').value.trim() !== '';
+    const submittedTooFast = (Date.now() - formLoadTime) < 4000;
+    if (honeypotFilled || submittedTooFast) {
+      contactForm.reset();
+      contactSubmit.textContent = 'Message Sent ✓';
+      formMsg.style.display = 'block';
+      formMsg.style.color = 'var(--gold)';
+      formMsg.textContent = "Thank you — we'll be in touch within 24 hours.";
+      return;
+    }
     const emailVal = emailInput.value.trim();
     const emailCheck = validateEmail(emailVal);
     if (!emailCheck.ok) {
