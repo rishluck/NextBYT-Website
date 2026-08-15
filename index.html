@@ -199,9 +199,52 @@
     100%{opacity:0;transform:translateY(-240px) translateX(var(--drift,20px)) scale(0.1)}
   }
 
+  /* Film-grain texture for a cinematic finish */
+  .hero-grain {
+    position: absolute; inset: 0; pointer-events: none; z-index: 1;
+    opacity: 0.05; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Floating portfolio preview cards */
+  .hero-float-card {
+    position: absolute; width: 130px; aspect-ratio: 4/5; z-index: 1;
+    opacity: 0; pointer-events: auto;
+    animation: floatCardIn 1s cubic-bezier(0.16,1,0.3,1) forwards;
+    animation-delay: var(--fdelay, 2s);
+  }
+  .hfc-inner {
+    width: 100%; height: 100%; border-radius: 4px; overflow: hidden; position: relative;
+    border: 1px solid rgba(212,160,112,0.25); box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+    animation: floatDrift var(--fdur,9s) ease-in-out infinite; animation-delay: var(--fddelay,0s);
+  }
+  .hero-float-card:hover .hfc-inner {
+    border-color: rgba(212,160,112,0.6); box-shadow: 0 24px 60px rgba(0,0,0,0.6);
+  }
+  .hfc-inner img { width: 100%; height: 100%; object-fit: cover; filter: saturate(0.85) brightness(0.8); transition: filter 0.4s ease; }
+  .hero-float-card:hover .hfc-inner img { filter: saturate(1) brightness(1); }
+  .hfc-inner::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(13,10,9,0.8) 0%, transparent 55%); }
+  .hfc-label {
+    position: absolute; left: 10px; bottom: 9px; z-index: 2;
+    font-family: 'Josefin Sans', sans-serif; font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gold-light); opacity: 0; transform: translateY(6px); transition: opacity 0.3s, transform 0.3s;
+  }
+  .hero-float-card:hover .hfc-label { opacity: 1; transform: translateY(0); }
+  @keyframes floatCardIn { to { opacity: 0.9; } }
+  @keyframes floatDrift {
+    0%,100% { transform: translate(0,0) rotate(var(--rot,-3deg)); }
+    50% { transform: translate(0,-16px) rotate(calc(var(--rot,-3deg) * -1)); }
+  }
+  .hfc-2 { top: 20%; right: 6%; width: 112px; --fdelay: 2.1s; }
+  .hfc-2 .hfc-inner { --fdur: 11s; --fddelay: -4s; --rot: 4deg; }
+  .hfc-3 { top: 54%; right: 3%; width: 104px; --fdelay: 2.7s; }
+  .hfc-3 .hfc-inner { --fdur: 10s; --fddelay: -2s; --rot: -2deg; }
+  @media (max-width: 1300px) { .hero-float-card { display: none; } }
+
   /* Corner brackets */
   .hero-corner {
-    position: absolute; width: 44px; height: 44px;
+    position: absolute; width: 44px; height: 44px; z-index: 2;
     border-color: rgba(212,160,112,0.4); border-style: solid; pointer-events: none;
     opacity: 0;
   }
@@ -212,7 +255,7 @@
 
   /* Availability badge */
   .hero-badge-wrap {
-    position: absolute; top: 108px; right: 60px;
+    position: absolute; top: 108px; right: 60px; z-index: 2;
     opacity: 0; animation: fadeUp 0.8s 1.3s forwards;
   }
   .hero-badge {
@@ -239,7 +282,7 @@
 
   /* Decorative gold accent line */
   .hero-accent-line {
-    position: absolute; left: 60px; top: 50%; height: 1px;
+    position: absolute; left: 60px; top: 50%; height: 1px; z-index: 2;
     background: linear-gradient(to right, rgba(212,160,112,0.5), transparent);
     width: 0; animation: lineGrow 1.2s cubic-bezier(0.16,1,0.3,1) 1.4s forwards;
     pointer-events: none;
@@ -248,14 +291,18 @@
 
   /* Title line-by-line reveal */
   .hero-tag {
+    position: relative; z-index: 2;
     font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
     color: var(--gold); margin-bottom: 28px;
     opacity: 0; animation: fadeUp 0.8s 0.4s forwards;
   }
   .hero-title {
+    position: relative; z-index: 2;
     font-family: 'Cormorant Garamond', serif;
     font-size: clamp(68px, 10vw, 140px); font-weight: 300; line-height: 0.9;
     letter-spacing: -2px; color: var(--white); margin-bottom: 40px;
+    transition: transform 0.6s cubic-bezier(0.16,1,0.3,1);
+    will-change: transform;
   }
   .hero-title em { font-style: italic; color: var(--gold); }
   .hero-title-line { display: block; overflow: hidden; }
@@ -270,9 +317,11 @@
   @keyframes lineReveal {
     to { transform: translateY(0); opacity: 1; }
   }
+  .hero-cycle { display: inline-block; transition: opacity 0.5s ease, transform 0.5s ease; }
 
   /* Hero bottom & CTAs */
   .hero-bottom {
+    position: relative; z-index: 2;
     display: flex; align-items: flex-end; justify-content: space-between;
     opacity: 0; animation: fadeUp 0.9s 1.05s forwards;
   }
@@ -841,6 +890,21 @@
   <div class="hero-blob hero-blob-3"></div>
   <div class="hero-ambient" id="heroAmbient"></div>
   <div class="hero-particles" id="heroParticles"></div>
+  <div class="hero-grain"></div>
+
+  <!-- Floating work previews -->
+  <div class="hero-float-card hfc-2">
+    <div class="hfc-inner">
+      <img src="/images/portfolio/AURIS/AURIS.jpg" alt="AURIS project preview" loading="lazy">
+    </div>
+    <span class="hfc-label">AURIS</span>
+  </div>
+  <div class="hero-float-card hfc-3">
+    <div class="hfc-inner">
+      <img src="/images/portfolio/read wave CASE STUDY/other/Cover Page.jpg" alt="ReadWave project preview" loading="lazy">
+    </div>
+    <span class="hfc-label">ReadWave</span>
+  </div>
 
   <!-- Corner brackets -->
   <div class="hero-corner hero-corner-tl"></div>
@@ -863,7 +927,7 @@
   <h1 class="hero-title">
     <span class="hero-title-line"><span class="hero-title-inner d1">We Build</span></span>
     <span class="hero-title-line"><span class="hero-title-inner d2"><em>Digital</em></span></span>
-    <span class="hero-title-line"><span class="hero-title-inner d3">Products &amp; Brands</span></span>
+    <span class="hero-title-line"><span class="hero-title-inner d3"><span class="hero-cycle" id="heroCycle">Products &amp; Brands</span></span></span>
   </h1>
   <div class="hero-bottom">
     <div>
@@ -1580,11 +1644,38 @@
     el.addEventListener('mouseleave', () => { cursor.classList.remove('hover'); cursorRing.classList.remove('hover'); });
   });
 
-  /* ── HERO PARALLAX ── */
+  /* ── HERO PARALLAX (multi-layer depth) ── */
   const heroBg = document.getElementById('heroBgImg');
+  const heroGridEl = document.querySelector('.hero-grid');
+  const heroFloatCards = document.querySelectorAll('.hero-float-card');
   window.addEventListener('scroll', () => {
-    if (heroBg) heroBg.style.transform = `scale(1.08) translateY(${window.scrollY * 0.25}px)`;
+    const sy = window.scrollY;
+    if (heroBg) heroBg.style.transform = `scale(1.08) translateY(${sy * 0.25}px)`;
+    if (heroGridEl) heroGridEl.style.transform = `translateY(${sy * 0.12}px)`;
+    heroFloatCards.forEach((card, i) => {
+      card.style.transform = `translateY(${sy * -(0.15 + i * 0.05)}px)`;
+    });
   }, { passive: true });
+
+  /* ── HERO WORD CYCLE ── */
+  const heroCycle = document.getElementById('heroCycle');
+  if (heroCycle) {
+    const heroWords = ['Products & Brands', 'Websites & Stores', 'Brands & Experiences', 'Marketing & Growth'];
+    let heroWordIdx = 0;
+    setTimeout(() => {
+      setInterval(() => {
+        heroCycle.style.opacity = 0; heroCycle.style.transform = 'translateY(8px)';
+        setTimeout(() => {
+          heroWordIdx = (heroWordIdx + 1) % heroWords.length;
+          heroCycle.textContent = heroWords[heroWordIdx];
+          heroCycle.style.transform = 'translateY(-8px)';
+          requestAnimationFrame(() => {
+            heroCycle.style.opacity = 1; heroCycle.style.transform = 'translateY(0)';
+          });
+        }, 500);
+      }, 2800);
+    }, 2500);
+  }
 
   /* ── EMAIL VALIDATION ── */
   const emailInput = document.getElementById('emailInput');
@@ -1694,14 +1785,25 @@
     particleContainer.appendChild(p);
   }
 
-  /* ── HERO AMBIENT GLOW ── */
+  /* ── HERO AMBIENT GLOW + MAGNETIC TITLE ── */
   const heroAmbient = document.getElementById('heroAmbient');
   const heroSection = document.getElementById('hero');
+  const heroTitleEl = document.querySelector('.hero-title');
   heroSection.addEventListener('mousemove', (e) => {
     const rect = heroSection.getBoundingClientRect();
     heroAmbient.style.left = (e.clientX - rect.left) + 'px';
     heroAmbient.style.top = (e.clientY - rect.top) + 'px';
+    if (heroTitleEl) {
+      const dx = (e.clientX - rect.left - rect.width / 2) / (rect.width / 2);
+      const dy = (e.clientY - rect.top - rect.height / 2) / (rect.height / 2);
+      heroTitleEl.style.transform = `perspective(1000px) rotateY(${dx * 2.5}deg) rotateX(${-dy * 2.5}deg) translate(${dx * 6}px, ${dy * 4}px)`;
+    }
   });
+  if (heroTitleEl) {
+    heroSection.addEventListener('mouseleave', () => {
+      heroTitleEl.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg) translate(0,0)';
+    });
+  }
 
   /* ── CARD 3D TILT ── */
   document.querySelectorAll('.service-card').forEach(card => {
