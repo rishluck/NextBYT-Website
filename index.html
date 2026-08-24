@@ -75,6 +75,15 @@
     z-index: 10000; width: 0%; transition: width 0.08s linear;
   }
 
+  /* VISITOR COUNTER */
+  #visitor-count {
+    position: fixed; left: 20px; bottom: 20px; z-index: 9000;
+    height: 16px; border-radius: 3px; opacity: 0;
+    transition: opacity 0.6s ease; pointer-events: none;
+  }
+  #visitor-count.visible { opacity: 0.7; }
+  @media (max-width: 640px) { #visitor-count { display: none; } }
+
   /* CURSOR */
   .cursor {
     position: fixed; width: 10px; height: 10px; background: var(--gold);
@@ -862,6 +871,11 @@
 
 <!-- SCROLL PROGRESS -->
 <div id="progress-bar"></div>
+
+<!-- VISITOR COUNTER -->
+<img id="visitor-count" alt=""
+  src="https://hits.sh/nextbyt.com-site-visits.svg?style=flat-square&label=%20&color=0d0a09"
+  onload="this.classList.add('visible')" onerror="this.style.display='none'">
 
 <!-- CURSOR -->
 <div class="cursor" id="cursor"></div>
