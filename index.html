@@ -78,10 +78,12 @@
   /* VISITOR COUNTER */
   #visitor-count {
     position: fixed; left: 20px; bottom: 20px; z-index: 9000;
-    height: 16px; border-radius: 3px; opacity: 0;
+    font-family: 'Josefin Sans', sans-serif; font-weight: 300;
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--text-dim); opacity: 0;
     transition: opacity 0.6s ease; pointer-events: none;
   }
-  #visitor-count.visible { opacity: 0.7; }
+  #visitor-count.visible { opacity: 1; }
   @media (max-width: 640px) { #visitor-count { display: none; } }
 
   /* CURSOR */
@@ -872,10 +874,8 @@
 <!-- SCROLL PROGRESS -->
 <div id="progress-bar"></div>
 
-<!-- VISITOR COUNTER -->
-<img id="visitor-count" alt=""
-  src="https://hits.sh/nextbyt.com-site-visits.svg?style=flat-square&label=%20&color=0d0a09"
-  onload="this.classList.add('visible')" onerror="this.style.display='none'">
+<!-- VISITOR COUNTER (unique — counts each browser once) -->
+<div id="visitor-count" aria-hidden="true"></div>
 
 <!-- CURSOR -->
 <div class="cursor" id="cursor"></div>
@@ -1998,6 +1998,29 @@
   let pfAuto = setInterval(() => pfGoTo(pfCurrent + 1), 5000);
   document.querySelector('.portfolio-slider-wrap').addEventListener('mouseenter', () => clearInterval(pfAuto));
   document.querySelector('.portfolio-slider-wrap').addEventListener('mouseleave', () => { pfAuto = setInterval(() => pfGoTo(pfCurrent + 1), 5000); });
+
+  /* UNIQUE VISITOR COUNTER
+     Counts each browser once. First-ever visit increments a shared counter
+     (abacus.jasoncameron.dev — free, no signup) and drops a localStorage flag;
+     repeat visits only read the current total. Same person = 1. */
+  (function () {
+    const el = document.getElementById('visitor-count');
+    if (!el) return;
+    const API = 'https://abacus.jasoncameron.dev';
+    const NS = 'nextbyt.com', KEY = 'visitors';
+    let seen = false;
+    try { seen = localStorage.getItem('nb_visited') === '1'; } catch (e) {}
+    const url = seen ? `${API}/get/${NS}/${KEY}` : `${API}/hit/${NS}/${KEY}`;
+    fetch(url)
+      .then(r => r.json())
+      .then(d => {
+        if (!d || typeof d.value !== 'number') return;
+        el.textContent = d.value.toLocaleString() + (d.value === 1 ? ' visitor' : ' visitors');
+        el.classList.add('visible');
+        if (!seen) { try { localStorage.setItem('nb_visited', '1'); } catch (e) {} }
+      })
+      .catch(() => {});
+  })();
 </script>
 </body>
 </html>
