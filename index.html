@@ -7,8 +7,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NextByt – Digital Creative Studio</title>
 <meta name="description" content="NextByt is a digital creative studio specialising in web design, brand identity, social media, and UI/UX. We build bold, high-converting digital experiences for modern brands.">
+<!-- Security: restrict what the page may load / connect to, force HTTPS on any subresource -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data:; connect-src 'self' https://formsubmit.co https://abacus.jasoncameron.dev; form-action 'self' https://formsubmit.co; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Josefin+Sans:wght@100;200;300;400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw==" crossorigin="anonymous" referrerpolicy="no-referrer">
 <style>
   :root {
     --black: #0d0a09;
@@ -141,12 +144,28 @@
     justify-content: flex-end; padding: 0 60px 80px;
     position: relative; overflow: hidden;
   }
-  .hero-bg-img {
+  /* Cinematic project slideshow — sits behind the hero veil, very low opacity */
+  .hero-slideshow {
+    position: absolute; inset: 0; overflow: hidden;
+    opacity: 0.11; will-change: transform;
+    filter: grayscale(100%) sepia(32%) brightness(0.8) contrast(1.15) blur(2px);
+    -webkit-mask-image: radial-gradient(ellipse 118% 110% at 50% 36%, #000 40%, transparent 92%);
+            mask-image: radial-gradient(ellipse 118% 110% at 50% 36%, #000 40%, transparent 92%);
+  }
+  .hero-slide {
     position: absolute; inset: 0;
-    background-image: url('/images/services/web-design.jpg');
     background-size: cover; background-position: center;
-    opacity: 0.09; filter: grayscale(100%);
-    transform: scale(1.08); will-change: transform;
+    opacity: 0; transform: scale(1.16);
+    transition: opacity 2.2s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: opacity, transform;
+  }
+  .hero-slide.is-active { opacity: 1; }
+  @keyframes heroKB1 { from { transform: scale(1.12) translate3d(-2%,-1.2%,0); }  to { transform: scale(1.30) translate3d(2%,1.2%,0); } }
+  @keyframes heroKB2 { from { transform: scale(1.30) translate3d(2%,1.2%,0); }    to { transform: scale(1.12) translate3d(-2%,-1.2%,0); } }
+  @keyframes heroKB3 { from { transform: scale(1.14) translate3d(2.2%,-1%,0); }   to { transform: scale(1.28) translate3d(-2.2%,1%,0); } }
+  @keyframes heroKB4 { from { transform: scale(1.28) translate3d(-2.2%,1%,0); }   to { transform: scale(1.14) translate3d(2.2%,-1%,0); } }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-slide { animation: none !important; transform: scale(1.1) !important; }
   }
   .hero-bg {
     position: absolute; inset: 0;
@@ -475,13 +494,17 @@
   .scard-soon-badge > span { display: block; font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(212,160,112,0.5); padding: 8px 20px; background: rgba(13,10,9,0.6); backdrop-filter: blur(6px); margin-bottom: 14px; font-family: 'Josefin Sans', sans-serif; }
   .scard-soon-badge .cs-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(24px, 2.8vw, 36px); font-weight: 300; color: #fff; line-height: 1.15; display: block; letter-spacing: 0; }
 
-  /* Wide card — Web Design as hero service */
-  .service-card.wide {
-    grid-column: span 2; flex-direction: row; align-items: stretch;
+  /* Wide card — Web Design as hero service.
+     The image panel is absolutely positioned (not a flex row) so no browser
+     can inflate it from the image's intrinsic size or let it escape the card. */
+  .service-card.wide { grid-column: span 2; min-height: 300px; }
+  .service-card.wide .scard-img {
+    position: absolute; top: 0; left: 0; bottom: 0; width: 48%; height: auto;
   }
-  .service-card.wide .scard-img { width: 48%; height: auto; min-height: 260px; }
-  .service-card.wide .scard-img img { height: 100%; }
-  .service-card.wide .scard-body { padding: 40px 40px; }
+  .service-card.wide .scard-img img {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  }
+  .service-card.wide .scard-body { padding: 40px 40px 40px calc(48% + 40px); }
   .service-card.wide .service-name { font-size: 34px; }
 
   /* ABOUT */
@@ -816,8 +839,9 @@
     .hero-corner-tr{right:30px} .hero-corner-br{right:30px}
     .hero-badge-wrap{right:30px}
     .services-grid{grid-template-columns:1fr 1fr}
-    .service-card.wide{grid-column:span 2;flex-direction:column}
-    .service-card.wide .scard-img{width:100%;height:220px}
+    .service-card.wide{grid-column:span 2}
+    .service-card.wide .scard-img{position:static;width:100%;height:220px}
+    .service-card.wide .scard-body{padding:28px 32px 36px}
     .about-grid,.contact-grid{grid-template-columns:1fr;gap:50px}
     .pricing-grid{grid-template-columns:1fr;gap:20px}
     .process-grid{grid-template-columns:1fr 1fr}
@@ -826,7 +850,7 @@
   }
   @media(max-width:640px){
     .services-grid{grid-template-columns:1fr}
-    .service-card.wide{grid-column:span 1;flex-direction:column}
+    .service-card.wide{grid-column:span 1}
     .portfolio-slide { height: 420px; }
     .slide-info { left: 28px; max-width: 90%; }
     .slider-controls { padding: 20px 28px; }
@@ -919,7 +943,15 @@
 
 <!-- HERO -->
 <section class="hero" id="hero">
-  <div class="hero-bg-img" id="heroBgImg"></div>
+  <div class="hero-slideshow" id="heroSlideshow">
+    <div class="hero-slide is-active" style="background-image:url('/images/portfolio/sephora/Sephora_Home.png')"></div>
+    <div class="hero-slide" style="background-image:url('/images/portfolio/AURIS/AURIS.jpg')"></div>
+    <div class="hero-slide" style="background-image:url('/images/portfolio/Vitly/Full%20Page.png')"></div>
+    <div class="hero-slide" style="background-image:url('/images/portfolio/Malabar%20Concept%20Design/Full%20Website.png')"></div>
+    <div class="hero-slide" style="background-image:url('/images/portfolio/read%20wave%20CASE%20STUDY/other/Cover%20Page.jpg')"></div>
+    <div class="hero-slide" style="background-image:url('/images/portfolio/ProDrive/Podrive.jpg')"></div>
+    <div class="hero-slide" style="background-image:url('/images/portfolio/Dr.Paul/1.png')"></div>
+  </div>
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
   <div class="hero-blob hero-blob-1"></div>
@@ -1694,17 +1726,47 @@
   });
 
   /* ── HERO PARALLAX (multi-layer depth) ── */
-  const heroBg = document.getElementById('heroBgImg');
+  const heroBg = document.getElementById('heroSlideshow');
   const heroGridEl = document.querySelector('.hero-grid');
   const heroFloatCards = document.querySelectorAll('.hero-float-card');
   window.addEventListener('scroll', () => {
     const sy = window.scrollY;
-    if (heroBg) heroBg.style.transform = `scale(1.08) translateY(${sy * 0.25}px)`;
+    if (heroBg) heroBg.style.transform = `translateY(${sy * 0.22}px)`;
     if (heroGridEl) heroGridEl.style.transform = `translateY(${sy * 0.12}px)`;
     heroFloatCards.forEach((card, i) => {
       card.style.transform = `translateY(${sy * -(0.15 + i * 0.05)}px)`;
     });
   }, { passive: true });
+
+  /* ── HERO PROJECT SLIDESHOW (cinematic Ken Burns crossfade) ── */
+  (function () {
+    const stage = document.getElementById('heroSlideshow');
+    if (!stage) return;
+    const slides = Array.from(stage.querySelectorAll('.hero-slide'));
+    if (slides.length < 2) return;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const HOLD = 6500;      // ms each project holds before the next fades in
+    const KB_DURATION = 11; // s — always outlasts the time a slide stays visible
+    let idx = 0;
+
+    function kenBurns(el, n) {
+      if (reduce) return;
+      el.style.animation = 'none';
+      void el.offsetWidth;          // force reflow so the animation restarts cleanly
+      el.style.animation = `heroKB${(n % 4) + 1} ${KB_DURATION}s ease-out forwards`;
+    }
+
+    kenBurns(slides[0], 0);
+    setInterval(() => {
+      if (document.hidden) return;
+      const current = slides[idx];
+      idx = (idx + 1) % slides.length;
+      const next = slides[idx];
+      kenBurns(next, idx);
+      next.classList.add('is-active');
+      current.classList.remove('is-active');   // keeps drifting while it fades out
+    }, HOLD);
+  })();
 
   /* ── HERO WORD CYCLE ── */
   const heroCycle = document.getElementById('heroCycle');
