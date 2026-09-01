@@ -1,2 +1,5 @@
 permalink: pretty
 exclude: [README.md, CNAME]
+# Jekyll skips underscore-prefixed files by default; keep _headers in the build
+# output so a Cloudflare Pages / Netlify deploy can read it.
+include: ['_headers']

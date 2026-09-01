@@ -1,0 +1,20 @@
+# HTTP response headers for the whole site.
+#
+# ⚠️  GitHub Pages IGNORES this file. It only takes effect if the site is
+#     hosted on a platform that reads a _headers file — Cloudflare Pages
+#     or Netlify (both have a free tier). Moving nextbyt.uk behind one of
+#     those is the single biggest security upgrade available for a static
+#     site: real headers below + HTTPS/HSTS, DDoS protection and a WAF.
+#
+# The <meta http-equiv="Content-Security-Policy"> tag in each HTML file is
+# the fallback that works on GitHub Pages. Keep the two in sync.
+
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data:; connect-src 'self' https://formsubmit.co https://abacus.jasoncameron.dev; form-action 'self' https://formsubmit.co; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), microphone=(), payment=(), usb=()
+  Cross-Origin-Opener-Policy: same-origin
+  X-Permitted-Cross-Domain-Policies: none
