@@ -792,6 +792,7 @@
     backdrop-filter: blur(20px); z-index: 9000;
     display: flex; flex-direction: column;
     align-items: center; justify-content: center;
+    padding: 110px 20px 48px; box-sizing: border-box; overflow-y: auto;
     opacity: 0; visibility: hidden;
     transition: opacity 0.4s ease, visibility 0.4s ease;
   }
@@ -801,7 +802,7 @@
   }
   .mobile-nav a {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(36px, 10vw, 60px); font-weight: 300; line-height: 1.25;
+    font-size: clamp(32px, 8.5vw, 54px); font-weight: 300; line-height: 1.2;
     color: var(--white); text-decoration: none; letter-spacing: -1px;
     transition: color 0.3s; display: block;
     opacity: 0; transform: translateY(20px);
