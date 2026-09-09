@@ -30,13 +30,15 @@
   }
 
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
   body {
     background: var(--black);
     color: var(--cream);
     font-family: 'DM Sans', sans-serif;
     font-weight: 300;
     overflow-x: hidden;
+    max-width: 100%;
+    overscroll-behavior-x: none;
     cursor: none;
   }
 
@@ -849,8 +851,27 @@
     .footer-main{grid-template-columns:1fr 1fr;gap:40px}
   }
   @media(max-width:640px){
-    .services-grid{grid-template-columns:1fr}
-    .service-card.wide{grid-column:span 1}
+    /* Services become a horizontal swipe carousel on mobile only */
+    .services-grid{
+      display:flex;
+      grid-template-columns:none;
+      gap:12px;
+      overflow-x:auto;
+      overflow-y:hidden;
+      scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+      touch-action:pan-x;
+      margin:0 -24px;
+      padding:4px 24px 10px;
+    }
+    .services-grid::-webkit-scrollbar{display:none}
+    .services-grid .service-card{
+      flex:0 0 85%;
+      scroll-snap-align:center;
+    }
+    .service-card.wide{flex:0 0 85%;grid-column:auto;min-height:0}
+    .service-card.scard-soon .scard-img{min-height:300px}
     .portfolio-slide { height: 420px; }
     .slide-info { left: 28px; max-width: 90%; }
     .slider-controls { padding: 20px 28px; }
@@ -1221,86 +1242,6 @@
   </div>
 </section>
 
-<!-- ABOUT -->
-<section class="about-section" id="about">
-  <div class="about-grid">
-    <div class="about-visual reveal-left">
-      <div class="about-img-main">
-        <img src="/images/services/graphic-design.jpg" alt="Creative design workspace" loading="lazy">
-      </div>
-      <div class="about-img-second">
-        <img src="/images/services/brand-design.jpg" alt="Design studio setup" loading="lazy">
-      </div>
-      <div class="about-img-accent">
-        <span class="about-accent-year">Since 2024</span>
-        <span class="about-accent-label">Nottingham Studio</span>
-      </div>
-    </div>
-    <div class="about-content reveal-right">
-      <p class="section-tag">&#x2666; About NextByt</p>
-      <h2 class="section-title">Where Technology<br>Meets <em>Creativity</em></h2>
-      <p>We are a digital-first creative studio helping small businesses and startups build a powerful online presence, from beautiful websites and data-driven marketing to iconic brand identities.</p>
-      <p>From a single logo to a complete digital ecosystem, NextByt does it all with the same obsessive attention to detail and strategic thinking.</p>
-      <div class="about-features">
-        <div class="about-feature">
-          <div class="feature-icon">&#x26A1;</div>
-          <div>
-            <div class="feature-title">Fast Turnarounds</div>
-            <div class="feature-text">We respect your deadlines. Most projects delivered within agreed timelines, with clear milestone updates throughout.</div>
-          </div>
-        </div>
-        <div class="about-feature">
-          <div class="feature-icon">&#x1F3AF;</div>
-          <div>
-            <div class="feature-title">Strategy-First Approach</div>
-            <div class="feature-text">Every design and development decision is rooted in your business goals, your audience, and your competitive landscape.</div>
-          </div>
-        </div>
-        <div class="about-feature">
-          <div class="feature-icon">&#x1F504;</div>
-          <div>
-            <div class="feature-title">Unlimited Revisions</div>
-            <div class="feature-text">We iterate until you love it. Our process is collaborative, transparent, and revision-friendly.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROCESS -->
-<section id="process">
-  <div class="section-header reveal">
-    <div>
-      <p class="section-tag">&#x2666; How We Work</p>
-      <h2 class="section-title">Our <em>Process</em></h2>
-    </div>
-    <p class="section-desc">A refined four-step methodology that keeps every project on track, on brief, and ahead of expectations.</p>
-  </div>
-  <div class="process-grid">
-    <div class="process-step reveal">
-      <div class="process-num">01</div>
-      <h3 class="process-title">Discovery</h3>
-      <p class="process-text">We dive deep into your business, your goals, your audience and your competition to build a solid creative brief.</p>
-    </div>
-    <div class="process-step reveal">
-      <div class="process-num">02</div>
-      <h3 class="process-title">Strategy</h3>
-      <p class="process-text">We map out the approach: defining direction, deliverables, timelines and the creative strategy before a single pixel is placed.</p>
-    </div>
-    <div class="process-step reveal">
-      <div class="process-num">03</div>
-      <h3 class="process-title">Creation</h3>
-      <p class="process-text">Our team gets to work: designing, building, and refining with you in the loop at every stage through shared feedback tools.</p>
-    </div>
-    <div class="process-step reveal">
-      <div class="process-num">04</div>
-      <h3 class="process-title">Delivery</h3>
-      <p class="process-text">Final files, live handover, and ongoing support. We don't disappear after delivery. We stay close for the long term.</p>
-    </div>
-  </div>
-</section>
-
 <!-- PORTFOLIO -->
 <section class="portfolio-section" id="work">
   <div class="section-header reveal">
@@ -1449,6 +1390,86 @@
   </div>
   <div style="text-align:center; padding: 50px 60px 80px;">
     <a href="/work/" style="display:inline-block; border:1px solid var(--gold); color:var(--gold); font-family:'DM Sans',sans-serif; font-size:11px; letter-spacing:3px; text-transform:uppercase; padding:14px 40px; text-decoration:none; transition:all .3s;" onmouseenter="this.style.background='var(--gold)';this.style.color='var(--black)'" onmouseleave="this.style.background='transparent';this.style.color='var(--gold)'">View All Projects</a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div class="about-grid">
+    <div class="about-visual reveal-left">
+      <div class="about-img-main">
+        <img src="/images/services/graphic-design.jpg" alt="Creative design workspace" loading="lazy">
+      </div>
+      <div class="about-img-second">
+        <img src="/images/services/brand-design.jpg" alt="Design studio setup" loading="lazy">
+      </div>
+      <div class="about-img-accent">
+        <span class="about-accent-year">Since 2024</span>
+        <span class="about-accent-label">Nottingham Studio</span>
+      </div>
+    </div>
+    <div class="about-content reveal-right">
+      <p class="section-tag">&#x2666; About NextByt</p>
+      <h2 class="section-title">Where Technology<br>Meets <em>Creativity</em></h2>
+      <p>We are a digital-first creative studio helping small businesses and startups build a powerful online presence, from beautiful websites and data-driven marketing to iconic brand identities.</p>
+      <p>From a single logo to a complete digital ecosystem, NextByt does it all with the same obsessive attention to detail and strategic thinking.</p>
+      <div class="about-features">
+        <div class="about-feature">
+          <div class="feature-icon">&#x26A1;</div>
+          <div>
+            <div class="feature-title">Fast Turnarounds</div>
+            <div class="feature-text">We respect your deadlines. Most projects delivered within agreed timelines, with clear milestone updates throughout.</div>
+          </div>
+        </div>
+        <div class="about-feature">
+          <div class="feature-icon">&#x1F3AF;</div>
+          <div>
+            <div class="feature-title">Strategy-First Approach</div>
+            <div class="feature-text">Every design and development decision is rooted in your business goals, your audience, and your competitive landscape.</div>
+          </div>
+        </div>
+        <div class="about-feature">
+          <div class="feature-icon">&#x1F504;</div>
+          <div>
+            <div class="feature-title">Unlimited Revisions</div>
+            <div class="feature-text">We iterate until you love it. Our process is collaborative, transparent, and revision-friendly.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="section-header reveal">
+    <div>
+      <p class="section-tag">&#x2666; How We Work</p>
+      <h2 class="section-title">Our <em>Process</em></h2>
+    </div>
+    <p class="section-desc">A refined four-step methodology that keeps every project on track, on brief, and ahead of expectations.</p>
+  </div>
+  <div class="process-grid">
+    <div class="process-step reveal">
+      <div class="process-num">01</div>
+      <h3 class="process-title">Discovery</h3>
+      <p class="process-text">We dive deep into your business, your goals, your audience and your competition to build a solid creative brief.</p>
+    </div>
+    <div class="process-step reveal">
+      <div class="process-num">02</div>
+      <h3 class="process-title">Strategy</h3>
+      <p class="process-text">We map out the approach: defining direction, deliverables, timelines and the creative strategy before a single pixel is placed.</p>
+    </div>
+    <div class="process-step reveal">
+      <div class="process-num">03</div>
+      <h3 class="process-title">Creation</h3>
+      <p class="process-text">Our team gets to work: designing, building, and refining with you in the loop at every stage through shared feedback tools.</p>
+    </div>
+    <div class="process-step reveal">
+      <div class="process-num">04</div>
+      <h3 class="process-title">Delivery</h3>
+      <p class="process-text">Final files, live handover, and ongoing support. We don't disappear after delivery. We stay close for the long term.</p>
+    </div>
   </div>
 </section>
 
