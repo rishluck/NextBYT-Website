@@ -759,11 +759,11 @@
   @keyframes scrollPulse { 0%,100%{opacity:1;transform:scaleY(1)} 50%{opacity:0.4;transform:scaleY(0.6)} }
 
   .reveal { opacity:0; transform:translateY(40px); transition:opacity 0.9s ease,transform 0.9s ease; }
-  .reveal.visible { opacity:1; transform:translateY(0); }
+  .reveal.visible { opacity:1; transform:none; }
   .reveal-left { opacity:0; transform:translateX(-40px); transition:opacity 0.9s ease,transform 0.9s ease; }
-  .reveal-left.visible { opacity:1; transform:translateX(0); }
+  .reveal-left.visible { opacity:1; transform:none; }
   .reveal-right { opacity:0; transform:translateX(40px); transition:opacity 0.9s ease,transform 0.9s ease; }
-  .reveal-right.visible { opacity:1; transform:translateX(0); }
+  .reveal-right.visible { opacity:1; transform:none; }
 
   .services-grid .service-card:nth-child(1).reveal{transition-delay:0s}
   .services-grid .service-card:nth-child(2).reveal{transition-delay:0.12s}
@@ -858,7 +858,7 @@
       align-items:stretch;
       gap:12px;
       overflow-x:auto;
-      overflow-y:visible;
+      overflow-y:hidden;
       scroll-snap-type:x mandatory;
       -webkit-overflow-scrolling:touch;
       scrollbar-width:none;
@@ -867,12 +867,14 @@
     }
     .services-grid::-webkit-scrollbar{display:none}
     .services-grid .service-card{
-      flex:0 0 84%;
-      height:360px;
+      flex:0 0 86%;
+      height:420px;
       scroll-snap-align:center;
     }
-    .services-grid .scard-img{height:140px;position:relative}
-    .services-grid .scard-body{padding:18px 20px 20px}
+    /* No reveal motion on carousel cards — keeps them crisp and static */
+    .services-grid .service-card.reveal{opacity:1;transform:none;transition:none}
+    .services-grid .scard-img{flex:1 1 auto;height:auto;min-height:150px;position:relative}
+    .services-grid .scard-body{flex:0 0 auto;padding:18px 20px 22px}
     .services-grid .service-name{font-size:22px;margin-bottom:8px}
     .services-grid .service-desc{
       font-size:12px;line-height:1.65;margin-bottom:14px;flex:none;
@@ -880,12 +882,12 @@
     }
     .services-grid .service-tags{margin-bottom:0;max-height:52px;overflow:hidden}
     .services-grid .service-arrow{display:none}
-    .service-card.wide{flex:0 0 84%;grid-column:auto;min-height:0}
-    .service-card.wide .scard-img{position:relative;width:100%;height:140px}
+    .service-card.wide{flex:0 0 86%;grid-column:auto;min-height:0}
+    .service-card.wide .scard-img{flex:1 1 auto;position:relative;width:100%;height:auto;min-height:150px}
     .service-card.wide .scard-img img{position:absolute;inset:0;width:100%;height:100%}
-    .service-card.wide .scard-body{padding:18px 20px 20px}
+    .service-card.wide .scard-body{flex:0 0 auto;padding:18px 20px 22px}
     .service-card.wide .service-name{font-size:22px}
-    .service-card.scard-soon .scard-img{min-height:200px}
+    .service-card.scard-soon .scard-img{min-height:220px}
     .scard-soon-badge .cs-title{font-size:22px}
     .portfolio-slide { height: 420px; }
     .slide-info { left: 28px; max-width: 90%; }
