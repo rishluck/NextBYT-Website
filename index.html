@@ -788,15 +788,17 @@
 
   /* MOBILE MENU OVERLAY */
   .mobile-menu {
-    position: fixed; inset: 0; background: rgba(8,8,8,0.98);
-    backdrop-filter: blur(20px); z-index: 9000;
+    position: fixed; inset: 0; background: #0d0a09;
+    z-index: 9000;
     display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    padding: 180px 20px 48px; box-sizing: border-box; overflow-y: auto;
+    align-items: center; justify-content: flex-start;
+    padding: 140px 20px 60px; box-sizing: border-box; overflow-y: auto;
     opacity: 0; visibility: hidden;
     transition: opacity 0.4s ease, visibility 0.4s ease;
   }
   .mobile-menu.open { opacity: 1; visibility: visible; }
+  /* Keep the nav bar solid while the menu is open so nothing shows through it */
+  body.mm-open nav { background: #0d0a09 !important; backdrop-filter: none !important; box-shadow: none !important; }
   .mobile-nav {
     display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center;
   }
@@ -1723,6 +1725,7 @@
   function toggleMenu(open) {
     hamburger.classList.toggle('open', open);
     mobileMenu.classList.toggle('open', open);
+    document.body.classList.toggle('mm-open', open);
     document.body.style.overflow = open ? 'hidden' : '';
   }
   hamburger.addEventListener('click', () => toggleMenu(!mobileMenu.classList.contains('open')));
