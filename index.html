@@ -855,7 +855,7 @@
     .services-grid{
       display:flex;
       grid-template-columns:none;
-      align-items:flex-start;
+      align-items:stretch;
       gap:12px;
       overflow-x:auto;
       overflow-y:visible;
@@ -868,6 +868,7 @@
     .services-grid::-webkit-scrollbar{display:none}
     .services-grid .service-card{
       flex:0 0 80%;
+      height:300px;
       scroll-snap-align:center;
     }
     .services-grid .scard-img{height:120px;position:relative}
@@ -877,7 +878,8 @@
       font-size:12px;line-height:1.6;margin-bottom:12px;flex:none;
       display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
     }
-    .services-grid .service-tags{margin-bottom:12px}
+    .services-grid .service-tags{margin-bottom:0;max-height:52px;overflow:hidden}
+    .services-grid .service-arrow{display:none}
     .service-card.wide{flex:0 0 80%;grid-column:auto;min-height:0}
     .service-card.wide .scard-img{position:relative;width:100%;height:120px}
     .service-card.wide .scard-img img{position:absolute;inset:0;width:100%;height:100%}
