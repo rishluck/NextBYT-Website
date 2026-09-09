@@ -855,34 +855,36 @@
     .services-grid{
       display:flex;
       grid-template-columns:none;
+      align-items:flex-start;
       gap:12px;
       overflow-x:auto;
-      overflow-y:hidden;
+      overflow-y:visible;
       scroll-snap-type:x mandatory;
       -webkit-overflow-scrolling:touch;
       scrollbar-width:none;
-      touch-action:pan-x;
       margin:0 -24px;
       padding:4px 24px 10px;
     }
     .services-grid::-webkit-scrollbar{display:none}
     .services-grid .service-card{
-      flex:0 0 82%;
+      flex:0 0 80%;
       scroll-snap-align:center;
     }
-    .services-grid .scard-img{height:140px}
-    .services-grid .scard-body{padding:20px 22px 24px}
-    .services-grid .service-name{font-size:22px;margin-bottom:8px}
+    .services-grid .scard-img{height:120px;position:relative}
+    .services-grid .scard-body{padding:16px 18px 18px}
+    .services-grid .service-name{font-size:20px;margin-bottom:6px}
     .services-grid .service-desc{
-      font-size:12px;line-height:1.7;margin-bottom:14px;
-      display:-webkit-box;-webkit-line-clamp:3;line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+      font-size:12px;line-height:1.6;margin-bottom:12px;flex:none;
+      display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
     }
-    .services-grid .service-tags{margin-bottom:14px}
-    .service-card.wide{flex:0 0 82%;grid-column:auto;min-height:0}
-    .service-card.wide .scard-body{padding:20px 22px 24px}
-    .service-card.wide .service-name{font-size:22px}
-    .service-card.scard-soon .scard-img{min-height:200px}
-    .scard-soon-badge .cs-title{font-size:22px}
+    .services-grid .service-tags{margin-bottom:12px}
+    .service-card.wide{flex:0 0 80%;grid-column:auto;min-height:0}
+    .service-card.wide .scard-img{position:relative;width:100%;height:120px}
+    .service-card.wide .scard-img img{position:absolute;inset:0;width:100%;height:100%}
+    .service-card.wide .scard-body{padding:16px 18px 18px}
+    .service-card.wide .service-name{font-size:20px}
+    .service-card.scard-soon .scard-img{min-height:170px}
+    .scard-soon-badge .cs-title{font-size:20px}
     .portfolio-slide { height: 420px; }
     .slide-info { left: 28px; max-width: 90%; }
     .slider-controls { padding: 20px 28px; }
