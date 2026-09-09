@@ -833,7 +833,7 @@
   }
 
   @media(max-width:1024px){
-    nav{padding:24px 30px} .nav-links{display:none} .nav-cta{display:none}
+    nav{padding:24px 30px; z-index:9999} .nav-links{display:none} .nav-cta{display:none}
     .nav-hamburger{display:flex}
     section{padding:80px 30px} .hero{padding:0 30px 60px}
     .hero-title{font-size:clamp(52px,12vw,100px)} .hero-stats{gap:30px}
@@ -1725,6 +1725,14 @@
   hamburger.addEventListener('click', () => toggleMenu(!mobileMenu.classList.contains('open')));
   document.querySelectorAll('.mobile-link, .mobile-nav-cta').forEach(link => {
     link.addEventListener('click', () => toggleMenu(false));
+  });
+  /* Tap the dark backdrop (outside the links) to close */
+  mobileMenu.addEventListener('click', (e) => {
+    if (e.target === mobileMenu) toggleMenu(false);
+  });
+  /* Esc closes it too */
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mobileMenu.classList.contains('open')) toggleMenu(false);
   });
 
   /* ── PRELOADER ── */
