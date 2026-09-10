@@ -985,13 +985,13 @@
 <!-- HERO -->
 <section class="hero" id="hero">
   <div class="hero-slideshow" id="heroSlideshow">
-    <div class="hero-slide is-active" style="background-image:url('/images/portfolio/sephora/Sephora_Home.png')"></div>
-    <div class="hero-slide" style="background-image:url('/images/portfolio/AURIS/AURIS.jpg')"></div>
-    <div class="hero-slide" style="background-image:url('/images/portfolio/Vitly/Full%20Page.png')"></div>
-    <div class="hero-slide" style="background-image:url('/images/portfolio/Malabar%20Concept%20Design/Full%20Website.png')"></div>
-    <div class="hero-slide" style="background-image:url('/images/portfolio/read%20wave%20CASE%20STUDY/other/Cover%20Page.jpg')"></div>
-    <div class="hero-slide" style="background-image:url('/images/portfolio/ProDrive/Podrive.jpg')"></div>
-    <div class="hero-slide" style="background-image:url('/images/portfolio/Dr.Paul/1.png')"></div>
+    <div class="hero-slide is-active" style="background-image:url('/images/portfolio/sephora/Sephora_Home.jpg')"></div>
+    <div class="hero-slide" data-bg="/images/portfolio/AURIS/AURIS.jpg"></div>
+    <div class="hero-slide" data-bg="/images/portfolio/Vitly/Full%20Page.jpg"></div>
+    <div class="hero-slide" data-bg="/images/portfolio/Malabar%20Concept%20Design/Full%20Website.jpg"></div>
+    <div class="hero-slide" data-bg="/images/portfolio/read%20wave%20CASE%20STUDY/other/Cover%20Page.jpg"></div>
+    <div class="hero-slide" data-bg="/images/portfolio/ProDrive/Podrive.jpg"></div>
+    <div class="hero-slide" data-bg="/images/portfolio/Dr.Paul/1.jpg"></div>
   </div>
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
@@ -1276,7 +1276,7 @@
       <div class="portfolio-slides" id="portfolioSlides">
 
         <a href="/project-sephora/" class="portfolio-slide active">
-          <img src="/images/portfolio/sephora/Sephora_Home.png" alt="Sephora Website Redesign" loading="lazy">
+          <img src="/images/portfolio/sephora/Sephora_Home.jpg" alt="Sephora Website Redesign" loading="lazy">
           <div class="slide-info">
             <div class="slide-num">01 / 11</div>
             <div class="slide-cat">Website Redesign &amp; UI/UX</div>
@@ -1296,7 +1296,7 @@
         </a>
 
         <a href="/project-vitly/" class="portfolio-slide">
-          <img src="/images/portfolio/Vitly/Full Page.png" alt="Vitly Nutrition Shopify Store" loading="lazy">
+          <img src="/images/portfolio/Vitly/Full Page.jpg" alt="Vitly Nutrition Shopify Store" loading="lazy">
           <div class="slide-info">
             <div class="slide-num">03 / 11</div>
             <div class="slide-cat">Shopify Design &amp; Development</div>
@@ -1306,7 +1306,7 @@
         </a>
 
         <a href="/project-malabar/" class="portfolio-slide">
-          <img src="/images/portfolio/Malabar Concept Design/1.png" alt="Malabar Hill Luxury Resort Website" loading="lazy">
+          <img src="/images/portfolio/Malabar Concept Design/1.jpg" alt="Malabar Hill Luxury Resort Website" loading="lazy">
           <div class="slide-info">
             <div class="slide-num">04 / 11</div>
             <div class="slide-cat">Luxury Hospitality &amp; Web Design</div>
@@ -1316,7 +1316,7 @@
         </a>
 
         <a href="/project-dr-paul/" class="portfolio-slide">
-          <img src="/images/portfolio/Dr.Paul/1.png" alt="Dr. Paul Pet Wellness Website" loading="lazy">
+          <img src="/images/portfolio/Dr.Paul/1.jpg" alt="Dr. Paul Pet Wellness Website" loading="lazy">
           <div class="slide-info">
             <div class="slide-num">05 / 11</div>
             <div class="slide-cat">E-Commerce &amp; Web Design</div>
@@ -1746,7 +1746,7 @@
     setTimeout(() => {
       document.getElementById('preloader').classList.add('hide');
       startCounters();
-    }, 1800);
+    }, 600);
   });
 
   /* ── SCROLL PROGRESS ── */
@@ -1794,6 +1794,15 @@
     if (!stage) return;
     const slides = Array.from(stage.querySelectorAll('.hero-slide'));
     if (slides.length < 2) return;
+    // Defer loading the non-visible slide images until the page has settled
+    function loadDeferredSlides() {
+      slides.forEach(s => {
+        const bg = s.getAttribute('data-bg');
+        if (bg) { s.style.backgroundImage = `url('${bg}')`; s.removeAttribute('data-bg'); }
+      });
+    }
+    if (document.readyState === 'complete') setTimeout(loadDeferredSlides, 1200);
+    else window.addEventListener('load', () => setTimeout(loadDeferredSlides, 1200));
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const HOLD = 6500;      // ms each project holds before the next fades in
     const KB_DURATION = 11; // s — always outlasts the time a slide stays visible
