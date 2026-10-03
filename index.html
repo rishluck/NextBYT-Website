@@ -797,6 +797,178 @@
   .services-grid .service-card:nth-child(7).reveal{transition-delay:0.12s}
   .services-grid .service-card:nth-child(8).reveal{transition-delay:0.24s}
 
+  /* PLAYFUL MOTION — short copy, animated icons, springy reveals */
+  @keyframes iconBob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+  @keyframes iconWiggle { 0% { transform: rotate(0) scale(1); } 30% { transform: rotate(-14deg) scale(1.18); } 60% { transform: rotate(10deg) scale(1.18); } 100% { transform: rotate(0) scale(1.1); } }
+  @keyframes iconSpin { to { transform: rotate(360deg); } }
+  @keyframes liftOff { 0% { transform: translate(0,0); } 40% { transform: translate(6px,-10px); opacity: 0; } 41% { transform: translate(-8px,10px); opacity: 0; } 100% { transform: translate(0,0); opacity: 1; } }
+  @keyframes zap { 0%,100% { opacity: 1; } 45% { opacity: 1; } 50% { opacity: .35; } 55% { opacity: 1; } 60% { opacity: .5; } 65% { opacity: 1; } }
+
+  /* Section headings slide up word by word */
+  .section-title .w { display: inline-block; overflow: hidden; vertical-align: top; padding: 0 .06em .1em 0; margin-right: -.06em; }
+  .section-title .w > span { display: inline-block; transform: translateY(110%); transition: transform .85s cubic-bezier(.16,1,.3,1); transition-delay: calc(var(--wi) * 80ms + .15s); }
+  .visible .section-title .w > span { transform: none; }
+
+  /* Service icons: gold badge that bobs, wiggles + fills on hover */
+  .scard-accent {
+    width: 46px; height: 46px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; color: var(--gold-light); filter: none;
+    background: rgba(13,10,9,0.55); border: 1px solid rgba(212,160,112,0.45);
+    backdrop-filter: blur(6px);
+    animation: iconBob 3.2s ease-in-out infinite;
+    transition: background .35s, color .35s;
+  }
+  .services-grid .service-card:nth-child(even) .scard-accent { animation-delay: -1.6s; }
+  .service-card:hover .scard-accent { background: var(--gold); color: var(--black); animation: iconWiggle .6s ease forwards; }
+  .service-desc { font-size: 15px; line-height: 1.6; color: var(--cream); opacity: .78; }
+  .service-tag { transition: background .3s, color .3s, transform .3s; }
+  .service-card:hover .service-tag { transform: translateY(-2px); }
+  .service-card:hover .service-tag:nth-child(2) { transition-delay: .05s; }
+  .service-card:hover .service-tag:nth-child(3) { transition-delay: .1s; }
+
+  /* About: features pop in like chips */
+  .about-content > p:not(.section-tag) { font-size: 18px; line-height: 1.7; color: var(--cream); opacity: .85; }
+  .about-content .section-tag { font-size: 10px; margin-top: 0; line-height: normal; color: var(--gold); }
+  .about-feature { align-items: center; opacity: 0; transform: translateY(24px) scale(.92); transition: opacity .5s ease, transform .7s cubic-bezier(.34,1.56,.64,1); }
+  .visible .about-feature { opacity: 1; transform: none; }
+  .visible .about-feature:nth-child(1) { transition-delay: .45s; }
+  .visible .about-feature:nth-child(2) { transition-delay: .6s; }
+  .visible .about-feature:nth-child(3) { transition-delay: .75s; }
+  .feature-icon {
+    width: 48px; height: 48px; border-radius: 50%; margin-top: 0;
+    border: 1px solid rgba(212,160,112,0.35);
+    display: flex; align-items: center; justify-content: center; font-size: 18px;
+    transition: transform .45s cubic-bezier(.34,1.56,.64,1), background .3s, color .3s;
+  }
+  .about-feature:hover .feature-icon { transform: scale(1.15) rotate(-8deg); background: var(--gold); color: var(--black); }
+  .feature-icon .fa-bolt { animation: zap 2.6s infinite; }
+  .about-feature:hover .fa-rotate { animation: iconSpin .8s ease; }
+  .feature-title { font-size: 17px; }
+
+  /* Process: timeline draws itself, then each step pops in */
+  .process-grid { position: relative; overflow: visible; margin-top: 0; }
+  .process-num { position: absolute; top: 34px; right: 30px; font-size: 64px; margin: 0; }
+  .process-icon {
+    width: 58px; height: 58px; border-radius: 50%; margin-bottom: 28px;
+    border: 1px solid rgba(212,160,112,0.4); background: var(--black);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold); font-size: 20px; position: relative; z-index: 1;
+    opacity: 0; transform: scale(.4) rotate(-30deg);
+    transition: opacity .4s, transform .7s cubic-bezier(.34,1.56,.64,1), background .3s, color .3s;
+    transition-delay: calc(.4s + var(--i) * .35s);
+  }
+  .process-grid.visible .process-icon { opacity: 1; transform: none; }
+  .process-grid.visible .process-step:hover .process-icon { background: var(--gold); color: var(--black); transform: scale(1.1); transition-delay: 0s; }
+  .process-step:hover .fa-rocket { animation: liftOff .9s ease; }
+  .process-step:hover .fa-magnifying-glass, .process-step:hover .fa-map, .process-step:hover .fa-wand-magic-sparkles { animation: iconWiggle .6s ease; }
+  .process-step .process-title, .process-step .process-text {
+    opacity: 0; transform: translateY(14px);
+    transition: opacity .5s, transform .5s; transition-delay: calc(.55s + var(--i) * .35s);
+  }
+  .process-grid.visible .process-title, .process-grid.visible .process-text { opacity: 1; transform: none; }
+  .process-text { font-size: 15px; line-height: 1.6; color: var(--cream); opacity: .75; }
+  .process-grid.visible .process-text { opacity: .75; }
+
+  /* MODERN LAYER — bento cards, pill buttons, floating glass nav, spotlight hovers */
+  @property --ang { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+  @keyframes spinBorder { to { --ang: 360deg; } }
+  @keyframes diamondSpin { to { transform: rotate(405deg); } }
+
+  /* Floating glass pill nav once you scroll */
+  nav { transition: top .45s cubic-bezier(.16,1,.3,1), left .45s cubic-bezier(.16,1,.3,1), right .45s cubic-bezier(.16,1,.3,1), padding .45s, border-radius .45s, background .4s, box-shadow .4s, border-color .4s; border: 1px solid transparent; }
+  nav.scrolled {
+    top: 14px; left: 24px; right: 24px; padding: 12px 14px 12px 28px; border-radius: 999px;
+    background: rgba(18,14,11,0.72); backdrop-filter: blur(18px) saturate(140%); -webkit-backdrop-filter: blur(18px) saturate(140%);
+    border-color: rgba(212,160,112,0.18); box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+  }
+  body.mm-open nav { top: 0; left: 0; right: 0; border-radius: 0; border-color: transparent; }
+
+  /* Pills everywhere */
+  .nav-cta, .hero-btn, .btn-primary, .btn-outline, .slide-link, .mobile-nav-cta, .pricing-badge, .hero-badge { border-radius: 999px; }
+  .nav-cta { background: var(--gold); color: var(--black); font-weight: 500; }
+  .nav-cta:hover { background: var(--gold-light); }
+  .hero-btn { padding: 16px 32px; }
+  .hero-btn-primary { box-shadow: 0 10px 30px rgba(212,160,112,0.25); }
+  .hero-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(212,160,112,0.35); }
+  .section-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 7px 16px; border-radius: 999px; font-size: 10px; letter-spacing: 3px;
+    border: 1px solid rgba(212,160,112,0.3); background: rgba(212,160,112,0.06);
+  }
+
+  /* Big bold marquee: alternating solid / outlined words + spinning diamonds */
+  .marquee-section { padding: 26px 0; }
+  .marquee-track { gap: 48px; animation-duration: 40s; }
+  .marquee-item {
+    font-family: 'Cormorant Garamond', serif; font-size: clamp(30px, 4vw, 56px); font-weight: 400;
+    letter-spacing: 0; text-transform: none; color: var(--cream); gap: 48px; line-height: 1;
+  }
+  .marquee-item:nth-child(even) { color: transparent; -webkit-text-stroke: 1px rgba(212,160,112,0.7); font-style: italic; }
+  .marquee-item .dot { width: 12px; height: 12px; border-radius: 2px; transform: rotate(45deg); animation: diamondSpin 4s linear infinite; }
+  .marquee-section:hover .marquee-track { animation-play-state: paused; }
+
+  /* Bento services: rounded tiles with gaps + cursor spotlight */
+  .services-grid { gap: 16px; }
+  .service-card { border-radius: 24px; }
+  .service-card::before {
+    content: ''; position: absolute; inset: 0; z-index: 3; pointer-events: none; border-radius: inherit;
+    background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(212,160,112,0.16), transparent 45%);
+    opacity: 0; transition: opacity .4s;
+  }
+  .service-card:hover::before { opacity: 1; }
+  .service-tag { border-radius: 999px; }
+  .scard-num { border-radius: 999px; }
+  .scard-soon-badge > span { border-radius: 999px; }
+
+  /* Portfolio: rounded showcase */
+  .portfolio-slider { border-radius: 28px 28px 0 0; }
+  .slider-controls { border-radius: 0 0 28px 28px; border: 1px solid var(--border); border-top: none; }
+  .slider-arrows { gap: 8px; }
+  .slider-arrow { border-radius: 50%; }
+  .pf-dot { border-radius: 999px; }
+
+  /* About: rounded images */
+  .about-img-main, .about-img-second { border-radius: 24px; }
+  .about-img-accent { border-radius: 16px; }
+
+  /* Process: separate rounded cards, each top edge draws in */
+  .process-grid { gap: 16px; border: none; }
+  .process-step, .process-step:last-child { border: 1px solid var(--border); border-radius: 24px; background: var(--card); }
+  .process-step:hover { border-color: rgba(212,160,112,0.4); transform: translateY(-4px); }
+  .process-step { transition: background .4s, border-color .4s, transform .4s; }
+  .process-step::after {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--gold-light), var(--gold), #a86030);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform .9s cubic-bezier(.65,0,.35,1); transition-delay: calc(.3s + var(--i) * .35s);
+  }
+  .process-grid.visible .process-step::after { transform: scaleX(1); }
+
+  /* Pricing: rounded cards, featured gets a rotating gold border */
+  .pricing-grid { gap: 20px; }
+  .pricing-card { border-radius: 28px; }
+  .pricing-card.featured {
+    border: 1.5px solid transparent;
+    background:
+      linear-gradient(160deg, #1f1712, var(--card) 60%) padding-box,
+      conic-gradient(from var(--ang), #a86030, #eacca8, #d4a070, rgba(212,160,112,0.15), #a86030) border-box;
+    animation: spinBorder 6s linear infinite;
+    box-shadow: 0 30px 80px rgba(212,160,112,0.12);
+  }
+
+  /* Contact + footer */
+  .form-input, .form-select, .form-textarea { border-radius: 14px; }
+  .social-link { border-radius: 50%; }
+  .social-link:hover { transform: translateY(-3px); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scard-accent, .feature-icon .fa-bolt, .marquee-item .dot, .pricing-card.featured { animation: none !important; }
+    .process-step::after { transition: none !important; transform: none !important; }
+    .section-title .w > span, .about-feature, .process-icon,
+    .process-step .process-title, .process-step .process-text { transition: none !important; transform: none !important; opacity: 1 !important; }
+  }
+
   /* HAMBURGER */
   .nav-hamburger {
     display: none; flex-direction: column; gap: 5px;
@@ -936,6 +1108,8 @@
     .about-visual{height:380px}
     .testimonial-section{padding:60px 24px}
     section{padding:60px 24px}
+    .section-header{flex-direction:column;margin-bottom:40px}
+    .section-desc{padding-top:12px}
   }
 </style>
 </head>
@@ -1070,7 +1244,7 @@
     </div>
   </div>
 
-  <p class="hero-tag">&#x2666; NextByt Digital Studio &#x2666; Technology &amp; Creative Agency</p>
+  <p class="hero-tag">&#x2666; Nottingham Digital Studio &#x2666;</p>
   <h1 class="hero-title">
     <span class="hero-title-line"><span class="hero-title-inner d1">We Build</span></span>
     <span class="hero-title-line"><span class="hero-title-inner d2"><em>Digital</em></span></span>
@@ -1078,7 +1252,7 @@
   </h1>
   <div class="hero-bottom">
     <div>
-      <p class="hero-desc">From custom websites and Shopify stores to AI-powered marketing and iconic brand identities, we build the complete digital presence your business deserves.</p>
+      <p class="hero-desc">Websites, Shopify stores and brands that make people stop scrolling.</p>
       <div class="hero-ctas">
         <a href="/work/" class="hero-btn hero-btn-primary">View Our Work <span class="hero-btn-arrow">→</span></a>
         <a href="#contact" class="hero-btn hero-btn-ghost" onclick="event.preventDefault();document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Start a Project</a>
@@ -1134,7 +1308,6 @@
       <p class="section-tag">&#x2666; What We Do</p>
       <h2 class="section-title">Our Core<br><em>Services</em></h2>
     </div>
-    <p class="section-desc">An integrated suite of digital and creative services, from Shopify stores and AI-driven campaigns to brand identity and web development, all under one roof.</p>
   </div>
 
   <div class="services-grid">
@@ -1144,17 +1317,15 @@
       <div class="scard-img">
         <img src="/images/services/web-design.jpg" alt="Web Design & Development" loading="lazy">
         <div class="scard-num">01</div>
-        <div class="scard-accent">💻</div>
+        <div class="scard-accent"><i class="fa-solid fa-laptop-code"></i></div>
       </div>
       <div class="scard-body">
         <h3 class="service-name">Website Design &amp; Development</h3>
-        <p class="service-desc">Stunning, conversion-focused websites built for small businesses and startups. Fast, responsive, SEO-ready, and engineered to grow with you, from a simple landing page to a full-featured web app.</p>
+        <p class="service-desc">Fast, beautiful websites that turn visitors into customers.</p>
         <div class="service-tags">
           <span class="service-tag">UI/UX</span>
-          <span class="service-tag">WordPress</span>
           <span class="service-tag">Custom Dev</span>
           <span class="service-tag">E-Commerce</span>
-          <span class="service-tag">React / Next.js</span>
         </div>
         <div class="service-arrow">→</div>
       </div>
@@ -1165,16 +1336,15 @@
       <div class="scard-img">
         <img src="/images/services/shopify.jpg" alt="Shopify Design" loading="lazy">
         <div class="scard-num">02</div>
-        <div class="scard-accent">🛍️</div>
+        <div class="scard-accent"><i class="fa-brands fa-shopify"></i></div>
       </div>
       <div class="scard-body">
         <h3 class="service-name">Shopify Design &amp; Development</h3>
-        <p class="service-desc">Custom Shopify stores built to convert: beautiful themes, seamless checkout flows, product pages that sell, and apps that automate your operations.</p>
+        <p class="service-desc">Online stores that look amazing and sell more.</p>
         <div class="service-tags">
           <span class="service-tag">Shopify</span>
           <span class="service-tag">Custom Theme</span>
           <span class="service-tag">E-Commerce</span>
-          <span class="service-tag">Shopify Plus</span>
         </div>
         <div class="service-arrow">→</div>
       </div>
@@ -1185,11 +1355,11 @@
       <div class="scard-img">
         <img src="/images/services/social-media.jpg" alt="Social Media Marketing" loading="lazy">
         <div class="scard-num">03</div>
-        <div class="scard-accent">📣</div>
+        <div class="scard-accent"><i class="fa-solid fa-bullhorn"></i></div>
       </div>
       <div class="scard-body">
         <h3 class="service-name">Social Media Marketing</h3>
-        <p class="service-desc">Strategic content creation, community management, and paid campaigns across Instagram, LinkedIn, TikTok, and more.</p>
+        <p class="service-desc">Scroll-stopping content that grows your following.</p>
         <div class="service-tags">
           <span class="service-tag">Content Strategy</span>
           <span class="service-tag">Paid Ads</span>
@@ -1204,11 +1374,11 @@
       <div class="scard-img">
         <img src="/images/services/brand-design.jpg" alt="Logo & Brand Design" loading="lazy">
         <div class="scard-num">04</div>
-        <div class="scard-accent">✏️</div>
+        <div class="scard-accent"><i class="fa-solid fa-pen-nib"></i></div>
       </div>
       <div class="scard-body">
         <h3 class="service-name">Logo &amp; Brand Design</h3>
-        <p class="service-desc">Memorable logos and complete brand identities: colour palettes, typography, brand guidelines and full visual systems.</p>
+        <p class="service-desc">Logos and brand looks people remember.</p>
         <div class="service-tags">
           <span class="service-tag">Logo Design</span>
           <span class="service-tag">Brand System</span>
@@ -1223,16 +1393,15 @@
       <div class="scard-img">
         <img src="/images/services/ai-marketing.jpg" alt="AI Marketing" loading="lazy">
         <div class="scard-num" style="background:rgba(212,160,112,0.25);color:var(--gold-light)">NEW</div>
-        <div class="scard-accent">🤖</div>
+        <div class="scard-accent"><i class="fa-solid fa-robot"></i></div>
       </div>
       <div class="scard-body">
         <h3 class="service-name">AI Marketing</h3>
-        <p class="service-desc">Supercharge your growth with AI-powered campaigns: automated ad copy, personalised email sequences, predictive audience targeting, and data-driven content strategies at scale.</p>
+        <p class="service-desc">Smarter ads and emails, powered by AI.</p>
         <div class="service-tags">
           <span class="service-tag">AI Copywriting</span>
           <span class="service-tag">Ad Automation</span>
           <span class="service-tag">Email Flows</span>
-          <span class="service-tag">Audience AI</span>
         </div>
         <div class="service-arrow">→</div>
       </div>
@@ -1243,16 +1412,15 @@
       <div class="scard-img">
         <img src="/images/services/graphic-design.jpg" alt="Graphic Design" loading="lazy">
         <div class="scard-num">06</div>
-        <div class="scard-accent">🎨</div>
+        <div class="scard-accent"><i class="fa-solid fa-palette"></i></div>
       </div>
       <div class="scard-body">
         <h3 class="service-name">Graphic Design</h3>
-        <p class="service-desc">Print and digital design for every touchpoint: brochures, packaging, presentations, advertising, event materials and more.</p>
+        <p class="service-desc">Flyers, packaging and posts that pop.</p>
         <div class="service-tags">
           <span class="service-tag">Print</span>
           <span class="service-tag">Digital</span>
           <span class="service-tag">Packaging</span>
-          <span class="service-tag">Presentations</span>
         </div>
         <div class="service-arrow">→</div>
       </div>
@@ -1292,7 +1460,6 @@
       <p class="section-tag">&#x2666; Selected Work</p>
       <h2 class="section-title">Recent <em>Projects</em></h2>
     </div>
-    <p class="section-desc">A curated selection from across our disciplines, each project a story of transformation.</p>
   </div>
   <div class="portfolio-slider-wrap">
     <div class="portfolio-slider">
@@ -1432,7 +1599,7 @@
     </div>
   </div>
   <div style="text-align:center; padding: 50px 60px 80px;">
-    <a href="/work/" style="display:inline-block; border:1px solid var(--gold); color:var(--gold); font-family:'DM Sans',sans-serif; font-size:11px; letter-spacing:3px; text-transform:uppercase; padding:14px 40px; text-decoration:none; transition:all .3s;" onmouseenter="this.style.background='var(--gold)';this.style.color='var(--black)'" onmouseleave="this.style.background='transparent';this.style.color='var(--gold)'">View All Projects</a>
+    <a href="/work/" style="display:inline-block; border:1px solid var(--gold); color:var(--gold); font-family:'DM Sans',sans-serif; font-size:11px; letter-spacing:3px; text-transform:uppercase; padding:16px 44px; border-radius:999px; text-decoration:none; transition:all .3s;" onmouseenter="this.style.background='var(--gold)';this.style.color='var(--black)'" onmouseleave="this.style.background='transparent';this.style.color='var(--gold)'">View All Projects</a>
   </div>
 </section>
 
@@ -1454,30 +1621,11 @@
     <div class="about-content reveal-right">
       <p class="section-tag">&#x2666; About NextByt</p>
       <h2 class="section-title">Where Technology<br>Meets <em>Creativity</em></h2>
-      <p>We are a digital-first creative studio helping small businesses and startups build a powerful online presence, from beautiful websites and data-driven marketing to iconic brand identities.</p>
-      <p>From a single logo to a complete digital ecosystem, NextByt does it all with the same obsessive attention to detail and strategic thinking.</p>
+      <p>We help small businesses look big online. One friendly team for your website, brand and marketing.</p>
       <div class="about-features">
-        <div class="about-feature">
-          <div class="feature-icon">&#x26A1;</div>
-          <div>
-            <div class="feature-title">Fast Turnarounds</div>
-            <div class="feature-text">We respect your deadlines. Most projects delivered within agreed timelines, with clear milestone updates throughout.</div>
-          </div>
-        </div>
-        <div class="about-feature">
-          <div class="feature-icon">&#x1F3AF;</div>
-          <div>
-            <div class="feature-title">Strategy-First Approach</div>
-            <div class="feature-text">Every design and development decision is rooted in your business goals, your audience, and your competitive landscape.</div>
-          </div>
-        </div>
-        <div class="about-feature">
-          <div class="feature-icon">&#x1F504;</div>
-          <div>
-            <div class="feature-title">Unlimited Revisions</div>
-            <div class="feature-text">We iterate until you love it. Our process is collaborative, transparent, and revision-friendly.</div>
-          </div>
-        </div>
+        <div class="about-feature"><div class="feature-icon"><i class="fa-solid fa-bolt"></i></div><div><div class="feature-title">Fast delivery</div><div class="feature-text">Clear timelines, no waiting around.</div></div></div>
+        <div class="about-feature"><div class="feature-icon"><i class="fa-solid fa-bullseye"></i></div><div><div class="feature-title">Goal-driven design</div><div class="feature-text">Every pixel works for your business.</div></div></div>
+        <div class="about-feature"><div class="feature-icon"><i class="fa-solid fa-rotate"></i></div><div><div class="feature-title">Unlimited revisions</div><div class="feature-text">We tweak it until you love it.</div></div></div>
       </div>
     </div>
   </div>
@@ -1490,28 +1638,31 @@
       <p class="section-tag">&#x2666; How We Work</p>
       <h2 class="section-title">Our <em>Process</em></h2>
     </div>
-    <p class="section-desc">A refined four-step methodology that keeps every project on track, on brief, and ahead of expectations.</p>
   </div>
-  <div class="process-grid">
-    <div class="process-step reveal">
+  <div class="process-grid reveal">
+    <div class="process-step" style="--i:0">
+      <div class="process-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
       <div class="process-num">01</div>
-      <h3 class="process-title">Discovery</h3>
-      <p class="process-text">We dive deep into your business, your goals, your audience and your competition to build a solid creative brief.</p>
+      <h3 class="process-title">Discover</h3>
+      <p class="process-text">We learn your business and goals.</p>
     </div>
-    <div class="process-step reveal">
+    <div class="process-step" style="--i:1">
+      <div class="process-icon"><i class="fa-solid fa-map"></i></div>
       <div class="process-num">02</div>
-      <h3 class="process-title">Strategy</h3>
-      <p class="process-text">We map out the approach: defining direction, deliverables, timelines and the creative strategy before a single pixel is placed.</p>
+      <h3 class="process-title">Plan</h3>
+      <p class="process-text">We map the look, pages and timeline.</p>
     </div>
-    <div class="process-step reveal">
+    <div class="process-step" style="--i:2">
+      <div class="process-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
       <div class="process-num">03</div>
-      <h3 class="process-title">Creation</h3>
-      <p class="process-text">Our team gets to work: designing, building, and refining with you in the loop at every stage through shared feedback tools.</p>
+      <h3 class="process-title">Create</h3>
+      <p class="process-text">We design and build. You give feedback.</p>
     </div>
-    <div class="process-step reveal">
+    <div class="process-step" style="--i:3">
+      <div class="process-icon"><i class="fa-solid fa-rocket"></i></div>
       <div class="process-num">04</div>
-      <h3 class="process-title">Delivery</h3>
-      <p class="process-text">Final files, live handover, and ongoing support. We don't disappear after delivery. We stay close for the long term.</p>
+      <h3 class="process-title">Launch</h3>
+      <p class="process-text">We go live and stay on hand.</p>
     </div>
   </div>
 </section>
@@ -1534,7 +1685,7 @@
       <p class="section-tag">&#x2666; Investment</p>
       <h2 class="section-title">Simple, Honest <em>Pricing</em></h2>
     </div>
-    <p class="section-desc">Transparent packages for every stage of business. No hidden fees, no surprises. Just great work.</p>
+    <p class="section-desc">No hidden fees. No surprises.</p>
   </div>
   <div class="pricing-grid">
     <div class="pricing-card reveal">
@@ -1598,7 +1749,7 @@
       <p class="section-tag">&#x2666; Get In Touch</p>
       <h2 class="section-title">Let's Build<br>Something <em>Great</em></h2>
       <p style="color:var(--text-muted);font-size:14px;line-height:1.9;margin-top:24px">
-        Whether you're a startup with a big idea or an established business ready for a digital refresh, we'd love to hear from you. Fill in the form and we'll get back to you within 24 hours.
+        Got an idea? Tell us about it. We reply within 24 hours.
       </p>
       <div class="contact-item">
         <div class="contact-item-label">Email Us</div>
@@ -1660,7 +1811,7 @@
       </div>
       <div class="form-group">
         <label class="form-label">Tell Us About Your Project</label>
-        <textarea name="message" class="form-textarea" placeholder="Briefly describe your project, goals, and timeline..."></textarea>
+        <textarea name="message" class="form-textarea" placeholder="What are you looking to build?"></textarea>
       </div>
       <button type="submit" class="btn-primary" id="contactSubmit">Send Enquiry &rarr;</button>
       <div id="formMsg" style="display:none;margin-top:20px;font-size:13px;letter-spacing:1px;"></div>
@@ -1693,7 +1844,7 @@
         </svg>
         <span class="logo-text">NEXT<span>BYT</span></span>
       </div>
-      <p class="footer-tagline">NextByt is a digital-first creative studio crafting websites, brands, and digital experiences that endure.</p>
+      <p class="footer-tagline">Websites, brands and marketing. Made in Nottingham.</p>
       <div class="footer-social">
         <a href="https://www.instagram.com/nextbyt_web/" class="social-link" title="Instagram" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
         <a href="https://www.facebook.com/profile.php?id=61591606343398" class="social-link" title="Facebook" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a>
@@ -2004,6 +2155,8 @@
       const rect = card.getBoundingClientRect();
       const cx = rect.left + rect.width / 2, cy = rect.top + rect.height / 2;
       const dx = (e.clientX - cx) / (rect.width / 2), dy = (e.clientY - cy) / (rect.height / 2);
+      card.style.setProperty('--mx', (e.clientX - rect.left) + 'px');
+      card.style.setProperty('--my', (e.clientY - rect.top) + 'px');
       card.style.transform = `perspective(800px) rotateY(${dx * 4}deg) rotateX(${-dy * 4}deg) translateZ(4px)`;
     });
     card.addEventListener('mouseleave', () => {
@@ -2033,6 +2186,43 @@
     });
   }
 
+  /* ── HEADING WORD SPLIT (words slide up one by one when revealed) ── */
+  document.querySelectorAll('.section-title').forEach(title => {
+    let wi = 0;
+    const walker = document.createTreeWalker(title, NodeFilter.SHOW_TEXT);
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach(node => {
+      const frag = document.createDocumentFragment();
+      node.textContent.split(/(\s+)/).forEach(part => {
+        if (!part) return;
+        if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(' ')); return; }
+        const w = document.createElement('span'); w.className = 'w';
+        const inner = document.createElement('span'); inner.textContent = part;
+        inner.style.setProperty('--wi', wi++);
+        w.appendChild(inner); frag.appendChild(w);
+      });
+      node.parentNode.replaceChild(frag, node);
+    });
+  });
+
+  /* ── PRICE COUNT-UP ── */
+  const priceObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      priceObserver.unobserve(entry.target);
+      const node = [...entry.target.childNodes].find(n => n.nodeType === 3 && /\d/.test(n.textContent));
+      if (!node || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const target = parseInt(node.textContent, 10), t0 = performance.now(), dur = 1300;
+      (function tick(now) {
+        const k = Math.min((now - t0) / dur, 1);
+        node.textContent = Math.round(target * (1 - Math.pow(1 - k, 3)));
+        if (k < 1) requestAnimationFrame(tick);
+      })(t0);
+    });
+  }, { threshold: 0.6 });
+  document.querySelectorAll('.pricing-price').forEach(el => priceObserver.observe(el));
+
   /* ── SCROLL REVEAL ── */
   const allReveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
   const observer = new IntersectionObserver((entries) => {
@@ -2059,19 +2249,9 @@
     });
   }
 
-  /* ── NAV SCROLL EFFECT ── */
-  window.addEventListener('scroll', () => {
-    const nav = document.querySelector('nav');
-    if (window.scrollY > 80) {
-      nav.style.background = 'rgba(8,8,8,0.97)';
-      nav.style.backdropFilter = 'blur(16px)';
-      nav.style.boxShadow = '0 1px 0 rgba(212,160,112,0.1)';
-    } else {
-      nav.style.background = 'linear-gradient(to bottom, rgba(8,8,8,0.95), transparent)';
-      nav.style.backdropFilter = 'blur(2px)';
-      nav.style.boxShadow = 'none';
-    }
-  }, { passive: true });
+  /* ── NAV SCROLL EFFECT (becomes a floating glass pill) ── */
+  const navEl = document.querySelector('body > nav');
+  window.addEventListener('scroll', () => navEl.classList.toggle('scrolled', window.scrollY > 80), { passive: true });
 
   /* ── FORM SUBMIT ── */
   function handleSubmit(btn) {
