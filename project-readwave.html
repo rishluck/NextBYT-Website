@@ -230,12 +230,80 @@
     .colour-swatch { flex: none; width: 50%; }
     footer { flex-direction: column; gap: 10px; }
   }
+  /* ── MODERN LAYER (shared with homepage: glass nav, pills, rounded bento cards) ── */
+  @property --ang { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+  @keyframes mlSpin { to { --ang: 360deg; } }
+  body > nav { border: 1px solid transparent; transition: top .45s cubic-bezier(.16,1,.3,1), left .45s cubic-bezier(.16,1,.3,1), right .45s cubic-bezier(.16,1,.3,1), padding .45s, border-radius .45s, background .4s, box-shadow .4s, border-color .4s; }
+  body > nav.scrolled {
+    top: 14px; left: 24px; right: 24px; padding-top: 12px; padding-bottom: 12px; border-radius: 999px;
+    background: rgba(18,14,11,0.72) !important; backdrop-filter: blur(18px) saturate(140%); -webkit-backdrop-filter: blur(18px) saturate(140%);
+    border-color: rgba(212,160,112,0.18); box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+  }
+  @media (max-width: 640px) { body > nav.scrolled { left: 12px; right: 12px; padding-left: 20px; padding-right: 20px; } }
+  @media (max-width: 640px) { body > nav:has(.nav-cta) .nav-back { display: none; } }
+  @media (max-width: 640px) {
+    .nav-cta { white-space: nowrap; padding: 9px 16px !important; font-size: 10px !important; letter-spacing: 1.5px !important; }
+    .nav-logo svg { width: 28px; height: 28px; }
+    .nav-logo .logo-text { font-size: 16px; letter-spacing: 4px; }
+    .hero-stats { flex-wrap: wrap; row-gap: 22px; column-gap: 32px; }
+  }
+
+  /* Pills */
+  .nav-cta, .btn-gold, .btn-outline, .btn-primary, .cta-btn, .filter-btn, .expand-btn,
+  .skill-tag, .tool-tag, .service-tag, .coming-soon-badge { border-radius: 999px !important; }
+  .nav-cta { background: var(--gold); color: var(--black) !important; border-color: var(--gold); font-weight: 500; }
+  .nav-cta:hover { background: var(--gold-light) !important; }
+  .section-tag, .page-tag, .hero-tag, .project-tag {
+    display: inline-flex; align-items: center; gap: 8px; width: auto;
+    padding: 7px 16px; border-radius: 999px; line-height: 1.2;
+    border: 1px solid rgba(212,160,112,0.3); background: rgba(212,160,112,0.06);
+  }
+
+  /* Rounded bento cards with breathing room */
+  .deliver-grid, .features-grid, .highlights, .gallery-grid, .process-steps { gap: 16px !important; }
+  .deliver-card, .feature-card, .highlight, .gallery-item, .p-step, .faq-item, .work-card,
+  .pnav-item, .sidebar-block, .project-sidebar { border-radius: 22px; overflow: hidden; }
+  .p-step, .deliver-card, .feature-card, .highlight { border: 1px solid var(--border); background: var(--card); transition: transform .4s, border-color .4s; }
+  .p-step:hover, .deliver-card:hover, .feature-card:hover, .highlight:hover { transform: translateY(-4px); border-color: rgba(212,160,112,0.45); }
+  .project-main-img, .next-project-img, .pnav-thumb, .fullpage-wrap, .swatch, .colour-swatch, .project-content img, .gallery-item img { border-radius: 22px; }
+  .faq-item { border: 1px solid var(--border); margin-bottom: 12px; padding-left: 24px; padding-right: 24px; background: var(--card); }
+  input, select, textarea { border-radius: 14px; }
+
+  /* Headings slide up word by word */
+  .ml-split .w { display: inline-block; overflow: hidden; vertical-align: top; padding: 0 .06em .1em 0; margin-right: -.06em; }
+  .ml-split .w > span { display: inline-block; transform: translateY(110%); transition: transform .85s cubic-bezier(.16,1,.3,1); transition-delay: calc(var(--wi) * 80ms + .1s); }
+  .ml-split.ml-in .w > span { transform: none; }
+  @media (prefers-reduced-motion: reduce) { .ml-split .w > span { transform: none !important; transition: none !important; } }
+  .nav-logo { display: flex; align-items: center; gap: 10px; }
+  .nav-logo .logo-text { color: var(--white); }
+  .nav-logo .logo-text span { color: var(--gold); font-weight: 400; }
+  /* ── /MODERN LAYER ── */
 </style>
 </head>
 <body>
 
 <nav>
-  <a href="/" class="nav-logo">NEXT<span>BYT</span></a>
+  <a href="/" class="nav-logo">
+    <svg viewBox="0 0 100 100" width="36" height="36" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="navRg" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#eacca8"/>
+          <stop offset="50%" stop-color="#d4a070"/>
+          <stop offset="100%" stop-color="#a86030"/>
+        </linearGradient>
+      </defs>
+      <path d="M4 22 L4 4 L22 4" fill="none" stroke="url(#navRg)" stroke-width="2.2"/>
+      <path d="M78 4 L96 4 L96 22" fill="none" stroke="url(#navRg)" stroke-width="2.2"/>
+      <path d="M4 78 L4 96 L22 96" fill="none" stroke="url(#navRg)" stroke-width="2.2"/>
+      <path d="M78 96 L96 96 L96 78" fill="none" stroke="url(#navRg)" stroke-width="2.2"/>
+      <line x1="27" y1="21" x2="27" y2="79" stroke="url(#navRg)" stroke-width="10" stroke-linecap="butt"/>
+      <line x1="73" y1="21" x2="73" y2="79" stroke="url(#navRg)" stroke-width="10" stroke-linecap="butt"/>
+      <line x1="27" y1="21" x2="73" y2="79" stroke="url(#navRg)" stroke-width="10" stroke-linecap="butt"/>
+      <rect x="42" y="42" width="12" height="12" fill="#0d0a09"/>
+      <rect x="43" y="43" width="10" height="10" fill="none" stroke="url(#navRg)" stroke-width="0.8" opacity="0.7"/>
+    </svg>
+    <span class="logo-text">NEXT<span>BYT</span></span>
+  </a>
   <a href="/#work" class="nav-back">← Back to Work</a>
 </nav>
 
@@ -527,5 +595,37 @@
   <span>ReadWave: original UI/UX concept by Rishitha Lakranda</span>
 </footer>
 
+<script>
+  /* ── MODERN LAYER: floating glass nav + word-by-word headings ── */
+  (function () {
+    const nav = document.querySelector('body > nav');
+    if (nav) {
+      const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 80);
+      window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+    }
+    const titles = document.querySelectorAll('.section-title, .cta-title');
+    const io = new IntersectionObserver((es) => es.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('ml-in'); io.unobserve(e.target); }
+    }), { threshold: 0.2 });
+    titles.forEach(title => {
+      let wi = 0; const nodes = [];
+      const walker = document.createTreeWalker(title, NodeFilter.SHOW_TEXT);
+      while (walker.nextNode()) nodes.push(walker.currentNode);
+      nodes.forEach(node => {
+        const frag = document.createDocumentFragment();
+        node.textContent.split(/(\s+)/).forEach(part => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(' ')); return; }
+          const w = document.createElement('span'); w.className = 'w';
+          const inner = document.createElement('span'); inner.textContent = part; inner.style.setProperty('--wi', wi++);
+          w.appendChild(inner); frag.appendChild(w);
+        });
+        node.parentNode.replaceChild(frag, node);
+      });
+      title.classList.add('ml-split'); io.observe(title);
+    });
+  })();
+  /* ── /MODERN LAYER ── */
+</script>
 </body>
 </html>
