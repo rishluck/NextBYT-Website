@@ -64,9 +64,6 @@
   .meta-value { font-size: 14px; color: var(--cream); }
   .project-main-img { padding: 60px; background: var(--dark); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
   .project-main-img img { width: 100%; max-width: 1000px; display: block; margin: 0 auto; border: 1px solid var(--border); box-shadow: 0 40px 100px rgba(0,0,0,0.5); }
-  .project-main-img.shots { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-  .project-main-img.shots img { max-width: none; }
-  @media (max-width: 768px) { .project-main-img.shots { grid-template-columns: 1fr; } }
   .project-content { padding: 100px 60px; max-width: 1200px; margin: 0 auto; }
   .project-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; margin-bottom: 80px; }
   .project-sidebar-title { font-family: 'Cormorant Garamond', serif; font-size: 14px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
@@ -119,6 +116,45 @@
     .highlights { grid-template-columns: 1fr; }
     .project-cta { padding: 60px 24px; }
     footer { flex-direction: column; gap: 12px; text-align: center; }
+  }
+  /* SK Chem showcase: browser + phone frames so the real site reads clearly */
+  .browser { border-radius: 18px; overflow: hidden; background: #fff; border: 1px solid rgba(255,236,220,.12); box-shadow: 0 40px 90px rgba(0,0,0,.55); }
+  .browser-bar { display: flex; align-items: center; gap: 7px; padding: 12px 16px; background: #1b1513; border-bottom: 1px solid rgba(255,236,220,.08); }
+  .browser-bar i { width: 11px; height: 11px; border-radius: 50%; background: #3a2e28; }
+  .browser-bar i:nth-child(1) { background: #ff5f57; } .browser-bar i:nth-child(2) { background: #febc2e; } .browser-bar i:nth-child(3) { background: #28c840; }
+  .browser-url { margin-left: 14px; flex: 1; max-width: 420px; padding: 6px 14px; border-radius: 999px; background: rgba(255,255,255,.06); font-size: 12px; color: var(--text-muted); font-family: 'DM Sans', sans-serif; }
+  .browser img { display: block; width: 100%; height: auto; border-radius: 0 !important; border: none !important; }
+  .sk-showcase { padding: 40px 60px 20px; max-width: 1320px; margin: 0 auto; }
+  .sk-showcase .browser { max-width: 1200px; margin: 0 auto; }
+  .sk-inside { padding: 40px 60px 100px; max-width: 1320px; margin: 0 auto; }
+  .sk-inside-head { text-align: center; margin-bottom: 56px; }
+  .sk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px 28px; }
+  .sk-shot { margin: 0; }
+  .sk-shot figcaption { margin-top: 16px; font-family: 'DM Sans', sans-serif; }
+  .sk-shot figcaption b { display: block; font-size: 19px; font-weight: 500; letter-spacing: -.02em; color: #fff; }
+  .sk-shot figcaption span { font-size: 14px; color: var(--text-muted); }
+  .sk-shot .browser { transition: transform .6s cubic-bezier(.16,1,.3,1); }
+  .sk-shot:hover .browser { transform: translateY(-6px); }
+  .sk-mobile { margin: 0 16px; padding: 90px 40px 120px; border-radius: 34px; position: relative; overflow: hidden; isolation: isolate; text-align: center;
+    background: radial-gradient(120% 120% at 75% 20%, #f39a5c 0%, #d46a2f 26%, #9a4019 52%, #4a1a09 80%, #1c0a05 100%); border: 1px solid rgba(255,190,150,.2); }
+  .sk-mobile::after { content: ''; position: absolute; inset: 0; z-index: -1; mix-blend-mode: overlay;
+    background: repeating-linear-gradient(90deg, rgba(0,0,0,.22) 0, rgba(0,0,0,.22) 1px, rgba(255,255,255,0) 1px, rgba(255,220,190,.05) 24px, rgba(255,238,222,.16) 42px, rgba(0,0,0,.14) 46px, rgba(0,0,0,.22) 48px); }
+  .sk-phones { display: flex; justify-content: center; align-items: flex-start; gap: 34px; margin-top: 50px; }
+  .phone { width: 250px; padding: 10px; border-radius: 40px; background: #0d0a09; box-shadow: 0 40px 80px rgba(30,8,0,.55), inset 0 0 0 1px rgba(255,255,255,.12); }
+  .phone img { display: block; width: 100%; border-radius: 30px !important; border: none !important; }
+  .phone:nth-child(2) { transform: translateY(40px); }
+  .sk-mobile .section-label { color: #fff !important; border-color: rgba(255,255,255,.35); background: rgba(255,255,255,.12); }
+  .sk-mobile h2 { color: #fff; margin-top: 22px; }
+  .sk-mobile .ml-split .w > span { background-image: linear-gradient(180deg, #fff, #fff1e6) !important; }
+  .sk-mobile .ml-split em .w > span { background-image: linear-gradient(180deg, #fff6ee, var(--gold-light)) !important; }
+  .project-hero .hero-bg { filter: brightness(.55) !important; }
+  @media (max-width: 900px) {
+    .sk-grid { grid-template-columns: 1fr; }
+    .sk-showcase, .sk-inside { padding-left: 20px; padding-right: 20px; }
+    .sk-phones { gap: 12px; } .phone { width: 31%; padding: 5px; border-radius: 22px; } .phone img { border-radius: 18px !important; }
+    .phone:nth-child(2) { transform: translateY(20px); }
+    .sk-mobile { margin: 0 10px; padding: 60px 16px 70px; border-radius: 24px; }
+    .browser-url { display: none; }
   }
   /* ── MODERN LAYER (shared with homepage: copper frame hero, ribbed glass, glass nav, DM Sans headlines, bento cards) ── */
   :root { --copper: #cf6429; --ember: #ee8a4c; --copper-light: #f0a46e; --card-2: #1b1513; --line: rgba(255,236,220,0.08); --ml-ease: cubic-bezier(.16,1,.3,1); }
@@ -373,8 +409,8 @@
   </div>
 </div>
 
-<div class="project-main-img">
-  <img src="/images/portfolio/SK Chem/hero.jpg" alt="SK Chem Solutions website homepage by NextByt">
+<div class="sk-showcase">
+  <div class="browser"><div class="browser-bar"><i></i><i></i><i></i><span class="browser-url">skchemsolutions.lk</span></div><img src="/images/portfolio/SK Chem/hero.jpg" alt="SK Chem Solutions website homepage by NextByt" width="1920" height="1200"></div>
 </div>
 
 <div class="project-content">
@@ -419,9 +455,29 @@
   </div>
 </div>
 
-<div class="project-main-img shots">
-  <img src="/images/portfolio/SK Chem/about.jpg" alt="SK Chem Solutions about page" loading="lazy">
-  <img src="/images/portfolio/SK Chem/industry.jpg" alt="SK Chem Solutions rubber and latex industry page" loading="lazy">
+<div class="sk-inside">
+  <div class="sk-inside-head">
+    <p class="section-label">&#x2666; A Look Inside</p>
+    <h2 class="section-title">Every section,<br><em>built to convert.</em></h2>
+  </div>
+  <div class="sk-grid">
+    <figure class="sk-shot"><div class="browser"><div class="browser-bar"><i></i><i></i><i></i><span class="browser-url">skchemsolutions.lk</span></div><img src="/images/portfolio/SK Chem/industries.jpg" alt="SK Chem Solutions website: Industries we serve" loading="lazy" width="1920" height="1200"></div><figcaption><b>Industries we serve</b><span>Swipeable cards for every sector, each linking to its own page.</span></figcaption></figure>
+    <figure class="sk-shot"><div class="browser"><div class="browser-bar"><i></i><i></i><i></i><span class="browser-url">skchemsolutions.lk</span></div><img src="/images/portfolio/SK Chem/why.jpg" alt="SK Chem Solutions website: Why choose us" loading="lazy" width="1920" height="1200"></div><figcaption><b>Why choose us</b><span>Three clear reasons buyers trust SK Chem.</span></figcaption></figure>
+    <figure class="sk-shot"><div class="browser"><div class="browser-bar"><i></i><i></i><i></i><span class="browser-url">skchemsolutions.lk</span></div><img src="/images/portfolio/SK Chem/about.jpg" alt="SK Chem Solutions website: About the company" loading="lazy" width="1920" height="1200"></div><figcaption><b>About the company</b><span>Story, values and global sourcing at a glance.</span></figcaption></figure>
+    <figure class="sk-shot"><div class="browser"><div class="browser-bar"><i></i><i></i><i></i><span class="browser-url">skchemsolutions.lk</span></div><img src="/images/portfolio/SK Chem/partners.jpg" alt="SK Chem Solutions website: Trusted partners" loading="lazy" width="1920" height="1200"></div><figcaption><b>Trusted partners</b><span>Global suppliers and local clients, one tap apart.</span></figcaption></figure>
+    <figure class="sk-shot"><div class="browser"><div class="browser-bar"><i></i><i></i><i></i><span class="browser-url">skchemsolutions.lk</span></div><img src="/images/portfolio/SK Chem/gallery.jpg" alt="SK Chem Solutions website: Warehouse &amp; operations" loading="lazy" width="1920" height="1200"></div><figcaption><b>Warehouse &amp; operations</b><span>A filterable photo gallery that shows the real operation.</span></figcaption></figure>
+    <figure class="sk-shot"><div class="browser"><div class="browser-bar"><i></i><i></i><i></i><span class="browser-url">skchemsolutions.lk</span></div><img src="/images/portfolio/SK Chem/csr.jpg" alt="SK Chem Solutions website: Social responsibility" loading="lazy" width="1920" height="1200"></div><figcaption><b>Social responsibility</b><span>Community work presented with a photo slider.</span></figcaption></figure>
+  </div>
+</div>
+
+<div class="sk-mobile">
+  <p class="section-label">&#x2666; Mobile First</p>
+  <h2 class="section-title">Looks sharp on<br><em>every phone.</em></h2>
+  <div class="sk-phones">
+    <div class="phone"><img src="/images/portfolio/SK Chem/m-home.jpg" alt="SK Chem Solutions mobile homepage" loading="lazy"></div>
+    <div class="phone"><img src="/images/portfolio/SK Chem/m-industries.jpg" alt="SK Chem Solutions mobile industries section" loading="lazy"></div>
+    <div class="phone"><img src="/images/portfolio/SK Chem/m-partners.jpg" alt="SK Chem Solutions mobile partners section" loading="lazy"></div>
+  </div>
 </div>
 
 <div class="palette-section">
