@@ -7,6 +7,7 @@ import * as readline from 'node:readline';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { spawn } from 'node:child_process';
+import * as http from 'node:http';
 
 const SITE_DIR = path.resolve(import.meta.dirname, '../../..'); // Website/
 const PORT = process.env.PORT || 8842;
@@ -22,11 +23,16 @@ const COMMANDS = {
     if (server) return console.log('already serving on', PORT);
     server = spawn('python3', ['-m', 'http.server', String(PORT)], { cwd: SITE_DIR, stdio: 'ignore' });
     const deadline = Date.now() + 10_000;
+    const tryGet = () => new Promise(resolve => {
+      const req = http.get({ hostname: 'localhost', port: PORT, path: '/index.html', agent: false }, res => {
+        res.resume();
+        resolve(res.statusCode < 500);
+      });
+      req.on('error', () => resolve(false));
+      req.setTimeout(500, () => { req.destroy(); resolve(false); });
+    });
     while (Date.now() < deadline) {
-      try {
-        const r = await fetch(`http://localhost:${PORT}/index.html`);
-        if (r.ok) { console.log('serving', SITE_DIR, 'on', PORT); return; }
-      } catch {}
+      if (await tryGet()) { console.log('serving', SITE_DIR, 'on', PORT); return; }
       await new Promise(r => setTimeout(r, 300));
     }
     console.log('ERROR: server did not come up');
@@ -34,7 +40,7 @@ const COMMANDS = {
 
   async launch() {
     if (page) return console.log('already launched');
-    browser = await chromium.launch();
+    browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium-1243/chrome-linux64/chrome', args: ['--no-sandbox'] });
     page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
     page.on('pageerror', e => console.log('[pageerror]', e.message));
     page.on('console', m => { if (m.type() === 'error') console.log('[console.error]', m.text()); });
