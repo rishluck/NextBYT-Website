@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Jim Steel Garage | MOT, Servicing & Repairs in Beeston</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0F1012;--ink2:#17181B;--line:#2A2B2F;--paper:#F4F1EA;--y:#FFD400;--mute:#A6A39B}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--ink);color:var(--paper);overflow-x:clip}
+a{color:inherit;text-decoration:none}
+img{display:block;width:100%;height:100%;object-fit:cover}
+.wrap{max-width:1240px;margin:0 auto;padding:0 24px}
+h1,h2,h3,.num{font-family:'Sora',sans-serif;letter-spacing:-.02em}
+.pill{display:inline-flex;align-items:center;gap:12px;border-radius:999px;font-weight:700;padding:8px 8px 8px 22px;transition:transform .3s}
+.pill:hover{transform:translateY(-2px)}
+.pill i{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-style:normal;transition:transform .35s}
+.pill:hover i{transform:rotate(-45deg)}
+.p-y{background:var(--y);color:var(--ink)}.p-y i{background:var(--ink);color:var(--y)}
+.p-w{background:var(--paper);color:var(--ink)}.p-w i{background:var(--y)}
+.ghost{border:1px solid rgba(255,255,255,.3);padding:0 24px;height:56px;border-radius:999px;display:inline-flex;align-items:center;font-weight:500;backdrop-filter:blur(6px)}
+
+/* nav */
+nav{position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:50;width:min(1180px,calc(100% - 28px));display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 10px 10px 20px;border-radius:999px;background:rgba(15,16,18,.55);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.12)}
+.logo{display:flex;align-items:center;gap:10px;font-size:14px;letter-spacing:5px;font-weight:500}
+.logo b{width:32px;height:32px;border-radius:8px;background:var(--y);color:var(--ink);display:grid;place-items:center;font-family:Sora;font-size:12px;letter-spacing:0}
+.links{display:flex;gap:28px;font-size:15px}.links a{opacity:.8}.links a:hover{opacity:1}
+nav .pill{padding:6px 6px 6px 18px;font-size:14px}nav .pill i{width:34px;height:34px}
+
+/* hero */
+.hero{position:relative;margin:12px;border-radius:28px;overflow:hidden;min-height:min(92vh,860px);display:flex;align-items:flex-end}
+.hero .bg{position:absolute;inset:0;animation:kb 18s ease-out both}
+@keyframes kb{from{transform:scale(1.18)}to{transform:scale(1)}}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,16,18,.35) 0%,rgba(15,16,18,.1) 35%,rgba(15,16,18,.92) 100%)}
+.hero .in{position:relative;z-index:2;width:100%;padding:0 clamp(22px,5vw,64px) clamp(36px,6vw,72px);display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:28px}
+.tag{font-size:13px;letter-spacing:4px;color:var(--y);margin-bottom:18px}
+.hero h1{font-size:clamp(48px,8.2vw,124px);line-height:.95;font-weight:800}
+.hero h1 em{font-style:normal;color:var(--y)}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.glass{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(16px);border-radius:22px;padding:22px 24px;min-width:220px}
+.glass .num{font-size:46px;font-weight:800;color:var(--y);line-height:1}
+.stars{color:var(--y);letter-spacing:3px;margin:6px 0 4px}
+.glass small{color:#D6D2C8;font-size:14px}
+
+/* marquee */
+.marq{overflow:hidden;padding:26px 0;border-block:1px solid var(--line);margin-top:40px}
+.marq div{display:flex;gap:56px;width:max-content;animation:mq 30s linear infinite;font-family:Sora;font-size:clamp(26px,3.4vw,44px);font-weight:700;white-space:nowrap}
+.marq span:nth-child(even){color:var(--y)}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* intro */
+.intro{padding:120px 0;display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center}
+.intro h2{font-size:clamp(34px,4.2vw,58px);line-height:1.05;font-weight:700}
+.intro h2 em{font-style:normal;color:var(--y)}
+.intro p{color:var(--mute);font-size:18px;line-height:1.6;margin-top:22px;max-width:480px}
+.stack{position:relative;height:520px}
+.stack figure{position:absolute;border-radius:24px;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.45)}
+.stack .a{inset:0 18% 14% 0}.stack .b{width:52%;height:46%;right:0;bottom:0;border:6px solid var(--ink)}
+.badge{position:absolute;left:-18px;bottom:40px;z-index:3;width:120px;height:120px;border-radius:50%;background:var(--y);color:var(--ink);display:grid;place-items:center;text-align:center;font-family:Sora;font-weight:800;font-size:13px;line-height:1.1;animation:sp 14s linear infinite}
+.badge b{font-size:30px;display:block}
+@keyframes sp{50%{transform:rotate(8deg) scale(1.04)}}
+
+/* services bento */
+.head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:40px}
+.head h2{font-size:clamp(34px,4.2vw,58px);line-height:1;font-weight:700}
+.head p{color:var(--mute);max-width:340px;font-size:17px}
+.bento{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:260px;gap:14px}
+.card{position:relative;border-radius:22px;overflow:hidden;isolation:isolate}
+.card img{transition:transform 1s cubic-bezier(.2,.8,.2,1)}
+.card:hover img{transform:scale(1.08)}
+.card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(10,10,12,.88))}
+.card div{position:absolute;left:22px;right:22px;bottom:20px;z-index:2;display:flex;align-items:flex-end;justify-content:space-between;gap:10px}
+.card h3{font-size:22px;font-weight:700}.card small{display:block;color:#D6D2C8;font-size:14px;margin-top:4px;font-family:'DM Sans'}
+.card .go{flex:none;width:42px;height:42px;border-radius:50%;background:var(--y);color:var(--ink);display:grid;place-items:center;transform:translateY(8px);opacity:0;transition:.35s}
+.card:hover .go{transform:none;opacity:1}
+.w2{grid-column:span 2}.h2{grid-row:span 2}
+
+/* numbers */
+.nums{margin:120px 12px;border-radius:28px;background:var(--y);color:var(--ink);padding:70px 0}
+.nums .wrap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+.nums .num{font-size:clamp(48px,6vw,84px);font-weight:800;line-height:1}
+.nums p{font-weight:500;margin-top:8px}
+
+/* warranty */
+.war{position:relative;margin:0 12px;border-radius:28px;overflow:hidden;min-height:620px;display:flex;align-items:center}
+.war .bg{position:absolute;inset:-12% 0;will-change:transform}
+.war::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(15,16,18,.95) 0%,rgba(15,16,18,.6) 45%,transparent 75%)}
+.war .in{position:relative;z-index:2;padding:0 clamp(22px,6vw,80px);max-width:620px}
+.war h2{font-size:clamp(38px,5vw,72px);line-height:1;font-weight:800}
+.war p{color:#D6D2C8;font-size:18px;line-height:1.6;margin:20px 0 30px}
+.ticks{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:32px}
+.ticks span{border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:8px 14px;font-size:14px}
+
+/* steps */
+.steps{padding:120px 0}
+.srow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.step{background:var(--ink2);border:1px solid var(--line);border-radius:22px;padding:34px 28px;transition:border-color .3s,transform .3s}
+.step:hover{border-color:var(--y);transform:translateY(-4px)}
+.step .ic{width:54px;height:54px;border-radius:16px;background:rgba(255,212,0,.12);display:grid;place-items:center;margin-bottom:26px}
+.step h3{font-size:22px;margin-bottom:8px}.step p{color:var(--mute)}
+
+/* gallery */
+.gal{overflow:hidden;padding-bottom:120px}
+.track{display:flex;gap:14px;width:max-content;animation:mq 50s linear infinite}
+.track:hover{animation-play-state:paused}
+.track figure{width:340px;height:420px;border-radius:22px;overflow:hidden;flex:none}
+.track figure:nth-child(odd){height:360px;margin-top:60px}
+
+/* contact */
+.contact{margin:0 12px 12px;border-radius:28px;background:var(--paper);color:var(--ink);overflow:hidden;display:grid;grid-template-columns:1fr 1fr}
+.contact .l{padding:clamp(36px,6vw,80px)}
+.contact h2{font-size:clamp(38px,5vw,68px);line-height:1;font-weight:800}
+.info{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:36px 0}
+.info small{display:block;font-size:13px;color:#6B675F;margin-bottom:6px}
+.info p{font-weight:500;line-height:1.55}
+.map{position:relative;min-height:440px;background:#E3DED3;overflow:hidden}
+.map svg{position:absolute;inset:0;width:100%;height:100%}
+.pin{position:absolute;left:52%;top:46%;transform:translate(-50%,-100%)}
+.pin b{display:block;background:var(--ink);color:var(--y);font-family:Sora;font-size:14px;padding:10px 14px;border-radius:12px;white-space:nowrap}
+.pin::after{content:"";position:absolute;left:50%;bottom:-26px;width:18px;height:18px;margin-left:-9px;border-radius:50%;background:var(--y);box-shadow:0 0 0 0 rgba(255,212,0,.7);animation:pu 2s infinite}
+@keyframes pu{70%{box-shadow:0 0 0 22px rgba(255,212,0,0)}100%{box-shadow:0 0 0 0 rgba(255,212,0,0)}}
+footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;padding:26px 24px 30px;color:#7B786F;font-size:14px;max-width:1240px;margin:0 auto}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(40px);transition:opacity 1s cubic-bezier(.2,.8,.2,1),transform 1s cubic-bezier(.2,.8,.2,1)}
+.rv.on{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+.hero .rv{transition-delay:.3s}
+
+/* ===== motion layer ===== */
+.bar{position:fixed;left:0;top:0;height:3px;width:100%;background:var(--y);transform-origin:0 50%;transform:scaleX(0);z-index:100}
+.loader{position:fixed;inset:0;z-index:200;background:var(--y);display:grid;place-items:center;transition:transform 1s cubic-bezier(.77,0,.18,1)}
+.loader b{font-family:Sora;font-weight:800;font-size:clamp(40px,8vw,96px);color:var(--ink);letter-spacing:-.03em;overflow:hidden;display:block}
+.loader b span{display:inline-block;transform:translateY(110%);animation:lu .7s cubic-bezier(.2,.8,.2,1) forwards}
+.loader b span+span{animation-delay:.12s}
+@keyframes lu{to{transform:none}}
+.loaded .loader{transform:translateY(-100%)}
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em;margin-bottom:-.08em}
+.w>span{display:inline-block;transform:translateY(105%);transition:transform 1s cubic-bezier(.2,.8,.2,1)}
+.split.on .w>span{transform:none}
+.js .clip{clip-path:inset(100% 0 0 0);transition:clip-path 1.2s cubic-bezier(.77,0,.18,1)}
+.js .clip img{transform:scale(1.25);transition:transform 1.6s cubic-bezier(.2,.8,.2,1)}
+.js .clip.on{clip-path:inset(0 0 0 0)}.js .clip.on img{transform:scale(1)}
+.card.clip.on:hover img{transform:scale(1.08)}
+.hero{will-change:clip-path}
+.hero .in{will-change:transform,opacity}
+.marq div{animation:none}
+.hz{position:relative;height:300vh}
+.hz .stick{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:34px}
+.hz .row{display:flex;gap:18px;padding:0 6vw;width:max-content;will-change:transform}
+.hz figure{width:min(42vw,520px);height:min(60vh,560px);border-radius:24px;overflow:hidden;flex:none;position:relative}
+.hz figure:nth-child(even){height:min(48vh,440px);align-self:flex-end}
+.hz figure img{transform:scale(1.15)}
+.hz .ttl{padding:0 6vw;display:flex;justify-content:space-between;align-items:flex-end;gap:20px}
+.hz .ttl h2{font-size:clamp(34px,4.2vw,58px);font-weight:700;line-height:1}
+.hz .count{font-family:Sora;color:var(--y);font-size:15px}
+.srow{position:relative}
+.line{position:absolute;left:0;right:0;top:-30px;height:2px;background:var(--line);overflow:hidden}
+.line i{position:absolute;inset:0;background:var(--y);transform-origin:0 50%;transform:scaleX(0)}
+.step .ic{transition:background .5s,transform .5s}
+.step.lit .ic{background:var(--y);transform:rotate(-8deg) scale(1.08)}.step.lit .ic svg{stroke:var(--ink)}
+.war h2{transform-origin:0 50%}
+.cur{position:fixed;left:0;top:0;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:var(--y);pointer-events:none;z-index:150;mix-blend-mode:difference;transition:width .3s,height .3s,margin .3s;display:none}
+.cur.big{width:70px;height:70px;margin:-35px 0 0 -35px}
+@media(hover:hover) and (pointer:fine){.cur{display:block}}
+.contact{transition:transform .2s}
+
+@media(max-width:900px){
+.links{display:none}
+.intro,.contact{grid-template-columns:1fr}
+.stack{height:420px}
+.bento{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:220px}
+.nums .wrap,.srow{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:700px){.hz{height:auto}.hz .stick{position:static;height:auto;padding:60px 0}.hz .row{width:auto;overflow-x:auto;scroll-snap-type:x mandatory;transform:none!important}.hz figure{width:78vw;height:380px;scroll-snap-align:center}.hz figure:nth-child(even){height:380px}}
+@media(max-width:560px){
+.bento{grid-template-columns:1fr}.w2{grid-column:auto}.h2{grid-row:auto}
+.srow{grid-template-columns:1fr}.info{grid-template-columns:1fr}
+.track figure{width:260px;height:320px}.badge{left:8px;width:96px;height:96px}.badge b{font-size:24px}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}.w>span{transform:none}.js .clip{clip-path:none}.js .clip img{transform:none}.loader{display:none}.cur{display:none!important}}
+</style>
+</head>
+<body>
+<div class="loader" aria-hidden="true"><b><span>JIM</span> <span>STEEL</span></b></div>
+<div class="bar" aria-hidden="true"></div>
+<div class="cur" aria-hidden="true"></div>
+
+<nav>
+<a href="#top" class="logo"><b>JS</b>JIM&nbsp;STEEL</a>
+<div class="links"><a href="#services">Services</a><a href="#why">Why us</a><a href="#visit">Visit</a></div>
+<a href="tel:01159227805" class="pill p-y">Book now<i>→</i></a>
+</nav>
+
+<header class="hero" id="top">
+<img class="bg" src="https://images.unsplash.com/photo-1723099971299-3789db53604c?auto=format&fit=crop&w=2000&q=80" alt="Car raised on a lift in a workshop">
+<div class="in">
+<div class="rv hero-txt">
+<div class="tag">BEESTON · SINCE 1982</div>
+<h1 class="split">The answer<br>is <em>yes.</em></h1>
+<div class="cta">
+<a href="tel:01159227805" class="pill p-y">Book an MOT<i>→</i></a>
+<a href="#services" class="ghost">Our services</a>
+</div>
+</div>
+<div class="glass rv d2">
+<div class="num">4.8</div>
+<div class="stars">★★★★★</div>
+<small>63 reviews on BookMyGarage</small>
+</div>
+</div>
+</header>
+
+<div class="marq" aria-hidden="true"><div>
+<span>MOT</span><span>✦</span><span>Servicing</span><span>✦</span><span>Repairs</span><span>✦</span><span>Hybrid & EV</span><span>✦</span><span>Air con</span><span>✦</span><span>Vans</span><span>✦</span>
+<span>MOT</span><span>✦</span><span>Servicing</span><span>✦</span><span>Repairs</span><span>✦</span><span>Hybrid & EV</span><span>✦</span><span>Air con</span><span>✦</span><span>Vans</span><span>✦</span>
+</div></div>
+
+<section class="wrap intro" id="why">
+<div class="rv">
+<h2 class="split">Family-run in Beeston for over <em>40 years.</em></h2>
+<p>Main-dealer care for every make, from Audi to Volvo. Without main-dealer prices.</p>
+<div class="cta"><a href="#visit" class="pill p-w">Visit the garage<i>→</i></a></div>
+</div>
+<div class="stack rv d2">
+<figure class="a clip" data-par="-0.06"><img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=1200&q=80" alt="Mechanic's hands working on an engine"></figure>
+<figure class="b clip" data-par="0.08"><img src="https://images.unsplash.com/photo-1637640125496-31852f042a60?auto=format&fit=crop&w=900&q=80" alt="Box of spanners"></figure>
+<div class="badge"><span><b>1982</b>EST.</span></div>
+</div>
+</section>
+
+<section class="wrap" id="services">
+<div class="head rv">
+<h2 class="split">What we do</h2>
+<p>Cars, hybrids and vans up to 4 tonnes. One friendly team.</p>
+</div>
+<div class="bento">
+<a href="tel:01159227805" class="card w2 h2 clip"><img src="https://images.unsplash.com/photo-1643701079732-3b1c7a797e3d?auto=format&fit=crop&w=1400&q=80" alt="Mechanic working under a car"><div><span><h3>MOT testing</h3><small>Straight answers, fair prices</small></span><span class="go">→</span></div></a>
+<a href="tel:01159227805" class="card w2 clip"><img src="https://images.unsplash.com/photo-1728474751252-9c085659f6ab?auto=format&fit=crop&w=1200&q=80" alt="Mechanic working on an engine"><div><span><h3>Servicing</h3><small>Warranty safe</small></span><span class="go">→</span></div></a>
+<a href="tel:01159227805" class="card clip"><img src="https://images.unsplash.com/photo-1593941707874-ef25b8b4a92b?auto=format&fit=crop&w=900&q=80" alt="Electric car charging"><div><span><h3>Hybrid & EV</h3></span><span class="go">→</span></div></a>
+<a href="tel:01159227805" class="card clip"><img src="https://images.unsplash.com/photo-1645445522156-9ac06bc7a767?auto=format&fit=crop&w=900&q=80" alt="Mechanic working on a tyre"><div><span><h3>Repairs</h3></span><span class="go">→</span></div></a>
+<a href="tel:01159227805" class="card w2 clip"><img src="https://images.unsplash.com/photo-1569002861746-64bc833953b2?auto=format&fit=crop&w=1200&q=80" alt="White van"><div><span><h3>Vans up to 4t</h3><small>Including Luton vans</small></span><span class="go">→</span></div></a>
+<a href="tel:01159227805" class="card w2 clip"><img src="https://images.unsplash.com/photo-1771340012319-0b4fca008b54?auto=format&fit=crop&w=1200&q=80" alt="Mechanic in the workshop"><div><span><h3>Air conditioning</h3><small>Re-gas and repairs</small></span><span class="go">→</span></div></a>
+</div>
+</section>
+
+<section class="nums">
+<div class="wrap">
+<div class="rv"><div class="num" data-to="1982">1982</div><p>Family-run since</p></div>
+<div class="rv d1"><div class="num" data-to="4.8" data-dec="1">4.8</div><p>Average rating</p></div>
+<div class="rv d2"><div class="num" data-to="4" data-suf="t">4t</div><p>Vans up to</p></div>
+<div class="rv d3"><div class="num">A–Z</div><p>Every make</p></div>
+</div>
+</section>
+
+<section class="war">
+<img class="bg" data-par="0.08" src="https://images.unsplash.com/photo-1711386689622-1cda23e10217?auto=format&fit=crop&w=2000&q=80" alt="Mechanic working on a car in a garage">
+<div class="in rv">
+<h2 class="split">Dealer quality.<br>Local prices.</h2>
+<p>We service to the manufacturer's schedule with original parts. Your warranty stays safe.</p>
+<div class="ticks"><span>Original parts</span><span>Warranty safe</span><span>Trained on EVs</span></div>
+<a href="tel:01159227805" class="pill p-y">Get a quote<i>→</i></a>
+</div>
+</section>
+
+<section class="wrap steps">
+<div class="head rv"><h2 class="split">Easy as 1, 2, 3</h2></div>
+<div class="srow"><div class="line"><i></i></div>
+<div class="step rv"><div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FFD400" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></div><h3>Call or email</h3><p>Pick a time that suits you.</p></div>
+<div class="step rv d1"><div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FFD400" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg></div><h3>Drop it off</h3><p>We check it and call you first.</p></div>
+<div class="step rv d2"><div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FFD400" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14M6 17l1.5-5h9L18 17M7.5 12 9 8h6l1.5 4"/><circle cx="8" cy="17" r="2"/><circle cx="16" cy="17" r="2"/></svg></div><h3>Drive away</h3><p>Same day for most jobs.</p></div>
+</div>
+</section>
+
+<section class="hz" aria-label="Inside the workshop">
+<div class="stick">
+<div class="ttl"><h2 class="split">Inside the workshop</h2><span class="count">Swipe →</span></div>
+<div class="row">
+<figure><img src="https://images.unsplash.com/photo-1643700973089-baa86a1ab9ee?auto=format&fit=crop&w=1000&q=80" alt="Mechanic working on a car"></figure>
+<figure><img src="https://images.unsplash.com/photo-1601411101851-ea0e07766235?auto=format&fit=crop&w=1000&q=80" alt="Alloy wheel close-up"></figure>
+<figure><img src="https://images.unsplash.com/photo-1631720040176-0d789a643a78?auto=format&fit=crop&w=1000&q=80" alt="Tools on a workshop wall"></figure>
+<figure><img src="https://images.unsplash.com/photo-1676018366904-c083ed678e60?auto=format&fit=crop&w=1000&q=80" alt="Mechanic at work"></figure>
+<figure><img src="https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&w=1000&q=80" alt="Electric car charging"></figure>
+<figure><img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=1000&q=80" alt="Hands on an engine"></figure>
+</div>
+</div>
+</section>
+
+<section class="contact" id="visit">
+<div class="l rv">
+<h2 class="split">Book your<br>car in.</h2>
+<div class="info">
+<div><small>Address</small><p>135 Station Road<br>Beeston, NG9 2AZ</p></div>
+<div><small>Hours</small><p>Mon–Thu 8–5:30<br>Fri 8–5</p></div>
+<div><small>Phone</small><p><a href="tel:01159227805">0115 922 7805</a></p></div>
+<div><small>Email</small><p><a href="mailto:service@jimsteelgarages.co.uk">service@jimsteel<wbr>garages.co.uk</a></p></div>
+</div>
+<a href="tel:01159227805" class="pill p-y">Call now<i>→</i></a>
+</div>
+<div class="map" aria-label="Map showing 135 Station Road, Beeston">
+<svg viewBox="0 0 600 440" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+<g stroke="#FFFFFF" stroke-linecap="round" fill="none">
+<path d="M-20 300 C 120 280, 260 230, 620 200" stroke-width="26"/>
+<path d="M310 -20 L 330 460" stroke-width="18"/>
+<path d="M-20 120 L 620 90" stroke-width="12"/>
+<path d="M120 -20 L 150 460" stroke-width="10"/>
+<path d="M470 -20 L 450 460" stroke-width="10"/>
+<path d="M-20 400 L 620 380" stroke-width="8"/>
+</g>
+<g fill="#D3CDBF"><rect x="170" y="130" width="120" height="70" rx="8"/><rect x="350" y="110" width="80" height="70" rx="8"/><rect x="180" y="320" width="110" height="50" rx="8"/><rect x="360" y="230" width="70" height="120" rx="8"/><rect x="20" y="150" width="80" height="110" rx="8"/><rect x="480" y="240" width="110" height="110" rx="8"/></g>
+<text x="40" y="292" font-family="DM Sans" font-size="14" fill="#8A8478">Station Road</text>
+</svg>
+<div class="pin"><b>Jim Steel Garage</b></div>
+</div>
+</section>
+
+<footer>
+<span>© 2026 Jim Steel Garages (Beeston) Ltd</span>
+<span>Photos: Unsplash · Website example by NextByt</span>
+</footer>
+
+<script>
+{
+const R=matchMedia('(prefers-reduced-motion: reduce)').matches;
+document.documentElement.classList.add('js');
+
+/* split headings into masked words */
+document.querySelectorAll('.split').forEach(h=>{
+  const walk=n=>{[...n.childNodes].forEach(c=>{
+    if(c.nodeType===3){const f=document.createDocumentFragment();c.textContent.split(/(\s+)/).forEach(t=>{if(!t)return;if(/^\s+$/.test(t)){f.append(t);return}const w=document.createElement('span');w.className='w';const i=document.createElement('span');i.textContent=t;w.append(i);f.append(w)});c.replaceWith(f)}
+    else if(c.nodeType===1&&c.tagName!=='BR')walk(c)})};
+  walk(h);
+  h.querySelectorAll('.w>span').forEach((x,i)=>x.style.transitionDelay=(i*0.07)+'s');
+});
+
+/* reveal on view */
+let pending=[...document.querySelectorAll('.rv,.clip,.split:not(.hero .split)')];
+const reveal=()=>{if(!pending.length)return;const lim=innerHeight*0.9;pending=pending.filter(el=>{const r=el.getBoundingClientRect();if(r.top<lim&&r.bottom>0){el.classList.add('on');return false}return true})};
+reveal();addEventListener('scroll',reveal,{passive:true});addEventListener('resize',reveal);
+document.querySelectorAll('.bento .clip').forEach((el,i)=>el.style.transitionDelay=(i%3*0.12)+'s');
+
+/* intro */
+const start=()=>{document.body.classList.add('loaded');setTimeout(()=>{document.querySelectorAll('.hero .split').forEach(h=>h.classList.add('on'))},R?0:550)};
+if(R)start();else setTimeout(start,1100);
+setTimeout(()=>{const l=document.querySelector('.loader');if(l)l.style.display='none'},2600);
+
+/* count up */
+const nio=new IntersectionObserver(es=>es.forEach(e=>{
+  if(!e.isIntersecting)return;nio.unobserve(e.target);
+  const el=e.target,to=parseFloat(el.dataset.to),dec=+el.dataset.dec||0,suf=el.dataset.suf||'',from=to>1000?1900:0,t0=performance.now();
+  if(R){el.textContent=to.toFixed(dec)+suf;return}
+  const tick=t=>{const k=Math.min(1,(t-t0)/1600),v=from+(to-from)*(1-Math.pow(1-k,3));el.textContent=v.toFixed(dec)+suf;if(k<1)requestAnimationFrame(tick)};
+  requestAnimationFrame(tick);
+}),{threshold:.6});
+document.querySelectorAll('[data-to]').forEach(el=>nio.observe(el));
+
+/* scroll-driven motion */
+const $=q=>document.querySelector(q),$$=q=>[...document.querySelectorAll(q)];
+const bar=$('.bar'),hero=$('.hero'),heroBg=$('.hero .bg'),heroIn=$('.hero .in'),marq=$('.marq div'),
+  par=$$('[data-par]'),hz=$('.hz'),row=$('.hz .row'),hzImgs=$$('.hz figure img'),count=$('.hz .count'),
+  line=$('.line i'),steps=$$('.step'),srow=$('.srow'),warH=$('.war h2'),war=$('.war');
+let last=scrollY,vel=0,mx=0;
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const frame=()=>{
+  const y=scrollY,h=innerHeight,doc=document.documentElement.scrollHeight-h;
+  vel+= ((y-last)-vel)*0.12; last=y;
+  bar.style.transform='scaleX('+(y/doc)+')';
+  if(!R){
+    /* hero shrinks into a frame and drifts */
+    const k=clamp(y/h,0,1);
+    hero.style.clipPath='inset('+(k*6)+'% '+(k*4)+'% round '+(28+k*20)+'px)';
+    heroBg.style.transform='scale('+(1+k*0.15)+') translateY('+(k*60)+'px)';
+    heroIn.style.transform='translateY('+(-k*120)+'px)';heroIn.style.opacity=1-k*1.3;
+    /* marquee reacts to scroll speed */
+    mx-= 1.2+Math.abs(vel)*0.6; const half=marq.scrollWidth/2; if(-mx>half)mx+=half;
+    marq.style.transform='translateX('+mx+'px) skewX('+clamp(-vel*0.4,-12,12)+'deg)';
+    /* parallax */
+    par.forEach(el=>{const r=el.parentElement.getBoundingClientRect();const c=r.top+r.height/2-h/2;el.style.transform='translateY('+clamp(c*parseFloat(el.dataset.par),-50,50)+'px)'});
+    /* pinned horizontal gallery */
+    if(hz&&innerWidth>700){const r=hz.getBoundingClientRect();const p=clamp(-r.top/(r.height-h),0,1);const max=row.scrollWidth-innerWidth;row.style.transform='translateX('+(-p*max)+'px)';hzImgs.forEach((im,i)=>im.style.transform='scale(1.15) translateX('+((p*100-i*14)*0.6)+'px)');count.textContent=String(Math.min(6,Math.floor(p*5.99)+1)).padStart(2,'0')+' / 06'}
+    /* warranty headline zoom */
+    if(war){const r=war.getBoundingClientRect();const p=clamp(1-(r.top+r.height/2)/h,0,1);warH.style.transform='scale('+(0.85+p*0.25)+')'}
+  }
+  /* steps line */
+  if(srow){const r=srow.getBoundingClientRect();const p=clamp((h*0.8-r.top)/(r.height+h*0.3),0,1);line.style.transform='scaleX('+p+')';steps.forEach((s,i)=>s.classList.toggle('lit',p>(i+0.4)/3.2))}
+  requestAnimationFrame(frame);
+};
+requestAnimationFrame(frame);
+
+/* cursor + magnetic buttons */
+const cur=$('.cur');
+if(matchMedia('(hover:hover) and (pointer:fine)').matches&&!R){
+  let cx=0,cy=0,tx=0,ty=0;
+  addEventListener('mousemove',e=>{tx=e.clientX;ty=e.clientY});
+  const mv=()=>{cx+=(tx-cx)*0.18;cy+=(ty-cy)*0.18;cur.style.transform='translate('+cx+'px,'+cy+'px)';requestAnimationFrame(mv)};mv();
+  $$('a,.card,figure').forEach(el=>{el.addEventListener('mouseenter',()=>cur.classList.add('big'));el.addEventListener('mouseleave',()=>cur.classList.remove('big'))});
+  $$('.pill').forEach(b=>{b.addEventListener('mousemove',e=>{const r=b.getBoundingClientRect();b.style.transform='translate('+((e.clientX-r.left-r.width/2)*0.25)+'px,'+((e.clientY-r.top-r.height/2)*0.35)+'px)'});b.addEventListener('mouseleave',()=>b.style.transform='')});
+}
+}
+</script>
+</body>
+</html>
