@@ -103,24 +103,39 @@ nav .btn{height:46px;padding:0 20px;font-size:14px;white-space:nowrap}
 .tick div{display:flex;gap:42px;width:max-content;font-size:clamp(20px,2.4vw,30px);font-weight:700;letter-spacing:-.02em;white-space:nowrap}
 .tick span:nth-child(even){font-style:italic;font-weight:300;color:var(--mint)}
 
-/* sectors: horizontal scroll */
+/* sectors: 3 cards on desktop, sideways scroll on phones */
 .sectors{background:var(--soft)}
-.hwrap{position:relative;height:300vh}
-.hstick{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:28px;padding-top:70px}
+.hwrap{position:relative}
+.hstick{display:flex;flex-direction:column;gap:36px;padding:120px 0}
 .hstick .head{margin-bottom:0;width:100%}
-.hnav{display:flex;align-items:center;gap:14px;font-weight:700;color:var(--blue)}
-.hbar{width:140px;height:3px;background:var(--line);border-radius:3px;overflow:hidden}
+.hnav{display:none;align-items:center;gap:14px;font-weight:700;color:var(--blue)}
+.hbar{width:100px;height:3px;background:var(--line);border-radius:3px;overflow:hidden}
 .hbar i{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--blue),var(--mint));transform:scaleX(0);transform-origin:0}
-.htrack{display:flex;gap:24px;width:max-content;padding:0 max(24px,calc((100vw - 1192px)/2));will-change:transform}
-.scard{width:min(1000px,84vw);height:min(480px,62vh);border-radius:30px;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;background:#fff;box-shadow:0 30px 60px rgba(11,27,43,.12);flex:none;transition:transform .5s,opacity .5s}
-.scard .txt{padding:clamp(24px,4vw,56px);display:flex;flex-direction:column;justify-content:space-between}
+.htrack{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;max-width:1240px;width:100%;margin:0 auto;padding:0 24px}
+.scard{border-radius:28px;overflow:hidden;display:grid;grid-template-rows:260px 1fr;background:#fff;box-shadow:0 24px 50px rgba(11,27,43,.1);transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .5s,opacity 1s}
+.scard:hover{transform:translateY(-8px);box-shadow:0 34px 70px rgba(11,27,43,.16)}
+.scard figure{overflow:hidden;order:-1}
+.scard figure img{transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
+.scard:hover figure img{transform:scale(1.08)}
+.scard .txt{padding:30px 28px;display:flex;flex-direction:column;justify-content:space-between}
 .scard .k{font-weight:700;color:var(--blue);font-size:14px}
-.scard h3{font-size:clamp(28px,3.8vw,54px);line-height:1;margin:14px 0}
-.scard p{color:var(--mute);font-size:17px;line-height:1.6;max-width:420px}
+.scard h3{font-size:30px;line-height:1.05;margin:12px 0}
+.scard p{color:var(--mute);font-size:16px;line-height:1.6}
 .scard ul{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
 .scard li{background:var(--sky);color:var(--blue);font-weight:700;font-size:13px;padding:8px 12px;border-radius:999px}
-.scard figure{overflow:hidden}
-.scard figure img{transform:scale(1.2);will-change:transform}
+.js .scard.rvc{opacity:0;transform:translateY(50px)}
+.js .scard.rvc.on{opacity:1;transform:none}
+.js .scard.rvc.on:hover{transform:translateY(-8px)}
+.scard:nth-child(2){transition-delay:0s,0s,.12s}.scard:nth-child(3){transition-delay:0s,0s,.24s}
+@media(max-width:900px){
+.hwrap{height:300vh}
+.hstick{position:sticky;top:0;height:100vh;overflow:hidden;justify-content:center;gap:18px;padding:70px 0 0}
+.hnav{display:flex}
+.htrack{display:flex;gap:16px;width:max-content;max-width:none;margin:0;padding:0 20px;will-change:transform}
+.scard{width:80vw;height:min(560px,66vh);grid-template-rows:40% 1fr;flex:none;transition:none}
+.scard .txt{padding:22px}.scard p{font-size:15px}.scard h3{font-size:26px}
+.js .scard.rvc{opacity:1;transform:none}
+}
 
 /* coverage */
 .cover{padding:130px 0;background:var(--ink);color:#fff;position:relative;overflow:hidden}
@@ -187,12 +202,12 @@ footer b{color:var(--ink)}
 .panel,.panel.open{flex:none;height:300px}
 .panel:not(.open) h3{writing-mode:horizontal-tb;transform:none;position:static}
 .panel p{opacity:1;transform:none}
-.scard{grid-template-columns:1fr;height:auto}.scard figure{height:240px;order:-1}
+
 .cover .wrap,.quote .wrap{grid-template-columns:1fr}
 .scrollcue{display:none}
 }
 @media(max-width:600px){.logo .full{display:none}.quote h2{font-size:42px}.wrap{padding-inline:20px}.state{padding-block:90px 70px}.proc{padding-block:90px}.svc{padding-bottom:90px}.cover{padding-block:90px}.acc{gap:14px}.quote .wrap{padding-block:70px}form{padding:22px}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.map .uk{stroke-dashoffset:0;fill-opacity:1}.map .ie,.map .halo,.city{opacity:1;transform:none}.hwrap{height:auto}.hstick{position:static;height:auto;padding:80px 0}.htrack{width:auto;overflow-x:auto;scroll-snap-type:x mandatory;transform:none!important}.scard{scroll-snap-align:center}.hero .clean{clip-path:none}.squeegee{display:none}.w>span{transform:none}.js .rv{opacity:1;transform:none}.js .acc .panel{clip-path:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.map .uk{stroke-dashoffset:0;fill-opacity:1}.map .ie,.map .halo,.city{opacity:1;transform:none}.js .scard.rvc{opacity:1;transform:none}.hero .clean{clip-path:none}.squeegee{display:none}.w>span{transform:none}.js .rv{opacity:1;transform:none}.js .acc .panel{clip-path:none}}
 </style>
 </head>
 <body>
@@ -257,9 +272,9 @@ footer b{color:var(--ink)}
 <div class="hstick">
 <div class="wrap head"><h2 class="split">Who we <span class="serif">look after</span></h2><div class="hnav"><span class="hcount">01 / 03</span><span class="hbar"><i></i></span></div></div>
 <div class="htrack">
-<article class="scard"><div class="txt"><div><span class="k">01 · Offices</span><h3>Workplaces people enjoy</h3><p>Desks, kitchens, washrooms and meeting rooms, cleaned before your team arrives.</p></div><ul><li>Daily contracts</li><li>Computer cleaning</li><li>Washrooms</li></ul></div><figure><img src="https://images.unsplash.com/photo-1577412647305-991150c7d163?auto=format&fit=crop&w=1200&q=80" alt="Open plan office"></figure></article>
-<article class="scard"><div class="txt"><div><span class="k">02 · Factories &amp; warehouses</span><h3>Safe, clean, compliant</h3><p>Heavy-duty cleaning for production lines, loading bays and high ceilings.</p></div><ul><li>High level</li><li>High pressure</li><li>Floor refurbishment</li></ul></div><figure><img src="https://images.unsplash.com/photo-1772305336606-989a457ffbae?auto=format&fit=crop&w=1200&q=80" alt="Industrial warehouse floor"></figure></article>
-<article class="scard"><div class="txt"><div><span class="k">03 · New builds &amp; refits</span><h3>Ready for handover</h3><p>After-builders cleans, void clearance and decorating, so you can move straight in.</p></div><ul><li>After builders</li><li>Void clearance</li><li>Decorating</li></ul></div><figure><img src="https://images.unsplash.com/photo-1504297050568-910d24c426d3?auto=format&fit=crop&w=1200&q=80" alt="Modern office hallway"></figure></article>
+<article class="scard rvc"><div class="txt"><div><span class="k">01 · Offices</span><h3>Workplaces people enjoy</h3><p>Desks, kitchens, washrooms and meeting rooms, cleaned before your team arrives.</p></div><ul><li>Daily contracts</li><li>Computer cleaning</li><li>Washrooms</li></ul></div><figure><img src="https://images.unsplash.com/photo-1577412647305-991150c7d163?auto=format&fit=crop&w=1200&q=80" alt="Open plan office"></figure></article>
+<article class="scard rvc"><div class="txt"><div><span class="k">02 · Factories &amp; warehouses</span><h3>Safe, clean, compliant</h3><p>Heavy-duty cleaning for production lines, loading bays and high ceilings.</p></div><ul><li>High level</li><li>High pressure</li><li>Floor refurbishment</li></ul></div><figure><img src="https://images.unsplash.com/photo-1772305336606-989a457ffbae?auto=format&fit=crop&w=1200&q=80" alt="Industrial warehouse floor"></figure></article>
+<article class="scard rvc"><div class="txt"><div><span class="k">03 · New builds &amp; refits</span><h3>Ready for handover</h3><p>After-builders cleans, void clearance and decorating, so you can move straight in.</p></div><ul><li>After builders</li><li>Void clearance</li><li>Decorating</li></ul></div><figure><img src="https://images.unsplash.com/photo-1504297050568-910d24c426d3?auto=format&fit=crop&w=1200&q=80" alt="Modern office hallway"></figure></article>
 </div>
 </div>
 </div></section>
@@ -329,7 +344,7 @@ const read=$('#read');read.querySelectorAll(':scope>.w, :scope>.serif').length;
 const dims=$$('#read .dim');
 
 /* reveals */
-let pend=$$('.rv,.split:not(.hsplit),.acc,.step,.map');
+let pend=$$('.rv,.split:not(.hsplit),.acc,.step,.map,.scard');
 const reveal=()=>{const lim=innerHeight*.88;pend=pend.filter(el=>{const r=el.getBoundingClientRect();if(r.top<lim&&r.bottom>0){el.classList.add('on');return false}return true})};
 reveal();addEventListener('scroll',reveal,{passive:true});addEventListener('resize',reveal);
 $$('.acc .panel').forEach((p,i)=>p.style.transitionDelay=(i*.1)+'s, 0s');
@@ -359,8 +374,9 @@ const frame=()=>{
   dims.forEach((d,i)=>d.classList.toggle('lit',i<n));
   if(!R){
     tx-=.8+Math.abs(vel)*.5;const half=tick.scrollWidth/2;if(-tx>half)tx+=half;tick.style.transform='translateX('+tx+'px)';
-    {const r=hw.getBoundingClientRect(),p=clamp(-r.top/(r.height-h),0,1),max=ht.scrollWidth-innerWidth;ht.style.transform='translateX('+(-p*max)+'px)';hb.style.transform='scaleX('+p+')';const idx=Math.min(hcards.length-1,Math.round(p*(hcards.length-1)));hc.textContent='0'+(idx+1)+' / 0'+hcards.length;
+    if(innerWidth<=900){const r=hw.getBoundingClientRect(),p=clamp(-r.top/(r.height-h),0,1),max=ht.scrollWidth-innerWidth;ht.style.transform='translateX('+(-p*max)+'px)';hb.style.transform='scaleX('+p+')';const idx=Math.min(hcards.length-1,Math.round(p*(hcards.length-1)));hc.textContent='0'+(idx+1)+' / 0'+hcards.length;
       hcards.forEach((c,i)=>{const cr=c.getBoundingClientRect(),off=(cr.left+cr.width/2-innerWidth/2)/innerWidth;c.style.transform='scale('+(1-Math.min(.08,Math.abs(off)*.12))+')';c.style.opacity=1-Math.min(.45,Math.abs(off)*.6);c.querySelector('img').style.transform='scale(1.2) translateX('+(off*-60)+'px)'})}
+    else if(ht.style.transform){ht.style.transform='';hcards.forEach(c=>{c.style.transform='';c.style.opacity='';c.querySelector('img').style.transform=''})}
     par.forEach(el=>{const b=el.parentElement.getBoundingClientRect();el.style.transform='translateY('+clamp((b.top+b.height/2-h/2)*+el.dataset.par,-50,50)+'px)'});
   }
   requestAnimationFrame(frame);
