@@ -8,8 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet">
 <style>
-/* VOICE: quiet luxury home services. IDEA: a high-end interiors brochure. */
-:root{--ink:#111418;--ink2:#1A1E24;--ivory:#F6F3EE;--stone:#E9E3DA;--brass:#B48A55;--mute:#7A7670;--line:rgba(17,20,24,.12)}
+/* VOICE: premium home services in A&B's own blue and orange. */
+:root{--ink:#0B1E33;--ink2:#102A45;--ivory:#F5F8FC;--stone:#E6EEF7;--brass:#F26B1D;--blue:#1A7FD4;--mute:#667487;--line:rgba(11,30,51,.12)}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:Montserrat,system-ui,sans-serif;background:var(--ivory);color:var(--ink);overflow-x:clip;-webkit-font-smoothing:antialiased;font-weight:400}
@@ -22,16 +22,16 @@ h1 b,h2 b{font-weight:600}
 .btn{display:inline-flex;align-items:center;gap:16px;height:58px;padding:0 30px;font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;transition:background .4s,color .4s,border-color .4s}
 .btn i{font-style:normal;transition:transform .4s}
 .btn:hover i{transform:translateX(6px)}
-.b-brass{background:var(--brass);color:#fff}.b-brass:hover{background:#9C7445}
+.b-brass{background:var(--brass);color:#fff}.b-brass:hover{background:#D9560E}
 .b-line{border:1px solid currentColor}.b-line:hover{background:#fff;color:var(--ink);border-color:#fff}
 .b-dark{background:var(--ink);color:#fff}.b-dark:hover{background:var(--brass)}
 
 /* nav */
 nav{position:fixed;inset:0 0 auto;z-index:50;color:#fff;transition:background .5s,color .5s,box-shadow .5s}
-nav.solid{background:rgba(246,243,238,.92);backdrop-filter:blur(16px);color:var(--ink);box-shadow:0 1px 0 var(--line)}
+nav.solid{background:rgba(245,248,252,.92);backdrop-filter:blur(16px);color:var(--ink);box-shadow:0 1px 0 var(--line)}
 nav .wrap{display:flex;align-items:center;justify-content:space-between;height:86px}
 .logo{display:flex;align-items:center;gap:14px}
-.logo span{width:42px;height:42px;border:1px solid currentColor;display:grid;place-items:center;font-weight:600;font-size:13px;letter-spacing:.05em}
+.logo span{width:42px;height:42px;border:0;background:linear-gradient(135deg,var(--blue),var(--brass));color:#fff;display:grid;place-items:center;font-weight:600;font-size:13px;letter-spacing:.05em}
 .logo b{font-weight:500;font-size:14px;letter-spacing:.24em;text-transform:uppercase}
 .links{display:flex;gap:40px;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase}
 .links a{position:relative;padding:6px 0}.links a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--brass);transform:scaleX(0);transition:transform .4s}.links a:hover::after{transform:scaleX(1)}
@@ -41,10 +41,10 @@ nav .btn{height:46px;padding:0 22px;font-size:12px}
 .hero{position:relative;height:100vh;min-height:680px;color:#fff;overflow:hidden;display:flex;align-items:flex-end}
 .hero .bg{position:absolute;inset:-6% 0;animation:kb 14s cubic-bezier(.2,.6,.2,1) both}
 @keyframes kb{from{transform:scale(1.15)}to{transform:scale(1)}}
-.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(17,20,24,.55) 0%,rgba(17,20,24,.15) 40%,rgba(17,20,24,.82) 100%)}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,30,51,.6) 0%,rgba(11,30,51,.15) 40%,rgba(11,30,51,.85) 100%)}
 .hero .in{position:relative;z-index:2;width:100%;padding-bottom:9vh;display:grid;grid-template-columns:1.3fr .7fr;gap:40px;align-items:end}
 .hero h1{font-size:clamp(52px,7.4vw,112px)}
-.hero h1 b{color:#E8D3B3}
+.hero h1 b{color:#FF9A5C}
 .hero p{font-size:17px;line-height:1.75;color:rgba(255,255,255,.85);max-width:380px;margin-bottom:30px;font-weight:300}
 .hero .cta{display:flex;flex-wrap:wrap;gap:12px}
 .scroll{position:absolute;left:50%;bottom:28px;z-index:2;width:1px;height:60px;background:rgba(255,255,255,.25);overflow:hidden}
@@ -62,7 +62,7 @@ nav .btn{height:46px;padding:0 22px;font-size:12px}
 .facts small{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);font-weight:500}
 
 /* services: sticky image swap */
-.svc{background:var(--ink);color:#fff;padding:140px 0}
+.svc{background:var(--ink2);color:#fff;padding:140px 0}
 .svc .wrap{display:grid;grid-template-columns:1fr 1fr;gap:90px}
 .stick{position:sticky;top:120px;height:calc(100vh - 200px);max-height:720px}
 .stick .frame{position:relative;width:100%;height:100%;overflow:hidden}
@@ -72,7 +72,7 @@ nav .btn{height:46px;padding:0 22px;font-size:12px}
 .svc h2{font-size:clamp(36px,4vw,56px);margin:18px 0 60px}
 .item{padding:46px 0;border-top:1px solid rgba(255,255,255,.12);opacity:.35;transition:opacity .6s}
 .item.act{opacity:1}
-.item .n{font-size:12px;letter-spacing:.2em;color:var(--brass);font-weight:600}
+.item .n{font-size:12px;letter-spacing:.2em;color:#FF8A45;font-weight:600}
 .item h3{font-size:clamp(28px,2.8vw,40px);margin:12px 0 14px}
 .item p{font-size:16px;line-height:1.8;color:rgba(255,255,255,.7);font-weight:300;max-width:420px}
 .item .m{display:none;height:240px;margin-bottom:22px;overflow:hidden}
@@ -80,17 +80,17 @@ nav .btn{height:46px;padding:0 22px;font-size:12px}
 /* quote band */
 .band{position:relative;height:80vh;min-height:520px;overflow:hidden;display:grid;place-items:center;color:#fff;text-align:center}
 .band img{position:absolute;inset:-15% 0;height:130%;will-change:transform}
-.band::after{content:"";position:absolute;inset:0;background:rgba(17,20,24,.45)}
+.band::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(26,127,212,.72),rgba(11,30,51,.55))}
 .band .in{position:relative;z-index:2;max-width:900px;padding:0 24px}
 .band h2{font-size:clamp(40px,6vw,92px)}
-.band h2 b{color:#E8D3B3}
+.band h2 b{color:#FF9A5C}
 
 /* credentials */
 .creds{padding:110px 0}
 .creds .wrap{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .creds div{padding:34px 18px;text-align:center;border-right:1px solid var(--line)}
 .creds div:last-child{border-right:0}
-.creds b{display:block;font-size:17px;font-weight:600;margin-bottom:6px}
+.creds b{display:block;font-size:17px;font-weight:600;margin-bottom:6px;color:var(--blue)}
 .creds small{font-size:12px;color:var(--mute);letter-spacing:.08em}
 
 /* emergency */
@@ -100,7 +100,7 @@ nav .btn{height:46px;padding:0 22px;font-size:12px}
 .sos p{color:var(--mute);line-height:1.8;font-weight:300;margin-bottom:34px;max-width:420px}
 .sos figure{min-height:460px;overflow:hidden}
 .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--brass);margin-right:10px;vertical-align:middle;animation:pl 2s infinite}
-@keyframes pl{0%{box-shadow:0 0 0 0 rgba(180,138,85,.7)}70%{box-shadow:0 0 0 12px rgba(180,138,85,0)}100%{box-shadow:0 0 0 0 rgba(180,138,85,0)}}
+@keyframes pl{0%{box-shadow:0 0 0 0 rgba(242,107,29,.7)}70%{box-shadow:0 0 0 12px rgba(242,107,29,0)}100%{box-shadow:0 0 0 0 rgba(242,107,29,0)}}
 
 /* areas */
 .areas{padding:150px 0}
@@ -108,17 +108,17 @@ nav .btn{height:46px;padding:0 22px;font-size:12px}
 .areas h2{font-size:clamp(34px,4vw,56px);margin-top:18px}
 .towns{columns:3;column-gap:40px}
 .towns span{display:block;padding:14px 0;border-bottom:1px solid var(--line);font-size:16px;break-inside:avoid;transition:color .3s,padding .3s}
-.towns span:hover{color:var(--brass);padding-left:8px}
+.towns span:hover{color:var(--blue);padding-left:8px}
 
 /* contact */
 .contact{background:var(--ink);color:#fff;padding:150px 0 0}
 .contact .wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:60px;align-items:end;padding-bottom:110px}
 .contact h2{font-size:clamp(44px,6vw,96px)}
-.contact h2 b{color:#E8D3B3}
+.contact h2 b{color:#FF9A5C}
 .cinfo{display:grid;gap:26px}
 .cinfo small{display:block;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--brass);font-weight:600;margin-bottom:6px}
 .cinfo a,.cinfo p{font-size:22px;font-weight:300}
-.cinfo a:hover{color:#E8D3B3}
+.cinfo a:hover{color:#FF9A5C}
 footer{border-top:1px solid rgba(255,255,255,.12)}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;padding-block:26px;font-size:12px;letter-spacing:.08em;color:rgba(255,255,255,.5)}
 
@@ -164,7 +164,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;
 <img class="bg" src="https://images.unsplash.com/photo-1782805152914-d2b6b2623a72?auto=format&fit=crop&w=2200&q=85" alt="Modern bathroom with a heated towel rail">
 <div class="wrap in">
 <div>
-<p class="lab rv" style="margin-bottom:24px;color:#E8D3B3">Nottingham · 15+ years of craft</p>
+<p class="lab rv" style="margin-bottom:24px;color:#FF9A5C">Nottingham · 15+ years of craft</p>
 <h1><span class="ln"><span>Heat with</span></span><span class="ln"><span><b>style.</b></span></span></h1>
 </div>
 <div class="rv d2">
@@ -214,7 +214,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;
 
 <section class="band">
 <img id="bandimg" src="https://images.unsplash.com/photo-1599028274511-e02a767949a3?auto=format&fit=crop&w=2200&q=85" alt="Radiator beside a window in a calm home">
-<div class="in rv"><p class="lab" style="color:#E8D3B3;margin-bottom:22px">Best Plumbing &amp; Heating Engineer 2019 · Nottingham</p><h2>Comfort you can <b>feel.</b></h2></div>
+<div class="in rv"><p class="lab" style="color:#FF9A5C;margin-bottom:22px">Best Plumbing &amp; Heating Engineer 2019 · Nottingham</p><h2>Comfort you can <b>feel.</b></h2></div>
 </section>
 
 <section class="creds">
