@@ -69,7 +69,7 @@ nav .btn{height:46px;padding:0 20px;font-size:14px;white-space:nowrap}
 .badges span::before{content:"";width:16px;height:16px;border-radius:50%;background:var(--sky) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.5l2.5 2.5L12 5.5' fill='none' stroke='%231257FF' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") center/12px no-repeat}
 
 /* statement */
-.state{padding:130px 0 110px}
+.state{padding-block:130px 110px}
 .state h2{font-size:clamp(36px,5.2vw,76px);line-height:1.02;max-width:1050px}
 .state h2 .serif{color:var(--blue)}
 .state h2 .dim{color:#B9C4D2;transition:color .5s}
@@ -80,7 +80,7 @@ nav .btn{height:46px;padding:0 20px;font-size:14px;white-space:nowrap}
 .stat p{margin-top:10px;font-weight:600;color:var(--mute)}
 
 /* services accordion */
-.svc{padding:40px 0 120px}
+.svc{padding-block:40px 120px}
 .head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:18px;margin-bottom:38px}
 .head h2{font-size:clamp(36px,4.6vw,64px);line-height:1}
 .head h2 .serif{color:var(--blue)}
@@ -132,7 +132,7 @@ nav .btn{height:46px;padding:0 20px;font-size:14px;white-space:nowrap}
 .city text{fill:#fff;font:600 15px Poppins}
 
 /* process */
-.proc{padding:130px 0}
+.proc{padding-block:130px}
 .steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;counter-reset:s}
 .step{border:1px solid var(--line);border-radius:24px;padding:34px 30px;position:relative;overflow:hidden;transition:border-color .4s}
 .step::before{counter-increment:s;content:"0" counter(s);font-style:italic;font-weight:300;font-size:58px;color:var(--blue);line-height:1;display:block;margin-bottom:26px}
@@ -179,7 +179,7 @@ footer b{color:var(--ink)}
 .cover .wrap,.quote .wrap{grid-template-columns:1fr}
 .scrollcue{display:none}
 }
-@media(max-width:600px){.logo .full{display:none}.quote h2{font-size:42px}}
+@media(max-width:600px){.logo .full{display:none}.quote h2{font-size:42px}.wrap{padding-inline:20px}.state{padding-block:90px 70px}.proc{padding-block:90px}.svc{padding-bottom:90px}.sectors,.cover{padding-block:90px}.acc{gap:14px}.quote .wrap{padding-block:70px}form{padding:22px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.hero .clean{clip-path:none}.squeegee{display:none}.w>span{transform:none}.js .rv{opacity:1;transform:none}.js .acc .panel{clip-path:none}}
 </style>
 </head>
