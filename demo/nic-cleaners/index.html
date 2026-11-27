@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Nottingham Industrial Cleaners | Commercial Cleaning in Nottingham</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0B1B2B;--blue:#1257FF;--sky:#E8F0FF;--mint:#2FE0B0;--paper:#FFFFFF;--soft:#F4F7FB;--mute:#5B6B7D;--line:#E1E8F0}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Poppins,system-ui,sans-serif;background:var(--paper);color:var(--ink);overflow-x:clip;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{display:block;width:100%;height:100%;object-fit:cover}
+.wrap{max-width:1240px;margin:0 auto;padding:0 24px}
+.serif{font-family:Poppins,sans-serif;font-weight:300;font-style:italic;letter-spacing:-.03em}
+h1,h2,h3{letter-spacing:-.04em;font-weight:700}
+.btn{display:inline-flex;align-items:center;gap:10px;height:56px;padding:0 26px;border-radius:14px;font-weight:700;transition:transform .3s,box-shadow .3s}
+.btn:hover{transform:translateY(-3px)}
+.b-blue{background:var(--blue);color:#fff;box-shadow:0 10px 30px rgba(18,87,255,.35)}
+.b-line{border:1.5px solid currentColor}
+.b-white{background:#fff;color:var(--ink)}
+
+/* progress + nav */
+.bar{position:fixed;left:0;top:0;height:3px;width:100%;background:linear-gradient(90deg,var(--blue),var(--mint));transform-origin:0 50%;transform:scaleX(0);z-index:100}
+nav{position:fixed;top:0;left:0;right:0;z-index:60;transition:background .4s,box-shadow .4s}
+nav.solid{background:rgba(255,255,255,.86);backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:78px;gap:16px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;letter-spacing:-.02em;color:#fff;transition:color .4s}
+nav.solid .logo{color:var(--ink)}
+.logo span{width:38px;height:38px;border-radius:12px;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:13px;letter-spacing:0}
+.nl{display:flex;gap:30px;font-weight:600;font-size:15px;color:#fff;transition:color .4s}
+nav.solid .nl{color:var(--ink)}
+.nl a{position:relative}.nl a::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;background:var(--mint);transform:scaleX(0);transition:transform .3s;transform-origin:0}
+.nl a:hover::after{transform:scaleX(1)}
+nav .btn{height:46px;padding:0 20px;font-size:14px;white-space:nowrap}
+.logo em{font-style:normal}
+.quote .wrap>*{min-width:0}
+
+/* hero: squeegee wipe */
+.hero{position:relative;height:100vh;min-height:640px;overflow:hidden;color:#fff}
+.hero .lay{position:absolute;inset:0}
+.hero .dirty{filter:grayscale(.85) sepia(.35) contrast(.85) brightness(.62) blur(1.5px)}
+.hero .dirty::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 30%,rgba(90,70,40,.45),transparent 40%),radial-gradient(circle at 70% 60%,rgba(80,60,30,.4),transparent 45%),radial-gradient(circle at 45% 85%,rgba(70,55,30,.5),transparent 35%)}
+.hero .clean{clip-path:inset(0 100% 0 0);animation:wipe 2.4s .7s cubic-bezier(.65,0,.25,1) forwards}
+@keyframes wipe{to{clip-path:inset(0 0 0 0)}}
+.squeegee{position:absolute;top:-5%;bottom:-5%;left:0;width:16px;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.95) 45%,var(--mint) 55%,rgba(47,224,176,0));box-shadow:0 0 50px 18px rgba(255,255,255,.35);animation:sq 2.4s .7s cubic-bezier(.65,0,.25,1) forwards;transform:translateX(-30px)}
+@keyframes sq{to{transform:translateX(calc(100vw + 30px))}}
+.hero .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,27,43,.55),rgba(11,27,43,.15) 40%,rgba(11,27,43,.75))}
+.hero .in{position:relative;z-index:3;height:100%;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:clamp(40px,8vh,90px)}
+.pill{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);backdrop-filter:blur(10px);padding:8px 14px;border-radius:999px;font-size:13px;font-weight:600;width:max-content}
+.pill i{width:8px;height:8px;border-radius:50%;background:var(--mint);box-shadow:0 0 0 0 rgba(47,224,176,.8);animation:pp 2s infinite}
+@keyframes pp{70%{box-shadow:0 0 0 10px rgba(47,224,176,0)}100%{box-shadow:0 0 0 0 rgba(47,224,176,0)}}
+.hero h1{font-size:clamp(48px,8vw,118px);line-height:.95;margin:22px 0 26px;max-width:1000px}
+.hero h1 .serif{color:var(--mint)}
+.hero .row{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.scrollcue{position:absolute;right:24px;bottom:40px;z-index:3;writing-mode:vertical-rl;font-size:12px;letter-spacing:3px;display:flex;align-items:center;gap:12px;opacity:.8}
+.scrollcue b{width:1px;height:60px;background:linear-gradient(#fff,transparent);animation:cue 1.8s infinite}
+@keyframes cue{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* trust strip */
+.trust{border-bottom:1px solid var(--line)}
+.trust .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px;padding-top:28px;padding-bottom:28px}
+.trust p{font-weight:700;color:var(--mute);font-size:14px}
+.badges{display:flex;flex-wrap:wrap;gap:10px}
+.badges span{border:1px solid var(--line);border-radius:12px;padding:10px 16px;font-weight:700;font-size:14px;display:flex;align-items:center;gap:8px}
+.badges span::before{content:"";width:16px;height:16px;border-radius:50%;background:var(--sky) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.5l2.5 2.5L12 5.5' fill='none' stroke='%231257FF' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") center/12px no-repeat}
+
+/* statement */
+.state{padding:130px 0 110px}
+.state h2{font-size:clamp(36px,5.2vw,76px);line-height:1.02;max-width:1050px}
+.state h2 .serif{color:var(--blue)}
+.state h2 .dim{color:#B9C4D2;transition:color .5s}
+.state h2 .dim.lit{color:var(--ink)}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:70px}
+.stat{background:var(--soft);border-radius:24px;padding:34px 30px}
+.stat .n{font-size:clamp(48px,6vw,86px);font-weight:800;letter-spacing:-.05em;line-height:1;color:var(--blue)}
+.stat p{margin-top:10px;font-weight:600;color:var(--mute)}
+
+/* services accordion */
+.svc{padding:40px 0 120px}
+.head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:18px;margin-bottom:38px}
+.head h2{font-size:clamp(36px,4.6vw,64px);line-height:1}
+.head h2 .serif{color:var(--blue)}
+.head p{max-width:330px;color:var(--mute);font-size:17px;line-height:1.55}
+.acc{display:flex;gap:12px;height:540px}
+.panel{position:relative;flex:1;border-radius:26px;overflow:hidden;transition:flex .7s cubic-bezier(.65,0,.25,1);cursor:pointer;color:#fff}
+.panel.open{flex:4.2}
+.panel img{transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
+.panel.open img{transform:scale(1.05)}
+.panel::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,27,43,0) 30%,rgba(11,27,43,.85))}
+.panel .t{position:absolute;left:24px;right:24px;bottom:24px;z-index:2}
+.panel h3{font-size:24px;white-space:nowrap}
+.panel .num{position:absolute;top:22px;left:24px;z-index:2;font-weight:700;font-size:13px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);padding:6px 10px;border-radius:999px}
+.panel p{max-width:380px;margin-top:8px;font-size:15px;line-height:1.5;opacity:0;transform:translateY(12px);transition:opacity .5s .2s,transform .5s .2s}
+.panel.open p{opacity:1;transform:none}
+.panel:not(.open) h3{writing-mode:vertical-rl;transform:rotate(180deg);position:absolute;bottom:0;left:-2px}
+
+/* all services ticker */
+.tick{background:var(--ink);color:#fff;overflow:hidden;padding:22px 0}
+.tick div{display:flex;gap:42px;width:max-content;font-size:clamp(20px,2.4vw,30px);font-weight:700;letter-spacing:-.02em;white-space:nowrap}
+.tick span:nth-child(even){font-style:italic;font-weight:300;color:var(--mint)}
+
+/* sectors: stacking cards */
+.sectors{padding:130px 0 60px;background:var(--soft)}
+.stackwrap{position:relative;margin-top:20px}
+.scard{position:sticky;top:110px;height:520px;border-radius:30px;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;background:#fff;box-shadow:0 30px 60px rgba(11,27,43,.12);margin-bottom:60px;transform-origin:50% 0}
+.scard .txt{padding:clamp(28px,4vw,56px);display:flex;flex-direction:column;justify-content:space-between}
+.scard .k{font-weight:700;color:var(--blue);font-size:14px}
+.scard h3{font-size:clamp(32px,3.8vw,54px);line-height:1;margin:16px 0}
+.scard p{color:var(--mute);font-size:17px;line-height:1.6;max-width:420px}
+.scard ul{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.scard li{background:var(--sky);color:var(--blue);font-weight:700;font-size:13px;padding:8px 12px;border-radius:999px}
+.scard figure{overflow:hidden}
+.scard figure img{transform:scale(1.12)}
+
+/* coverage */
+.cover{padding:130px 0;background:var(--ink);color:#fff;position:relative;overflow:hidden}
+.cover .wrap{display:grid;grid-template-columns:1fr 1.1fr;gap:60px;align-items:center}
+.cover h2{font-size:clamp(36px,4.6vw,64px);line-height:1}
+.cover h2 .serif{color:var(--mint)}
+.cover p{color:#A9B6C6;font-size:17px;line-height:1.6;margin:18px 0 30px;max-width:440px}
+.map{position:relative;aspect-ratio:1/1;max-height:560px;width:100%}
+.map svg{width:100%;height:100%}
+.city circle.core{fill:var(--mint)}
+.city circle.ring{fill:none;stroke:var(--mint);opacity:.6;transform-box:fill-box;transform-origin:center;animation:rg 2.6s infinite}
+@keyframes rg{from{transform:scale(1);opacity:.7}to{transform:scale(4);opacity:0}}
+.route{stroke:var(--mint);stroke-width:1.5;fill:none;stroke-dasharray:6 8;opacity:.55;animation:dash 20s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-400}}
+.city text{fill:#fff;font:600 15px Poppins}
+
+/* process */
+.proc{padding:130px 0}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;counter-reset:s}
+.step{border:1px solid var(--line);border-radius:24px;padding:34px 30px;position:relative;overflow:hidden;transition:border-color .4s}
+.step::before{counter-increment:s;content:"0" counter(s);font-style:italic;font-weight:300;font-size:58px;color:var(--blue);line-height:1;display:block;margin-bottom:26px}
+.step::after{content:"";position:absolute;left:0;bottom:0;height:4px;width:100%;background:linear-gradient(90deg,var(--blue),var(--mint));transform:scaleX(0);transform-origin:0;transition:transform 1s cubic-bezier(.65,0,.25,1)}
+.step.on::after{transform:scaleX(1)}
+.step h3{font-size:24px;margin-bottom:8px}.step p{color:var(--mute);line-height:1.55}
+
+/* quote */
+.quote{margin:0 12px 12px;border-radius:32px;overflow:hidden;position:relative;color:#fff}
+.quote .bg{position:absolute;inset:-10% 0}
+.quote::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(18,87,255,.95),rgba(18,87,255,.75) 50%,rgba(11,27,43,.3))}
+.quote .wrap{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:50px;padding-top:100px;padding-bottom:100px;align-items:center}
+.quote h2{font-size:clamp(40px,5.4vw,80px);line-height:.98}
+.quote h2 .serif{color:var(--mint)}
+.quote .ph{display:block;font-size:clamp(28px,3vw,40px);font-weight:800;margin-top:26px;letter-spacing:-.03em}
+.quote small{opacity:.8;font-weight:600}
+form{background:#fff;color:var(--ink);border-radius:24px;padding:30px;display:grid;gap:14px;box-shadow:0 30px 60px rgba(0,0,0,.25)}
+label{font-size:13px;font-weight:700;display:grid;gap:6px}
+input,select{width:100%;min-width:0;font:inherit;font-size:16px;border:1.5px solid var(--line);border-radius:12px;height:52px;padding:0 14px;background:var(--soft);transition:border-color .3s}
+input:focus,select:focus{outline:none;border-color:var(--blue)}
+form .btn{justify-content:center;border:0;cursor:pointer;font:inherit;font-weight:700}
+.ok{display:none;background:var(--sky);color:var(--blue);padding:14px;border-radius:12px;font-weight:700}
+footer{padding:40px 24px;max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;color:var(--mute);font-size:14px}
+footer b{color:var(--ink)}
+
+/* motion utilities */
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.1em;margin-bottom:-.1em}
+.w>span{display:inline-block;transform:translateY(110%) rotate(4deg);transform-origin:0 100%;transition:transform 1s cubic-bezier(.2,.8,.2,1)}
+.split.on .w>span{transform:none}
+.js .rv{opacity:0;transform:translateY(40px);transition:opacity 1s cubic-bezier(.2,.8,.2,1),transform 1s cubic-bezier(.2,.8,.2,1)}
+.js .rv.on{opacity:1;transform:none}
+.js .acc .panel{clip-path:inset(100% 0 0 0 round 26px);transition:clip-path 1.1s cubic-bezier(.65,0,.25,1),flex .7s cubic-bezier(.65,0,.25,1)}
+.js .acc.on .panel{clip-path:inset(0 0 0 0 round 26px)}
+
+@media(max-width:900px){
+.nl{display:none}
+.stats,.steps{grid-template-columns:1fr}
+.acc{flex-direction:column;height:auto}
+.panel,.panel.open{flex:none;height:300px}
+.panel:not(.open) h3{writing-mode:horizontal-tb;transform:none;position:static}
+.panel p{opacity:1;transform:none}
+.scard{grid-template-columns:1fr;height:auto;top:90px}
+.scard figure{height:240px;order:-1}
+.cover .wrap,.quote .wrap{grid-template-columns:1fr}
+.scrollcue{display:none}
+}
+@media(max-width:600px){.logo .full{display:none}.quote h2{font-size:42px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.hero .clean{clip-path:none}.squeegee{display:none}.w>span{transform:none}.js .rv{opacity:1;transform:none}.js .acc .panel{clip-path:none}}
+</style>
+</head>
+<body>
+<div class="bar" aria-hidden="true"></div>
+
+<nav id="nav"><div class="wrap">
+<a href="#top" class="logo"><span>NIC</span><em class="full">Nottingham Industrial Cleaners</em></a>
+<div class="nl"><a href="#services">Services</a><a href="#sectors">Sectors</a><a href="#areas">Areas</a></div>
+<a href="#quote" class="btn b-blue">Free quote</a>
+</div></nav>
+
+<header class="hero" id="top">
+<div class="lay dirty"><img src="https://images.unsplash.com/photo-1771530789155-b1f03fbf82b5?auto=format&fit=crop&w=2000&q=80" alt=""></div>
+<div class="lay clean"><img src="https://images.unsplash.com/photo-1771530789155-b1f03fbf82b5?auto=format&fit=crop&w=2000&q=80" alt="Spotless warehouse with a polished concrete floor"></div>
+<div class="squeegee" aria-hidden="true"></div>
+<div class="shade"></div>
+<div class="wrap in">
+<span class="pill rv"><i></i>Cleaning businesses for over 50 years</span>
+<h1 class="split hsplit">No job too big <span class="serif">or small.</span></h1>
+<div class="row rv">
+<a href="#quote" class="btn b-blue">Get a free quote →</a>
+<a href="tel:08001692728" class="btn b-line">Call free 0800 169 2728</a>
+</div>
+</div>
+<div class="scrollcue" aria-hidden="true">SCROLL<b></b></div>
+</header>
+
+<section class="trust"><div class="wrap">
+<p>Certified for peace of mind</p>
+<div class="badges"><span>ISO 9001</span><span>SafeContractor</span><span>BICSc member</span><span>CHSA member</span></div>
+</div></section>
+
+<section class="state wrap">
+<h2 id="read">From offices to factory floors, we keep the East Midlands <span class="serif">spotless.</span></h2>
+<div class="stats">
+<div class="stat rv"><div class="n" data-to="50" data-suf="+">50+</div><p>Years in business</p></div>
+<div class="stat rv"><div class="n" data-to="21">21</div><p>Cleaning services</p></div>
+<div class="stat rv"><div class="n" data-to="5">5</div><p>Regions covered</p></div>
+</div>
+</section>
+
+<section class="svc wrap" id="services">
+<div class="head">
+<h2 class="split">What we <span class="serif">clean</span></h2>
+<p>Daily contracts or one-off deep cleans. Tap a service to see more.</p>
+</div>
+<div class="acc" id="acc">
+<div class="panel open" tabindex="0"><img src="https://images.unsplash.com/photo-1781637590564-01c65dbf2039?auto=format&fit=crop&w=1400&q=80" alt="Cleaner vacuuming an office"><span class="num">01</span><div class="t"><h3>Contract cleaning</h3><p>Regular office and workplace cleaning, on a schedule that suits you.</p></div></div>
+<div class="panel" tabindex="0"><img src="https://images.unsplash.com/photo-1694885169342-909981fb408a?auto=format&fit=crop&w=1400&q=80" alt="Large empty warehouse"><span class="num">02</span><div class="t"><h3>Industrial</h3><p>Factories and warehouses, including high-level and roof light cleaning.</p></div></div>
+<div class="panel" tabindex="0"><img src="https://images.unsplash.com/photo-1482449609509-eae2a7ea42b7?auto=format&fit=crop&w=1400&q=80" alt="Window cleaner on a platform"><span class="num">03</span><div class="t"><h3>Windows</h3><p>Water-fed long-reach systems for spotless glass at any height.</p></div></div>
+<div class="panel" tabindex="0"><img src="https://images.unsplash.com/photo-1742483359033-13315b247c74?auto=format&fit=crop&w=1400&q=80" alt="Carpet being deep cleaned"><span class="num">04</span><div class="t"><h3>Floors &amp; carpets</h3><p>Deep cleaning, upholstery and full floor refurbishment.</p></div></div>
+<div class="panel" tabindex="0"><img src="https://images.unsplash.com/photo-1669101602124-f5b78895d91c?auto=format&fit=crop&w=1400&q=80" alt="Cleaner in protective clothing mopping"><span class="num">05</span><div class="t"><h3>Specialist</h3><p>Chemical fogging, kitchens, ducts, graffiti removal and more.</p></div></div>
+</div>
+</section>
+
+<div class="tick" aria-label="All 21 services"><div id="tick">
+<span>Contract Cleaning</span><span>One-off Cleaning</span><span>Chemical Fogging</span><span>Kitchen Cleaning</span><span>Window Cleaning</span><span>Carpet Cleaning</span><span>Upholstery</span><span>Computer Cleaning</span><span>Floor Refurbishment</span><span>High Level</span><span>Roof Lights</span><span>Duct Cleaning</span><span>High Pressure</span><span>Washroom Descaling</span><span>After Builders</span><span>Painting &amp; Decorating</span><span>Void Clearance</span><span>Graffiti Removal</span><span>Grounds Maintenance</span><span>Office Cleaning</span>
+<span>Contract Cleaning</span><span>One-off Cleaning</span><span>Chemical Fogging</span><span>Kitchen Cleaning</span><span>Window Cleaning</span><span>Carpet Cleaning</span><span>Upholstery</span><span>Computer Cleaning</span><span>Floor Refurbishment</span><span>High Level</span><span>Roof Lights</span><span>Duct Cleaning</span><span>High Pressure</span><span>Washroom Descaling</span><span>After Builders</span><span>Painting &amp; Decorating</span><span>Void Clearance</span><span>Graffiti Removal</span><span>Grounds Maintenance</span><span>Office Cleaning</span>
+</div></div>
+
+<section class="sectors" id="sectors"><div class="wrap">
+<div class="head"><h2 class="split">Who we <span class="serif">look after</span></h2><p>One team for every kind of building.</p></div>
+<div class="stackwrap">
+<article class="scard"><div class="txt"><div><span class="k">01 · Offices</span><h3>Workplaces people enjoy</h3><p>Desks, kitchens, washrooms and meeting rooms, cleaned before your team arrives.</p></div><ul><li>Daily contracts</li><li>Computer cleaning</li><li>Washrooms</li></ul></div><figure><img src="https://images.unsplash.com/photo-1577412647305-991150c7d163?auto=format&fit=crop&w=1200&q=80" alt="Open plan office"></figure></article>
+<article class="scard"><div class="txt"><div><span class="k">02 · Factories &amp; warehouses</span><h3>Safe, clean, compliant</h3><p>Heavy-duty cleaning for production lines, loading bays and high ceilings.</p></div><ul><li>High level</li><li>High pressure</li><li>Floor refurbishment</li></ul></div><figure><img src="https://images.unsplash.com/photo-1772305336606-989a457ffbae?auto=format&fit=crop&w=1200&q=80" alt="Industrial warehouse floor"></figure></article>
+<article class="scard"><div class="txt"><div><span class="k">03 · New builds &amp; refits</span><h3>Ready for handover</h3><p>After-builders cleans, void clearance and decorating, so you can move straight in.</p></div><ul><li>After builders</li><li>Void clearance</li><li>Decorating</li></ul></div><figure><img src="https://images.unsplash.com/photo-1504297050568-910d24c426d3?auto=format&fit=crop&w=1200&q=80" alt="Modern office hallway"></figure></article>
+</div>
+</div></section>
+
+<section class="cover" id="areas"><div class="wrap">
+<div class="rv">
+<h2 class="split">Across the <span class="serif">Midlands</span> and beyond</h2>
+<p>Based in Bilborough, Nottingham, with teams covering five regions.</p>
+<a href="#quote" class="btn b-white">Check your area →</a>
+</div>
+<div class="map" aria-label="Map of areas covered: Nottingham, Derby, Leicester, Birmingham and Yorkshire">
+<svg viewBox="0 0 500 500">
+<defs><pattern id="dots" width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.4" fill="#22384F"/></pattern></defs>
+<rect width="500" height="500" fill="url(#dots)"/>
+<path class="route" d="M290 250 L230 270 M290 250 L320 330 M290 250 L170 380 M290 250 L300 110"/>
+<g class="city"><circle class="ring" cx="290" cy="250" r="9"/><circle class="core" cx="290" cy="250" r="9"/><text x="306" y="246">Nottingham</text><text x="306" y="264" style="font-weight:500;font-size:12px;fill:#2FE0B0">Head office</text></g>
+<g class="city"><circle class="ring" cx="230" cy="270" r="6" style="animation-delay:.4s"/><circle class="core" cx="230" cy="270" r="6"/><text x="150" y="292">Derby</text></g>
+<g class="city"><circle class="ring" cx="320" cy="330" r="6" style="animation-delay:.8s"/><circle class="core" cx="320" cy="330" r="6"/><text x="334" y="335">Leicester</text></g>
+<g class="city"><circle class="ring" cx="170" cy="380" r="6" style="animation-delay:1.2s"/><circle class="core" cx="170" cy="380" r="6"/><text x="70" y="405">Birmingham</text></g>
+<g class="city"><circle class="ring" cx="300" cy="110" r="6" style="animation-delay:1.6s"/><circle class="core" cx="300" cy="110" r="6"/><text x="314" y="105">Yorkshire</text></g>
+</svg>
+</div>
+</div></section>
+
+<section class="proc wrap">
+<div class="head"><h2 class="split">Clean in <span class="serif">three steps</span></h2></div>
+<div class="steps">
+<div class="step rv"><h3>Tell us what you need</h3><p>Call free or send the quick form below.</p></div>
+<div class="step rv"><h3>Get your quote</h3><p>A clear price for your building and schedule.</p></div>
+<div class="step rv"><h3>We get cleaning</h3><p>Trained, certified teams. You enjoy the results.</p></div>
+</div>
+</section>
+
+<section class="quote" id="quote">
+<img class="bg" data-par="0.08" src="https://images.unsplash.com/photo-1627905646269-7f034dcc5738?auto=format&fit=crop&w=2000&q=80" alt="">
+<div class="wrap">
+<div class="rv">
+<h2 class="split">Let's make it <span class="serif">sparkle.</span></h2>
+<a class="ph" href="tel:08001692728">0800 169 2728</a>
+<small>Freephone · docsales@nic-group.co.uk</small>
+</div>
+<form id="f" class="rv" novalidate>
+<label>Your name<input id="n" required autocomplete="name"></label>
+<label>Email or phone<input id="c" required></label>
+<label>What needs cleaning?<select id="s"><option>Offices</option><option>Factory or warehouse</option><option>Windows</option><option>Floors and carpets</option><option>Something else</option></select></label>
+<button class="btn b-blue" type="submit">Request my free quote →</button>
+<div class="ok" id="ok" role="status">Thanks! This is a demo form, so nothing was sent.</div>
+</form>
+</div>
+</section>
+
+<footer>
+<span><b>Nottingham Industrial Cleaners</b> · Elizabeth House, 33 Wigman Road, Bilborough, NG8 3HY</span>
+<span>Part of NIC Group · Photos: Unsplash · Website example by NextByt</span>
+</footer>
+
+<script>
+{
+const R=matchMedia('(prefers-reduced-motion: reduce)').matches,$=q=>document.querySelector(q),$$=q=>[...document.querySelectorAll(q)];
+document.documentElement.classList.add('js');
+
+/* split words */
+$$('.split').forEach(h=>{const walk=n=>{[...n.childNodes].forEach(c=>{if(c.nodeType===3){const f=document.createDocumentFragment();c.textContent.split(/(\s+)/).forEach(t=>{if(!t)return;if(/^\s+$/.test(t)){f.append(t);return}const w=document.createElement('span');w.className='w';const i=document.createElement('span');i.textContent=t;w.append(i);f.append(w)});c.replaceWith(f)}else if(c.nodeType===1)walk(c)})};walk(h);h.querySelectorAll('.w>span').forEach((x,i)=>x.style.transitionDelay=(i*.06)+'s')});
+
+/* reading highlight statement */
+const read=$('#read');read.querySelectorAll(':scope>.w, :scope>.serif').length;
+(()=>{const f=document.createDocumentFragment();[...read.childNodes].forEach(c=>{if(c.nodeType===3){c.textContent.split(/(\s+)/).forEach(t=>{if(!t)return;if(/^\s+$/.test(t)){f.append(t);return}const s=document.createElement('span');s.className='dim';s.textContent=t;f.append(s)})}else f.append(c)});read.innerHTML='';read.append(f)})();
+const dims=$$('#read .dim');
+
+/* reveals */
+let pend=$$('.rv,.split:not(.hsplit),.acc,.step');
+const reveal=()=>{const lim=innerHeight*.88;pend=pend.filter(el=>{const r=el.getBoundingClientRect();if(r.top<lim&&r.bottom>0){el.classList.add('on');return false}return true})};
+reveal();addEventListener('scroll',reveal,{passive:true});addEventListener('resize',reveal);
+$$('.acc .panel').forEach((p,i)=>p.style.transitionDelay=(i*.1)+'s, 0s');
+setTimeout(()=>{$$('.hero .rv').forEach(e=>e.classList.add('on'));$('.hsplit').classList.add('on')},R?0:1500);
+
+/* counters */
+const cio=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;cio.unobserve(e.target);const el=e.target,to=+el.dataset.to,suf=el.dataset.suf||'',t0=performance.now();if(R){el.textContent=to+suf;return}const tk=t=>{const k=Math.min(1,(t-t0)/1500);el.textContent=Math.round(to*(1-Math.pow(1-k,3)))+suf;if(k<1)requestAnimationFrame(tk)};requestAnimationFrame(tk)}),{threshold:.5});
+$$('[data-to]').forEach(e=>cio.observe(e));
+
+/* accordion */
+const panels=$$('.panel');const open=p=>{panels.forEach(x=>x.classList.toggle('open',x===p))};
+panels.forEach(p=>{p.addEventListener('mouseenter',()=>{if(innerWidth>900)open(p)});p.addEventListener('click',()=>open(p));p.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open(p)}})});
+
+/* form */
+$('#f').addEventListener('submit',e=>{e.preventDefault();$('#ok').style.display='block'});
+
+/* scroll loop */
+const bar=$('.bar'),nav=$('#nav'),tick=$('#tick'),cards=$$('.scard'),par=$$('[data-par]');
+let tx=0,last=scrollY,vel=0;
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const frame=()=>{
+  const y=scrollY,h=innerHeight;vel+=((y-last)-vel)*.1;last=y;
+  bar.style.transform='scaleX('+y/(document.documentElement.scrollHeight-h)+')';
+  nav.classList.toggle('solid',y>h*.6);
+  /* reading highlight */
+  const r=read.getBoundingClientRect(),p=clamp((h*.8-r.top)/(r.height+h*.3),0,1),n=Math.floor(p*dims.length*1.15);
+  dims.forEach((d,i)=>d.classList.toggle('lit',i<n));
+  if(!R){
+    tx-=.8+Math.abs(vel)*.5;const half=tick.scrollWidth/2;if(-tx>half)tx+=half;tick.style.transform='translateX('+tx+'px)';
+    /* stacking cards shrink as next one arrives */
+    if(innerWidth>900)cards.forEach((c,i)=>{const nx=cards[i+1];if(!nx){c.style.transform='';return}const d=nx.getBoundingClientRect().top-c.getBoundingClientRect().top;const k=clamp(1-d/560,0,1);c.style.transform='scale('+(1-k*.06)+')';c.style.filter='brightness('+(1-k*.25)+')';const im=c.querySelector('img');im.style.transform='scale('+(1.12-k*.08)+')'});
+    par.forEach(el=>{const b=el.parentElement.getBoundingClientRect();el.style.transform='translateY('+clamp((b.top+b.height/2-h/2)*+el.dataset.par,-50,50)+'px)'});
+  }
+  requestAnimationFrame(frame);
+};
+requestAnimationFrame(frame);
+}
+</script>
+</body>
+</html>
