@@ -106,7 +106,13 @@ nav .btn{height:46px;padding:0 20px;font-size:14px;white-space:nowrap}
 /* sectors: stacking cards */
 .sectors{padding:130px 0 60px;background:var(--soft)}
 .stackwrap{position:relative;margin-top:20px}
-.scard{position:sticky;top:110px;height:520px;border-radius:30px;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;background:#fff;box-shadow:0 30px 60px rgba(11,27,43,.12);margin-bottom:60px;transform-origin:50% 0}
+.scard{position:relative;height:480px;border-radius:30px;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;background:#fff;box-shadow:0 30px 60px rgba(11,27,43,.12);margin-bottom:28px}
+.scard:nth-child(even) figure{order:-1}
+.js .scard figure{clip-path:inset(0 0 0 100%);transition:clip-path 1.2s cubic-bezier(.65,0,.25,1)}
+.js .scard:nth-child(even) figure{clip-path:inset(0 100% 0 0)}
+.js .scard figure img{transform:scale(1.2);transition:transform 1.6s cubic-bezier(.2,.8,.2,1)}
+.js .scard .txt{opacity:0;transform:translateY(30px);transition:opacity .9s .3s,transform .9s .3s cubic-bezier(.2,.8,.2,1)}
+.js .scard.on figure{clip-path:inset(0 0 0 0)}.js .scard.on figure img{transform:scale(1)}.js .scard.on .txt{opacity:1;transform:none}
 .scard .txt{padding:clamp(28px,4vw,56px);display:flex;flex-direction:column;justify-content:space-between}
 .scard .k{font-weight:700;color:var(--blue);font-size:14px}
 .scard h3{font-size:clamp(32px,3.8vw,54px);line-height:1;margin:16px 0}
@@ -114,7 +120,7 @@ nav .btn{height:46px;padding:0 20px;font-size:14px;white-space:nowrap}
 .scard ul{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
 .scard li{background:var(--sky);color:var(--blue);font-weight:700;font-size:13px;padding:8px 12px;border-radius:999px}
 .scard figure{overflow:hidden}
-.scard figure img{transform:scale(1.12)}
+
 
 /* coverage */
 .cover{padding:130px 0;background:var(--ink);color:#fff;position:relative;overflow:hidden}
@@ -174,13 +180,13 @@ footer b{color:var(--ink)}
 .panel,.panel.open{flex:none;height:300px}
 .panel:not(.open) h3{writing-mode:horizontal-tb;transform:none;position:static}
 .panel p{opacity:1;transform:none}
-.scard{grid-template-columns:1fr;height:auto;top:90px}
+.scard{grid-template-columns:1fr;height:auto}.scard:nth-child(even) figure{order:-1}
 .scard figure{height:240px;order:-1}
 .cover .wrap,.quote .wrap{grid-template-columns:1fr}
 .scrollcue{display:none}
 }
 @media(max-width:600px){.logo .full{display:none}.quote h2{font-size:42px}.wrap{padding-inline:20px}.state{padding-block:90px 70px}.proc{padding-block:90px}.svc{padding-bottom:90px}.sectors,.cover{padding-block:90px}.acc{gap:14px}.quote .wrap{padding-block:70px}form{padding:22px}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.hero .clean{clip-path:none}.squeegee{display:none}.w>span{transform:none}.js .rv{opacity:1;transform:none}.js .acc .panel{clip-path:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.js .scard figure{clip-path:none}.js .scard figure img{transform:none}.js .scard .txt{opacity:1;transform:none}.hero .clean{clip-path:none}.squeegee{display:none}.w>span{transform:none}.js .rv{opacity:1;transform:none}.js .acc .panel{clip-path:none}}
 </style>
 </head>
 <body>
@@ -316,7 +322,7 @@ const read=$('#read');read.querySelectorAll(':scope>.w, :scope>.serif').length;
 const dims=$$('#read .dim');
 
 /* reveals */
-let pend=$$('.rv,.split:not(.hsplit),.acc,.step');
+let pend=$$('.rv,.split:not(.hsplit),.acc,.step,.scard');
 const reveal=()=>{const lim=innerHeight*.88;pend=pend.filter(el=>{const r=el.getBoundingClientRect();if(r.top<lim&&r.bottom>0){el.classList.add('on');return false}return true})};
 reveal();addEventListener('scroll',reveal,{passive:true});addEventListener('resize',reveal);
 $$('.acc .panel').forEach((p,i)=>p.style.transitionDelay=(i*.1)+'s, 0s');
@@ -334,7 +340,7 @@ panels.forEach(p=>{p.addEventListener('mouseenter',()=>{if(innerWidth>900)open(p
 $('#f').addEventListener('submit',e=>{e.preventDefault();$('#ok').style.display='block'});
 
 /* scroll loop */
-const bar=$('.bar'),nav=$('#nav'),tick=$('#tick'),cards=$$('.scard'),par=$$('[data-par]');
+const bar=$('.bar'),nav=$('#nav'),tick=$('#tick'),par=$$('[data-par]');
 let tx=0,last=scrollY,vel=0;
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const frame=()=>{
@@ -346,8 +352,6 @@ const frame=()=>{
   dims.forEach((d,i)=>d.classList.toggle('lit',i<n));
   if(!R){
     tx-=.8+Math.abs(vel)*.5;const half=tick.scrollWidth/2;if(-tx>half)tx+=half;tick.style.transform='translateX('+tx+'px)';
-    /* stacking cards shrink as next one arrives */
-    if(innerWidth>900)cards.forEach((c,i)=>{const nx=cards[i+1];if(!nx){c.style.transform='';return}const d=nx.getBoundingClientRect().top-c.getBoundingClientRect().top;const k=clamp(1-d/560,0,1);c.style.transform='scale('+(1-k*.06)+')';c.style.filter='brightness('+(1-k*.25)+')';const im=c.querySelector('img');im.style.transform='scale('+(1.12-k*.08)+')'});
     par.forEach(el=>{const b=el.parentElement.getBoundingClientRect();el.style.transform='translateY('+clamp((b.top+b.height/2-h/2)*+el.dataset.par,-50,50)+'px)'});
   }
   requestAnimationFrame(frame);
