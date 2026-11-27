@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>A&amp;B Plumbing &amp; Heating | Boilers &amp; Heating in Nottingham</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#14213D;--flame:#FF5A1F;--amber:#FFB020;--cream:#FBF6EF;--sand:#F2E9DD;--mute:#6A6F7C;--line:#E7DCCD}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Poppins,system-ui,sans-serif;background:var(--cream);color:var(--navy);overflow-x:clip}
+a{color:inherit;text-decoration:none}
+img{display:block;width:100%;height:100%;object-fit:cover}
+.wrap{max-width:1240px;margin:0 auto;padding:0 24px}
+h1,h2,h3{letter-spacing:-.04em;font-weight:700}
+em{font-style:italic;font-weight:300}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:56px;padding:0 26px;border-radius:999px;font-weight:600;transition:transform .3s,box-shadow .3s;white-space:nowrap}
+.btn:hover{transform:translateY(-3px)}
+.b-fl{background:var(--flame);color:#fff;box-shadow:0 12px 30px rgba(255,90,31,.35)}
+.b-nv{background:var(--navy);color:#fff}
+.b-ln{border:1.5px solid var(--navy)}
+
+nav{position:sticky;top:0;z-index:50;background:rgba(251,246,239,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:76px;gap:14px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;letter-spacing:-.03em}
+.logo i{width:40px;height:40px;border-radius:12px;background:linear-gradient(140deg,var(--amber),var(--flame));display:grid;place-items:center;color:#fff;font-style:normal;font-size:14px}
+.nl{display:flex;gap:28px;font-weight:500;font-size:15px}
+nav .btn{height:46px;padding:0 20px;font-size:14px}
+
+/* hero */
+.hero{padding:60px 0 90px;position:relative;overflow:hidden}
+.blob{position:absolute;right:-10%;top:-20%;width:70vw;height:70vw;max-width:900px;max-height:900px;border-radius:50%;background:radial-gradient(circle,rgba(255,176,32,.35),rgba(255,90,31,.12) 45%,transparent 70%);filter:blur(10px);animation:breathe 7s ease-in-out infinite;pointer-events:none}
+@keyframes breathe{50%{transform:scale(1.12) translate(-3%,4%)}}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:50px;align-items:center;position:relative}
+.tag{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-size:13px;font-weight:600}
+.tag b{color:var(--flame)}
+.hero h1{font-size:clamp(46px,6.6vw,96px);line-height:.98;margin:22px 0 22px}
+.hero h1 em{color:var(--flame)}
+.hero p{font-size:18px;line-height:1.6;color:var(--mute);max-width:470px;margin-bottom:32px}
+.ctas{display:flex;flex-wrap:wrap;gap:12px}
+.pic{position:relative;height:600px}
+.pic figure{position:absolute;inset:0 0 0 12%;border-radius:200px 200px 32px 32px;overflow:hidden;box-shadow:0 40px 80px rgba(20,33,61,.18)}
+.dial{position:absolute;left:0;bottom:60px;width:210px;background:#fff;border-radius:28px;padding:20px;box-shadow:0 30px 60px rgba(20,33,61,.18);animation:float 5s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-10px)}}
+.dial svg{width:100%;height:auto;display:block}
+.dial .arc{fill:none;stroke:url(#heat);stroke-width:12;stroke-linecap:round;stroke-dasharray:251;stroke-dashoffset:251;transition:stroke-dashoffset 2.2s cubic-bezier(.2,.8,.2,1)}
+.dial.on .arc{stroke-dashoffset:60}
+.dial .t{font-size:44px;font-weight:700;letter-spacing:-.05em;fill:var(--navy)}
+.dial small{display:block;text-align:center;font-size:12px;font-weight:600;color:var(--mute);margin-top:-6px}
+.chip{position:absolute;right:-8px;top:70px;background:var(--navy);color:#fff;border-radius:18px;padding:14px 16px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:10px;box-shadow:0 20px 40px rgba(20,33,61,.25);animation:float 6s 1s ease-in-out infinite}
+.chip span{width:28px;height:28px;border-radius:50%;background:#22C55E;display:grid;place-items:center}
+
+/* badges */
+.badges{border-block:1px solid var(--line);background:#fff}
+.badges .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:18px;padding-block:26px}
+.bd{display:flex;align-items:center;gap:10px;font-weight:600;font-size:15px}
+.bd i{width:34px;height:34px;border-radius:10px;background:var(--sand);display:grid;place-items:center;font-style:normal;color:var(--flame)}
+
+/* services */
+.svc{padding:120px 0}
+.head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:40px}
+.head h2{font-size:clamp(36px,4.8vw,64px);line-height:1}
+.head h2 em{color:var(--flame)}
+.head p{color:var(--mute);max-width:320px;line-height:1.55}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.card{position:relative;background:#fff;border-radius:28px;overflow:hidden;border:1px solid var(--line);transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .5s}
+.card:hover{transform:translateY(-8px);box-shadow:0 30px 60px rgba(20,33,61,.12)}
+.card figure{height:220px;overflow:hidden}
+.card img{transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
+.card:hover img{transform:scale(1.08)}
+.card div{padding:24px 24px 28px}
+.card h3{font-size:22px;margin-bottom:6px}
+.card p{color:var(--mute);font-size:15px;line-height:1.55}
+.card .go{position:absolute;right:18px;top:178px;width:52px;height:52px;border-radius:50%;background:var(--flame);color:#fff;display:grid;place-items:center;font-size:20px;transform:scale(0) rotate(-45deg);transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.card:hover .go{transform:scale(1) rotate(0)}
+
+/* emergency band */
+.sos{margin:0 12px;border-radius:32px;background:var(--navy);color:#fff;overflow:hidden;position:relative}
+.sos::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 85% 50%,rgba(255,90,31,.5),transparent 45%);animation:breathe 6s ease-in-out infinite}
+.sos .wrap{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px;padding-block:70px}
+.sos h2{font-size:clamp(34px,4.4vw,60px);line-height:1}
+.sos h2 em{color:var(--amber)}
+.live{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--amber);margin-bottom:14px}
+.live i{width:10px;height:10px;border-radius:50%;background:var(--flame);box-shadow:0 0 0 0 rgba(255,90,31,.8);animation:pu 1.6s infinite}
+@keyframes pu{70%{box-shadow:0 0 0 12px rgba(255,90,31,0)}100%{box-shadow:0 0 0 0 rgba(255,90,31,0)}}
+
+/* proof */
+.proof{padding:120px 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.pf{border-radius:28px;padding:34px 30px;background:var(--sand)}
+.pf:nth-child(2){background:linear-gradient(150deg,var(--amber),var(--flame));color:#fff}
+.pf:nth-child(2) p{color:rgba(255,255,255,.9)}
+.pf .n{font-size:clamp(52px,6vw,84px);font-weight:700;letter-spacing:-.05em;line-height:1}
+.pf p{margin-top:10px;font-weight:500;color:var(--mute)}
+
+/* areas */
+.areas{overflow:hidden;padding:0 0 110px}
+.areas h3{text-align:center;font-size:15px;font-weight:600;color:var(--mute);margin-bottom:22px}
+.row{display:flex;gap:14px;width:max-content;animation:mq 40s linear infinite}
+.row.rev{animation-direction:reverse;margin-top:14px}
+.row span{background:#fff;border:1px solid var(--line);border-radius:999px;padding:12px 22px;font-weight:600;white-space:nowrap}
+.row span:nth-child(4n+1){background:var(--navy);color:#fff;border-color:var(--navy)}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* contact */
+.cta{margin:0 12px 12px;border-radius:32px;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;background:#fff;border:1px solid var(--line)}
+.cta .l{padding:clamp(34px,6vw,80px)}
+.cta h2{font-size:clamp(38px,5vw,72px);line-height:1}
+.cta h2 em{color:var(--flame)}
+.ph{display:block;font-size:clamp(30px,3.4vw,46px);font-weight:700;letter-spacing:-.04em;margin:26px 0 6px}
+.cta .l p{color:var(--mute);margin-bottom:28px}
+.cta figure{min-height:380px}
+footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding:26px 24px 30px;max-width:1240px;margin:0 auto;color:var(--mute);font-size:14px}
+
+/* motion */
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.1em;margin-bottom:-.1em}
+.w>span{display:inline-block;transform:translateY(110%);transition:transform 1s cubic-bezier(.2,.8,.2,1)}
+.split.on .w>span{transform:none}
+.js .rv{opacity:0;transform:translateY(40px);transition:opacity 1s,transform 1s cubic-bezier(.2,.8,.2,1)}
+.js .rv.on{opacity:1;transform:none}
+.js .card.rv.on:hover{transform:translateY(-8px)}
+.js .pic figure{clip-path:inset(100% 0 0 0 round 200px 200px 32px 32px);transition:clip-path 1.4s .2s cubic-bezier(.65,0,.25,1)}
+.js .pic.on figure{clip-path:inset(0 0 0 0 round 200px 200px 32px 32px)}
+.js .pic figure img{transform:scale(1.25);transition:transform 2s .2s cubic-bezier(.2,.8,.2,1)}
+.js .pic.on figure img{transform:scale(1)}
+
+@media(max-width:900px){
+.nl{display:none}
+.hero .wrap,.cta{grid-template-columns:1fr}
+.pic{height:460px}
+.grid,.proof{grid-template-columns:1fr}
+.hero{padding:30px 0 70px}.svc,.proof{padding-block:80px}
+}
+@media(max-width:600px){
+.logo b{display:none}
+.wrap{padding-inline:20px}
+.pic figure{inset:0 0 0 8%}
+.dial{width:170px;bottom:30px}
+.chip{right:0;top:40px}
+.badges .wrap{justify-content:flex-start}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.w>span{transform:none}.js .rv{opacity:1;transform:none}.js .pic figure{clip-path:none}.js .pic figure img{transform:none}.dial .arc{stroke-dashoffset:60}}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+<a href="#top" class="logo"><i>A&amp;B</i><b>A&amp;B Plumbing &amp; Heating</b></a>
+<div class="nl"><a href="#services">Services</a><a href="#emergency">Emergency</a><a href="#areas">Areas</a><a href="#contact">Contact</a></div>
+<a href="tel:01159177423" class="btn b-fl">Book a service</a>
+</div></nav>
+
+<header class="hero" id="top">
+<div class="blob" aria-hidden="true"></div>
+<div class="wrap">
+<div>
+<span class="tag rv"><b>★ Excellent</b> on Google · 150 reviews</span>
+<h1 class="split hs">Heat with <em>style.</em></h1>
+<p class="rv">Boilers, heating and plumbing across Nottingham. Worcester Bosch approved, Gas Safe registered, and here for you 24/7.</p>
+<div class="ctas rv">
+<a href="tel:01159177423" class="btn b-fl">Get a boiler quote →</a>
+<a href="#services" class="btn b-ln">Our services</a>
+</div>
+</div>
+<div class="pic">
+<figure><img src="https://images.unsplash.com/photo-1749532125405-70950966b0e5?auto=format&fit=crop&w=1200&q=80" alt="Plumber repairing pipework in a bathroom"></figure>
+<div class="dial" aria-hidden="true">
+<svg viewBox="0 0 120 100"><defs><linearGradient id="heat" x1="0" x2="1"><stop offset="0" stop-color="#FFB020"/><stop offset="1" stop-color="#FF5A1F"/></linearGradient></defs>
+<path d="M20 85 A45 45 0 1 1 100 85" fill="none" stroke="#F2E9DD" stroke-width="12" stroke-linecap="round"/>
+<path class="arc" d="M20 85 A45 45 0 1 1 100 85"/>
+<text class="t" x="60" y="70" text-anchor="middle"><tspan id="temp">16</tspan>°</text></svg>
+<small>Warming up your home</small>
+</div>
+<div class="chip"><span>&#10003;</span>Boiler serviced</div>
+</div>
+</div>
+</header>
+
+<section class="badges"><div class="wrap">
+<span class="bd"><i>✓</i>Gas Safe registered</span>
+<span class="bd"><i>★</i>Which? Trusted Trader</span>
+<span class="bd"><i>✓</i>Checkatrade</span>
+<span class="bd"><i>W</i>Worcester approved</span>
+<span class="bd"><i>1st</i>Best Plumbing &amp; Heating 2019</span>
+</div></section>
+
+<section class="svc wrap" id="services">
+<div class="head"><h2 class="split">Everything for a <em>warm home</em></h2><p>From a dripping tap to a brand-new boiler.</p></div>
+<div class="grid">
+<a href="tel:01159177423" class="card rv"><figure><img src="https://images.unsplash.com/photo-1676210134190-3f2c0d5cf58d?auto=format&fit=crop&w=900&q=80" alt="Engineer fixing a boiler"></figure><span class="go">→</span><div><h3>New boilers</h3><p>Supply and fit, including the Worcester Greenstar range.</p></div></a>
+<a href="tel:01159177423" class="card rv"><figure><img src="https://images.unsplash.com/photo-1761758674188-2b8e4c89c5e2?auto=format&fit=crop&w=900&q=80" alt="Pressure gauge on a heating valve"></figure><span class="go">→</span><div><h3>Boiler repairs &amp; servicing</h3><p>Annual services and fast fixes to keep you warm.</p></div></a>
+<a href="tel:01159177423" class="card rv"><figure><img src="https://images.unsplash.com/photo-1669725341213-7379ff6c90d5?auto=format&fit=crop&w=900&q=80" alt="White radiator in a room"></figure><span class="go">→</span><div><h3>Central heating</h3><p>Radiators, thermostats, controls and power flushing.</p></div></a>
+<a href="tel:01159177423" class="card rv"><figure><img src="https://images.unsplash.com/photo-1676210134188-4c05dd172f89?auto=format&fit=crop&w=900&q=80" alt="Plumber working on a pipe"></figure><span class="go">→</span><div><h3>Plumbing</h3><p>Repairs, installs and wetroom plumbing.</p></div></a>
+<a href="tel:01159177423" class="card rv"><figure><img src="https://images.unsplash.com/photo-1782805152914-d2b6b2623a72?auto=format&fit=crop&w=900&q=80" alt="Modern bathroom with towel warmer"></figure><span class="go">→</span><div><h3>Bathrooms</h3><p>Full bathroom installations, start to finish.</p></div></a>
+<a href="tel:01159177423" class="card rv"><figure><img src="https://images.unsplash.com/photo-1776860155275-eee24bfb1dee?auto=format&fit=crop&w=900&q=80" alt="Modern house exterior"></figure><span class="go">→</span><div><h3>Landlord certificates</h3><p>Gas safety certificates for your rental properties.</p></div></a>
+</div>
+</section>
+
+<section class="sos" id="emergency"><div class="wrap">
+<div class="rv"><span class="live"><i></i>Available now</span><h2>Boiler down? <em>We're on it,</em><br>24/7.</h2></div>
+<a href="tel:07973119666" class="btn b-fl rv">Emergency 07973 119 666</a>
+</div></section>
+
+<section class="proof wrap">
+<div class="pf rv"><div class="n" data-to="15" data-suf="+">15+</div><p>Years of experience</p></div>
+<div class="pf rv"><div class="n" data-to="150">150</div><p>Google reviews, rated Excellent</p></div>
+<div class="pf rv"><div class="n">2019</div><p>Best Plumbing &amp; Heating Engineer, Nottingham</p></div>
+</section>
+
+<section class="areas" id="areas" aria-label="Areas we cover">
+<h3>Proudly covering Nottingham and nearby</h3>
+<div class="row"><span>Nottingham</span><span>Beeston</span><span>West Bridgford</span><span>Long Eaton</span><span>Stapleford</span><span>Wollaton</span><span>Bramcote</span><span>Toton</span><span>Clifton</span><span>Wilford</span><span>Nottingham</span><span>Beeston</span><span>West Bridgford</span><span>Long Eaton</span><span>Stapleford</span><span>Wollaton</span><span>Bramcote</span><span>Toton</span><span>Clifton</span><span>Wilford</span></div>
+<div class="row rev"><span>Derby</span><span>Ilkeston</span><span>Draycott</span><span>Breaston</span><span>Borrowash</span><span>Risley</span><span>Ockbrook</span><span>Trowell</span><span>Strelley</span><span>Stanton by Dale</span><span>Derby</span><span>Ilkeston</span><span>Draycott</span><span>Breaston</span><span>Borrowash</span><span>Risley</span><span>Ockbrook</span><span>Trowell</span><span>Strelley</span><span>Stanton by Dale</span></div>
+</section>
+
+<section class="cta" id="contact">
+<div class="l rv">
+<h2 class="split">Let's get you <em>warm.</em></h2>
+<a class="ph" href="tel:01159177423">0115 917 7423</a>
+<p>Free quotes on new boilers. Call, or book your annual service online.</p>
+<div class="ctas"><a href="tel:01159177423" class="btn b-fl">Book a service →</a><a href="tel:07973119666" class="btn b-ln">Mobile 07973 119 666</a></div>
+</div>
+<figure><img src="https://images.unsplash.com/photo-1599028274511-e02a767949a3?auto=format&fit=crop&w=1200&q=80" alt="Radiator beside a window in a warm home"></figure>
+</section>
+
+<footer><span>© 2026 A&amp;B Plumbing &amp; Heating (Nottingham) Ltd</span><span>Photos: Unsplash · Website example by NextByt</span></footer>
+
+<script>
+{
+const R=matchMedia('(prefers-reduced-motion: reduce)').matches,$=q=>document.querySelector(q),$$=q=>[...document.querySelectorAll(q)];
+document.documentElement.classList.add('js');
+$$('.split').forEach(h=>{const walk=n=>{[...n.childNodes].forEach(c=>{if(c.nodeType===3){const f=document.createDocumentFragment();c.textContent.split(/(\s+)/).forEach(t=>{if(!t)return;if(/^\s+$/.test(t)){f.append(t);return}const w=document.createElement('span');w.className='w';const i=document.createElement('span');i.textContent=t;w.append(i);f.append(w)});c.replaceWith(f)}else if(c.nodeType===1)walk(c)})};walk(h);h.querySelectorAll('.w>span').forEach((x,i)=>x.style.transitionDelay=(i*.08)+'s')});
+let pend=$$('.rv,.split,.pic,.dial');
+$$('.grid .card').forEach((c,i)=>c.style.transitionDelay=(i%3*.1)+'s, '+(i%3*.1)+'s, 0s');
+const reveal=()=>{const lim=innerHeight*.9;pend=pend.filter(el=>{const r=el.getBoundingClientRect();if(r.top<lim&&r.bottom>0){el.classList.add('on');if(el.classList.contains('dial'))heat();return false}return true})};
+addEventListener('scroll',reveal,{passive:true});addEventListener('resize',reveal);setTimeout(reveal,R?0:150);
+function heat(){const t=$('#temp');if(R){t.textContent=21;return}let v=16;const iv=setInterval(()=>{v++;t.textContent=v;if(v>=21)clearInterval(iv)},380)}
+const cio=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;cio.unobserve(e.target);const el=e.target,to=+el.dataset.to,suf=el.dataset.suf||'',t0=performance.now();if(R){el.textContent=to+suf;return}const tk=t=>{const k=Math.min(1,(t-t0)/1500);el.textContent=Math.round(to*(1-Math.pow(1-k,3)))+suf;if(k<1)requestAnimationFrame(tk)};requestAnimationFrame(tk)}),{threshold:.5});
+$$('[data-to]').forEach(e=>cio.observe(e));
+}
+</script>
+</body>
+</html>
